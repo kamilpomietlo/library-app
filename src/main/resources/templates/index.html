@@ -1,11 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Library System</title>
+
+    <link href="webjars/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
-<h1>Welcome to Library System!</h1>
+
+<div class="container-fluid" style="margin-top: 40px">
+    <div class="row">
+        <div class="col-md-2 offset-md-0">
+            <div class="card">
+                <div class="card-header bg-primary text-light">
+                    <h5 class="card-title offset-md-3">Library system</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'books/list'}" role="button">Get books list</a>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'authors/list'}" role="button">Get authors list</a>
+                            </div>
+
+<!--                            <a class="btn" href="/authors/list">One</a>-->
+
+<!--                            <tr th:each="x : ${y}">-->
+<!--                                <td th:text="${x.id}">334</td>-->
+<!--                                <td th:text="${x.description}">asd</td>-->
+<!--                                <td><a href="#" th:href="@{'/x/z/' + ${x.id}}">xyz</a></td>-->
+<!--                            </tr>-->
+
+
+<!--                            <ul th:remove="all-but-first">-->
+<!--                                <li th:each="y : ${x.y}" th:text="${x.z}">something 1</li>-->
+<!--                                <li>something 2</li>-->
+<!--                                <li>something 3</li>-->
+<!--                            </ul>-->
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="webjars/jquery/3.5.1/jquery.min.js"></script>
+<script src="webjars/popper.js/2.0.2/umd/popper.min.js"></script>
+<script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

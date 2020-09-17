@@ -94,7 +94,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.setGenre(fantasyGenre);
         elantris.addPublisher(torBooks);
         elantris.setYearOfRelease(2005);
-        elantris.setIsbn("0765311771");
+        elantris.setIsbn("9788374806671");
         books.add(elantris);
 
         Author stephenKing = new Author("Stephen", "King");

@@ -1,6 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
-import com.kamilpomietlo.libraryapp.repositories.BookRepository;
+import com.kamilpomietlo.libraryapp.services.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
-    public BookController(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @RequestMapping("books/list")
     public String getBooks(Model model) {
-        model.addAttribute("books", bookRepository.findAll());
+        model.addAttribute("books", bookService.getBooks());
 
         return "books/list";
     }

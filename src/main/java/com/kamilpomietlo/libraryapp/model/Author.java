@@ -2,6 +2,7 @@ package com.kamilpomietlo.libraryapp.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = "books")
+@ToString(exclude = {"books"})
 @Entity
 public class Author extends BaseEntity {
 
