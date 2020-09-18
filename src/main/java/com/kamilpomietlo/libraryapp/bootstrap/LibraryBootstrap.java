@@ -1,9 +1,6 @@
 package com.kamilpomietlo.libraryapp.bootstrap;
 
-import com.kamilpomietlo.libraryapp.model.Author;
-import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.Genre;
-import com.kamilpomietlo.libraryapp.model.Publisher;
+import com.kamilpomietlo.libraryapp.model.*;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import com.kamilpomietlo.libraryapp.repositories.GenreRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -93,6 +90,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.addAuthor(brandonSanderson);
         elantris.setGenre(fantasyGenre);
         elantris.addPublisher(torBooks);
+        elantris.setCoverType(CoverType.SOFT);
         elantris.setYearOfRelease(2005);
         elantris.setIsbn("9788374806671");
         books.add(elantris);
@@ -105,6 +103,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.addAuthor(stephenKing);
         misery.setGenre(horrorGenre);
         misery.addPublisher(vikingPress);
+        misery.setCoverType(CoverType.SOFT);
         misery.setYearOfRelease(1987);
         misery.setIsbn("9780670813643");
         books.add(misery);
@@ -117,6 +116,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves.addAuthor(andrzejSapkowski);
         bloodOfElves.setGenre(fantasyGenre);
         bloodOfElves.addPublisher(superNowa);
+        bloodOfElves.setCoverType(CoverType.SOFT);
         bloodOfElves.setYearOfRelease(1994);
         bloodOfElves.setIsbn("9788375780659");
         books.add(bloodOfElves);
@@ -126,6 +126,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.addAuthor(andrzejSapkowski);
         timeOfContempt.setGenre(fantasyGenre);
         timeOfContempt.addPublisher(superNowa);
+        timeOfContempt.setCoverType(CoverType.SOFT);
         timeOfContempt.setYearOfRelease(1995);
         timeOfContempt.setIsbn("9788375780666");
         books.add(timeOfContempt);
@@ -138,9 +139,25 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.addAuthor(agathaChristie);
         poirotInvestigates.setGenre(thrillerGenre);
         poirotInvestigates.addPublisher(bodleyHead);
+        poirotInvestigates.setCoverType(CoverType.HARD);
         poirotInvestigates.setYearOfRelease(1924);
         poirotInvestigates.setIsbn("9788577991273");
         books.add(poirotInvestigates);
+
+        Author terryPratchett = new Author("Terry", "Pratchett");
+        Author neilGaiman = new Author("Neil", "Gaiman");
+        Publisher gollancz = new Publisher("Gollancz");
+
+        Book goodOmens = new Book();
+        goodOmens.setTitle("Good Omens");
+        goodOmens.addAuthor(terryPratchett);
+        goodOmens.addAuthor(neilGaiman);
+        goodOmens.setGenre(fantasyGenre);
+        goodOmens.addPublisher(gollancz);
+        goodOmens.setCoverType(CoverType.HARD);
+        goodOmens.setYearOfRelease(1990);
+        goodOmens.setIsbn("9780575048003");
+        books.add(goodOmens);
 
         return books;
     }

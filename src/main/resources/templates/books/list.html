@@ -7,50 +7,36 @@
 <body>
 <h1>Books List</h1>
 
-<!-- todo all htmls -->
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="panel panel-primary">
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Publisher</th>
+        <th>Cover</th>
+        <th>Year of release</th>
+        <th>ISBN</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getId()}">1</td>
+        <td th:text="${book.getTitle()}">2</td>
+        <td>
+            <ul style="list-style: none">
+                <li th:each="author : ${book.authors}"
+                    th:text="${author.toString()}">3
+                </li>
+            </ul>
+        </td>
+        <td th:text="${book.getPublisher().getName()}">4</td>
+        <td th:text="${book.getCoverType()}">5</td>
+        <td th:text="${book.getYearOfRelease()}">6</td>
+        <td th:text="${book.getIsbn()}">7</td>
+    </tr>
+</table>
 
-                <div class="panel-heading">
-                    <h1 class="panel-title">Library system</h1>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive" th:if="${not #lists.isEmpty(books)}">
-                        <table class="table table-hover ">
-                            <thead class="thead-inverse">
-                            <tr>
-                                <th>ID</th>
-                                <th>Description</th>
-                                <th>View</th>
-                                <th>Update</th>
-                                <th>Delete</th>
-                            </tr>
-                            </thead>
-                            <tr th:remove="all">
-                                <td>123</td>
-                                <td>Tasty Goodnees 1</td>
-                                <td><a href="#">View</a></td>
-                            </tr>
-                            <tr th:remove="all">
-                                <td>12333</td>
-                                <td>Tasty Goodnees 2</td>
-                                <td><a href="#">View</a></td>
-                            </tr>
-                            <tr th:each="book : ${books}">
-                                <td th:text="${book.getId()}">334</td>
-                                <td th:text="${book.getGenre().getDescription()}">Tasty Goodnees 3</td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${book.getId()} + '/show'}">View</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${book.getId()} + '/update'}">Update</a></td>
-                                <td><a href="#" th:href="@{'/recipe/' + ${book.getId()} + '/delete'}">Delete</a></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="col">
+    <a class="btn btn-primary" href="#"
+       th:href="@{'/'}" role="button">Back to menu</a>
 </div>
 
 </body>

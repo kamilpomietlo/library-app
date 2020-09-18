@@ -4,30 +4,33 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class Book extends BaseEntity {
 
-    // todo: add cover type
     private String title;
-    private String isbn;
-    private Integer yearOfRelease;
+
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
+    private List<Author> authors = new ArrayList<>();
 
     // todo: all cascade types to check
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
-    private Set<Author> authors = new HashSet<>();
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
+
+    @Enumerated(value = EnumType.STRING)
+    private CoverType coverType;
+
+    private Integer yearOfRelease;
+    private String isbn;
 
     public void addAuthor(Author author) {
         if (author != null) {

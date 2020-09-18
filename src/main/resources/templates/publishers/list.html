@@ -11,13 +11,17 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Books</th>
     </tr>
     <tr th:each="publisher : ${publishers}">
         <td th:text="${publisher.getId()}">1</td>
         <td th:text="${publisher.getName()}">2</td>
     </tr>
 </table>
+
+<div class="col">
+    <a class="btn btn-primary" href="#"
+       th:href="@{'/'}" role="button">Back to menu</a>
+</div>
 
 </body>
 </html>
