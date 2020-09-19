@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = "books")
-//@ToString(exclude = {"books"})
 @Entity
 public class Author extends BaseEntity {
 

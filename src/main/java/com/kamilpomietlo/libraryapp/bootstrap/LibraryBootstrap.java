@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.bootstrap;
 import com.kamilpomietlo.libraryapp.model.*;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import com.kamilpomietlo.libraryapp.repositories.GenreRepository;
+import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -19,20 +20,23 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
+    private final UserRepository userRepository;
 
-    public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository) {
+    public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
         this.genreRepository = genreRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        bookRepository.saveAll(getBooks());
+        bookRepository.saveAll(loadBooks());
+        userRepository.saveAll(loadUsers());
         log.debug("Bootstrap data loaded.");
     }
 
-    private List<Book> getBooks() {
+    private List<Book> loadBooks() {
         List<Book> books = new ArrayList<>();
         final String EXCEPTION_STRING = "Expected genre not found.";
 
@@ -81,7 +85,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         Genre horrorGenre = horrorGenreOptional.get();
         Genre historyGenre = historyGenreOptional.get();
 
-        // set books
+        // add authors, publishers and books
         Author brandonSanderson = new Author("Brandon", "Sanderson");
         Publisher torBooks = new Publisher("Tor Books");
 
@@ -160,5 +164,49 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         books.add(goodOmens);
 
         return books;
+    }
+
+    private List<User> loadUsers() {
+        List<User> users = new ArrayList<>();
+
+        User janKowalski = new User();
+        janKowalski.setFirstName("Jan");
+        janKowalski.setLastName("Kowalski");
+        janKowalski.setIdNumber("88021574862");
+        janKowalski.setCountry("Poland");
+        janKowalski.setState("mazowieckie");
+        janKowalski.setCity("Warszawa");
+        janKowalski.setStreet("Szkolna");
+        janKowalski.setHomeNumber("7");
+        //janKowalski.getBooks().add(bookRepository.findById(2L).get()); // todo: add books to users
+        //janKowalski.addBook(loadBooks().get(1));
+
+        // maybe with Optionals getting?
+        // get Genres
+//        Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
+//        if (thrillerGenreOptional.isEmpty()) {
+//            throw new RuntimeException(EXCEPTION_STRING);
+//        }
+
+        // get optionals
+//        Genre thrillerGenre = thrillerGenreOptional.get();
+
+
+        users.add(janKowalski);
+
+        User tomaszNowak = new User();
+        tomaszNowak.setFirstName("Tomasz");
+        tomaszNowak.setLastName("Nowak");
+        tomaszNowak.setIdNumber("74012285943");
+        tomaszNowak.setCountry("Poland");
+        tomaszNowak.setState("śląskie");
+        tomaszNowak.setCity("Katowice");
+        tomaszNowak.setStreet("Rynkowa");
+        tomaszNowak.setHomeNumber("12");
+        tomaszNowak.getBooks().add(bookRepository.findById(2L).get());
+        tomaszNowak.getBooks().add(bookRepository.findById(5L).get());
+        users.add(tomaszNowak);
+
+        return users;
     }
 }

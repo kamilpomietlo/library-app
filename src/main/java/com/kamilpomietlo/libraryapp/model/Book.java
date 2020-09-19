@@ -17,7 +17,6 @@ public class Book extends BaseEntity {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
-    // todo: all cascade types to check
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "genre_id")
     private Genre genre;
@@ -31,6 +30,10 @@ public class Book extends BaseEntity {
 
     private Integer yearOfRelease;
     private String isbn;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public void addAuthor(Author author) {
         if (author != null) {

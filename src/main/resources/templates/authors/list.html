@@ -14,7 +14,7 @@
     </tr>
     <tr th:each="author : ${authors}">
         <td th:text="${author.getId()}">1</td>
-        <td th:text="${author.getFirstName() + ' ' + author.getLastName()}">2</td>
+        <td th:text="${author.toString()}">2</td>
     </tr>
 </table>
 

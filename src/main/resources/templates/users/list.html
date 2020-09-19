@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+</head>
+<body>
+<h1>Users List</h1>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ID Number</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>City</th>
+        <th>Street</th>
+        <th>Home number</th>
+        <th>Borrowed books</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}">1</td>
+        <td th:text="${user.toString()}">2</td>
+        <td th:text="${user.getIdNumber()}">3</td>
+        <td th:text="${user.getCountry()}">4</td>
+        <td th:text="${user.getState()}">5</td>
+        <td th:text="${user.getCity()}">6</td>
+        <td th:text="${user.getStreet()}">7</td>
+        <td th:text="${user.getHomeNumber()}">8</td>
+        <td>
+            <ul style="list-style: none">
+                <li th:each="book : ${user.books}"
+                    th:text="${book.getTitle()}">9</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+<div class="col">
+    <a class="btn btn-primary" href="#"
+       th:href="@{'/'}" role="button">Back to menu</a>
+</div>
+
+</body>
+</html>

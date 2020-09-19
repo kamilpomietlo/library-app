@@ -1,7 +1,11 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -12,7 +16,15 @@ public class AuthorServiceImpl implements AuthorService {
         this.authorRepository = authorRepository;
     }
 
-//    @Override
+    @Override
+    public Set<Author> getAuthors() {
+        Set<Author> authorSet = new HashSet<>();
+        authorRepository.findAll().iterator().forEachRemaining(authorSet::add);
+
+        return authorSet;
+    }
+
+    //    @Override
 //    public Author findById(Long id) {
 //        Optional<Author> authorOptional = authorRepository.findById(id);
 //
