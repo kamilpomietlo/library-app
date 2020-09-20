@@ -30,7 +30,6 @@ public class User extends BaseEntity {
         return firstName + " " + lastName;
     }
 
-    // todo: test
     public void addBook(Book book) {
         if (book != null) {
             this.books.add(book);
@@ -38,4 +37,3 @@ public class User extends BaseEntity {
         }
     }
 }
-

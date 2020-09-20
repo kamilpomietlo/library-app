@@ -21,6 +21,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
     private final UserRepository userRepository;
+    private final String EXCEPTION_STRING = "Expected object not found.";
 
     public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository, UserRepository userRepository) {
         this.bookRepository = bookRepository;
@@ -38,9 +39,9 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
     private List<Book> loadBooks() {
         List<Book> books = new ArrayList<>();
-        final String EXCEPTION_STRING = "Expected genre not found.";
 
-        // get Genres
+
+        // get genres
         Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
         if (thrillerGenreOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
@@ -78,12 +79,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
         // get optionals
         Genre thrillerGenre = thrillerGenreOptional.get();
-        Genre romanceGenre = romanceGenreOptional.get();
-        Genre scienceFictionGenre = scienceFictionGenreOptional.get();
         Genre fantasyGenre = fantasyGenreOptional.get();
-        Genre mysteryGenre = mysteryGenreOptional.get();
         Genre horrorGenre = horrorGenreOptional.get();
-        Genre historyGenre = historyGenreOptional.get();
 
         // add authors, publishers and books
         Author brandonSanderson = new Author("Brandon", "Sanderson");
@@ -169,6 +166,27 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
     private List<User> loadUsers() {
         List<User> users = new ArrayList<>();
 
+        // get books
+        Optional<Book> miseryBookOptional = bookRepository.findByTitle("Misery");
+        if (miseryBookOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        Optional<Book> timeOfContemptBookOptional = bookRepository.findByTitle("Time of Contempt");
+        if (timeOfContemptBookOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        Optional<Book> poirotInvestigatesBookOptional = bookRepository.findByTitle("Poirot Investigates");
+        if (poirotInvestigatesBookOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        // get optionals
+        Book miseryBook = miseryBookOptional.get();
+        Book timeOfContemptBook = timeOfContemptBookOptional.get();
+        Book poirotInvestigatesBook = poirotInvestigatesBookOptional.get();
+
         User janKowalski = new User();
         janKowalski.setFirstName("Jan");
         janKowalski.setLastName("Kowalski");
@@ -178,20 +196,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setCity("Warszawa");
         janKowalski.setStreet("Szkolna");
         janKowalski.setHomeNumber("7");
-        //janKowalski.getBooks().add(bookRepository.findById(2L).get()); // todo: add books to users
-        //janKowalski.addBook(loadBooks().get(1));
-
-        // maybe with Optionals getting?
-        // get Genres
-//        Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
-//        if (thrillerGenreOptional.isEmpty()) {
-//            throw new RuntimeException(EXCEPTION_STRING);
-//        }
-
-        // get optionals
-//        Genre thrillerGenre = thrillerGenreOptional.get();
-
-
+        janKowalski.addBook(miseryBook);
         users.add(janKowalski);
 
         User tomaszNowak = new User();
@@ -203,8 +208,10 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setCity("Katowice");
         tomaszNowak.setStreet("Rynkowa");
         tomaszNowak.setHomeNumber("12");
-        tomaszNowak.getBooks().add(bookRepository.findById(2L).get());
-        tomaszNowak.getBooks().add(bookRepository.findById(5L).get());
+        // todo: fix - it sees the book added to the user, the second one loses author
+        // (it takes the author with it?)
+        tomaszNowak.addBook(timeOfContemptBook);
+        tomaszNowak.addBook(poirotInvestigatesBook);
         users.add(tomaszNowak);
 
         return users;
