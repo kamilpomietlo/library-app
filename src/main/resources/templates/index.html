@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Library System</title>
@@ -34,19 +34,19 @@
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
-                                   th:href="@{'books/list'}" role="button">Search a book</a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-primary" href="#"
-                                   th:href="@{'authors/list'}" role="button">Search an author</a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-primary" href="#"
-                                   th:href="@{'publishers/list'}" role="button">Search a publisher</a>
-                            </div>
-                            <div class="col">
-                                <a class="btn btn-primary" href="#"
                                    th:href="@{'users/list'}" role="button">Get users list</a>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'books/search'}" role="button">Search for a book</a>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'authors/search'}" role="button">Search for an author</a>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'publishers/search'}" role="button">Search for a publisher</a>
                             </div>
 
 <!--                            <a class="btn" href="/authors/list">One</a>-->

@@ -40,7 +40,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
     private List<Book> loadBooks() {
         List<Book> books = new ArrayList<>();
 
-
         // get genres
         Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
         if (thrillerGenreOptional.isEmpty()) {
