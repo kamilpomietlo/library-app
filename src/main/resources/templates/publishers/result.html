@@ -12,12 +12,11 @@
         <p th:text="'Name: ' + ${searchedPublisher.getName()}">1</p>
         <p th:text="'ID: ' + ${searchedPublisher.getId()}">2</p>
         <p th:text="'Books: '">
-            <ul style="list-style: none">
-                <li th:each="book : ${searchedPublisher.books}"
-                    th:text="${book.getTitle()}">3
-                </li>
-            </ul>
-        </p>
+        <ul style="list-style: none">
+            <li th:each="book : ${searchedPublisher.books}"
+                th:text="${book.getTitle()}">3
+            </li>
+        </ul>
 
         <a th:href="@{search}">Search again</a>
     </tr>

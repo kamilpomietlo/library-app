@@ -5,12 +5,14 @@ import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final String EXCEPTION_STRING = "Expected object not found.";
 
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
@@ -22,5 +24,15 @@ public class BookServiceImpl implements BookService {
         bookRepository.findAll().iterator().forEachRemaining(bookSet::add);
 
         return bookSet;
+    }
+
+    @Override
+    public Book findByTitle(String title) {
+        Optional<Book> bookOptional = bookRepository.findByTitle(title);
+        if (bookOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        return bookOptional.get();
     }
 }
