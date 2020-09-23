@@ -11,10 +11,17 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Books</th>
     </tr>
     <tr th:each="publisher : ${publishers}">
         <td th:text="${publisher.getId()}">1</td>
         <td th:text="${publisher.getName()}">2</td>
+        <td>
+            <ul style="list-style: none">
+                <li th:each="book : ${publisher.books}"
+                    th:text="${book.getTitle()}">3</li>
+            </ul>
+        </td>
     </tr>
 </table>
 

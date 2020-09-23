@@ -34,8 +34,8 @@ public class PublisherController {
 
     @PostMapping("publishers/search")
     public String publisherSearchSubmit(@ModelAttribute Publisher publisher, Model model) {
-        model.addAttribute("searchedPublisher", publisherService.findByName(publisher.getName()));
+        model.addAttribute("publishers", publisherService.findByName(publisher.getName()));
 
-        return "publishers/result";
+        return "publishers/list";
     }
 }

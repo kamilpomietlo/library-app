@@ -4,9 +4,7 @@ import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class PublisherServiceImpl implements PublisherService {
@@ -26,12 +24,15 @@ public class PublisherServiceImpl implements PublisherService {
         return publisherSet;
     }
 
-    public Publisher findByName(String name) {
+    public List<Publisher> findByName(String name) {
+        List<Publisher> publisherList = new ArrayList<>();
         Optional<Publisher> publisherOptional = publisherRepository.findByName(name);
         if (publisherOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
+        } else {
+            publisherList.add(publisherOptional.get());
         }
 
-        return publisherOptional.get();
+        return publisherList;
     }
 }

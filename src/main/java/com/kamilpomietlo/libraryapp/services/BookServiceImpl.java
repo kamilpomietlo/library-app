@@ -4,9 +4,7 @@ import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -27,12 +25,15 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book findByTitle(String title) {
+    public List<Book> findByTitle(String title) {
+        List<Book> bookList = new ArrayList<>();
         Optional<Book> bookOptional = bookRepository.findByTitle(title);
         if (bookOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
+        } else {
+            bookList.add(bookOptional.get());
         }
 
-        return bookOptional.get();
+        return bookList;
     }
 }

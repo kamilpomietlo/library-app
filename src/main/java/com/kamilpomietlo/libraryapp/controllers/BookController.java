@@ -34,8 +34,8 @@ public class BookController {
 
     @PostMapping("books/search")
     public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
-        model.addAttribute("searchedBook", bookService.findByTitle(book.getTitle()));
+        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
 
-        return "books/result";
+        return "books/list";
     }
 }
