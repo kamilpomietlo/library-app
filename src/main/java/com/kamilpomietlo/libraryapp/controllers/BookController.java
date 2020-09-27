@@ -4,10 +4,7 @@ import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.services.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class BookController {
@@ -18,24 +15,31 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @RequestMapping("books/list")
+    @RequestMapping("book/list")
     public String getBooks(Model model) {
         model.addAttribute("books", bookService.getBooks());
 
-        return "books/list";
+        return "book/list";
     }
 
-    @GetMapping("books/search")
+    @GetMapping("book/search")
     public String bookSearchForm(Model model) {
-        model.addAttribute("searchedBook", new Book());
+        model.addAttribute("books", new Book());
 
-        return "books/search";
+        return "book/search";
     }
 
-    @PostMapping("books/search")
+    @PostMapping("book/search")
     public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
         model.addAttribute("books", bookService.findByTitle(book.getTitle()));
 
-        return "books/list";
+        return "book/list";
+    }
+
+    @RequestMapping("book/{id}/reserve")
+    public String reserveBook(@PathVariable String id, Model model) {
+        model.addAttribute("books", bookService.getBooks());
+
+        return "book/list";
     }
 }

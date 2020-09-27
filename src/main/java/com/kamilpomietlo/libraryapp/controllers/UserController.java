@@ -18,24 +18,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("users/list")
+    @RequestMapping("user/list")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
 
-        return "users/list";
+        return "user/list";
     }
 
-    @GetMapping("users/search")
+    @GetMapping("user/search")
     public String userSearchForm(Model model) {
         model.addAttribute("searchedUser", new User());
 
-        return "users/search";
+        return "user/search";
     }
 
-    @PostMapping("users/search")
+    @PostMapping("user/search")
     public String userSearchSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("users", userService.findByIdNumber(user.getIdNumber()));
 
-        return "users/list";
+        return "user/list";
     }
 }

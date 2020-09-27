@@ -9,4 +9,5 @@ public interface BookService {
 
     Set<Book> getBooks();
     List<Book> findByTitle(String title);
+    void reserveBook(Long id);
 }

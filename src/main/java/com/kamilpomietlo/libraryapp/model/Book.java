@@ -36,6 +36,9 @@ public class Book extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Enumerated(value = EnumType.STRING)
+    private BookStatus bookStatus;
+
     public void addAuthor(Author author) {
         if (author != null) {
             this.authors.add(author);

@@ -1,6 +1,7 @@
 package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,17 @@ public class BookServiceImpl implements BookService {
         }
 
         return bookList;
+    }
+
+    @Override
+    public void reserveBook(Long id) {
+        Book bookToReserve = bookRepository.findById(id).get();
+
+        // don't work, command objects to do
+        if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
+            bookToReserve.setBookStatus(BookStatus.RESERVED);
+        } else {
+
+        }
     }
 }

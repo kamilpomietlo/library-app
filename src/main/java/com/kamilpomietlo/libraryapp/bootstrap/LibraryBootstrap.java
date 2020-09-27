@@ -93,6 +93,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.setCoverType(CoverType.SOFT);
         elantris.setYearOfRelease(2005);
         elantris.setIsbn("9788374806671");
+        elantris.setBookStatus(BookStatus.AVAILABLE);
         books.add(elantris);
 
         Author stephenKing = new Author("Stephen", "King");
@@ -106,6 +107,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setCoverType(CoverType.SOFT);
         misery.setYearOfRelease(1987);
         misery.setIsbn("9780670813643");
+        misery.setBookStatus(BookStatus.BORROWED);
         books.add(misery);
 
         Author andrzejSapkowski = new Author("Andrzej", "Sapkowski");
@@ -119,6 +121,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves.setCoverType(CoverType.SOFT);
         bloodOfElves.setYearOfRelease(1994);
         bloodOfElves.setIsbn("9788375780659");
+        bloodOfElves.setBookStatus(BookStatus.AVAILABLE);
         books.add(bloodOfElves);
 
         Book timeOfContempt = new Book();
@@ -129,6 +132,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setCoverType(CoverType.SOFT);
         timeOfContempt.setYearOfRelease(1995);
         timeOfContempt.setIsbn("9788375780666");
+        timeOfContempt.setBookStatus(BookStatus.AVAILABLE);
         books.add(timeOfContempt);
 
         Author agathaChristie = new Author("Agatha", "Christie");
@@ -142,6 +146,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.setCoverType(CoverType.HARD);
         poirotInvestigates.setYearOfRelease(1924);
         poirotInvestigates.setIsbn("9788577991273");
+        poirotInvestigates.setBookStatus(BookStatus.RESERVED);
         books.add(poirotInvestigates);
 
         Author terryPratchett = new Author("Terry", "Pratchett");
@@ -157,6 +162,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setCoverType(CoverType.HARD);
         goodOmens.setYearOfRelease(1990);
         goodOmens.setIsbn("9780575048003");
+        goodOmens.setBookStatus(BookStatus.RESERVED);
         books.add(goodOmens);
 
         return books;

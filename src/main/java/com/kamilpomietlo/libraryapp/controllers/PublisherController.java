@@ -18,24 +18,24 @@ public class PublisherController {
         this.publisherService = publisherService;
     }
 
-    @RequestMapping("publishers/list")
+    @RequestMapping("publisher/list")
     public String getPublishers(Model model) {
         model.addAttribute("publishers", publisherService.getPublishers());
 
-        return "publishers/list";
+        return "publisher/list";
     }
 
-    @GetMapping("publishers/search")
+    @GetMapping("publisher/search")
     public String publisherSearchForm(Model model) {
         model.addAttribute("searchedPublisher", new Publisher());
 
-        return "publishers/search";
+        return "publisher/search";
     }
 
-    @PostMapping("publishers/search")
+    @PostMapping("publisher/search")
     public String publisherSearchSubmit(@ModelAttribute Publisher publisher, Model model) {
         model.addAttribute("publishers", publisherService.findByName(publisher.getName()));
 
-        return "publishers/list";
+        return "publisher/list";
     }
 }

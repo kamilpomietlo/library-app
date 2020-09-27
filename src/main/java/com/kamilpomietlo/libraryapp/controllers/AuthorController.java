@@ -18,24 +18,24 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @RequestMapping("authors/list")
+    @RequestMapping("author/list")
     public String getAuthors(Model model) {
         model.addAttribute("authors", authorService.getAuthors());
 
-        return "authors/list";
+        return "author/list";
     }
 
-    @GetMapping("authors/search")
+    @GetMapping("author/search")
     public String authorSearchForm(Model model) {
         model.addAttribute("searchedAuthor", new Author());
 
-        return "authors/search";
+        return "author/search";
     }
 
-    @PostMapping("authors/search")
+    @PostMapping("author/search")
     public String authorSearchSubmit(@ModelAttribute Author author, Model model) {
         model.addAttribute("authors", authorService.findByFirstNameAndLastName(author.getFirstName(), author.getLastName()));
 
-        return "authors/list";
+        return "author/list";
     }
 }

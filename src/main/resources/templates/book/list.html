@@ -16,6 +16,7 @@
         <th>Cover</th>
         <th>Year of release</th>
         <th>ISBN</th>
+        <th>Status</th>
     </tr>
     <tr th:each="book : ${books}">
         <td th:text="${book.getId()}">1</td>
@@ -30,6 +31,13 @@
         <td th:text="${book.getCoverType()}">5</td>
         <td th:text="${book.getYearOfRelease()}">6</td>
         <td th:text="${book.getIsbn()}">7</td>
+        <td th:text="${book.getBookStatus()}">8</td>
+        <td>
+            <div class="col">
+                <a class="btn btn-primary" href="#"
+                   th:href="@{'/book/{id}/reserve'}" role="button">Reserve</a>
+            </div>
+        </td>
     </tr>
 </table>
 
