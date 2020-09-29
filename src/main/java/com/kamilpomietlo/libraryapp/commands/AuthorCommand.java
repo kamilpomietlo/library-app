@@ -1,6 +1,5 @@
 package com.kamilpomietlo.libraryapp.commands;
 
-import com.kamilpomietlo.libraryapp.model.Book;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,5 +14,5 @@ public class AuthorCommand extends BaseEntityCommand {
 
     private String firstName;
     private String lastName;
-    private Set<Book> books = new HashSet<>();
+    private Set<BookCommand> books = new HashSet<>();
 }

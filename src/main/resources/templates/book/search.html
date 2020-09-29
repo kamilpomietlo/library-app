@@ -9,7 +9,7 @@
 
 <table>
     <tr>
-        <form action="#" th:action="@{search}" method="post" th:object="${searchedBook}">
+        <form action="#" th:action="@{search}" method="post" th:object="${books}">
             <p>Title of the book:
                 <label>
                     <input type="text" th:field="*{title}"/>

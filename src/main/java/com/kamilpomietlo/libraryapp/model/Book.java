@@ -14,7 +14,7 @@ public class Book extends BaseEntity {
 
     private String title;
 
-    // cascade causes problem?
+    // cascade or owning side causes problem?
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
