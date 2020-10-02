@@ -26,7 +26,7 @@ public class AuthorController {
 
     @GetMapping("author/search")
     public String authorSearchForm(Model model) {
-        model.addAttribute("searchedAuthor", new Author());
+        model.addAttribute("authors", new Author());
 
         return "author/search";
     }

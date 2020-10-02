@@ -45,4 +45,18 @@ public class BookController {
 
         return "book/list";
     }
+
+    @GetMapping("book/delete")
+    public String deleteByIdForm(Model model) {
+        model.addAttribute("books", new Book());
+
+        return "book/delete";
+    }
+
+    @PostMapping("book/delete")
+    public String deleteByIdSubmit(@ModelAttribute Book book) {
+        bookService.deleteById(book.getId());
+
+        return "book/list";
+    }
 }

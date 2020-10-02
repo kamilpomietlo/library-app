@@ -12,6 +12,7 @@
         <th>ID</th>
         <th>Title</th>
         <th>Author</th>
+        <th>Genre</th>
         <th>Publisher</th>
         <th>Cover</th>
         <th>Year of release</th>
@@ -27,11 +28,12 @@
                     th:text="${author.toString()}">3</li>
             </ul>
         </td>
-        <td th:text="${book.getPublisher().getName()}">4</td>
-        <td th:text="${book.getCoverType()}">5</td>
-        <td th:text="${book.getYearOfRelease()}">6</td>
-        <td th:text="${book.getIsbn()}">7</td>
-        <td th:text="${book.getBookStatus()}">8</td>
+        <td th:text="${book.getGenre().getDescription()}">4</td>
+        <td th:text="${book.getPublisher().getName()}">5</td>
+        <td th:text="${book.getCoverType()}">6</td>
+        <td th:text="${book.getYearOfRelease()}">7</td>
+        <td th:text="${book.getIsbn()}">8</td>
+        <td th:text="${book.getBookStatus()}">9</td>
         <td>
             <div class="col">
                 <a class="btn btn-primary" href="#"

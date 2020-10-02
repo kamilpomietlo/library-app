@@ -14,11 +14,11 @@ public class Book extends BaseEntity {
 
     private String title;
 
-    // todo cascade or owning side causes problem?
+    // todo cascade or owning side causes problems?
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
     private List<Author> authors = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "genre_id")
     private Genre genre;
 

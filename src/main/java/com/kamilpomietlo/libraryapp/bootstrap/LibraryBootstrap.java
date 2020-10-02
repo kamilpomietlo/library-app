@@ -3,7 +3,6 @@ package com.kamilpomietlo.libraryapp.bootstrap;
 import com.kamilpomietlo.libraryapp.model.*;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import com.kamilpomietlo.libraryapp.repositories.GenreRepository;
-import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -20,25 +19,22 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
     private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
-    private final UserRepository userRepository;
-    private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository, UserRepository userRepository) {
+    public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository) {
         this.bookRepository = bookRepository;
         this.genreRepository = genreRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         bookRepository.saveAll(loadBooks());
-        userRepository.saveAll(loadUsers());
         log.debug("Bootstrap data loaded.");
     }
 
     private List<Book> loadBooks() {
         List<Book> books = new ArrayList<>();
+        String EXCEPTION_STRING = "Expected object not found.";
 
         // get genres
         Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
@@ -165,33 +161,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setBookStatus(BookStatus.RESERVED);
         books.add(goodOmens);
 
-        return books;
-    }
-
-    private List<User> loadUsers() {
-        List<User> users = new ArrayList<>();
-
-        // get books
-        Optional<Book> miseryBookOptional = bookRepository.findByTitle("Misery");
-        if (miseryBookOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
-
-        Optional<Book> timeOfContemptBookOptional = bookRepository.findByTitle("Time of Contempt");
-        if (timeOfContemptBookOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
-
-        Optional<Book> poirotInvestigatesBookOptional = bookRepository.findByTitle("Poirot Investigates");
-        if (poirotInvestigatesBookOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
-
-        // get optionals
-        Book miseryBook = miseryBookOptional.get();
-        Book timeOfContemptBook = timeOfContemptBookOptional.get();
-        Book poirotInvestigatesBook = poirotInvestigatesBookOptional.get();
-
         // add users
         User janKowalski = new User();
         janKowalski.setFirstName("Jan");
@@ -202,8 +171,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setCity("Warszawa");
         janKowalski.setStreet("Szkolna");
         janKowalski.setHomeNumber("7");
-        janKowalski.addBook(miseryBook);
-        users.add(janKowalski);
+        janKowalski.addBook(misery);
 
         User tomaszNowak = new User();
         tomaszNowak.setFirstName("Tomasz");
@@ -214,12 +182,9 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setCity("Katowice");
         tomaszNowak.setStreet("Rynkowa");
         tomaszNowak.setHomeNumber("12");
-        // todo: fix - it sees the book added to the user, the second one loses author
-        // (it takes the author with it?)
-        tomaszNowak.addBook(timeOfContemptBook);
-        tomaszNowak.addBook(poirotInvestigatesBook);
-        users.add(tomaszNowak);
+        tomaszNowak.addBook(timeOfContempt);
+        tomaszNowak.addBook(poirotInvestigates);
 
-        return users;
+        return books;
     }
 }
