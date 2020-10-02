@@ -14,15 +14,17 @@ public class Book extends BaseEntity {
 
     private String title;
 
-    // todo cascade or owning side causes problems?
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "books")
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private List<Author> authors = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
@@ -32,7 +34,7 @@ public class Book extends BaseEntity {
     private Integer yearOfRelease;
     private String isbn;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 

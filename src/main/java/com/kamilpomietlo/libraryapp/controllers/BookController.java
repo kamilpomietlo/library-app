@@ -39,13 +39,6 @@ public class BookController {
         return "book/list";
     }
 
-    @PostMapping("book/{id}/reserve")
-    public String reserveBook(@PathVariable String id, Model model) {
-        model.addAttribute("books", bookService.getBooks());
-
-        return "book/list";
-    }
-
     @GetMapping("book/delete")
     public String deleteByIdForm(Model model) {
         model.addAttribute("books", new Book());
@@ -54,8 +47,16 @@ public class BookController {
     }
 
     @PostMapping("book/delete")
-    public String deleteByIdSubmit(@ModelAttribute Book book) {
+    public String deleteByIdSubmit(@ModelAttribute Book book, Model model) {
+        model.addAttribute("books");
         bookService.deleteById(book.getId());
+
+        return "redirect:/book/list";
+    }
+
+    @PostMapping("book/{id}/reserve")
+    public String reserveBook(@PathVariable String id, Model model) {
+        model.addAttribute("books", bookService.getBooks());
 
         return "book/list";
     }

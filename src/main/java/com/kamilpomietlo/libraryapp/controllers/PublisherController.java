@@ -26,7 +26,7 @@ public class PublisherController {
 
     @GetMapping("publisher/search")
     public String publisherSearchForm(Model model) {
-        model.addAttribute("searchedPublisher", new Publisher());
+        model.addAttribute("publishers", new Publisher());
 
         return "publisher/search";
     }
