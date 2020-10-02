@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService {
     public void reserveBook(Long id) {
         Book bookToReserve = bookRepository.findById(id).get();
 
-        // don't work, command objects to do
+        // todo don't work, command objects to do first
         if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
             bookToReserve.setBookStatus(BookStatus.RESERVED);
         } else {

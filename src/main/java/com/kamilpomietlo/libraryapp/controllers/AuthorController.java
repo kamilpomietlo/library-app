@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AuthorController {
@@ -18,7 +17,7 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @RequestMapping("author/list")
+    @GetMapping("author/list")
     public String getAuthors(Model model) {
         model.addAttribute("authors", authorService.getAuthors());
 

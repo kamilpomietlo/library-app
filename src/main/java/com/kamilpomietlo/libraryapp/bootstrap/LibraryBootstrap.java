@@ -192,6 +192,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         Book timeOfContemptBook = timeOfContemptBookOptional.get();
         Book poirotInvestigatesBook = poirotInvestigatesBookOptional.get();
 
+        // add users
         User janKowalski = new User();
         janKowalski.setFirstName("Jan");
         janKowalski.setLastName("Kowalski");

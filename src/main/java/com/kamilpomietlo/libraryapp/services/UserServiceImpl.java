@@ -4,7 +4,9 @@ import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,15 +27,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findByIdNumber(String idNumber) {
-        List<User> userList = new ArrayList<>();
+    public User findByIdNumber(String idNumber) {
         Optional<User> userOptional = userRepository.findByIdNumber(idNumber);
         if (userOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
-        } else {
-            userList.add(userOptional.get());
         }
 
-        return userList;
+        return userOptional.get();
     }
 }

@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -68,11 +67,11 @@ class UserServiceImplTest {
         when(userRepository.findByIdNumber(anyString())).thenReturn(userOptional);
 
         // when
-        List<User> usersReturned = userService.findByIdNumber("123");
+        User userReturned = userService.findByIdNumber("123");
 
         // then
-        assertNotNull(usersReturned);
-        assertEquals(1, usersReturned.size());
+        assertNotNull(userReturned);
+        assertEquals(1, userReturned.getId());
         verify(userRepository, times(1)).findByIdNumber(anyString());
         verify(userRepository, never()).findAll();
     }

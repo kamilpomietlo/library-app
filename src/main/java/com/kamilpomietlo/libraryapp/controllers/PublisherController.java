@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PublisherController {
@@ -18,7 +17,7 @@ public class PublisherController {
         this.publisherService = publisherService;
     }
 
-    @RequestMapping("publisher/list")
+    @GetMapping("publisher/list")
     public String getPublishers(Model model) {
         model.addAttribute("publishers", publisherService.getPublishers());
 
