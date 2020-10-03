@@ -5,14 +5,14 @@
     <title>Library System</title>
 </head>
 <body>
-<h1>Search for a user</h1>
+<h1>Delete a user</h1>
 
 <table>
     <tr>
-        <form action="#" th:action="@{search}" method="post" th:object="${users}">
-            <p>ID number of the user:
+        <form action="#" th:action="@{delete}" method="post" th:object="${users}">
+            <p>ID of the user:
                 <label>
-                    <input type="text" th:field="*{idNumber}"/>
+                    <input type="text" th:field="*{id}"/>
                 </label>
             </p>
             <p>
@@ -21,8 +21,6 @@
             </p>
         </form>
     </tr>
-
-
 </table>
 
 <div class="col">

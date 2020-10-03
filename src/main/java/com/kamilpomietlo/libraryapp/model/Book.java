@@ -34,7 +34,7 @@ public class Book extends BaseEntity {
     private Integer yearOfRelease;
     private String isbn;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 

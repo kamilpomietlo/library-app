@@ -47,8 +47,7 @@ public class BookController {
     }
 
     @PostMapping("book/delete")
-    public String deleteByIdSubmit(@ModelAttribute Book book, Model model) {
-        model.addAttribute("books");
+    public String deleteByIdSubmit(@ModelAttribute Book book) {
         bookService.deleteById(book.getId());
 
         return "redirect:/book/list";

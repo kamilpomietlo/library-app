@@ -1,8 +1,7 @@
 package com.kamilpomietlo.libraryapp.bootstrap;
 
 import com.kamilpomietlo.libraryapp.model.*;
-import com.kamilpomietlo.libraryapp.repositories.BookRepository;
-import com.kamilpomietlo.libraryapp.repositories.GenreRepository;
+import com.kamilpomietlo.libraryapp.repositories.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -17,23 +16,34 @@ import java.util.Optional;
 @Component
 public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final BookRepository bookRepository;
     private final GenreRepository genreRepository;
+    private final AuthorRepository authorRepository;
+    private final PublisherRepository publisherRepository;
+    private final BookRepository bookRepository;
+    private final UserRepository userRepository;
 
-    public LibraryBootstrap(BookRepository bookRepository, GenreRepository genreRepository) {
-        this.bookRepository = bookRepository;
+    public LibraryBootstrap(GenreRepository genreRepository, AuthorRepository authorRepository,
+                            PublisherRepository publisherRepository, BookRepository bookRepository,
+                            UserRepository userRepository) {
         this.genreRepository = genreRepository;
+        this.authorRepository = authorRepository;
+        this.publisherRepository = publisherRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        bookRepository.saveAll(loadBooks());
+        loadBooks();
         log.debug("Bootstrap data loaded.");
     }
 
-    private List<Book> loadBooks() {
+    private void loadBooks() {
+        List<Author> authors = new ArrayList<>();
+        List<Publisher> publishers = new ArrayList<>();
         List<Book> books = new ArrayList<>();
+        List<User> users = new ArrayList<>();
         String EXCEPTION_STRING = "Expected object not found.";
 
         // get genres
@@ -77,10 +87,37 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         Genre fantasyGenre = fantasyGenreOptional.get();
         Genre horrorGenre = horrorGenreOptional.get();
 
-        // add authors, publishers and books
+        // add authors
         Author brandonSanderson = new Author("Brandon", "Sanderson");
-        Publisher torBooks = new Publisher("Tor Books");
+        Author stephenKing = new Author("Stephen", "King");
+        Author andrzejSapkowski = new Author("Andrzej", "Sapkowski");
+        Author agathaChristie = new Author("Agatha", "Christie");
+        Author terryPratchett = new Author("Terry", "Pratchett");
+        Author neilGaiman = new Author("Neil", "Gaiman");
 
+        authors.add(brandonSanderson);
+        authors.add(stephenKing);
+        authors.add(andrzejSapkowski);
+        authors.add(agathaChristie);
+        authors.add(terryPratchett);
+        authors.add(neilGaiman);
+        authorRepository.saveAll(authors);
+
+        // add publishers
+        Publisher torBooks = new Publisher("Tor Books");
+        Publisher vikingPress = new Publisher("Viking Press");
+        Publisher superNowa = new Publisher("superNOWA");
+        Publisher bodleyHead = new Publisher("Bodley Head");
+        Publisher gollancz = new Publisher("Gollancz");
+
+        publishers.add(torBooks);
+        publishers.add(vikingPress);
+        publishers.add(superNowa);
+        publishers.add(bodleyHead);
+        publishers.add(gollancz);
+        publisherRepository.saveAll(publishers);
+
+        // add books
         Book elantris = new Book();
         elantris.setTitle("Elantris");
         elantris.addAuthor(brandonSanderson);
@@ -90,10 +127,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.setYearOfRelease(2005);
         elantris.setIsbn("9788374806671");
         elantris.setBookStatus(BookStatus.AVAILABLE);
-        books.add(elantris);
-
-        Author stephenKing = new Author("Stephen", "King");
-        Publisher vikingPress = new Publisher("Viking Press");
 
         Book misery = new Book();
         misery.setTitle("Misery");
@@ -104,10 +137,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setYearOfRelease(1987);
         misery.setIsbn("9780670813643");
         misery.setBookStatus(BookStatus.BORROWED);
-        books.add(misery);
-
-        Author andrzejSapkowski = new Author("Andrzej", "Sapkowski");
-        Publisher superNowa = new Publisher("superNOWA");
 
         Book bloodOfElves = new Book();
         bloodOfElves.setTitle("Blood of Elves");
@@ -118,7 +147,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves.setYearOfRelease(1994);
         bloodOfElves.setIsbn("9788375780659");
         bloodOfElves.setBookStatus(BookStatus.AVAILABLE);
-        books.add(bloodOfElves);
 
         Book timeOfContempt = new Book();
         timeOfContempt.setTitle("Time of Contempt");
@@ -129,10 +157,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setYearOfRelease(1995);
         timeOfContempt.setIsbn("9788375780666");
         timeOfContempt.setBookStatus(BookStatus.AVAILABLE);
-        books.add(timeOfContempt);
-
-        Author agathaChristie = new Author("Agatha", "Christie");
-        Publisher bodleyHead = new Publisher("Bodley Head");
 
         Book poirotInvestigates = new Book();
         poirotInvestigates.setTitle("Poirot Investigates");
@@ -143,11 +167,6 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.setYearOfRelease(1924);
         poirotInvestigates.setIsbn("9788577991273");
         poirotInvestigates.setBookStatus(BookStatus.RESERVED);
-        books.add(poirotInvestigates);
-
-        Author terryPratchett = new Author("Terry", "Pratchett");
-        Author neilGaiman = new Author("Neil", "Gaiman");
-        Publisher gollancz = new Publisher("Gollancz");
 
         Book goodOmens = new Book();
         goodOmens.setTitle("Good Omens");
@@ -159,7 +178,14 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setYearOfRelease(1990);
         goodOmens.setIsbn("9780575048003");
         goodOmens.setBookStatus(BookStatus.RESERVED);
+
+        books.add(elantris);
+        books.add(misery);
+        books.add(bloodOfElves);
+        books.add(timeOfContempt);
+        books.add(poirotInvestigates);
         books.add(goodOmens);
+        bookRepository.saveAll(books);
 
         // add users
         User janKowalski = new User();
@@ -185,6 +211,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.addBook(timeOfContempt);
         tomaszNowak.addBook(poirotInvestigates);
 
-        return books;
+        users.add(janKowalski);
+        users.add(tomaszNowak);
+        userRepository.saveAll(users);
     }
 }

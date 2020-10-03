@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("user/search")
     public String userSearchForm(Model model) {
-        model.addAttribute("searchedUser", new User());
+        model.addAttribute("users", new User());
 
         return "user/search";
     }
@@ -36,5 +36,19 @@ public class UserController {
         model.addAttribute("users", userService.findByIdNumber(user.getIdNumber()));
 
         return "user/list";
+    }
+
+    @GetMapping("user/delete")
+    public String deleteByIdForm(Model model) {
+        model.addAttribute("users", new User());
+
+        return "user/delete";
+    }
+
+    @PostMapping("user/delete")
+    public String deleteByIdSubmit(@ModelAttribute User user) {
+        userService.deleteById(user.getId());
+
+        return "redirect:/user/list";
     }
 }
