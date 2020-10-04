@@ -24,7 +24,7 @@ public class Book extends BaseEntity {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 

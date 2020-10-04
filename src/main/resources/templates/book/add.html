@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+</head>
+<body>
+<h1>Add new book</h1>
+
+<table>
+    <tr>
+        <form action="#" th:action="@{add}" method="post" th:object="${books}">
+            <p>Title of the book:
+                <label>
+                    <input type="text" th:field="*{title}"/>
+                </label>
+            </p>
+<!--            todo add author, change genre and publisher to use name-->
+<!--            <p>Author (first name):-->
+<!--                <label>-->
+<!--                    <input type="text" th:field="*{}"/>-->
+<!--                </label>-->
+<!--            </p>-->
+<!--            <p>Author (last name):-->
+<!--                <label>-->
+<!--                    <input type="text" th:field="*{id}"/>-->
+<!--                </label>-->
+<!--            </p>-->
+            <p>Genre:
+                <label>
+                    <input type="text" th:field="*{genreId}"/>
+                </label>
+            </p>
+            <p>Publisher:
+                <label>
+                    <input type="text" th:field="*{publisherId}"/>
+                </label>
+            </p>
+            <p>Cover type:
+                <label>
+                    <select class="form-control" th:field="*{coverType}">
+                        <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
+                                th:value="${coverType}"
+                                th:text="${coverType.getDisplayName()}">1
+                        </option>
+                    </select>
+                </label>
+            </p>
+            <p>Year of release:
+                <label>
+                    <input type="text" th:field="*{yearOfRelease}"/>
+                </label>
+            </p>
+            <p>ISBN:
+                <label>
+                    <input type="text" th:field="*{isbn}"/>
+                </label>
+            </p>
+            <p>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset"/>
+            </p>
+        </form>
+    </tr>
+</table>
+
+<div class="col">
+    <a class="btn btn-primary"
+       th:href="@{'/'}" role="button">Back to menu</a>
+</div>
+
+</body>
+</html>

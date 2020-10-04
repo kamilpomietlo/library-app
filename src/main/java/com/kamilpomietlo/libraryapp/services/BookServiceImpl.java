@@ -1,9 +1,12 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.commands.BookCommand;
+import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -11,10 +14,12 @@ import java.util.*;
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
+    private final BookCommandToBook bookCommandToBook;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook) {
         this.bookRepository = bookRepository;
+        this.bookCommandToBook = bookCommandToBook;
     }
 
     @Override
@@ -44,14 +49,26 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void reserveBook(Long id) {
-        Book bookToReserve = bookRepository.findById(id).get();
+    @Transactional
+    public void saveBookCommand(BookCommand bookCommand) {
+        Book detachedBook = bookCommandToBook.convert(bookCommand);
 
-        // todo don't work, command objects to do first
-        if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
-            bookToReserve.setBookStatus(BookStatus.RESERVED);
-        } else {
-
+        if (detachedBook != null) {
+            detachedBook.setBookStatus(BookStatus.AVAILABLE);
         }
+
+        bookRepository.save(detachedBook);
     }
+
+    //    @Override
+//    public void reserveBook(Long id) {
+//        Book bookToReserve = bookRepository.findById(id).get();
+//
+//        // todo don't work, command objects to do first
+//        if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
+//            bookToReserve.setBookStatus(BookStatus.RESERVED);
+//        } else {
+//
+//        }
+//    }
 }

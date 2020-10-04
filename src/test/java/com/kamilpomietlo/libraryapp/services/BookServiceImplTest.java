@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,14 @@ import static org.mockito.Mockito.*;
 class BookServiceImplTest {
 
     private BookService bookService;
+    private BookCommandToBook bookCommandToBook;
 
     @Mock
     BookRepository bookRepository;
 
     @BeforeEach
     void setUp() {
-        bookService = new BookServiceImpl(bookRepository);
+        bookService = new BookServiceImpl(bookRepository, bookCommandToBook);
     }
 
     @Test
@@ -77,8 +79,8 @@ class BookServiceImplTest {
         verify(bookRepository, never()).findAll();
     }
 
-    @Test
-    void reserveBook() {
-        // todo after implementation
-    }
+//    @Test
+//    void reserveBook() {
+//        // todo after implementation
+//    }
 }

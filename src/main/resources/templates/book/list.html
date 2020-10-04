@@ -30,7 +30,7 @@
         </td>
         <td th:text="${book.getGenre().getDescription()}">4</td>
         <td th:text="${book.getPublisher().getName()}">5</td>
-        <td th:text="${book.getCoverType()}">6</td>
+        <td th:text="${book.getCoverType().getDisplayName()}">6</td>
         <td th:text="${book.getYearOfRelease()}">7</td>
         <td th:text="${book.getIsbn()}">8</td>
         <td th:text="${book.getBookStatus()}">9</td>
