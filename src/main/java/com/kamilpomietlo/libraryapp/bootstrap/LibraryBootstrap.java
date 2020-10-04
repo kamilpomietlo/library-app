@@ -89,11 +89,22 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
         // add authors
         Author brandonSanderson = new Author("Brandon", "Sanderson");
+        brandonSanderson.setId(1L);
+
         Author stephenKing = new Author("Stephen", "King");
+        stephenKing.setId(2L);
+
         Author andrzejSapkowski = new Author("Andrzej", "Sapkowski");
+        andrzejSapkowski.setId(3L);
+
         Author agathaChristie = new Author("Agatha", "Christie");
+        agathaChristie.setId(4L);
+
         Author terryPratchett = new Author("Terry", "Pratchett");
+        terryPratchett.setId(5L);
+
         Author neilGaiman = new Author("Neil", "Gaiman");
+        neilGaiman.setId(6L);
 
         authors.add(brandonSanderson);
         authors.add(stephenKing);
@@ -105,10 +116,19 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
         // add publishers
         Publisher torBooks = new Publisher("Tor Books");
+        torBooks.setId(1L);
+
         Publisher vikingPress = new Publisher("Viking Press");
+        vikingPress.setId(2L);
+
         Publisher superNowa = new Publisher("superNOWA");
+        superNowa.setId(3L);
+
         Publisher bodleyHead = new Publisher("Bodley Head");
+        bodleyHead.setId(4L);
+
         Publisher gollancz = new Publisher("Gollancz");
+        gollancz.setId(5L);
 
         publishers.add(torBooks);
         publishers.add(vikingPress);
@@ -119,6 +139,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
         // add books
         Book elantris = new Book();
+        elantris.setId(1L);
         elantris.setTitle("Elantris");
         elantris.addAuthor(brandonSanderson);
         elantris.setGenre(fantasyGenre);
@@ -129,6 +150,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.setBookStatus(BookStatus.AVAILABLE);
 
         Book misery = new Book();
+        misery.setId(2L);
         misery.setTitle("Misery");
         misery.addAuthor(stephenKing);
         misery.setGenre(horrorGenre);
@@ -139,6 +161,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setBookStatus(BookStatus.BORROWED);
 
         Book bloodOfElves = new Book();
+        bloodOfElves.setId(3L);
         bloodOfElves.setTitle("Blood of Elves");
         bloodOfElves.addAuthor(andrzejSapkowski);
         bloodOfElves.setGenre(fantasyGenre);
@@ -149,6 +172,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves.setBookStatus(BookStatus.AVAILABLE);
 
         Book timeOfContempt = new Book();
+        timeOfContempt.setId(4L);
         timeOfContempt.setTitle("Time of Contempt");
         timeOfContempt.addAuthor(andrzejSapkowski);
         timeOfContempt.setGenre(fantasyGenre);
@@ -159,6 +183,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setBookStatus(BookStatus.AVAILABLE);
 
         Book poirotInvestigates = new Book();
+        poirotInvestigates.setId(5L);
         poirotInvestigates.setTitle("Poirot Investigates");
         poirotInvestigates.addAuthor(agathaChristie);
         poirotInvestigates.setGenre(thrillerGenre);
@@ -169,6 +194,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.setBookStatus(BookStatus.RESERVED);
 
         Book goodOmens = new Book();
+        goodOmens.setId(6L);
         goodOmens.setTitle("Good Omens");
         goodOmens.addAuthor(terryPratchett);
         goodOmens.addAuthor(neilGaiman);
@@ -189,6 +215,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
 
         // add users
         User janKowalski = new User();
+        janKowalski.setId(1L);
         janKowalski.setFirstName("Jan");
         janKowalski.setLastName("Kowalski");
         janKowalski.setIdNumber("88021574862");
@@ -200,6 +227,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.addBook(misery);
 
         User tomaszNowak = new User();
+        tomaszNowak.setId(2L);
         tomaszNowak.setFirstName("Tomasz");
         tomaszNowak.setLastName("Nowak");
         tomaszNowak.setIdNumber("74012285943");
