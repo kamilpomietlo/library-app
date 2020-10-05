@@ -10,30 +10,36 @@
 <table>
     <tr>
         <form action="#" th:action="@{add}" method="post" th:object="${books}">
-            <p>Title of the book:
+            <p>Title:
                 <label>
                     <input type="text" th:field="*{title}"/>
                 </label>
             </p>
-<!--            todo add author, change genre and publisher to use name-->
-<!--            <p>Author (first name):-->
-<!--                <label>-->
-<!--                    <input type="text" th:field="*{}"/>-->
-<!--                </label>-->
-<!--            </p>-->
-<!--            <p>Author (last name):-->
-<!--                <label>-->
-<!--                    <input type="text" th:field="*{id}"/>-->
-<!--                </label>-->
-<!--            </p>-->
+            <p>Author:
+                <label>
+                    <select class="form-control" th:field="*{authors}">
+                        <option th:each="author : ${authors}"
+                                th:value="${author.id}"
+                                th:text="${author.toString()}"></option>
+                    </select>
+                </label>
+            </p>
             <p>Genre:
                 <label>
-                    <input type="text" th:field="*{genreId}"/>
+                    <select class="form-control" th:field="*{genreId}">
+                        <option th:each="genre : ${genres}"
+                                th:value="${genre.id}"
+                                th:text="${genre.description}"></option>
+                    </select>
                 </label>
             </p>
             <p>Publisher:
                 <label>
-                    <input type="text" th:field="*{publisherId}"/>
+                    <select class="form-control" th:field="*{publisherId}">
+                        <option th:each="publisher : ${publishers}"
+                                th:value="${publisher.getId()}"
+                                th:text="${publisher.getName()}"></option>
+                    </select>
                 </label>
             </p>
             <p>Cover type:

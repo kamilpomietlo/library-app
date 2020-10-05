@@ -1,14 +1,14 @@
 package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.Genre;
-import com.kamilpomietlo.libraryapp.model.Publisher;
-import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.model.*;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
@@ -28,6 +28,11 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setYearOfRelease(source.getYearOfRelease());
         book.setIsbn(source.getIsbn());
         book.setBookStatus(source.getBookStatus());
+
+        if(source.getAuthors() != null) {
+            List<Author> authors = new ArrayList<>(source.getAuthors());
+            book.setAuthors(authors);
+        }
 
         if (source.getGenreId() != null) {
             Genre genre = new Genre();
