@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,14 @@ import static org.mockito.Mockito.*;
 class PublisherServiceImplTest {
 
     private PublisherService publisherService;
+    private PublisherCommandToPublisher publisherCommandToPublisher;
 
     @Mock
     PublisherRepository publisherRepository;
 
     @BeforeEach
     void setUp() {
-        publisherService = new PublisherServiceImpl(publisherRepository);
+        publisherService = new PublisherServiceImpl(publisherRepository, publisherCommandToPublisher);
     }
 
     @Test

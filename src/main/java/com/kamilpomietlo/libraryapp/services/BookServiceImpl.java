@@ -55,9 +55,8 @@ public class BookServiceImpl implements BookService {
 
         if (detachedBook != null) {
             detachedBook.setBookStatus(BookStatus.AVAILABLE);
+            bookRepository.save(detachedBook);
         }
-
-        bookRepository.save(detachedBook);
     }
 
     //    @Override
