@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -70,7 +69,7 @@ class BookServiceImplTest {
         when(bookRepository.findByTitle(anyString())).thenReturn(bookOptional);
 
         // when
-        List<Book> booksReturned = bookService.findByTitle("title");
+        Set<Book> booksReturned = bookService.findByTitle("title");
 
         // then
         assertNotNull(booksReturned);

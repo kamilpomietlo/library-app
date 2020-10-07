@@ -8,7 +8,9 @@ import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -31,16 +33,16 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findByTitle(String title) {
-        List<Book> bookList = new ArrayList<>();
+    public Set<Book> findByTitle(String title) {
+        Set<Book> bookSet = new HashSet<>();
         Optional<Book> bookOptional = bookRepository.findByTitle(title);
         if (bookOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {
-            bookList.add(bookOptional.get());
+            bookSet.add(bookOptional.get());
         }
 
-        return bookList;
+        return bookSet;
     }
 
     @Override

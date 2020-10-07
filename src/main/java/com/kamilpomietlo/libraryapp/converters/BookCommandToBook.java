@@ -7,8 +7,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
@@ -30,7 +30,7 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setBookStatus(source.getBookStatus());
 
         if(source.getAuthors() != null) {
-            List<Author> authors = new ArrayList<>(source.getAuthors());
+            Set<Author> authors = new HashSet<>(source.getAuthors());
             book.setAuthors(authors);
         }
 

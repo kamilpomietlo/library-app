@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -70,7 +69,7 @@ class PublisherServiceImplTest {
         when(publisherRepository.findByName(anyString())).thenReturn(publisherOptional);
 
         // when
-        List<Publisher> publishersReturned = publisherService.findByName("name");
+        Set<Publisher> publishersReturned = publisherService.findByName("name");
 
         // then
         assertNotNull(publishersReturned);

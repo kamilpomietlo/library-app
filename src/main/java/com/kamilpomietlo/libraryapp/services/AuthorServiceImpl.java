@@ -6,7 +6,9 @@ import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -30,16 +32,16 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> findByFirstNameAndLastName(String firstName, String lastName) {
-        List<Author> authorList = new ArrayList<>();
+    public Set<Author> findByFirstNameAndLastName(String firstName, String lastName) {
+        Set<Author> authorSet = new HashSet<>();
         Optional<Author> authorOptional = authorRepository.findByFirstNameAndLastName(firstName, lastName);
         if (authorOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {
-            authorList.add(authorOptional.get());
+            authorSet.add(authorOptional.get());
         }
 
-        return authorList;
+        return authorSet;
     }
 
     @Override

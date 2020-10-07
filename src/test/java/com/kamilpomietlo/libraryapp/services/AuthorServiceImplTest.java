@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -75,7 +74,7 @@ class AuthorServiceImplTest {
         when(authorRepository.findByFirstNameAndLastName(anyString(), anyString())).thenReturn(authorOptional);
 
         // when
-        List<Author> authorsReturned = authorService.findByFirstNameAndLastName("first", "last");
+        Set<Author> authorsReturned = authorService.findByFirstNameAndLastName("first", "last");
 
         // then
         assertNotNull(authorsReturned);

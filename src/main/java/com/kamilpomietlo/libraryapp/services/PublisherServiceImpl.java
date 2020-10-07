@@ -7,7 +7,9 @@ import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PublisherServiceImpl implements PublisherService {
@@ -30,16 +32,16 @@ public class PublisherServiceImpl implements PublisherService {
         return publisherSet;
     }
 
-    public List<Publisher> findByName(String name) {
-        List<Publisher> publisherList = new ArrayList<>();
+    public Set<Publisher> findByName(String name) {
+        Set<Publisher> publisherSet = new HashSet<>();
         Optional<Publisher> publisherOptional = publisherRepository.findByName(name);
         if (publisherOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {
-            publisherList.add(publisherOptional.get());
+            publisherSet.add(publisherOptional.get());
         }
 
-        return publisherList;
+        return publisherSet;
     }
 
     @Override
