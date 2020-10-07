@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
+import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -48,6 +49,20 @@ public class UserController {
     @PostMapping("user/delete")
     public String deleteByIdSubmit(@ModelAttribute User user) {
         userService.deleteById(user.getId());
+
+        return "redirect:/user/list";
+    }
+
+    @GetMapping("user/add")
+    public String addNewUserForm(Model model) {
+        model.addAttribute("users", new UserCommand());
+
+        return "user/add";
+    }
+
+    @PostMapping("user/add")
+    public String addNewUserSubmit(@ModelAttribute UserCommand userCommand) {
+        userService.saveUserCommand(userCommand);
 
         return "redirect:/user/list";
     }

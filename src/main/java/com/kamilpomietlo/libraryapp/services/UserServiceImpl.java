@@ -1,5 +1,7 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.commands.UserCommand;
+import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -12,10 +14,12 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final UserCommandToUser userCommandToUser;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserCommandToUser userCommandToUser) {
         this.userRepository = userRepository;
+        this.userCommandToUser = userCommandToUser;
     }
 
     @Override
@@ -39,5 +43,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveUserCommand(UserCommand userCommand) {
+        User detachedUser = userCommandToUser.convert(userCommand);
+
+        if (detachedUser != null) {
+            userRepository.save(detachedUser);
+        }
     }
 }

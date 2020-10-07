@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,13 +21,14 @@ import static org.mockito.Mockito.*;
 class UserServiceImplTest {
 
     private UserService userService;
+    private UserCommandToUser userCommandToUser;
 
     @Mock
     UserRepository userRepository;
 
     @BeforeEach
     void setUp() {
-        userService = new UserServiceImpl(userRepository);
+        userService = new UserServiceImpl(userRepository, userCommandToUser);
     }
 
     @Test
