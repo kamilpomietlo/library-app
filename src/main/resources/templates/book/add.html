@@ -37,8 +37,8 @@
                 <label>
                     <select class="form-control" th:field="*{publisherId}">
                         <option th:each="publisher : ${publishers}"
-                                th:value="${publisher.getId()}"
-                                th:text="${publisher.getName()}"></option>
+                                th:value="${publisher.id}"
+                                th:text="${publisher.name}"></option>
                     </select>
                 </label>
             </p>
@@ -47,7 +47,7 @@
                     <select class="form-control" th:field="*{coverType}">
                         <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
                                 th:value="${coverType}"
-                                th:text="${coverType.getDisplayName()}">1
+                                th:text="${coverType}">1
                         </option>
                     </select>
                 </label>

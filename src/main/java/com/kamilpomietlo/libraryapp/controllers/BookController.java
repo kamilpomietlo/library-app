@@ -40,14 +40,14 @@ public class BookController {
         return "book/list";
     }
 
-    @GetMapping("book/search")
+    @GetMapping("book/find")
     public String bookSearchForm(Model model) {
         model.addAttribute("books", new Book());
 
-        return "book/search";
+        return "book/find";
     }
 
-    @PostMapping("book/search")
+    @PostMapping("book/find")
     public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
         model.addAttribute("books", bookService.findByTitle(book.getTitle()));
 

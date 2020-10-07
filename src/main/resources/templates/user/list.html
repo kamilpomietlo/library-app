@@ -5,7 +5,7 @@
     <title>Library System</title>
 </head>
 <body>
-<h1>Users List</h1>
+<h1>Users</h1>
 
 <table>
     <tr>
@@ -20,18 +20,18 @@
         <th>Borrowed books</th>
     </tr>
     <tr th:each="user : ${users}">
-        <td th:text="${user.getId()}">1</td>
+        <td th:text="${user.id}">1</td>
         <td th:text="${user.toString()}">2</td>
-        <td th:text="${user.getIdNumber()}">3</td>
-        <td th:text="${user.getCountry()}">4</td>
-        <td th:text="${user.getState()}">5</td>
-        <td th:text="${user.getCity()}">6</td>
-        <td th:text="${user.getStreet()}">7</td>
-        <td th:text="${user.getHomeNumber()}">8</td>
+        <td th:text="${user.idNumber}">3</td>
+        <td th:text="${user.country}">4</td>
+        <td th:text="${user.state}">5</td>
+        <td th:text="${user.city}">6</td>
+        <td th:text="${user.street}">7</td>
+        <td th:text="${user.homeNumber}">8</td>
         <td>
             <ul style="list-style: none">
                 <li th:each="book : ${user.books}"
-                    th:text="${book.getTitle()}">9</li>
+                    th:text="${book.title}">9</li>
             </ul>
         </td>
     </tr>

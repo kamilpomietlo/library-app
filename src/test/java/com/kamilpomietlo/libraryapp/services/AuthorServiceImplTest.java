@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.converters.AuthorCommandToAuthor;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +22,14 @@ import static org.mockito.Mockito.*;
 class AuthorServiceImplTest {
 
     private AuthorService authorService;
+    private AuthorCommandToAuthor authorCommandToAuthor;
 
     @Mock
     AuthorRepository authorRepository;
 
     @BeforeEach
     void setUp() {
-        authorService = new AuthorServiceImpl(authorRepository);
+        authorService = new AuthorServiceImpl(authorRepository, authorCommandToAuthor);
     }
 
     @Test

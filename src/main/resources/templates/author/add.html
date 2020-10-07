@@ -5,14 +5,19 @@
     <title>Library System</title>
 </head>
 <body>
-<h1>Search for a publisher</h1>
+<h1>Add new author</h1>
 
 <table>
     <tr>
-        <form action="#" th:action="@{search}" method="post" th:object="${publishers}">
-            <p>Name of the publisher:
+        <form action="#" th:action="@{add}" method="post" th:object="${authors}">
+            <p>First name:
                 <label>
-                    <input type="text" th:field="*{name}"/>
+                    <input type="text" th:field="*{firstName}"/>
+                </label>
+            </p>
+            <p>Last name:
+                <label>
+                    <input type="text" th:field="*{lastName}"/>
                 </label>
             </p>
             <p>

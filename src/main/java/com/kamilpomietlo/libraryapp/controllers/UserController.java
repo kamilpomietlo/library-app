@@ -24,14 +24,14 @@ public class UserController {
         return "user/list";
     }
 
-    @GetMapping("user/search")
+    @GetMapping("user/find")
     public String userSearchForm(Model model) {
         model.addAttribute("users", new User());
 
-        return "user/search";
+        return "user/find";
     }
 
-    @PostMapping("user/search")
+    @PostMapping("user/find")
     public String userSearchSubmit(@ModelAttribute User user, Model model) {
         model.addAttribute("users", userService.findByIdNumber(user.getIdNumber()));
 

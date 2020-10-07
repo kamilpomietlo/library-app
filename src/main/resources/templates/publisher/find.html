@@ -5,11 +5,11 @@
     <title>Library System</title>
 </head>
 <body>
-<h1>Add new publisher</h1>
+<h1>Find a publisher</h1>
 
 <table>
     <tr>
-        <form action="#" th:action="@{add}" method="post" th:object="${publishers}">
+        <form action="#" th:action="@{find}" method="post" th:object="${publishers}">
             <p>Name:
                 <label>
                     <input type="text" th:field="*{name}"/>

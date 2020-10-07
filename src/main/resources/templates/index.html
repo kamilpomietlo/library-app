@@ -10,9 +10,8 @@
 <body>
 
 <!--todo add remaining unit tests-->
-<!--todo choose final collections-->
-<!--todo check current code correctness...-->
-<!--todo refactor getters to fields for every html file-->
+<!--todo choose collections-->
+
 <div class="container-fluid" style="margin-top: 40px">
     <div class="row">
         <div class="col-md-2 offset-md-0">
@@ -42,19 +41,19 @@
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
-                                   th:href="@{'book/search'}" role="button">Search for a book</a>
+                                   th:href="@{'book/find'}" role="button">Find a book</a>
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
-                                   th:href="@{'author/search'}" role="button">Search for an author</a>
+                                   th:href="@{'author/find'}" role="button">Find an author</a>
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
-                                   th:href="@{'publisher/search'}" role="button">Search for a publisher</a>
+                                   th:href="@{'publisher/find'}" role="button">Find a publisher</a>
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
-                                   th:href="@{'user/search'}" role="button">Search for a user</a>
+                                   th:href="@{'user/find'}" role="button">Find a user</a>
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
@@ -67,6 +66,10 @@
                             <div class="col">
                                 <a class="btn btn-primary" href="#"
                                    th:href="@{'book/add'}" role="button">Add new book</a>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-primary" href="#"
+                                   th:href="@{'author/add'}" role="button">Add new author</a>
                             </div>
                             <div class="col">
                                 <a class="btn btn-primary" href="#"

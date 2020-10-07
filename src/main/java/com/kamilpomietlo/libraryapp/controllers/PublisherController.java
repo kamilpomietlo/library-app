@@ -25,14 +25,14 @@ public class PublisherController {
         return "publisher/list";
     }
 
-    @GetMapping("publisher/search")
+    @GetMapping("publisher/find")
     public String publisherSearchForm(Model model) {
         model.addAttribute("publishers", new Publisher());
 
-        return "publisher/search";
+        return "publisher/find";
     }
 
-    @PostMapping("publisher/search")
+    @PostMapping("publisher/find")
     public String publisherSearchSubmit(@ModelAttribute Publisher publisher, Model model) {
         model.addAttribute("publishers", publisherService.findByName(publisher.getName()));
 

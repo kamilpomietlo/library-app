@@ -5,7 +5,7 @@
     <title>Library System</title>
 </head>
 <body>
-<h1>Authors List</h1>
+<h1>Authors</h1>
 
 <table>
     <tr>
@@ -14,12 +14,12 @@
         <th>Books</th>
     </tr>
     <tr th:each="author : ${authors}">
-        <td th:text="${author.getId()}">1</td>
+        <td th:text="${author.id}">1</td>
         <td th:text="${author.toString()}">2</td>
         <td>
             <ul style="list-style: none">
                 <li th:each="book : ${author.books}"
-                    th:text="${book.getTitle()}">3</li>
+                    th:text="${book.title}">3</li>
             </ul>
         </td>
     </tr>

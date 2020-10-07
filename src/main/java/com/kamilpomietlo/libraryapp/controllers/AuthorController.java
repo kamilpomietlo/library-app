@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
+import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,31 @@ public class AuthorController {
         return "author/list";
     }
 
-    @GetMapping("author/search")
+    @GetMapping("author/find")
     public String authorSearchForm(Model model) {
         model.addAttribute("authors", new Author());
 
-        return "author/search";
+        return "author/find";
     }
 
-    @PostMapping("author/search")
+    @PostMapping("author/find")
     public String authorSearchSubmit(@ModelAttribute Author author, Model model) {
         model.addAttribute("authors", authorService.findByFirstNameAndLastName(author.getFirstName(), author.getLastName()));
 
         return "author/list";
+    }
+
+    @GetMapping("author/add")
+    public String addNewAuthorForm(Model model) {
+        model.addAttribute("authors", new AuthorCommand());
+
+        return "author/add";
+    }
+
+    @PostMapping("author/add")
+    public String addNewAuthorSubmit(@ModelAttribute AuthorCommand authorCommand) {
+        authorService.saveAuthorCommand(authorCommand);
+
+        return "redirect:/author/list";
     }
 }
