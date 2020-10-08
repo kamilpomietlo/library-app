@@ -1,6 +1,10 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.converters.AuthorCommandToAuthor;
+import com.kamilpomietlo.libraryapp.converters.AuthorToAuthorCommand;
+import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
+import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +26,16 @@ class AuthorServiceImplTest {
 
     private AuthorService authorService;
     private AuthorCommandToAuthor authorCommandToAuthor;
+    private AuthorToAuthorCommand authorToAuthorCommand;
 
     @Mock
     AuthorRepository authorRepository;
 
     @BeforeEach
     void setUp() {
-        authorService = new AuthorServiceImpl(authorRepository, authorCommandToAuthor);
+        authorCommandToAuthor = new AuthorCommandToAuthor(new BookCommandToBook());
+        authorToAuthorCommand = new AuthorToAuthorCommand(new BookToBookCommand());
+        authorService = new AuthorServiceImpl(authorRepository, authorCommandToAuthor, authorToAuthorCommand);
     }
 
     @Test
@@ -81,5 +88,21 @@ class AuthorServiceImplTest {
         assertEquals(1, authorsReturned.size());
         verify(authorRepository, times(1)).findByFirstNameAndLastName(anyString(), anyString());
         verify(authorRepository, never()).findAll();
+    }
+
+    @Test
+    void saveAuthorCommand() {
+        // given
+        AuthorCommand authorCommand = new AuthorCommand();
+        authorCommand.setId(1L);
+
+        when(authorRepository.save(any())).thenReturn(authorCommandToAuthor.convert(authorCommand));
+
+        // when
+        AuthorCommand savedAuthorCommand = authorService.saveAuthorCommand(authorCommand);
+
+        // then
+        assertEquals(1L, savedAuthorCommand.getId());
+        verify(authorRepository, times(1)).save(any());
     }
 }

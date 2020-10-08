@@ -9,5 +9,5 @@ public interface PublisherService {
 
     Set<Publisher> getPublishers();
     Set<Publisher> findByName(String name);
-    void savePublisherCommand(PublisherCommand publisherCommand);
+    PublisherCommand savePublisherCommand(PublisherCommand publisherCommand);
 }

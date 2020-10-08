@@ -2,6 +2,7 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
+import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
@@ -17,11 +18,14 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final BookCommandToBook bookCommandToBook;
+    private final BookToBookCommand bookToBookCommand;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook,
+                           BookToBookCommand bookToBookCommand) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
+        this.bookToBookCommand = bookToBookCommand;
     }
 
     @Override
@@ -52,20 +56,22 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void saveBookCommand(BookCommand bookCommand) {
+    public BookCommand saveBookCommand(BookCommand bookCommand) {
         Book detachedBook = bookCommandToBook.convert(bookCommand);
 
         if (detachedBook != null) {
             detachedBook.setBookStatus(BookStatus.AVAILABLE);
-            bookRepository.save(detachedBook);
         }
+
+        Book savedBook = bookRepository.save(detachedBook);
+
+        return bookToBookCommand.convert(savedBook);
     }
 
     //    @Override
 //    public void reserveBook(Long id) {
 //        Book bookToReserve = bookRepository.findById(id).get();
 //
-//        // todo don't work, command objects to do first
 //        if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
 //            bookToReserve.setBookStatus(BookStatus.RESERVED);
 //        } else {

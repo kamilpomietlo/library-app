@@ -2,9 +2,11 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
+import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -15,11 +17,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserCommandToUser userCommandToUser;
+    private final UserToUserCommand userToUserCommand;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public UserServiceImpl(UserRepository userRepository, UserCommandToUser userCommandToUser) {
+    public UserServiceImpl(UserRepository userRepository, UserCommandToUser userCommandToUser,
+                           UserToUserCommand userToUserCommand) {
         this.userRepository = userRepository;
         this.userCommandToUser = userCommandToUser;
+        this.userToUserCommand = userToUserCommand;
     }
 
     @Override
@@ -46,11 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUserCommand(UserCommand userCommand) {
+    @Transactional
+    public UserCommand saveUserCommand(UserCommand userCommand) {
         User detachedUser = userCommandToUser.convert(userCommand);
+        User savedUser = userRepository.save(detachedUser);
 
-        if (detachedUser != null) {
-            userRepository.save(detachedUser);
-        }
+        return userToUserCommand.convert(savedUser);
     }
 }

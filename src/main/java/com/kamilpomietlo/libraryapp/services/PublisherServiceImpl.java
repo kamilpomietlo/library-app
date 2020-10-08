@@ -2,6 +2,7 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
+import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,15 @@ public class PublisherServiceImpl implements PublisherService {
 
     private final PublisherRepository publisherRepository;
     private final PublisherCommandToPublisher publisherCommandToPublisher;
+    private final PublisherToPublisherCommand publisherToPublisherCommand;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
     public PublisherServiceImpl(PublisherRepository publisherRepository,
-                                PublisherCommandToPublisher publisherCommandToPublisher) {
+                                PublisherCommandToPublisher publisherCommandToPublisher,
+                                PublisherToPublisherCommand publisherToPublisherCommand) {
         this.publisherRepository = publisherRepository;
         this.publisherCommandToPublisher = publisherCommandToPublisher;
+        this.publisherToPublisherCommand = publisherToPublisherCommand;
     }
 
     @Override
@@ -32,6 +36,7 @@ public class PublisherServiceImpl implements PublisherService {
         return publisherSet;
     }
 
+    @Override
     public Set<Publisher> findByName(String name) {
         Set<Publisher> publisherSet = new HashSet<>();
         Optional<Publisher> publisherOptional = publisherRepository.findByName(name);
@@ -46,11 +51,10 @@ public class PublisherServiceImpl implements PublisherService {
 
     @Override
     @Transactional
-    public void savePublisherCommand(PublisherCommand publisherCommand) {
+    public PublisherCommand savePublisherCommand(PublisherCommand publisherCommand) {
         Publisher detachedPublisher = publisherCommandToPublisher.convert(publisherCommand);
+        Publisher savedPublisher = publisherRepository.save(detachedPublisher);
 
-        if (detachedPublisher != null) {
-            publisherRepository.save(detachedPublisher);
-        }
+        return publisherToPublisherCommand.convert(savedPublisher);
     }
 }

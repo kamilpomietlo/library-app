@@ -29,7 +29,7 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setIsbn(source.getIsbn());
         book.setBookStatus(source.getBookStatus());
 
-        if(source.getAuthors() != null) {
+        if (source.getAuthors() != null) {
             Set<Author> authors = new HashSet<>(source.getAuthors());
             book.setAuthors(authors);
         }

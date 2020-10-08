@@ -1,6 +1,8 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
+import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +24,16 @@ class BookServiceImplTest {
 
     private BookService bookService;
     private BookCommandToBook bookCommandToBook;
+    private BookToBookCommand bookToBookCommand;
 
     @Mock
     BookRepository bookRepository;
 
     @BeforeEach
     void setUp() {
-        bookService = new BookServiceImpl(bookRepository, bookCommandToBook);
+        bookCommandToBook = new BookCommandToBook();
+        bookToBookCommand = new BookToBookCommand();
+        bookService = new BookServiceImpl(bookRepository, bookCommandToBook, bookToBookCommand);
     }
 
     @Test
@@ -78,8 +83,31 @@ class BookServiceImplTest {
         verify(bookRepository, never()).findAll();
     }
 
-//    @Test
-//    void reserveBook() {
-//        // todo after implementation
-//    }
+    @Test
+    void deleteById() {
+        // given
+        Long bookIdToDelete = 1L;
+
+        // when
+        bookService.deleteById(bookIdToDelete);
+
+        // then
+        verify(bookRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    void saveBookCommand() {
+        // given
+        BookCommand bookCommand = new BookCommand();
+        bookCommand.setId(1L);
+
+        when(bookRepository.save(any())).thenReturn(bookCommandToBook.convert(bookCommand));
+
+        // when
+        BookCommand savedBookCommand = bookService.saveBookCommand(bookCommand);
+
+        // then
+        assertEquals(1L, savedBookCommand.getId());
+        verify(bookRepository, times(1)).save(any());
+    }
 }

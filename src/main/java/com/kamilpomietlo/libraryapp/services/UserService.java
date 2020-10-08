@@ -10,5 +10,5 @@ public interface UserService {
     Set<User> getUsers();
     User findByIdNumber(String idNumber);
     void deleteById(Long id);
-    void saveUserCommand(UserCommand userCommand);
+    UserCommand saveUserCommand(UserCommand userCommand);
 }

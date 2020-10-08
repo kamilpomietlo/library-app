@@ -10,6 +10,6 @@ public interface BookService {
     Set<Book> getBooks();
     Set<Book> findByTitle(String title);
     void deleteById(Long id);
-    void saveBookCommand(BookCommand bookCommand);
+    BookCommand saveBookCommand(BookCommand bookCommand);
 //    void reserveBook(Long id);
 }

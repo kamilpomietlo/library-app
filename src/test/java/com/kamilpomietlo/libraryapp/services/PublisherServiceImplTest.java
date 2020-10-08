@@ -1,6 +1,10 @@
 package com.kamilpomietlo.libraryapp.services;
 
+import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
+import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
+import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
+import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,13 +26,17 @@ class PublisherServiceImplTest {
 
     private PublisherService publisherService;
     private PublisherCommandToPublisher publisherCommandToPublisher;
+    private PublisherToPublisherCommand publisherToPublisherCommand;
 
     @Mock
     PublisherRepository publisherRepository;
 
     @BeforeEach
     void setUp() {
-        publisherService = new PublisherServiceImpl(publisherRepository, publisherCommandToPublisher);
+        publisherCommandToPublisher = new PublisherCommandToPublisher(new BookCommandToBook());
+        publisherToPublisherCommand = new PublisherToPublisherCommand(new BookToBookCommand());
+        publisherService = new PublisherServiceImpl(publisherRepository, publisherCommandToPublisher,
+                publisherToPublisherCommand);
     }
 
     @Test
@@ -76,5 +84,21 @@ class PublisherServiceImplTest {
         assertEquals(1, publishersReturned.size());
         verify(publisherRepository, times(1)).findByName(anyString());
         verify(publisherRepository, never()).findAll();
+    }
+
+    @Test
+    void savePublisherCommand() {
+        // given
+        PublisherCommand publisherCommand = new PublisherCommand();
+        publisherCommand.setId(1L);
+
+        when(publisherRepository.save(any())).thenReturn(publisherCommandToPublisher.convert(publisherCommand));
+
+        // when
+        PublisherCommand savedPublisher = publisherService.savePublisherCommand(publisherCommand);
+
+        // then
+        assertEquals(1L, savedPublisher.getId());
+        verify(publisherRepository, times(1)).save(any());
     }
 }
