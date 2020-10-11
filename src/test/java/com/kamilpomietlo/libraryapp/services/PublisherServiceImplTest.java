@@ -101,4 +101,40 @@ class PublisherServiceImplTest {
         assertEquals(1L, savedPublisher.getId());
         verify(publisherRepository, times(1)).save(any());
     }
+
+    @Test
+    void findById() {
+        // given
+        Publisher publisher = new Publisher();
+        publisher.setId(1L);
+
+        Optional<Publisher> publisherOptional = Optional.of(publisher);
+
+        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
+
+        // when
+        Publisher foundPublisher = publisherService.findById(publisher.getId());
+
+        // then
+        assertEquals(1L, foundPublisher.getId());
+        verify(publisherRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        Publisher publisher = new Publisher();
+        publisher.setId(1L);
+
+        Optional<Publisher> publisherOptional = Optional.of(publisher);
+
+        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
+
+        // when
+        PublisherCommand foundPublisherCommand = publisherService.findCommandById(publisher.getId());
+
+        // then
+        assertEquals(1L, foundPublisherCommand.getId());
+        verify(publisherRepository, times(1)).findById(anyLong());
+    }
 }

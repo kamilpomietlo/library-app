@@ -10,4 +10,6 @@ public interface PublisherService {
     Set<Publisher> getPublishers();
     Set<Publisher> findByName(String name);
     PublisherCommand savePublisherCommand(PublisherCommand publisherCommand);
+    Publisher findById(Long id);
+    PublisherCommand findCommandById(Long id);
 }

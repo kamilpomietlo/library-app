@@ -57,4 +57,21 @@ public class PublisherServiceImpl implements PublisherService {
 
         return publisherToPublisherCommand.convert(savedPublisher);
     }
+
+    @Override
+    public Publisher findById(Long id) {
+        Optional<Publisher> publisherOptional = publisherRepository.findById(id);
+
+        if (publisherOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        return publisherOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public PublisherCommand findCommandById(Long id) {
+        return publisherToPublisherCommand.convert(findById(id));
+    }
 }

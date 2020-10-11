@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -48,6 +49,20 @@ public class PublisherController {
 
     @PostMapping("publisher/add")
     public String addNewPublisherSubmit(@ModelAttribute PublisherCommand publisherCommand) {
+        publisherService.savePublisherCommand(publisherCommand);
+
+        return "redirect:/publisher/list";
+    }
+
+    @GetMapping("publisher/{id}/edit")
+    public String editPublisherForm(@PathVariable String id, Model model) {
+        model.addAttribute("publishers", publisherService.findCommandById(Long.valueOf(id)));
+
+        return "publisher/edit";
+    }
+
+    @PostMapping("publisher/{id}/edit")
+    public String editPublisherSubmit(@ModelAttribute PublisherCommand publisherCommand) {
         publisherService.savePublisherCommand(publisherCommand);
 
         return "redirect:/publisher/list";
