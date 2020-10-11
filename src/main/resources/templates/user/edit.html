@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+</head>
+<body>
+<h1>Edit user information</h1>
+
+<table>
+    <tr>
+        <form action="#" th:action="@{edit}" method="post" th:object="${users}">
+            <p>First name:
+                <label>
+                    <input type="text" th:field="*{firstName}"/>
+                </label>
+            </p>
+            <p>Last name:
+                <label>
+                    <input type="text" th:field="*{lastName}"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="hidden" th:field="*{idNumber}"/>
+                </label>
+            </p>
+            <p>Country:
+                <label>
+                    <input type="text" th:field="*{country}"/>
+                </label>
+            </p>
+            <p>State:
+                <label>
+                    <input type="text" th:field="*{state}"/>
+                </label>
+            </p>
+            <p>City:
+                <label>
+                    <input type="text" th:field="*{city}"/>
+                </label>
+            </p>
+            <p>Street:
+                <label>
+                    <input type="text" th:field="*{street}"/>
+                </label>
+            </p>
+            <p>Home number:
+                <label>
+                    <input type="text" th:field="*{homeNumber}"/>
+                </label>
+            </p>
+
+<!--            todo fix books disappearing after editing info-->
+<!--            <p>-->
+<!--            <ul>-->
+<!--                <li th:each="book : ${users.books}">3-->
+<!--                    <input type="hidden" th:field="*{books}">-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            </p>-->
+
+<!--            <p>-->
+<!--                <label>-->
+<!--                    <input type="hidden" th:field="*{books}"/>-->
+<!--                </label>-->
+<!--            </p>-->
+            <p>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset"/>
+            </p>
+        </form>
+    </tr>
+</table>
+
+<div class="col">
+    <a class="btn btn-primary" href="#"
+       th:href="@{'/'}" role="button">Back to menu</a>
+</div>
+
+</body>
+</html>

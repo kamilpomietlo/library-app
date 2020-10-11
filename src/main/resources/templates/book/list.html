@@ -37,7 +37,7 @@
         <td>
             <div class="col">
                 <a class="btn btn-primary" href="#"
-                   th:href="@{'/book/{id}/reserve'}" role="button">Reserve</a>
+                   th:href="@{'/book/' + ${book.id} + '/reserve'}" role="button">Reserve</a>
             </div>
         </td>
     </tr>

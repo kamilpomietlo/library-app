@@ -112,4 +112,40 @@ class UserServiceImplTest {
         assertEquals(1L, savedUserCommand.getId());
         verify(userRepository, times(1)).save(any());
     }
+
+    @Test
+    void findById() {
+        // given
+        User user = new User();
+        user.setId(1L);
+
+        Optional<User> userOptional = Optional.of(user);
+
+        when(userRepository.findById(anyLong())).thenReturn(userOptional);
+
+        // when
+        User foundUser = userService.findById(user.getId());
+
+        // then
+        assertEquals(1L, foundUser.getId());
+        verify(userRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        User user = new User();
+        user.setId(1L);
+
+        Optional<User> userOptional = Optional.of(user);
+
+        when(userRepository.findById(anyLong())).thenReturn(userOptional);
+
+        // when
+        UserCommand foundUserCommand = userService.findCommandById(user.getId());
+
+        // then
+        assertEquals(1L, foundUserCommand.getId());
+        verify(userRepository, times(1)).findById(anyLong());
+    }
 }

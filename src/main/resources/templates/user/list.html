@@ -34,6 +34,12 @@
                     th:text="${book.title}">9</li>
             </ul>
         </td>
+        <td>
+            <div class="col">
+                <a class="btn btn-primary" href="#"
+                   th:href="@{'/user/' + ${user.id} + '/edit'}" role="button">Edit</a>
+            </div>
+        </td>
     </tr>
 </table>
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -62,6 +63,20 @@ public class UserController {
 
     @PostMapping("user/add")
     public String addNewUserSubmit(@ModelAttribute UserCommand userCommand) {
+        userService.saveUserCommand(userCommand);
+
+        return "redirect:/user/list";
+    }
+
+    @GetMapping("user/{id}/edit")
+    public String editUserForm(@PathVariable String id, Model model) {
+        model.addAttribute("users", userService.findCommandById(Long.valueOf(id)));
+
+        return "user/edit";
+    }
+
+    @PostMapping("user/{id}/edit")
+    public String editUserSubmit(@ModelAttribute UserCommand userCommand) {
         userService.saveUserCommand(userCommand);
 
         return "redirect:/user/list";

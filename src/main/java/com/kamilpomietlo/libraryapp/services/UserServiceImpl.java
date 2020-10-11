@@ -58,4 +58,21 @@ public class UserServiceImpl implements UserService {
 
         return userToUserCommand.convert(savedUser);
     }
+
+    @Override
+    public User findById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+
+        if (userOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        return userOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public UserCommand findCommandById(Long id) {
+        return userToUserCommand.convert(findById(id));
+    }
 }
