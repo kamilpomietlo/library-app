@@ -68,23 +68,23 @@ public class BookServiceImpl implements BookService {
         return bookToBookCommand.convert(savedBook);
     }
 
-//    @Override
-//    public Book findById(Long id) {
-//        Optional<Book> bookOptional = bookRepository.findById(id);
-//
-//        if (bookOptional.isEmpty()) {
-//            throw new RuntimeException(EXCEPTION_STRING);
-//        }
-//
-//        return bookOptional.get();
-//    }
-//
-//    @Override
-//    @Transactional
-//    public BookCommand findCommandById(Long id) {
-//        return bookToBookCommand.convert(findById(id));
-//    }
-//
+    @Override
+    public Book findById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+
+        if (bookOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        return bookOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public BookCommand findCommandById(Long id) {
+        return bookToBookCommand.convert(findById(id));
+    }
+
 //    @Override
 //    @Transactional
 //    public void reserveBook(Long id) {

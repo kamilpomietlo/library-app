@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+</head>
+<body>
+<h1>Edit book information</h1>
+
+<table>
+    <tr>
+        <form action="#" th:action="@{edit}" method="post" th:object="${books}">
+            <p>Title:
+                <label>
+                    <input type="text" th:field="*{title}"/>
+                </label>
+            </p>
+            <p>Author:
+                <label>
+                    <select class="form-control" th:field="*{authors}">
+                        <option th:each="author : ${authors}"
+                                th:value="${author.id}"
+                                th:text="${author.toString()}"></option>
+                    </select>
+                </label>
+            </p>
+            <p>Genre:
+                <label>
+                    <select class="form-control" th:field="*{genreId}">
+                        <option th:each="genre : ${genres}"
+                                th:value="${genre.id}"
+                                th:text="${genre.description}"></option>
+                    </select>
+                </label>
+            </p>
+            <p>Publisher:
+                <label>
+                    <select class="form-control" th:field="*{publisherId}">
+                        <option th:each="publisher : ${publishers}"
+                                th:value="${publisher.id}"
+                                th:text="${publisher.name}"></option>
+                    </select>
+                </label>
+            </p>
+            <p>Cover type:
+                <label>
+                    <select class="form-control" th:field="*{coverType}">
+                        <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
+                                th:value="${coverType}"
+                                th:text="${coverType}">
+                        </option>
+                    </select>
+                </label>
+            </p>
+            <p>Year of release:
+                <label>
+                    <input type="text" th:field="*{yearOfRelease}"/>
+                </label>
+            </p>
+            <p>ISBN:
+                <label>
+                    <input type="text" th:field="*{isbn}"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="hidden" th:field="*{userId}"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    <select class="form-control" th:field="*{bookStatus}">
+                        <option th:each="bookStatus : ${T(com.kamilpomietlo.libraryapp.model.BookStatus).values()}"
+                                th:value="${bookStatus}"
+                                th:text="${bookStatus}">
+                        </option>
+                    </select>
+                </label>
+            </p>
+            <p>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset"/>
+            </p>
+        </form>
+    </tr>
+</table>
+
+<div class="col">
+    <a class="btn btn-primary" href="#"
+       th:href="@{'/'}" role="button">Back to menu</a>
+</div>
+
+</body>
+</html>

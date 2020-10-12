@@ -110,4 +110,40 @@ class BookServiceImplTest {
         assertEquals(1L, savedBookCommand.getId());
         verify(bookRepository, times(1)).save(any());
     }
+
+    @Test
+    void findById() {
+        // given
+        Book book = new Book();
+        book.setId(1L);
+
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+
+        // when
+        Book foundBook = bookService.findById(book.getId());
+
+        // then
+        assertEquals(1L, foundBook.getId());
+        verify(bookRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        Book book = new Book();
+        book.setId(1L);
+
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+
+        // when
+        BookCommand foundBookCommand = bookService.findCommandById(book.getId());
+
+        // then
+        assertEquals(1L, foundBookCommand.getId());
+        verify(bookRepository, times(1)).findById(anyLong());
+    }
 }
