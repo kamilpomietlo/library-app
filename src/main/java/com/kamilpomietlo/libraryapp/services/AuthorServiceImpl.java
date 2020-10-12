@@ -57,4 +57,21 @@ public class AuthorServiceImpl implements AuthorService {
 
         return authorToAuthorCommand.convert(savedAuthor);
     }
+
+    @Override
+    public Author findById(Long id) {
+        Optional<Author> authorOptional = authorRepository.findById(id);
+
+        if (authorOptional.isEmpty()) {
+            throw new RuntimeException(EXCEPTION_STRING);
+        }
+
+        return authorOptional.get();
+    }
+
+    @Override
+    @Transactional
+    public AuthorCommand findCommandById(Long id) {
+        return authorToAuthorCommand.convert(findById(id));
+    }
 }

@@ -10,4 +10,6 @@ public interface AuthorService {
     Set<Author> getAuthors();
     Set<Author> findByFirstNameAndLastName(String firstName, String lastName);
     AuthorCommand saveAuthorCommand(AuthorCommand authorCommand);
+    Author findById(Long id);
+    AuthorCommand findCommandById(Long id);
 }

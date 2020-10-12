@@ -105,4 +105,40 @@ class AuthorServiceImplTest {
         assertEquals(1L, savedAuthorCommand.getId());
         verify(authorRepository, times(1)).save(any());
     }
+
+    @Test
+    void findById() {
+        // given
+        Author author = new Author();
+        author.setId(1L);
+
+        Optional<Author> authorOptional = Optional.of(author);
+
+        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        // when
+        Author foundAuthor = authorService.findById(author.getId());
+
+        // then
+        assertEquals(1L, foundAuthor.getId());
+        verify(authorRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        Author author = new Author();
+        author.setId(1L);
+
+        Optional<Author> authorOptional = Optional.of(author);
+
+        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        // when
+        AuthorCommand foundAuthorCommand = authorService.findCommandById(author.getId());
+
+        // then
+        assertEquals(1L, foundAuthorCommand.getId());
+        verify(authorRepository, times(1)).findById(anyLong());
+    }
 }

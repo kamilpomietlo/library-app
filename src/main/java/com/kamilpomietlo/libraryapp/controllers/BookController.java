@@ -91,10 +91,10 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-//    @PostMapping("book/{id}/reserve")
-//    public String reserveBook(@PathVariable String id, Model model) {
-//        model.addAttribute("books", bookService.getBooks());
+//    @GetMapping("book/{id}/reserve")
+//    public String reserveBook(@PathVariable String id) {
+//        bookService.reserveBook(Long.valueOf(id));
 //
-//        return "book/list";
+//        return "redirect:/book/list";
 //    }
 }

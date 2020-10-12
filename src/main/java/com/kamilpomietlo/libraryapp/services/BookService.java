@@ -11,5 +11,7 @@ public interface BookService {
     Set<Book> findByTitle(String title);
     void deleteById(Long id);
     BookCommand saveBookCommand(BookCommand bookCommand);
+//    Book findById(Long id);
+//    BookCommand findCommandById(Long id);
 //    void reserveBook(Long id);
 }

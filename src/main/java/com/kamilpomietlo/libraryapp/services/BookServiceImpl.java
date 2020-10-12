@@ -68,14 +68,40 @@ public class BookServiceImpl implements BookService {
         return bookToBookCommand.convert(savedBook);
     }
 
-    //    @Override
-//    public void reserveBook(Long id) {
-//        Book bookToReserve = bookRepository.findById(id).get();
+//    @Override
+//    public Book findById(Long id) {
+//        Optional<Book> bookOptional = bookRepository.findById(id);
 //
-//        if (bookToReserve.getBookStatus().equals(BookStatus.AVAILABLE)) {
-//            bookToReserve.setBookStatus(BookStatus.RESERVED);
-//        } else {
-//
+//        if (bookOptional.isEmpty()) {
+//            throw new RuntimeException(EXCEPTION_STRING);
 //        }
+//
+//        return bookOptional.get();
+//    }
+//
+//    @Override
+//    @Transactional
+//    public BookCommand findCommandById(Long id) {
+//        return bookToBookCommand.convert(findById(id));
+//    }
+//
+//    @Override
+//    @Transactional
+//    public void reserveBook(Long id) {
+//        BookCommand bookCommand = findCommandById(id);
+//
+//        Book bookToReserve = bookCommandToBook.convert(bookCommand);
+//        bookToReserve.setBookStatus(BookStatus.RESERVED);
+//
+//        // todo don't work
+////        if (bookToReserve.getBookStatus() == BookStatus.AVAILABLE) {
+////            bookToReserve.setBookStatus(BookStatus.RESERVED);
+////        }
+//
+////        BookCommand reservedBook = bookToBookCommand.convert(bookToReserve);
+////        reservedBook.setIsbn("zxc");
+////        reservedBook.setBookStatus(BookStatus.RESERVED);
+//
+//        saveBookCommand(bookToBookCommand.convert(bookToReserve));
 //    }
 }
