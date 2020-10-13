@@ -1,7 +1,9 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
+import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.services.BookService;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,13 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Set;
+
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final BookService bookService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BookService bookService) {
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     @GetMapping("user/list")
@@ -70,6 +76,9 @@ public class UserController {
 
     @GetMapping("user/{id}/edit")
     public String editUserForm(@PathVariable String id, Model model) {
+        Set<Book> books = bookService.getBooks();
+        model.addAttribute("books", books);
+
         model.addAttribute("users", userService.findCommandById(Long.valueOf(id)));
 
         return "user/edit";
