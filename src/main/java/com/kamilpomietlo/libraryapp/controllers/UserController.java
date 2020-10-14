@@ -1,5 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
+import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.User;
@@ -86,6 +87,13 @@ public class UserController {
 
     @PostMapping("user/{id}/edit")
     public String editUserSubmit(@ModelAttribute UserCommand userCommand) {
+        UserCommand tempUserCommand = userService.findCommandById(userCommand.getId());
+        Set<BookCommand> bookCommandSet = tempUserCommand.getBooks();
+        String idNumber = tempUserCommand.getIdNumber();
+
+        userCommand.setBooks(bookCommandSet);
+        userCommand.setIdNumber(idNumber);
+
         userService.saveUserCommand(userCommand);
 
         return "redirect:/user/list";
