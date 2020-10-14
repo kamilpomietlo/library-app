@@ -83,6 +83,8 @@ public class BookController {
 
     @PostMapping("book/add")
     public String addNewBookSubmit(@ModelAttribute BookCommand bookCommand) {
+        bookCommand.setBookStatus(BookStatus.AVAILABLE);
+
         bookService.saveBookCommand(bookCommand);
 
         return "redirect:/book/list";
@@ -109,6 +111,10 @@ public class BookController {
 
     @PostMapping("book/{id}/edit")
     public String editBookSubmit(@ModelAttribute BookCommand bookCommand) {
+        BookCommand tempBookCommand = bookService.findCommandById(bookCommand.getId());
+        bookCommand.setUserId(tempBookCommand.getUserId());
+        bookCommand.setBookStatus(tempBookCommand.getBookStatus());
+
         bookService.saveBookCommand(bookCommand);
 
         return "redirect:/book/list";

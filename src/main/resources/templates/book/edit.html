@@ -63,21 +63,6 @@
                 </label>
             </p>
             <p>
-                <label>
-                    <input type="hidden" th:field="*{userId}"/>
-                </label>
-            </p>
-            <p>
-                <label>
-                    <select class="form-control" th:field="*{bookStatus}">
-                        <option th:each="bookStatus : ${T(com.kamilpomietlo.libraryapp.model.BookStatus).values()}"
-                                th:value="${bookStatus}"
-                                th:text="${bookStatus}">
-                        </option>
-                    </select>
-                </label>
-            </p>
-            <p>
                 <input type="submit" value="Submit"/>
                 <input type="reset" value="Reset"/>
             </p>

@@ -4,7 +4,6 @@ import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,11 +57,6 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public BookCommand saveBookCommand(BookCommand bookCommand) {
         Book detachedBook = bookCommandToBook.convert(bookCommand);
-
-        if (detachedBook != null) {
-            detachedBook.setBookStatus(BookStatus.AVAILABLE);
-        }
-
         Book savedBook = bookRepository.save(detachedBook);
 
         return bookToBookCommand.convert(savedBook);
