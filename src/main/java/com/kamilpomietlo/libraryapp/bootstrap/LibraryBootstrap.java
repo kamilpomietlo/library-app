@@ -158,7 +158,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setCoverType(CoverType.SOFT);
         misery.setYearOfRelease(1987);
         misery.setIsbn("9780670813643");
-        misery.setBookStatus(BookStatus.BORROWED);
+        misery.setBookStatus(BookStatus.RESERVED);
 
         Book bloodOfElves = new Book();
         bloodOfElves.setId(3L);
@@ -180,7 +180,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setCoverType(CoverType.SOFT);
         timeOfContempt.setYearOfRelease(1995);
         timeOfContempt.setIsbn("9788375780666");
-        timeOfContempt.setBookStatus(BookStatus.AVAILABLE);
+        timeOfContempt.setBookStatus(BookStatus.BORROWED);
 
         Book poirotInvestigates = new Book();
         poirotInvestigates.setId(5L);
@@ -203,7 +203,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setCoverType(CoverType.HARD);
         goodOmens.setYearOfRelease(1990);
         goodOmens.setIsbn("9780575048003");
-        goodOmens.setBookStatus(BookStatus.RESERVED);
+        goodOmens.setBookStatus(BookStatus.AVAILABLE);
 
         books.add(elantris);
         books.add(misery);

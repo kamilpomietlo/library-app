@@ -4,6 +4,7 @@ import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,23 +80,20 @@ public class BookServiceImpl implements BookService {
         return bookToBookCommand.convert(findById(id));
     }
 
-//    @Override
-//    @Transactional
-//    public void reserveBook(Long id) {
-//        BookCommand bookCommand = findCommandById(id);
-//
-//        Book bookToReserve = bookCommandToBook.convert(bookCommand);
-//        bookToReserve.setBookStatus(BookStatus.RESERVED);
-//
-//        // todo don't work
-////        if (bookToReserve.getBookStatus() == BookStatus.AVAILABLE) {
-////            bookToReserve.setBookStatus(BookStatus.RESERVED);
-////        }
-//
-////        BookCommand reservedBook = bookToBookCommand.convert(bookToReserve);
-////        reservedBook.setIsbn("zxc");
-////        reservedBook.setBookStatus(BookStatus.RESERVED);
-//
-//        saveBookCommand(bookToBookCommand.convert(bookToReserve));
-//    }
+    // todo add unit test after full implementation (user account)
+    @Override
+    @Transactional
+    public void reserveBook(BookCommand bookCommand) {
+        Book book = findById(bookCommand.getId());
+        bookCommand.setAuthors(book.getAuthors());
+
+        if (bookCommand.getBookStatus() == BookStatus.AVAILABLE) {
+            bookCommand.setBookStatus(BookStatus.RESERVED);
+
+            // temp user setting
+            bookCommand.setUserId(1L);
+        }
+
+        saveBookCommand(bookCommand);
+    }
 }

@@ -120,10 +120,12 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-//    @GetMapping("book/{id}/reserve")
-//    public String reserveBook(@PathVariable String id) {
-//        bookService.reserveBook(Long.valueOf(id));
-//
-//        return "redirect:/book/list";
-//    }
+    @GetMapping("book/{id}/reserve")
+    public String reserveBook(@PathVariable String id) {
+        BookCommand bookToReserve = bookService.findCommandById(Long.valueOf(id));
+
+        bookService.reserveBook(bookToReserve);
+
+        return "redirect:/book/list";
+    }
 }
