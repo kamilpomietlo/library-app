@@ -128,4 +128,13 @@ public class BookController {
 
         return "redirect:/book/list";
     }
+
+    @GetMapping("book/{id}/borrow")
+    public String borrowBook(@PathVariable String id) {
+        BookCommand bookToBorrow = bookService.findCommandById(Long.valueOf(id));
+
+        bookService.borrowBook(bookToBorrow);
+
+        return "redirect:/book/list";
+    }
 }

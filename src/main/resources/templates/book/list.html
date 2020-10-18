@@ -46,6 +46,12 @@
                    th:href="@{'/book/' + ${book.id} + '/reserve'}" role="button">Reserve</a>
             </div>
         </td>
+        <td>
+            <div class="col">
+                <a class="btn btn-primary" href="#"
+                   th:href="@{'/book/' + ${book.id} + '/borrow'}" role="button">Borrow</a>
+            </div>
+        </td>
     </tr>
 </table>
 

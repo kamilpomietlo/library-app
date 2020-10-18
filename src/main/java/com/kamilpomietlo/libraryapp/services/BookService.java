@@ -14,4 +14,5 @@ public interface BookService {
     Book findById(Long id);
     BookCommand findCommandById(Long id);
     void reserveBook(BookCommand bookCommand);
+    void borrowBook(BookCommand bookCommand);
 }

@@ -96,4 +96,21 @@ public class BookServiceImpl implements BookService {
 
         saveBookCommand(bookCommand);
     }
+
+    // todo add unit test after full implementation (user account)
+    @Override
+    @Transactional
+    public void borrowBook(BookCommand bookCommand) {
+        Book book = findById(bookCommand.getId());
+        bookCommand.setAuthors(book.getAuthors());
+
+        if (bookCommand.getBookStatus() == BookStatus.RESERVED) {
+            bookCommand.setBookStatus(BookStatus.BORROWED);
+
+            // temp user setting
+            bookCommand.setUserId(1L);
+        }
+
+        saveBookCommand(bookCommand);
+    }
 }
