@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background: dimgrey;
+    background-image: url("images/background.jpeg");
+    background-size: cover;
     font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
 .header {
@@ -12,9 +13,11 @@
     display: inline-flex;
     width: 100%;
     align-items: center;
+    position: fixed;
 }
 #logo {
     height: 100px;
+    border-radius: 0 30px 30px 0;
 }
 .name {
     margin-left: 40px;
@@ -36,7 +39,6 @@
 #login {
     margin-left: auto;
     margin-right: 30px;
-
 }
 #register {
     margin-right: 50px;
@@ -45,10 +47,51 @@
     margin-left: 100px;
 }
 .footer {
-    position: absolute;
     background: chocolate;
     height: 30px;
     border-top: 5px solid #ff6e00;
     width: 100%;
     bottom: 0;
+    position: fixed;
+}
+.main {
+    padding-top: 120px;
+    padding-bottom: 30px;
+}
+.form {
+    background: navajowhite;
+    text-align: center;
+    margin: 100px auto;
+    width: 30%;
+    border: 5px solid black;
+    padding-bottom: 40px;
+}
+.form h1 {
+    background: navajowhite;
+    padding: 40px;
+    font-size: 50px;
+}
+label {
+    display: inline-block;
+    text-align: left;
+    color: black;
+    width: 100px;
+    background: navajowhite;
+    margin-bottom: 20px;
+
+}
+input {
+    background: white;
+    display: inline-block;
+    width: 350px;
+    height: 30px;
+}
+button {
+    margin: 20px 10px 0 10px;
+    background: white;
+    width: 70px;
+    height: 30px;
+}
+button:hover {
+    cursor: pointer;
 }
