@@ -71,6 +71,9 @@
     padding: 40px;
     font-size: 50px;
 }
+form {
+    background: navajowhite;
+}
 label {
     display: inline-block;
     text-align: left;

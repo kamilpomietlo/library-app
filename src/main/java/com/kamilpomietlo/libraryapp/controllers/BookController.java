@@ -37,19 +37,19 @@ public class BookController {
         return "book/list";
     }
 
-    @GetMapping("book/find")
-    public String bookSearchForm(Model model) {
-        model.addAttribute("books", new Book());
-
-        return "book/find";
-    }
-
-    @PostMapping("book/find")
-    public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
-        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
-
-        return "book/list";
-    }
+//    @GetMapping({"index", ""})
+//    public String bookSearchForm(Model model) {
+//        model.addAttribute("books", new Book());
+//
+//        return "index";
+//    }
+//
+//    @PostMapping({"index", ""})
+//    public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
+//        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
+//
+//        return "book/list";
+//    }
 
     @GetMapping("book/delete")
     public String deleteByIdForm(Model model) {
