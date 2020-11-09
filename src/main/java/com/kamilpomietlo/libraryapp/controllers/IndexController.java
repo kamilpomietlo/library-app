@@ -23,7 +23,7 @@ public class IndexController {
 
     @GetMapping({"index", ""})
     public String searchForm(Model model) {
-//        model.addAttribute("books", new Book());
+        model.addAttribute("books", new Book());
         model.addAttribute("authors", new Author());
 
         return "index";
@@ -31,8 +31,8 @@ public class IndexController {
 
     @PostMapping({"index", ""})
     public String searchSubmit(@ModelAttribute Book book, @ModelAttribute Author author, Model model) {
-//        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
-        model.addAttribute("authors", authorService.findByFirstNameAndLastName(author.getFirstName(), author.getLastName()));
+        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
+        model.addAttribute("authors", authorService.findByName(author.getName()));
 
         return "book/list";
     }

@@ -12,7 +12,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class AuthorCommand extends BaseEntityCommand {
 
-    private String firstName;
-    private String lastName;
+    private String name;
     private Set<BookCommand> books = new HashSet<>();
 }

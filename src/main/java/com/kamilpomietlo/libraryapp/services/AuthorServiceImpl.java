@@ -37,9 +37,9 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Set<Author> findByFirstNameAndLastName(String firstName, String lastName) {
+    public Set<Author> findByName(String name) {
         Set<Author> authorSet = new HashSet<>();
-        Optional<Author> authorOptional = authorRepository.findByFirstNameAndLastName(firstName, lastName);
+        Optional<Author> authorOptional = authorRepository.findByName(name);
         if (authorOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {

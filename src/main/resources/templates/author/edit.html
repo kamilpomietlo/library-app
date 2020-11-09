@@ -10,14 +10,9 @@
 <table>
     <tr>
         <form action="#" th:action="@{edit}" method="post" th:object="${authors}">
-            <p>First name:
+            <p>Name:
                 <label>
-                    <input type="text" th:field="*{firstName}"/>
-                </label>
-            </p>
-            <p>Last name:
-                <label>
-                    <input type="text" th:field="*{lastName}"/>
+                    <input type="text" th:field="*{name}"/>
                 </label>
             </p>
             <p>

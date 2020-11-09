@@ -35,7 +35,7 @@ public class AuthorController {
 
     @PostMapping("author/find")
     public String authorSearchSubmit(@ModelAttribute Author author, Model model) {
-        model.addAttribute("authors", authorService.findByFirstNameAndLastName(author.getFirstName(), author.getLastName()));
+        model.addAttribute("authors", authorService.findByName(author.getName()));
 
         return "author/list";
     }

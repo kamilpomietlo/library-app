@@ -22,11 +22,11 @@
         <h1>Find a book</h1>
 
         <form th:action="@{index}" method="post">
-<!--            <label for="title">Title:</label>-->
-<!--            <input type="text" id="title" th:field="${books.title}">-->
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="${books.title}">
             <br>
             <label for="author">Author:</label>
-            <input type="text" id="author" th:field="${authors.firstName}">
+            <input type="text" id="author" th:field="${authors.name}">
             <br>
             <br>
             <button type="submit">Submit</button>

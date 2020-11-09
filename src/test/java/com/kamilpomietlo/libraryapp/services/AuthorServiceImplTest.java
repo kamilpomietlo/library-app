@@ -45,13 +45,11 @@ class AuthorServiceImplTest {
 
         Author author1 = new Author();
         author1.setId(1L);
-        author1.setFirstName("first1");
-        author1.setLastName("last1");
+        author1.setName("name1");
 
         Author author2 = new Author();
         author2.setId(2L);
-        author2.setFirstName("first2");
-        author2.setLastName("last2");
+        author2.setName("name2");
 
         authors.add(author1);
         authors.add(author2);
@@ -73,20 +71,19 @@ class AuthorServiceImplTest {
         Author author = new Author();
 
         author.setId(1L);
-        author.setFirstName("first");
-        author.setLastName("last");
+        author.setName("name");
 
         Optional<Author> authorOptional = Optional.of(author);
 
-        when(authorRepository.findByFirstNameAndLastName(anyString(), anyString())).thenReturn(authorOptional);
+        when(authorRepository.findByName(anyString())).thenReturn(authorOptional);
 
         // when
-        Set<Author> authorsReturned = authorService.findByFirstNameAndLastName("first", "last");
+        Set<Author> authorsReturned = authorService.findByName("name");
 
         // then
         assertNotNull(authorsReturned);
         assertEquals(1, authorsReturned.size());
-        verify(authorRepository, times(1)).findByFirstNameAndLastName(anyString(), anyString());
+        verify(authorRepository, times(1)).findByName(anyString());
         verify(authorRepository, never()).findAll();
     }
 

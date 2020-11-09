@@ -26,8 +26,7 @@ public class AuthorToAuthorCommand implements Converter<Author, AuthorCommand> {
 
         final AuthorCommand authorCommand = new AuthorCommand();
         authorCommand.setId(source.getId());
-        authorCommand.setFirstName(source.getFirstName());
-        authorCommand.setLastName(source.getLastName());
+        authorCommand.setName(source.getName());
 
         if (source.getBooks() != null && source.getBooks().size() > 0) {
             source.getBooks()

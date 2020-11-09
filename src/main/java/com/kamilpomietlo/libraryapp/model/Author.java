@@ -13,8 +13,7 @@ import java.util.Set;
 @Entity
 public class Author extends BaseEntity {
 
-    private String firstName;
-    private String lastName;
+    private String name;
 
     @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
@@ -22,13 +21,7 @@ public class Author extends BaseEntity {
     public Author() {
     }
 
-    public Author(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return firstName + " " + lastName;
+    public Author(String name) {
+        this.name = name;
     }
 }

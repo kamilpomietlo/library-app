@@ -8,7 +8,7 @@ import java.util.Set;
 public interface AuthorService {
 
     Set<Author> getAuthors();
-    Set<Author> findByFirstNameAndLastName(String firstName, String lastName);
+    Set<Author> findByName(String name);
     AuthorCommand saveAuthorCommand(AuthorCommand authorCommand);
     Author findById(Long id);
     AuthorCommand findCommandById(Long id);

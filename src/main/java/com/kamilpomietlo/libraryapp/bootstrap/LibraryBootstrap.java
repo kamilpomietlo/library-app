@@ -88,22 +88,22 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         Genre horrorGenre = horrorGenreOptional.get();
 
         // add authors
-        Author brandonSanderson = new Author("Brandon", "Sanderson");
+        Author brandonSanderson = new Author("Brandon Sanderson");
         brandonSanderson.setId(1L);
 
-        Author stephenKing = new Author("Stephen", "King");
+        Author stephenKing = new Author("Stephen King");
         stephenKing.setId(2L);
 
-        Author andrzejSapkowski = new Author("Andrzej", "Sapkowski");
+        Author andrzejSapkowski = new Author("Andrzej Sapkowski");
         andrzejSapkowski.setId(3L);
 
-        Author agathaChristie = new Author("Agatha", "Christie");
+        Author agathaChristie = new Author("Agatha Christie");
         agathaChristie.setId(4L);
 
-        Author terryPratchett = new Author("Terry", "Pratchett");
+        Author terryPratchett = new Author("Terry Pratchett");
         terryPratchett.setId(5L);
 
-        Author neilGaiman = new Author("Neil", "Gaiman");
+        Author neilGaiman = new Author("Neil Gaiman");
         neilGaiman.setId(6L);
 
         authors.add(brandonSanderson);

@@ -15,7 +15,7 @@
     </tr>
     <tr th:each="author : ${authors}">
         <td th:text="${author.id}">1</td>
-        <td th:text="${author.toString()}">2</td>
+        <td th:text="${author.name}">2</td>
         <td>
             <ul style="list-style: none">
                 <li th:each="book : ${author.books}"

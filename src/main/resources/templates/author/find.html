@@ -10,16 +10,12 @@
 <table>
     <tr>
         <form action="#" th:action="@{find}" method="post" th:object="${authors}">
-            <p>First name:
+            <p>Name:
                 <label>
-                    <input type="text" th:field="*{firstName}"/>
+                    <input type="text" th:field="*{name}"/>
                 </label>
             </p>
-            <p>Last name:
-                <label>
-                    <input type="text" th:field="*{lastName}"/>
-                </label>
-            </p>
+
             <p>
                 <input type="submit" value="Submit"/>
                 <input type="reset" value="Reset"/>

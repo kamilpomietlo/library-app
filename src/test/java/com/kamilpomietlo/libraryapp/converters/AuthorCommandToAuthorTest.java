@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorCommandToAuthorTest {
 
     private static final Long ID = 1L;
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
+    private static final String NAME = "name";
     private static final Long BOOK_ID_1 = 1L;
     private static final Long BOOK_ID_2 = 2L;
     private static AuthorCommandToAuthor authorCommandToAuthor;
@@ -37,8 +36,7 @@ class AuthorCommandToAuthorTest {
         // given
         AuthorCommand authorCommand = new AuthorCommand();
         authorCommand.setId(ID);
-        authorCommand.setFirstName(FIRST_NAME);
-        authorCommand.setLastName(LAST_NAME);
+        authorCommand.setName(NAME);
 
         BookCommand bookCommand1 = new BookCommand();
         bookCommand1.setId(BOOK_ID_1);
@@ -55,8 +53,7 @@ class AuthorCommandToAuthorTest {
         // then
         assertNotNull(author);
         assertEquals(ID, author.getId());
-        assertEquals(FIRST_NAME, author.getFirstName());
-        assertEquals(LAST_NAME, author.getLastName());
+        assertEquals(NAME, author.getName());
         assertEquals(2, author.getBooks().size());
     }
 }
