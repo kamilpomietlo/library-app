@@ -2,10 +2,28 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Library System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestLib</title>
+
+    <link rel="shortcut icon" href="images/logo.jpg"/>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
-<h1>Books</h1>
+<div class="header">
+    <img id="logo" src="images/logo.jpg" alt="logo">
+    <h1 class="name">BestLib</h1>
+    <a class="nav-button" id="find" th:href="@{'index'}">FIND A BOOK</a>
+    <a class="nav-button" id="login" th:href="@{'index'}">LOGIN</a>
+    <a class="nav-button" id="register" th:href="@{'index'}">REGISTER</a>
+</div>
+<div class="background">
+    <div class="table">
+
+
+
+
+    <h1>Search results</h1>
 
 <table>
     <tr>
@@ -60,5 +78,15 @@
        th:href="@{'/'}" role="button">Back to menu</a>
 </div>
 
+
+
+
+
+
+    </div>
+</div>
+<div class="footer">
+
+</div>
 </body>
 </html>

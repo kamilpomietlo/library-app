@@ -54,11 +54,11 @@
     bottom: 0;
     position: fixed;
 }
-.main {
+.background {
     padding-top: 120px;
     padding-bottom: 30px;
 }
-.form {
+.main-form {
     background: navajowhite;
     text-align: center;
     margin: 100px auto;
@@ -66,7 +66,7 @@
     border: 5px solid black;
     padding-bottom: 40px;
 }
-.form h1 {
+.main-form h1 {
     background: navajowhite;
     padding: 40px;
     font-size: 50px;
@@ -97,4 +97,19 @@ button {
 }
 button:hover {
     cursor: pointer;
+}
+
+
+.table {
+    background: navajowhite;
+    text-align: center;
+    margin: 100px auto;
+    width: 60%;
+    border: 5px solid black;
+    padding-bottom: 40px;
+}
+.table h1 {
+    background: navajowhite;
+    padding: 40px;
+    font-size: 50px;
 }
