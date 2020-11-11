@@ -75,7 +75,7 @@ class AuthorServiceImplTest {
 
         Optional<Author> authorOptional = Optional.of(author);
 
-        when(authorRepository.findByName(anyString())).thenReturn(authorOptional);
+        when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authorOptional);
 
         // when
         Set<Author> authorsReturned = authorService.findByName("name");
@@ -83,7 +83,7 @@ class AuthorServiceImplTest {
         // then
         assertNotNull(authorsReturned);
         assertEquals(1, authorsReturned.size());
-        verify(authorRepository, times(1)).findByName(anyString());
+        verify(authorRepository, times(1)).findByNameIgnoreCaseContaining(anyString());
         verify(authorRepository, never()).findAll();
     }
 

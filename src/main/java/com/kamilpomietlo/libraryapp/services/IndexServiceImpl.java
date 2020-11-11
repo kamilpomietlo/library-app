@@ -35,7 +35,7 @@ public class IndexServiceImpl implements IndexService {
             return searchedBooks;
         }
 
-        // bo author's name provided
+        // no author's name provided
         if (author.getName().isEmpty()) {
             searchedBooks = bookService.findByTitle(book.getTitle());
 

@@ -71,7 +71,7 @@ class BookServiceImplTest {
 
         Optional<Book> bookOptional = Optional.of(book);
 
-        when(bookRepository.findByTitle(anyString())).thenReturn(bookOptional);
+        when(bookRepository.findByTitleIgnoreCaseContaining(anyString())).thenReturn(bookOptional);
 
         // when
         Set<Book> booksReturned = bookService.findByTitle("title");
@@ -79,7 +79,7 @@ class BookServiceImplTest {
         // then
         assertNotNull(booksReturned);
         assertEquals(1, booksReturned.size());
-        verify(bookRepository, times(1)).findByTitle(anyString());
+        verify(bookRepository, times(1)).findByTitleIgnoreCaseContaining(anyString());
         verify(bookRepository, never()).findAll();
     }
 

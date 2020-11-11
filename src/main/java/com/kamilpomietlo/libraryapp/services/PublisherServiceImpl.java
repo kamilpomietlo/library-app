@@ -39,7 +39,7 @@ public class PublisherServiceImpl implements PublisherService {
     @Override
     public Set<Publisher> findByName(String name) {
         Set<Publisher> publisherSet = new HashSet<>();
-        Optional<Publisher> publisherOptional = publisherRepository.findByName(name);
+        Optional<Publisher> publisherOptional = publisherRepository.findByNameIgnoreCaseContaining(name.trim());
         if (publisherOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {

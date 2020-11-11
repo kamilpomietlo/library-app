@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByIdNumber(String idNumber) {
-        Optional<User> userOptional = userRepository.findByIdNumber(idNumber);
+        Optional<User> userOptional = userRepository.findByIdNumber(idNumber.trim());
         if (userOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         }

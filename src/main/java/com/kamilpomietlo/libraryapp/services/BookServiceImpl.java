@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public Set<Book> findByTitle(String title) {
         Set<Book> bookSet = new HashSet<>();
-        Optional<Book> bookOptional = bookRepository.findByTitle(title);
+        Optional<Book> bookOptional = bookRepository.findByTitleIgnoreCaseContaining(title.trim());
         if (bookOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {

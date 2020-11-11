@@ -74,7 +74,7 @@ class PublisherServiceImplTest {
 
         Optional<Publisher> publisherOptional = Optional.of(publisher);
 
-        when(publisherRepository.findByName(anyString())).thenReturn(publisherOptional);
+        when(publisherRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(publisherOptional);
 
         // when
         Set<Publisher> publishersReturned = publisherService.findByName("name");
@@ -82,7 +82,7 @@ class PublisherServiceImplTest {
         // then
         assertNotNull(publishersReturned);
         assertEquals(1, publishersReturned.size());
-        verify(publisherRepository, times(1)).findByName(anyString());
+        verify(publisherRepository, times(1)).findByNameIgnoreCaseContaining(anyString());
         verify(publisherRepository, never()).findAll();
     }
 

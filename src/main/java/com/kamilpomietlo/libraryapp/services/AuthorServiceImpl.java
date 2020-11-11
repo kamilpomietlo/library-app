@@ -39,7 +39,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public Set<Author> findByName(String name) {
         Set<Author> authorSet = new HashSet<>();
-        Optional<Author> authorOptional = authorRepository.findByName(name);
+        Optional<Author> authorOptional = authorRepository.findByNameIgnoreCaseContaining(name.trim());
         if (authorOptional.isEmpty()) {
             throw new RuntimeException(EXCEPTION_STRING);
         } else {

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface PublisherRepository extends CrudRepository<Publisher, Long> {
-    Optional<Publisher> findByName(String name);
+    Optional<Publisher> findByNameIgnoreCaseContaining(String name);
 }
