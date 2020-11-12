@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BestLib</title>
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+
     <link rel="shortcut icon" href="images/logo.jpg"/>
     <link rel="stylesheet" href="styles.css">
 
@@ -17,10 +22,10 @@
     <a class="nav-button" id="login" th:href="@{'index'}">LOGIN</a>
     <a class="nav-button" id="register" th:href="@{'index'}">REGISTER</a>
 </div>
+
 <div class="background">
     <div class="main-form">
         <h1>Find a book</h1>
-
         <form th:action="@{index}" method="post">
             <label for="title">Title:</label>
             <input type="text" id="title" th:field="${books.title}">
@@ -29,109 +34,45 @@
             <input type="text" id="author" th:field="${authors.name}">
             <br>
             <br>
-            <button type="submit">Submit</button>
-            <button type="reset">Reset</button>
+            <button type="submit" class="action-button">Submit</button>
+            <button type="reset" class="action-button">Reset</button>
         </form>
     </div>
 </div>
+
 <div class="footer">
 
 </div>
 
-<!--<div class="container-fluid" style="margin-top: 40px">-->
-<!--    <div class="row">-->
-<!--        <div class="col-md-2 offset-md-0">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header bg-primary text-light">-->
-<!--                    <h5 class="card-title offset-md-3">Library system</h5>-->
-<!--                </div>-->
-<!--                <div class="card-body">-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table table-hover">-->
-<!--                            <thead class="thead-inverse">-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'book/list'}" role="button">Get books list</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'author/list'}" role="button">Get authors list</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'publisher/list'}" role="button">Get publishers list</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'user/list'}" role="button">Get users list</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'book/find'}" role="button">Find a book</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'author/find'}" role="button">Find an author</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'publisher/find'}" role="button">Find a publisher</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'user/find'}" role="button">Find a user</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'book/delete'}" role="button">Delete a book</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'user/delete'}" role="button">Delete a user</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'book/add'}" role="button">Add new book</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'author/add'}" role="button">Add new author</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'publisher/add'}" role="button">Add new publisher</a>-->
-<!--                            </div>-->
-<!--                            <div class="col">-->
-<!--                                <a class="btn btn-primary" href="#"-->
-<!--                                   th:href="@{'user/add'}" role="button">Add new user</a>-->
-<!--                            </div>-->
 
-<!--                            &lt;!&ndash;                            <a class="btn" href="/authors/list">One</a>&ndash;&gt;-->
+<!--<a th:href="@{'book/list'}">Get books list</a>-->
 
-<!--                            &lt;!&ndash;                            <tr th:each="x : ${y}">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <td th:text="${x.id}">334</td>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <td th:text="${x.description}">asd</td>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <td><a href="#" th:href="@{'/x/z/' + ${x.id}}">xyz</a></td>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </tr>&ndash;&gt;-->
+<!--<a th:href="@{'author/list'}">Get authors list</a>-->
 
+<!--<a th:href="@{'publisher/list'}">Get publishers list</a>-->
 
-<!--                            &lt;!&ndash;                            <ul th:remove="all-but-first">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <li th:each="y : ${x.y}" th:text="${x.z}">something 1</li>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <li>something 2</li>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <li>something 3</li>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </ul>&ndash;&gt;-->
+<!--<a th:href="@{'user/list'}">Get users list</a>-->
 
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<!--<a th:href="@{'book/find'}">Find a book</a>-->
 
-<!--<script src="webjars/jquery/3.5.1/jquery.min.js"></script>-->
-<!--<script src="webjars/popper.js/2.0.2/umd/popper.min.js"></script>-->
-<!--<script src="webjars/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--<a th:href="@{'author/find'}">Find an author</a>-->
+
+<!--<a th:href="@{'publisher/find'}">Find a publisher</a>-->
+
+<!--<a th:href="@{'user/find'}">Find a user</a>-->
+
+<!--<a th:href="@{'book/delete'}">Delete a book</a>-->
+
+<!--<a th:href="@{'user/delete'}">Delete a user</a>-->
+
+<!--<a th:href="@{'book/add'}">Add new book</a>-->
+
+<!--<a th:href="@{'author/add'}">Add new author</a>-->
+
+<!--<a th:href="@{'publisher/add'}">Add new publisher</a>-->
+
+<!--<a th:href="@{'user/add'}">Add new user</a>-->
+
 
 </body>
 </html>

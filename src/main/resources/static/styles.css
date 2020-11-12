@@ -2,10 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Merriweather', serif;
+    color: black;
+}
+
+body {
     background-image: url("images/background.jpeg");
     background-size: cover;
-    font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
 }
+
 .header {
     background: chocolate;
     height: 120px;
@@ -15,37 +20,47 @@
     align-items: center;
     position: fixed;
 }
+
 #logo {
     height: 100px;
     border-radius: 0 30px 30px 0;
+    pointer-events: none;
 }
+
 .name {
-    margin-left: 40px;
+    padding: 0 30px;
     display: inline;
-    background: chocolate;
     color: navajowhite;
-    font-size: 40px;
+    font-size: 60px;
+    font-family: 'Big Shoulders Stencil Text', cursive;
+    border-right: 3px solid #ff6e00;
+    border-radius: 10px;
+    user-select: none;
 }
+
 .nav-button {
     background: #ff9637;
     text-decoration: none;
     font-size: 20px;
     padding: 15px;
-    border: 1px solid black;
+    border: 1px solid saddlebrown;
     border-radius: 10px;
-    color: black;
     font-weight: bold;
 }
+
 #login {
     margin-left: auto;
     margin-right: 30px;
 }
+
 #register {
     margin-right: 50px;
 }
+
 #find {
-    margin-left: 100px;
+    margin-left: 80px;
 }
+
 .footer {
     background: chocolate;
     height: 30px;
@@ -54,62 +69,117 @@
     bottom: 0;
     position: fixed;
 }
+
 .background {
     padding-top: 120px;
     padding-bottom: 30px;
 }
+
 .main-form {
     background: navajowhite;
     text-align: center;
-    margin: 100px auto;
-    width: 30%;
-    border: 5px solid black;
-    padding-bottom: 40px;
-}
-.main-form h1 {
-    background: navajowhite;
+    margin: 80px auto;
+    width: 600px;
+    border: 3px solid saddlebrown;
+    border-radius: 20px;
     padding: 40px;
-    font-size: 50px;
 }
-form {
-    background: navajowhite;
+
+.main-form h1 {
+    padding-bottom: 40px;
+    font-size: 40px;
 }
+
 label {
     display: inline-block;
     text-align: left;
-    color: black;
     width: 100px;
-    background: navajowhite;
     margin-bottom: 20px;
-
+    font-weight: bold;
 }
+
 input {
-    background: white;
     display: inline-block;
     width: 350px;
     height: 30px;
+    border: 1px solid black;
+    padding: 0 5px;
 }
+
 button {
     margin: 20px 10px 0 10px;
-    background: white;
     width: 70px;
     height: 30px;
 }
+
 button:hover {
     cursor: pointer;
 }
 
+table {
+    background: black;
+    text-align: center;
+    margin: auto;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+table th:first-child {
+    border-top-left-radius: 17px;
+}
+
+table th:last-child {
+    border-top-right-radius: 17px;
+}
+
+table tr:last-child td:first-child {
+    border-bottom-left-radius: 17px;
+}
+
+table tr:last-child td:last-child {
+    border-bottom-right-radius: 17px;
+}
+
+table tr:last-child th:first-child {
+    border-bottom-left-radius: 17px;
+}
+
+table tr:last-child th:last-child {
+    border-bottom-right-radius: 17px;
+}
+
+table th {
+    background: chocolate;
+    padding: 18px;
+}
+
+td {
+    background: lightgrey;
+    padding: 14px;
+    font-size: 14px;
+}
 
 .table {
     background: navajowhite;
     text-align: center;
-    margin: 100px auto;
-    width: 60%;
-    border: 5px solid black;
-    padding-bottom: 40px;
-}
-.table h1 {
-    background: navajowhite;
+    margin: 80px auto;
+    width: 1280px;
+    border: 3px solid saddlebrown;
+    border-radius: 20px;
     padding: 40px;
-    font-size: 50px;
+}
+
+.table h1 {
+    padding-bottom: 40px;
+    font-size: 40px;
+}
+
+.action-button {
+    background: #ff9637;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid saddlebrown;
+    border-radius: 5px;
+    font-weight: bold;
 }

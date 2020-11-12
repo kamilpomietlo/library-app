@@ -126,7 +126,7 @@ public class BookController {
 
         bookService.reserveBook(bookToReserve);
 
-        return "redirect:/book/list";
+        return "redirect:/index";
     }
 
     @GetMapping("book/{id}/borrow")
@@ -135,6 +135,6 @@ public class BookController {
 
         bookService.borrowBook(bookToBorrow);
 
-        return "redirect:/book/list";
+        return "redirect:/index";
     }
 }
