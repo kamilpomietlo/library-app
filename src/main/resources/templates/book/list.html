@@ -11,16 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="images/logo.jpg"/>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
 </head>
 <body>
 <div class="header">
-    <img id="logo" src="images/logo.jpg" alt="logo">
+    <img id="logo" src="/images/logo.jpg" alt="logo">
     <h1 class="name">BestLib</h1>
-    <a class="nav-button" id="find" th:href="@{'index'}">FIND A BOOK</a>
-    <a class="nav-button" id="login" th:href="@{'index'}">LOGIN</a>
-    <a class="nav-button" id="register" th:href="@{'index'}">REGISTER</a>
+    <a class="nav-button" id="find" th:href="@{'/index'}">FIND A BOOK</a>
+    <a class="nav-button" id="login" th:href="@{''}">LOGIN</a>
+    <a class="nav-button" id="register" th:href="@{'/user/add'}">REGISTER</a>
 </div>
 
 <div class="background">

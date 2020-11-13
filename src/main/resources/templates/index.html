@@ -11,16 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
 
     <link rel="shortcut icon" href="images/logo.jpg"/>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
 </head>
 <body>
 <div class="header">
-    <img id="logo" src="images/logo.jpg" alt="logo">
+    <img id="logo" src="/images/logo.jpg" alt="logo">
     <h1 class="name">BestLib</h1>
-    <a class="nav-button" id="find" th:href="@{'index'}">FIND A BOOK</a>
-    <a class="nav-button" id="login" th:href="@{'index'}">LOGIN</a>
-    <a class="nav-button" id="register" th:href="@{'index'}">REGISTER</a>
+    <a class="nav-button" id="find" th:href="@{'/index'}">FIND A BOOK</a>
+    <a class="nav-button" id="login" th:href="@{''}">LOGIN</a>
+    <a class="nav-button" id="register" th:href="@{'/user/add'}">REGISTER</a>
 </div>
 
 <div class="background">
@@ -29,11 +29,10 @@
         <form th:action="@{index}" method="post">
             <label for="title">Title:</label>
             <input type="text" id="title" th:field="${books.title}">
-            <br>
+
             <label for="author">Author:</label>
             <input type="text" id="author" th:field="${authors.name}">
-            <br>
-            <br>
+
             <button type="submit" class="action-button">Submit</button>
             <button type="reset" class="action-button">Reset</button>
         </form>
@@ -44,35 +43,23 @@
 
 </div>
 
-
 <!--<a th:href="@{'book/list'}">Get books list</a>-->
-
 <!--<a th:href="@{'author/list'}">Get authors list</a>-->
-
 <!--<a th:href="@{'publisher/list'}">Get publishers list</a>-->
-
 <!--<a th:href="@{'user/list'}">Get users list</a>-->
 
 <!--<a th:href="@{'book/find'}">Find a book</a>-->
-
 <!--<a th:href="@{'author/find'}">Find an author</a>-->
-
 <!--<a th:href="@{'publisher/find'}">Find a publisher</a>-->
-
 <!--<a th:href="@{'user/find'}">Find a user</a>-->
 
 <!--<a th:href="@{'book/delete'}">Delete a book</a>-->
-
 <!--<a th:href="@{'user/delete'}">Delete a user</a>-->
 
 <!--<a th:href="@{'book/add'}">Add new book</a>-->
-
 <!--<a th:href="@{'author/add'}">Add new author</a>-->
-
 <!--<a th:href="@{'publisher/add'}">Add new publisher</a>-->
-
 <!--<a th:href="@{'user/add'}">Add new user</a>-->
-
 
 </body>
 </html>

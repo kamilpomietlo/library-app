@@ -2,31 +2,42 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Library System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestLib</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/logo.jpg"/>
+    <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
-<h1>Add new publisher</h1>
-
-<table>
-    <tr>
-        <form action="#" th:action="@{add}" method="post" th:object="${publishers}">
-            <p>Name:
-                <label>
-                    <input type="text" th:field="*{name}"/>
-                </label>
-            </p>
-            <p>
-                <input type="submit" value="Submit"/>
-                <input type="reset" value="Reset"/>
-            </p>
-        </form>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div class="header">
+    <img id="logo" src="/images/logo.jpg" alt="logo">
+    <h1 class="name">BestLib</h1>
+    <a class="nav-button" id="find" th:href="@{'/index'}">FIND A BOOK</a>
+    <a class="nav-button" id="login" th:href="@{''}">LOGIN</a>
+    <a class="nav-button" id="register" th:href="@{'/user/add'}">REGISTER</a>
 </div>
 
+<div class="background">
+    <div class="fill-form">
+        <h1>Add new publisher</h1>
+        <form th:action="@{add}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="${publishers.name}">
+
+            <button type="submit" id="submit" class="action-button">Submit</button>
+            <button type="reset" id="reset" class="action-button">Reset</button>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+
+</div>
 </body>
 </html>

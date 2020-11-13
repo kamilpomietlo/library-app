@@ -2,78 +2,93 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Library System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BestLib</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="images/logo.jpg"/>
+    <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
-<h1>Edit book information</h1>
-
-<table>
-    <tr>
-        <form action="#" th:action="@{edit}" method="post" th:object="${books}">
-            <p>Title:
-                <label>
-                    <input type="text" th:field="*{title}"/>
-                </label>
-            </p>
-            <p>Author:
-                <label>
-                    <select class="form-control" th:field="*{authors}">
-                        <option th:each="author : ${authors}"
-                                th:value="${author.id}"
-                                th:text="${author.toString()}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Genre:
-                <label>
-                    <select class="form-control" th:field="*{genreId}">
-                        <option th:each="genre : ${genres}"
-                                th:value="${genre.id}"
-                                th:text="${genre.description}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Publisher:
-                <label>
-                    <select class="form-control" th:field="*{publisherId}">
-                        <option th:each="publisher : ${publishers}"
-                                th:value="${publisher.id}"
-                                th:text="${publisher.name}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Cover type:
-                <label>
-                    <select class="form-control" th:field="*{coverType}">
-                        <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
-                                th:value="${coverType}"
-                                th:text="${coverType}">
-                        </option>
-                    </select>
-                </label>
-            </p>
-            <p>Year of release:
-                <label>
-                    <input type="text" th:field="*{yearOfRelease}"/>
-                </label>
-            </p>
-            <p>ISBN:
-                <label>
-                    <input type="text" th:field="*{isbn}"/>
-                </label>
-            </p>
-            <p>
-                <input type="submit" value="Submit"/>
-                <input type="reset" value="Reset"/>
-            </p>
-        </form>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary" href="#"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div class="header">
+    <img id="logo" src="/images/logo.jpg" alt="logo">
+    <h1 class="name">BestLib</h1>
+    <a class="nav-button" id="find" th:href="@{'/index'}">FIND A BOOK</a>
+    <a class="nav-button" id="login" th:href="@{''}">LOGIN</a>
+    <a class="nav-button" id="register" th:href="@{'/user/add'}">REGISTER</a>
 </div>
+
+<div class="background">
+    <div class="fill-form">
+        <h1>Edit book info</h1>
+        <form th:action="@{edit}" method="post" th:object="${books}">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}">
+
+            <label for="author">Author:</label>
+            <select id="author" th:field="*{authors}">
+                <option th:each="author : ${authors}"
+                        th:value="${author.id}"
+                        th:text="${author.name}"></option>
+            </select>
+
+            <label for="genre">Genre:</label>
+            <select id="genre" th:field="*{genreId}">
+                <option th:each="genre : ${genres}"
+                        th:value="${genre.id}"
+                        th:text="${genre.description}"></option>
+            </select>
+
+            <label for="publisher">Publisher:</label>
+            <select id="publisher" th:field="*{publisherId}">
+                <option th:each="publisher : ${publishers}"
+                        th:value="${publisher.id}"
+                        th:text="${publisher.name}"></option>
+            </select>
+
+            <label for="cover-type">Cover type:</label>
+            <select id="cover-type" th:field="*{coverType}">
+                <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
+                        th:value="${coverType}"
+                        th:text="${coverType}">
+                </option>
+            </select>
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" th:field="*{yearOfRelease}">
+
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" th:field="*{isbn}">
+
+            <button type="submit" id="submit" class="action-button">Submit</button>
+            <button type="reset" id="reset" class="action-button">Reset</button>
+        </form>
+    </div>
+</div>
+
+<div class="footer">
+
+</div>
+</body>
+</html>
+
+
+<!--            <p>Author:-->
+<!--                <label>-->
+<!--                    <select class="form-control" th:field="*{authors}">-->
+<!--                        <option th:each="author : ${authors}"-->
+<!--                                th:value="${author.id}"-->
+<!--                                th:text="${author.name}"></option>-->
+<!--                    </select>-->
+<!--                </label>-->
+<!--            </p>-->
+
+
 
 </body>
 </html>

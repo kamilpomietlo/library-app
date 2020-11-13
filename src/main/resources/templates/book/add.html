@@ -20,7 +20,7 @@
                     <select class="form-control" th:field="*{authors}">
                         <option th:each="author : ${authors}"
                                 th:value="${author.id}"
-                                th:text="${author.toString()}"></option>
+                                th:text="${author.name}"></option>
                     </select>
                 </label>
             </p>
@@ -52,7 +52,7 @@
                     </select>
                 </label>
             </p>
-            <p>Year of release:
+            <p>Year:
                 <label>
                     <input type="text" th:field="*{yearOfRelease}"/>
                 </label>
