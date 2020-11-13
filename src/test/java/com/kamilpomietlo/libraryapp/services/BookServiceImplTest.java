@@ -69,9 +69,10 @@ class BookServiceImplTest {
         book.setId(1L);
         book.setTitle("title");
 
-        Optional<Book> bookOptional = Optional.of(book);
+        Set<Book> bookSet = new HashSet<>();
+        bookSet.add(book);
 
-        when(bookRepository.findByTitleIgnoreCaseContaining(anyString())).thenReturn(bookOptional);
+        when(bookRepository.findByTitleIgnoreCaseContaining(anyString())).thenReturn(bookSet);
 
         // when
         Set<Book> booksReturned = bookService.findByTitle("title");

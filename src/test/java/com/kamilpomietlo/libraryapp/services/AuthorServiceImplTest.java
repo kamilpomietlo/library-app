@@ -66,16 +66,17 @@ class AuthorServiceImplTest {
     }
 
     @Test
-    void findByFirstNameAndLastName() {
+    void findByName() {
         // given
         Author author = new Author();
 
         author.setId(1L);
         author.setName("name");
 
-        Optional<Author> authorOptional = Optional.of(author);
+        Set<Author> authorSet = new HashSet<>();
+        authorSet.add(author);
 
-        when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authorOptional);
+        when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authorSet);
 
         // when
         Set<Author> authorsReturned = authorService.findByName("name");

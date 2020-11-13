@@ -4,9 +4,9 @@ import com.kamilpomietlo.libraryapp.model.Author;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface AuthorRepository extends CrudRepository<Author, Long> {
-    Optional<Author> findByNameIgnoreCaseContaining(String name);
+    Set<Author> findByNameIgnoreCaseContaining(String name);
 }
