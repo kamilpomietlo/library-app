@@ -1,26 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head th:replace="fragments/header :: head">
     <title>BestLib</title>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-
-    <link rel="shortcut icon" href="images/logo.jpg"/>
-    <link rel="stylesheet" href="/styles.css">
-
 </head>
 <body>
-<div class="header">
-    <img id="logo" src="/images/logo.jpg" alt="logo">
-    <h1 class="name">BestLib</h1>
-    <a class="nav-button" id="find" th:href="@{'/index'}">FIND A BOOK</a>
-    <a class="nav-button" id="login" th:href="@{''}">LOGIN</a>
-    <a class="nav-button" id="register" th:href="@{'/user/add'}">REGISTER</a>
+<div th:replace="fragments/nav-bar :: div">
 </div>
 
 <div class="background">
@@ -36,8 +20,7 @@
     </div>
 </div>
 
-<div class="footer">
-
+<div th:replace="fragments/footer :: div">
 </div>
 </body>
 </html>

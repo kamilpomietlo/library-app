@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Library System</title>
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
 </head>
 <body>
-<h1>Users</h1>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>ID Number</th>
-        <th>Country</th>
-        <th>State</th>
-        <th>City</th>
-        <th>Street</th>
-        <th>Home number</th>
-        <th>Borrowed books</th>
-    </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}">1</td>
-        <td th:text="${user.toString()}">2</td>
-        <td th:text="${user.idNumber}">3</td>
-        <td th:text="${user.country}">4</td>
-        <td th:text="${user.state}">5</td>
-        <td th:text="${user.city}">6</td>
-        <td th:text="${user.street}">7</td>
-        <td th:text="${user.homeNumber}">8</td>
-        <td>
-            <ul style="list-style: none">
-                <li th:each="book : ${user.books}"
-                    th:text="${book.title}">9</li>
-            </ul>
-        </td>
-        <td>
-            <div class="col">
-                <a class="btn btn-primary" href="#"
-                   th:href="@{'/user/' + ${user.id} + '/edit'}" role="button">Edit</a>
-            </div>
-        </td>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary" href="#"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div th:replace="fragments/nav-bar :: div">
 </div>
 
+<div class="background">
+    <div class="table">
+        <h1>Search results</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>ID Number</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Home number</th>
+                <th>Borrowed books</th>
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">1</td>
+                <td th:text="${user.toString()}">2</td>
+                <td th:text="${user.idNumber}">3</td>
+                <td th:text="${user.country}">4</td>
+                <td th:text="${user.state}">5</td>
+                <td th:text="${user.city}">6</td>
+                <td th:text="${user.street}">7</td>
+                <td th:text="${user.homeNumber}">8</td>
+                <td>
+                    <ul style="list-style: none">
+                        <li th:each="book : ${user.books}"
+                            th:text="${book.title}">9</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
 </body>
 </html>

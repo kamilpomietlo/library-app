@@ -10,11 +10,11 @@ body {
     background-image: url("images/background.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
     background-attachment: fixed;
 }
 
-.header {
+.nav-bar {
     background: chocolate;
     height: 120px;
     border-bottom: 20px solid #ff6e00;
@@ -173,7 +173,7 @@ td {
 .table {
     background: navajowhite;
     text-align: center;
-    margin: 60px auto 30px auto;
+    margin: 60px auto 60px auto;
     width: 1280px;
     border: 3px solid saddlebrown;
     border-radius: 20px;
