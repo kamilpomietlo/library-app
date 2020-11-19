@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.converters.AuthorCommandToAuthor;
 import com.kamilpomietlo.libraryapp.converters.AuthorToAuthorCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
@@ -38,13 +39,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Set<Author> findByName(String name) {
-        Set<Author> authorSet = authorRepository.findByNameIgnoreCaseContaining(name.trim());
-
-        if (authorSet.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
-
-        return authorSet;
+        return authorRepository.findByNameIgnoreCaseContaining(name.trim());
     }
 
     @Override
@@ -61,7 +56,7 @@ public class AuthorServiceImpl implements AuthorService {
         Optional<Author> authorOptional = authorRepository.findById(id);
 
         if (authorOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         }
 
         return authorOptional.get();

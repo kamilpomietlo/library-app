@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
 import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class PublisherServiceImpl implements PublisherService {
         Set<Publisher> publisherSet = new HashSet<>();
         Optional<Publisher> publisherOptional = publisherRepository.findByNameIgnoreCaseContaining(name.trim());
         if (publisherOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         } else {
             publisherSet.add(publisherOptional.get());
         }
@@ -63,7 +64,7 @@ public class PublisherServiceImpl implements PublisherService {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
 
         if (publisherOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         }
 
         return publisherOptional.get();

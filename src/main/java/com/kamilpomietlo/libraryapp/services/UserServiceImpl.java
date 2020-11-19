@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
 import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByIdNumber(String idNumber) {
         Optional<User> userOptional = userRepository.findByIdNumber(idNumber.trim());
+
         if (userOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         }
 
         return userOptional.get();
@@ -64,7 +66,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
 
         if (userOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         }
 
         return userOptional.get();

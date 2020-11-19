@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
@@ -38,13 +39,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Set<Book> findByTitle(String title) {
-        Set<Book> bookSet = bookRepository.findByTitleIgnoreCaseContaining(title.trim());
-
-        if (bookSet.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
-
-        return bookSet;
+        return bookRepository.findByTitleIgnoreCaseContaining(title.trim());
     }
 
     @Override
@@ -66,7 +61,7 @@ public class BookServiceImpl implements BookService {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
         if (bookOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
+            throw new NotFoundException(EXCEPTION_STRING);
         }
 
         return bookOptional.get();
