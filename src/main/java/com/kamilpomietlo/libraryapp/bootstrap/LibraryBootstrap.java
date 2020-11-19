@@ -205,12 +205,49 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setIsbn("9780575048003");
         goodOmens.setBookStatus(BookStatus.AVAILABLE);
 
+        Book misery2 = new Book();
+        misery2.setId(7L);
+        misery2.setTitle("Misery");
+        misery2.addAuthor(stephenKing);
+        misery2.setGenre(horrorGenre);
+        misery2.addPublisher(vikingPress);
+        misery2.setCoverType(CoverType.SOFT);
+        misery2.setYearOfRelease(1987);
+        misery2.setIsbn("9780670813643");
+        misery2.setBookStatus(BookStatus.AVAILABLE);
+
+        Book bloodOfElves2 = new Book();
+        bloodOfElves2.setId(8L);
+        bloodOfElves2.setTitle("Blood of Elves");
+        bloodOfElves2.addAuthor(andrzejSapkowski);
+        bloodOfElves2.setGenre(fantasyGenre);
+        bloodOfElves2.addPublisher(superNowa);
+        bloodOfElves2.setCoverType(CoverType.HARD);
+        bloodOfElves2.setYearOfRelease(1994);
+        bloodOfElves2.setIsbn("9788375780659");
+        bloodOfElves2.setBookStatus(BookStatus.AVAILABLE);
+
+        Book goodOmens2 = new Book();
+        goodOmens2.setId(9L);
+        goodOmens2.setTitle("Good Omens");
+        goodOmens2.addAuthor(terryPratchett);
+        goodOmens2.addAuthor(neilGaiman);
+        goodOmens2.setGenre(fantasyGenre);
+        goodOmens2.addPublisher(gollancz);
+        goodOmens2.setCoverType(CoverType.SOFT);
+        goodOmens2.setYearOfRelease(1990);
+        goodOmens2.setIsbn("9780575048003");
+        goodOmens2.setBookStatus(BookStatus.AVAILABLE);
+
         books.add(elantris);
         books.add(misery);
         books.add(bloodOfElves);
         books.add(timeOfContempt);
         books.add(poirotInvestigates);
         books.add(goodOmens);
+        books.add(misery2);
+        books.add(bloodOfElves2);
+        books.add(goodOmens2);
         bookRepository.saveAll(books);
 
         // add users

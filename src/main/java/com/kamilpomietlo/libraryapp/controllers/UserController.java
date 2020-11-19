@@ -71,7 +71,7 @@ public class UserController {
     public String addNewUserSubmit(@ModelAttribute UserCommand userCommand) {
         userService.saveUserCommand(userCommand);
 
-        return "redirect:/user/list";
+        return "redirect:/index";
     }
 
     @GetMapping("user/{id}/edit")

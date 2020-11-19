@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Library System</title>
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
 </head>
 <body>
-<h1>Add new author</h1>
-
-<table>
-    <tr>
-        <form action="#" th:action="@{add}" method="post" th:object="${authors}">
-            <p>Name:
-                <label>
-                    <input type="text" th:field="*{name}"/>
-                </label>
-            </p>
-            <p>
-                <input type="submit" value="Submit"/>
-                <input type="reset" value="Reset"/>
-            </p>
-        </form>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div th:replace="fragments/nav-bar :: div">
 </div>
 
+<div class="background">
+    <div class="fill-form">
+        <h1>Add new author</h1>
+        <form th:action="@{add}" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="${authors.name}">
+
+            <button type="submit" id="submit" class="action-button">Submit</button>
+            <button type="reset" id="reset" class="action-button">Reset</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
 </body>
 </html>

@@ -18,21 +18,27 @@
             <select id="author" th:field="*{authors}">
                 <option th:each="author : ${authors}"
                         th:value="${author.id}"
-                        th:text="${author.name}"></option>
+                        th:text="${author.name}">
+
+                </option>
             </select>
 
             <label for="genre">Genre:</label>
             <select id="genre" th:field="*{genreId}">
                 <option th:each="genre : ${genres}"
                         th:value="${genre.id}"
-                        th:text="${genre.description}"></option>
+                        th:text="${genre.description}">
+
+                </option>
             </select>
 
             <label for="publisher">Publisher:</label>
             <select id="publisher" th:field="*{publisherId}">
                 <option th:each="publisher : ${publishers}"
                         th:value="${publisher.id}"
-                        th:text="${publisher.name}"></option>
+                        th:text="${publisher.name}">
+
+                </option>
             </select>
 
             <label for="cover-type">Cover type:</label>

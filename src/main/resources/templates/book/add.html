@@ -1,79 +1,67 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Library System</title>
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
 </head>
 <body>
-<h1>Add new book</h1>
-
-<table>
-    <tr>
-        <form action="#" th:action="@{add}" method="post" th:object="${books}">
-            <p>Title:
-                <label>
-                    <input type="text" th:field="*{title}"/>
-                </label>
-            </p>
-            <p>Author:
-                <label>
-                    <select class="form-control" th:field="*{authors}">
-                        <option th:each="author : ${authors}"
-                                th:value="${author.id}"
-                                th:text="${author.name}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Genre:
-                <label>
-                    <select class="form-control" th:field="*{genreId}">
-                        <option th:each="genre : ${genres}"
-                                th:value="${genre.id}"
-                                th:text="${genre.description}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Publisher:
-                <label>
-                    <select class="form-control" th:field="*{publisherId}">
-                        <option th:each="publisher : ${publishers}"
-                                th:value="${publisher.id}"
-                                th:text="${publisher.name}"></option>
-                    </select>
-                </label>
-            </p>
-            <p>Cover type:
-                <label>
-                    <select class="form-control" th:field="*{coverType}">
-                        <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
-                                th:value="${coverType}"
-                                th:text="${coverType}">1
-                        </option>
-                    </select>
-                </label>
-            </p>
-            <p>Year:
-                <label>
-                    <input type="text" th:field="*{yearOfRelease}"/>
-                </label>
-            </p>
-            <p>ISBN:
-                <label>
-                    <input type="text" th:field="*{isbn}"/>
-                </label>
-            </p>
-            <p>
-                <input type="submit" value="Submit"/>
-                <input type="reset" value="Reset"/>
-            </p>
-        </form>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div th:replace="fragments/nav-bar :: div">
 </div>
 
+<div class="background">
+    <div class="fill-form">
+        <h1>Add new book</h1>
+        <form th:action="@{add}" method="post" th:object="${books}">
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}">
+
+            <label for="author">Author:</label>
+            <select id="author" th:field="*{authors}">
+                <option th:each="author : ${authors}"
+                        th:value="${author.id}"
+                        th:text="${author.name}">
+
+                </option>
+            </select>
+
+            <label for="genre">Genre:</label>
+            <select id="genre" th:field="*{genreId}">
+                <option th:each="genre : ${genres}"
+                        th:value="${genre.id}"
+                        th:text="${genre.description}">
+
+                </option>
+            </select>
+
+            <label for="publisher">Publisher:</label>
+            <select id="publisher" th:field="*{publisherId}">
+                <option th:each="publisher : ${publishers}"
+                        th:value="${publisher.id}"
+                        th:text="${publisher.name}">
+
+                </option>
+            </select>
+
+            <label for="cover-type">Cover type:</label>
+            <select id="cover-type" th:field="*{coverType}">
+                <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
+                        th:value="${coverType}"
+                        th:text="${coverType}">
+                </option>
+            </select>
+
+            <label for="year">Year:</label>
+            <input type="text" id="year" th:field="*{yearOfRelease}">
+
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" th:field="*{isbn}">
+
+            <button type="submit" id="submit" class="action-button">Submit</button>
+            <button type="reset" id="reset" class="action-button">Reset</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
 </body>
 </html>
