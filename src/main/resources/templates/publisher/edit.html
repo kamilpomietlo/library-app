@@ -8,11 +8,16 @@
 </div>
 
 <div class="background">
-    <div class="fill-form">
+    <div class="form">
         <h1>Edit publisher info</h1>
-        <form th:action="@{edit}" method="post">
+        <form th:action="@{edit}" th:object="${publishers}" method="post">
             <label for="name">Name:</label>
-            <input type="text" id="name" th:field="${publishers.name}">
+            <input type="text" th:class="${#fields.hasErrors('name')} ? 'input-error' : 'input'" id="name" th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+                </ul>
+            </div>
 
             <button type="submit" id="submit" class="action-button">Submit</button>
             <button type="reset" id="reset" class="action-button">Reset</button>

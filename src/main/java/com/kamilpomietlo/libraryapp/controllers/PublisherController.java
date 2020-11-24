@@ -3,13 +3,18 @@ package com.kamilpomietlo.libraryapp.controllers;
 import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.services.PublisherService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 public class PublisherController {
 
@@ -48,7 +53,14 @@ public class PublisherController {
     }
 
     @PostMapping("publisher/add")
-    public String addNewPublisherSubmit(@ModelAttribute PublisherCommand publisherCommand) {
+    public String addNewPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
+                                        BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "publisher/add";
+        }
+
         publisherService.savePublisherCommand(publisherCommand);
 
         return "redirect:/publisher/list";
@@ -62,7 +74,14 @@ public class PublisherController {
     }
 
     @PostMapping("publisher/{id}/edit")
-    public String editPublisherSubmit(@ModelAttribute PublisherCommand publisherCommand) {
+    public String editPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
+                                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "publisher/edit";
+        }
+
         publisherService.savePublisherCommand(publisherCommand);
 
         return "redirect:/publisher/list";

@@ -1,17 +1,21 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.*;
+import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Set;
+import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class BookController {
 
@@ -67,24 +71,28 @@ public class BookController {
 
     @GetMapping("book/add")
     public String addNewBookForm(Model model) {
-        Set<Author> authors = authorService.getAuthors();
-        model.addAttribute("authors", authors);
-
-        Set<Genre> genres = genreService.getGenres();
-        model.addAttribute("genres", genres);
-
-        Set<Publisher> publishers = publisherService.getPublishers();
-        model.addAttribute("publishers", publishers);
-
+        model.addAttribute("authors", authorService.getAuthors());
+        model.addAttribute("genres", genreService.getGenres());
+        model.addAttribute("publishers", publisherService.getPublishers());
         model.addAttribute("books", new BookCommand());
 
         return "book/add";
     }
 
     @PostMapping("book/add")
-    public String addNewBookSubmit(@ModelAttribute BookCommand bookCommand) {
-        bookCommand.setBookStatus(BookStatus.AVAILABLE);
+    public String addNewBookSubmit(Model model, @Valid @ModelAttribute("books") BookCommand bookCommand,
+                                   BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
+            model.addAttribute("authors", authorService.getAuthors());
+            model.addAttribute("genres", genreService.getGenres());
+            model.addAttribute("publishers", publisherService.getPublishers());
+
+            return "book/add";
+        }
+
+        bookCommand.setBookStatus(BookStatus.AVAILABLE);
         bookService.saveBookCommand(bookCommand);
 
         return "redirect:/book/list";
@@ -92,25 +100,27 @@ public class BookController {
 
     @GetMapping("book/{id}/edit")
     public String editBookForm(@PathVariable String id, Model model) {
-        Set<Author> authors = authorService.getAuthors();
-        model.addAttribute("authors", authors);
-
-        Set<Genre> genres = genreService.getGenres();
-        model.addAttribute("genres", genres);
-
-        Set<Publisher> publishers = publisherService.getPublishers();
-        model.addAttribute("publishers", publishers);
-
-        Set<User> users = userService.getUsers();
-        model.addAttribute("users", users);
-
+        model.addAttribute("authors", authorService.getAuthors());
+        model.addAttribute("genres", genreService.getGenres());
+        model.addAttribute("publishers", publisherService.getPublishers());
         model.addAttribute("books", bookService.findCommandById(Long.valueOf(id)));
 
         return "book/edit";
     }
 
     @PostMapping("book/{id}/edit")
-    public String editBookSubmit(@ModelAttribute BookCommand bookCommand) {
+    public String editBookSubmit(Model model, @Valid @ModelAttribute("books") BookCommand bookCommand,
+                                 BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            model.addAttribute("authors", authorService.getAuthors());
+            model.addAttribute("genres", genreService.getGenres());
+            model.addAttribute("publishers", publisherService.getPublishers());
+
+            return "book/edit";
+        }
+
         BookCommand tempBookCommand = bookService.findCommandById(bookCommand.getId());
         bookCommand.setUserId(tempBookCommand.getUserId());
         bookCommand.setBookStatus(tempBookCommand.getBookStatus());

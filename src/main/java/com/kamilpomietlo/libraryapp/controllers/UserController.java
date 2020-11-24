@@ -1,19 +1,21 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.services.BookService;
 import com.kamilpomietlo.libraryapp.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Set;
+import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class UserController {
 
@@ -68,7 +70,13 @@ public class UserController {
     }
 
     @PostMapping("user/add")
-    public String addNewUserSubmit(@ModelAttribute UserCommand userCommand) {
+    public String addNewUserSubmit(@Valid @ModelAttribute("users") UserCommand userCommand, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "user/add";
+        }
+
         userService.saveUserCommand(userCommand);
 
         return "redirect:/index";
@@ -76,22 +84,24 @@ public class UserController {
 
     @GetMapping("user/{id}/edit")
     public String editUserForm(@PathVariable String id, Model model) {
-        Set<Book> books = bookService.getBooks();
-        model.addAttribute("books", books);
-
         model.addAttribute("users", userService.findCommandById(Long.valueOf(id)));
 
         return "user/edit";
     }
 
     @PostMapping("user/{id}/edit")
-    public String editUserSubmit(@ModelAttribute UserCommand userCommand) {
-        UserCommand tempUserCommand = userService.findCommandById(userCommand.getId());
-        userCommand.setBooks(tempUserCommand.getBooks());
-        userCommand.setIdNumber(tempUserCommand.getIdNumber());
+    public String editUserSubmit(@Valid @ModelAttribute("users") UserCommand userCommand, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "user/edit";
+        }
+
+        UserCommand oldUserCommand = userService.findCommandById(userCommand.getId());
+        userCommand.setBooks(oldUserCommand.getBooks());
 
         userService.saveUserCommand(userCommand);
 
-        return "redirect:/user/list";
+        return "redirect:/index";
     }
 }

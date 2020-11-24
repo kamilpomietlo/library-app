@@ -3,13 +3,18 @@ package com.kamilpomietlo.libraryapp.controllers;
 import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 public class AuthorController {
 
@@ -48,7 +53,14 @@ public class AuthorController {
     }
 
     @PostMapping("author/add")
-    public String addNewAuthorSubmit(@ModelAttribute AuthorCommand authorCommand) {
+    public String addNewAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
+                                     BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "author/add";
+        }
+
         authorService.saveAuthorCommand(authorCommand);
 
         return "redirect:/author/list";
@@ -62,7 +74,14 @@ public class AuthorController {
     }
 
     @PostMapping("author/{id}/edit")
-    public String editAuthorSubmit(@ModelAttribute AuthorCommand authorCommand) {
+    public String editAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
+                                   BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "author/edit";
+        }
+
         authorService.saveAuthorCommand(authorCommand);
 
         return "redirect:/author/list";
