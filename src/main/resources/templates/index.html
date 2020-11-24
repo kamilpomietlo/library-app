@@ -8,7 +8,7 @@
 </div>
 
 <div class="background">
-    <div class="main-form">
+    <div class="form">
         <h1>Find a book</h1>
         <form th:action="@{index}" method="post">
             <label for="title">Title:</label>
@@ -18,7 +18,6 @@
             <input type="text" id="author" th:field="${authors.name}">
 
             <button type="submit" class="action-button">Submit</button>
-            <button type="reset" class="action-button">Reset</button>
         </form>
     </div>
 </div>

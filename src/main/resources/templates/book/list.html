@@ -40,7 +40,11 @@
                 <td th:text="${book.isbn}">8</td>
                 <td th:text="${book.bookStatus}">9</td>
                 <td>
-                    <a class="action-button" th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
+                    <a class="action-button"
+                       th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
+                       th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
+                    <a class="action-button action-button-disabled"
+                       th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Reserve</a>
                 </td>
 <!--                <td>-->
 <!--                    <a class="action-button" th:href="@{'/book/' + ${book.id} + '/edit'}">Edit</a>-->

@@ -6,6 +6,12 @@
     color: black;
 }
 
+:root {
+    --primaryColor: chocolate;
+    --secondaryColor: navajowhite;
+    --detailsColor: saddlebrown;
+}
+
 body {
     background-image: url("images/background.jpeg");
     background-size: cover;
@@ -14,8 +20,12 @@ body {
     background-attachment: fixed;
 }
 
+.background {
+    padding-top: 120px;
+}
+
 .nav-bar {
-    background: chocolate;
+    background: var(--primaryColor);
     height: 120px;
     border-bottom: 20px solid #ff6e00;
     display: inline-flex;
@@ -26,30 +36,19 @@ body {
 
 #logo {
     height: 100px;
-    border-radius: 0 30px 30px 0;
+    border-radius: 0 20px 20px 0;
     pointer-events: none;
 }
 
 .name {
     padding: 0 30px;
     display: inline;
-    color: navajowhite;
+    color: var(--secondaryColor);
     font-size: 60px;
     font-family: 'Big Shoulders Stencil Text', cursive;
     border-right: 3px solid #ff6e00;
     border-radius: 10px;
     user-select: none;
-}
-
-.nav-button {
-    background: #ff9637;
-    text-decoration: none;
-    font-size: 20px;
-    padding: 15px;
-    border: 1px solid saddlebrown;
-    border-radius: 10px;
-    font-weight: bold;
-    text-align: center;
 }
 
 #login {
@@ -69,56 +68,16 @@ body {
 }
 
 .footer {
-    background: chocolate;
-    height: 30px;
+    background: var(--primaryColor);
+    height: 25px;
     border-top: 5px solid #ff6e00;
     width: 100%;
     bottom: 0;
     position: fixed;
 }
 
-.background {
-    padding-top: 120px;
-    padding-bottom: 30px;
-}
-
-.main-form {
-    background: navajowhite;
-    text-align: center;
-    margin: 140px auto 70px auto;
-    width: 600px;
-    border: 3px solid saddlebrown;
-    border-radius: 20px;
-    padding: 40px;
-}
-
-h1 {
-    padding-bottom: 40px;
-    font-size: 40px;
-}
-
-label {
-    display: inline-block;
-    text-align: left;
-    width: 100px;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-input, select {
-    display: inline-block;
-    width: 350px;
-    height: 30px;
-    border: 1px solid black;
-    padding: 0 5px;
-}
-
-select {
-    padding: 0;
-}
-
 button {
-    margin: 20px 10px 0 10px;
+    margin: 50px 10px 0 10px;
     width: 70px;
     height: 30px;
 }
@@ -127,10 +86,65 @@ button:hover {
     cursor: pointer;
 }
 
+.nav-button {
+    background: #ff9637;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 15px;
+    border: 1px solid var(--detailsColor);
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.action-button {
+    background: #ff9637;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px;
+    border: 1px solid var(--detailsColor);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.action-button-disabled {
+    background: darkgrey;
+    border: 1px solid grey;
+    color: dimgrey;
+    cursor: not-allowed;
+    user-select: none;
+}
+
+.form {
+    background: var(--secondaryColor);
+    text-align: center;
+    margin: 60px auto 30px auto;
+    width: 660px;
+    border: 3px solid var(--detailsColor);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.form label {
+    display: inline-block;
+    text-align: left;
+    width: 130px;
+    font-weight: bold;
+}
+
+.table {
+    background: var(--secondaryColor);
+    text-align: center;
+    margin: 60px auto 60px auto;
+    width: 1280px;
+    border: 3px solid var(--detailsColor);
+    border-radius: 20px;
+    padding: 40px;
+}
+
 table {
     background: black;
-    text-align: center;
-    margin: auto;
+    margin: 20px auto 10px auto;
     border-radius: 20px;
     border: 1px solid black;
 }
@@ -160,7 +174,7 @@ table tr:last-child th:last-child {
 }
 
 th {
-    background: chocolate;
+    background: var(--primaryColor);
     padding: 18px 14px;
 }
 
@@ -170,43 +184,50 @@ td {
     font-size: 14px;
 }
 
-.table {
-    background: navajowhite;
-    text-align: center;
-    margin: 60px auto 60px auto;
-    width: 1280px;
-    border: 3px solid saddlebrown;
-    border-radius: 20px;
-    padding: 40px;
+ul {
+    list-style-type: none;
+    display: inline-block;
 }
 
-.action-button {
-    background: #ff9637;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 5px;
-    border: 1px solid saddlebrown;
-    border-radius: 5px;
-    font-weight: bold;
+h1 {
+    padding-bottom: 20px;
+    font-size: 40px;
 }
 
-#submit, #reset {
-    margin: 40px 30px 10px 30px;
-}
-
-.fill-form {
-    background: navajowhite;
-    text-align: center;
-    margin: 60px auto 30px auto;
-    width: 700px;
-    border: 3px solid saddlebrown;
-    border-radius: 20px;
-    padding: 40px;
-}
-
-.fill-form label {
+label {
     display: inline-block;
     text-align: left;
-    width: 130px;
+    width: 100px;
     font-weight: bold;
+}
+
+input, select {
+    display: inline-block;
+    width: 350px;
+    height: 30px;
+    border: 1px solid black;
+    padding: 0 5px;
+    margin-top: 20px;
+}
+
+.input-error {
+    display: inline-block;
+    width: 350px;
+    height: 30px;
+    border: 1px solid red;
+    padding: 0 5px;
+}
+
+.alert li {
+    display: inline-block;
+    color: red;
+    font-size: 12px;
+    width: 480px;
+    text-align: right;
+}
+
+.read-only {
+    background: lightgrey;
+    color: grey;
+    cursor: not-allowed;
 }

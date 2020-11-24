@@ -255,8 +255,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setId(1L);
         janKowalski.setFirstName("Jan");
         janKowalski.setLastName("Kowalski");
-        janKowalski.setIdNumber("88021574862");
-        janKowalski.setCountry("Poland");
+        janKowalski.setIdNumber("88021574863");
+        janKowalski.setCountry("Polska");
         janKowalski.setState("mazowieckie");
         janKowalski.setCity("Warszawa");
         janKowalski.setStreet("Szkolna");
@@ -267,8 +267,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setId(2L);
         tomaszNowak.setFirstName("Tomasz");
         tomaszNowak.setLastName("Nowak");
-        tomaszNowak.setIdNumber("74012285943");
-        tomaszNowak.setCountry("Poland");
+        tomaszNowak.setIdNumber("74012285959");
+        tomaszNowak.setCountry("Polska");
         tomaszNowak.setState("śląskie");
         tomaszNowak.setCity("Katowice");
         tomaszNowak.setStreet("Rynkowa");
