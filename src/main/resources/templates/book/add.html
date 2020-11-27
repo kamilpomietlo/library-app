@@ -19,13 +19,35 @@
                 </ul>
             </div>
 
-            <label for="author">Author:</label>
-            <select id="author" th:field="*{authors}">
+            <label for="author">Authors:</label>
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author" th:field="*{authors}">
+                <option th:value="null">------------</option>
                 <option th:each="author : ${authors}"
                         th:value="${author.id}"
                         th:text="${author.name}">
                 </option>
             </select>
+            <label for="author2"></label>
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author2" th:field="*{authors}">
+                <option th:value="null">------------</option>
+                <option th:each="author : ${authors}"
+                        th:value="${author.id}"
+                        th:text="${author.name}">
+                </option>
+            </select>
+            <label for="author3"></label>
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author3" th:field="*{authors}">
+                <option th:value="null">------------</option>
+                <option th:each="author : ${authors}"
+                        th:value="${author.id}"
+                        th:text="${author.name}">
+                </option>
+            </select>
+            <div th:if="${#fields.hasErrors('authors')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#lists.sort(#fields.errors('authors'))}" th:text="${error}"></li>
+                </ul>
+            </div>
 
             <label for="genre">Genre:</label>
             <select id="genre" th:field="*{genreId}">

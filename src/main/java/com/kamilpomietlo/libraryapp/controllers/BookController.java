@@ -85,6 +85,8 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
+            bookCommand.getAuthors().clear();
+
             model.addAttribute("authors", authorService.getAuthors());
             model.addAttribute("genres", genreService.getGenres());
             model.addAttribute("publishers", publisherService.getPublishers());

@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.ISBN;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,9 @@ public class BookCommand extends BaseEntityCommand {
     @NotBlank
     private String title;
 
+    @Size(min = 2, max = 3)
     private Set<Author> authors = new HashSet<>();
+
     private Long genreId;
     private Long publisherId;
     private CoverType coverType;
@@ -31,7 +34,6 @@ public class BookCommand extends BaseEntityCommand {
     @Max(2020)
     private Integer yearOfRelease;
 
-    @NotBlank
     @ISBN
     private String isbn;
 

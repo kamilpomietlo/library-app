@@ -1,2 +1,19 @@
-<div class="footer">
+<div class="footer" xmlns:th="https://www.thymeleaf.org">
+    <a th:href="@{'/book/list'}">Get books list</a>
+    <a th:href="@{'/author/list'}">Get authors list</a>
+    <a th:href="@{'/publisher/list'}">Get publishers list</a>
+    <a th:href="@{'/user/list'}">Get users list</a>
+
+    <a th:href="@{'/book/find'}">Find a book</a>
+    <a th:href="@{'/author/find'}">Find an author</a>
+    <a th:href="@{'/publisher/find'}">Find a publisher</a>
+    <a th:href="@{'/user/find'}">Find a user</a>
+
+    <a th:href="@{'/book/delete'}">Delete a book</a>
+    <a th:href="@{'/user/delete'}">Delete a user</a>
+
+    <a th:href="@{'/book/add'}">Add new book</a>
+    <a th:href="@{'/author/add'}">Add new author</a>
+    <a th:href="@{'/publisher/add'}">Add new publisher</a>
+    <a th:href="@{'/user/add'}">Add new user</a>
 </div>
