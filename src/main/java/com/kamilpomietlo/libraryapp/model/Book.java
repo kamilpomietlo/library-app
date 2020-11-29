@@ -16,7 +16,7 @@ public class Book extends BaseEntity {
 
     private String title;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -36,7 +36,7 @@ public class Book extends BaseEntity {
     private Integer yearOfRelease;
     private String isbn;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private User user;
 
     @Enumerated(value = EnumType.STRING)

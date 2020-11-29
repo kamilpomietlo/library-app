@@ -3,7 +3,6 @@ package com.kamilpomietlo.libraryapp.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -24,7 +23,7 @@ public class User extends BaseEntity {
     private String street;
     private String homeNumber;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     @JoinColumn(name = "user_id")
     private Set<Book> books = new HashSet<>();
 

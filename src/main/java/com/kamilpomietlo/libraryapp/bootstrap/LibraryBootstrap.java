@@ -4,15 +4,16 @@ import com.kamilpomietlo.libraryapp.model.*;
 import com.kamilpomietlo.libraryapp.repositories.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
+@Profile("default")
 @Component
 public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -44,48 +45,38 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         List<Publisher> publishers = new ArrayList<>();
         List<Book> books = new ArrayList<>();
         List<User> users = new ArrayList<>();
-        String EXCEPTION_STRING = "Expected object not found.";
+        List<Genre> genres = new ArrayList<>();
 
-        // get genres
-        Optional<Genre> thrillerGenreOptional = genreRepository.findByDescription("Thriller");
-        if (thrillerGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        // add genres
+        Genre thriller = new Genre();
+        thriller.setDescription("Thriller");
 
-        Optional<Genre> romanceGenreOptional = genreRepository.findByDescription("Romance");
-        if (romanceGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre romance = new Genre();
+        romance.setDescription("Romance");
 
-        Optional<Genre> scienceFictionGenreOptional = genreRepository.findByDescription("Science fiction");
-        if (scienceFictionGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre scienceFiction = new Genre();
+        scienceFiction.setDescription("Science fiction");
 
-        Optional<Genre> fantasyGenreOptional = genreRepository.findByDescription("Fantasy");
-        if (fantasyGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre fantasy = new Genre();
+        fantasy.setDescription("Fantasy");
 
-        Optional<Genre> mysteryGenreOptional = genreRepository.findByDescription("Mystery");
-        if (mysteryGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre mystery = new Genre();
+        mystery.setDescription("Mystery");
 
-        Optional<Genre> horrorGenreOptional = genreRepository.findByDescription("Horror");
-        if (horrorGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre horror = new Genre();
+        horror.setDescription("Horror");
 
-        Optional<Genre> historyGenreOptional = genreRepository.findByDescription("History");
-        if (historyGenreOptional.isEmpty()) {
-            throw new RuntimeException(EXCEPTION_STRING);
-        }
+        Genre history = new Genre();
+        history.setDescription("History");
 
-        // get optionals
-        Genre thrillerGenre = thrillerGenreOptional.get();
-        Genre fantasyGenre = fantasyGenreOptional.get();
-        Genre horrorGenre = horrorGenreOptional.get();
+        genres.add(thriller);
+        genres.add(romance);
+        genres.add(scienceFiction);
+        genres.add(fantasy);
+        genres.add(mystery);
+        genres.add(horror);
+        genres.add(history);
+        genreRepository.saveAll(genres);
 
         // add authors
         Author brandonSanderson = new Author("Brandon Sanderson");
@@ -142,7 +133,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         elantris.setId(1L);
         elantris.setTitle("Elantris");
         elantris.addAuthor(brandonSanderson);
-        elantris.setGenre(fantasyGenre);
+        elantris.setGenre(fantasy);
         elantris.addPublisher(torBooks);
         elantris.setCoverType(CoverType.SOFT);
         elantris.setYearOfRelease(2005);
@@ -153,7 +144,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setId(2L);
         misery.setTitle("Misery");
         misery.addAuthor(stephenKing);
-        misery.setGenre(horrorGenre);
+        misery.setGenre(horror);
         misery.addPublisher(vikingPress);
         misery.setCoverType(CoverType.SOFT);
         misery.setYearOfRelease(1987);
@@ -164,7 +155,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves.setId(3L);
         bloodOfElves.setTitle("Blood of Elves");
         bloodOfElves.addAuthor(andrzejSapkowski);
-        bloodOfElves.setGenre(fantasyGenre);
+        bloodOfElves.setGenre(fantasy);
         bloodOfElves.addPublisher(superNowa);
         bloodOfElves.setCoverType(CoverType.SOFT);
         bloodOfElves.setYearOfRelease(1994);
@@ -175,7 +166,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setId(4L);
         timeOfContempt.setTitle("Time of Contempt");
         timeOfContempt.addAuthor(andrzejSapkowski);
-        timeOfContempt.setGenre(fantasyGenre);
+        timeOfContempt.setGenre(fantasy);
         timeOfContempt.addPublisher(superNowa);
         timeOfContempt.setCoverType(CoverType.SOFT);
         timeOfContempt.setYearOfRelease(1995);
@@ -186,7 +177,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.setId(5L);
         poirotInvestigates.setTitle("Poirot Investigates");
         poirotInvestigates.addAuthor(agathaChristie);
-        poirotInvestigates.setGenre(thrillerGenre);
+        poirotInvestigates.setGenre(thriller);
         poirotInvestigates.addPublisher(bodleyHead);
         poirotInvestigates.setCoverType(CoverType.HARD);
         poirotInvestigates.setYearOfRelease(1924);
@@ -198,7 +189,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens.setTitle("Good Omens");
         goodOmens.addAuthor(terryPratchett);
         goodOmens.addAuthor(neilGaiman);
-        goodOmens.setGenre(fantasyGenre);
+        goodOmens.setGenre(fantasy);
         goodOmens.addPublisher(gollancz);
         goodOmens.setCoverType(CoverType.HARD);
         goodOmens.setYearOfRelease(1990);
@@ -209,7 +200,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery2.setId(7L);
         misery2.setTitle("Misery");
         misery2.addAuthor(stephenKing);
-        misery2.setGenre(horrorGenre);
+        misery2.setGenre(horror);
         misery2.addPublisher(vikingPress);
         misery2.setCoverType(CoverType.SOFT);
         misery2.setYearOfRelease(1987);
@@ -220,7 +211,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         bloodOfElves2.setId(8L);
         bloodOfElves2.setTitle("Blood of Elves");
         bloodOfElves2.addAuthor(andrzejSapkowski);
-        bloodOfElves2.setGenre(fantasyGenre);
+        bloodOfElves2.setGenre(fantasy);
         bloodOfElves2.addPublisher(superNowa);
         bloodOfElves2.setCoverType(CoverType.HARD);
         bloodOfElves2.setYearOfRelease(1994);
@@ -232,7 +223,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         goodOmens2.setTitle("Good Omens");
         goodOmens2.addAuthor(terryPratchett);
         goodOmens2.addAuthor(neilGaiman);
-        goodOmens2.setGenre(fantasyGenre);
+        goodOmens2.setGenre(fantasy);
         goodOmens2.addPublisher(gollancz);
         goodOmens2.setCoverType(CoverType.SOFT);
         goodOmens2.setYearOfRelease(1990);
