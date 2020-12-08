@@ -11,9 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -39,7 +37,7 @@ class BookServiceImplTest {
     @Test
     void getBooks() {
         // given
-        Set<Book> books = new HashSet<>();
+        List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
         book1.setId(1L);
@@ -53,7 +51,7 @@ class BookServiceImplTest {
         when(bookRepository.findAll()).thenReturn(books);
 
         // when
-        Set<Book> bookSet = bookService.getBooks();
+        Set<Book> bookSet = bookService.findAll();
 
         // then
         assertNotNull(bookSet);

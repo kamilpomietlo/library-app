@@ -3,24 +3,13 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.repositories.GenreRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class GenreServiceImpl implements GenreService {
+@Transactional
+public class GenreServiceImpl extends BaseServiceImpl<Genre, GenreRepository> implements GenreService {
 
-    private final GenreRepository genreRepository;
-
-    public GenreServiceImpl(GenreRepository genreRepository) {
-        this.genreRepository = genreRepository;
-    }
-
-    @Override
-    public Set<Genre> getGenres() {
-        Set<Genre> genreSet = new HashSet<>();
-        genreRepository.findAll().iterator().forEachRemaining(genreSet::add);
-
-        return genreSet;
+    public GenreServiceImpl(GenreRepository repository) {
+        super(repository);
     }
 }

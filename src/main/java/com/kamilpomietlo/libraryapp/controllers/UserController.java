@@ -29,24 +29,24 @@ public class UserController {
 
     @GetMapping("user/list")
     public String getUsers(Model model) {
-        model.addAttribute("users", userService.getUsers());
+        model.addAttribute("users", userService.findAll());
 
         return "user/list";
     }
 
-    @GetMapping("user/find")
-    public String userSearchForm(Model model) {
-        model.addAttribute("users", new User());
-
-        return "user/find";
-    }
-
-    @PostMapping("user/find")
-    public String userSearchSubmit(@ModelAttribute User user, Model model) {
-        model.addAttribute("users", userService.findByIdNumber(user.getIdNumber()));
-
-        return "user/list";
-    }
+//    @GetMapping("user/find")
+//    public String userSearchForm(Model model) {
+//        model.addAttribute("users", new User());
+//
+//        return "user/find";
+//    }
+//
+//    @PostMapping("user/find")
+//    public String userSearchSubmit(@ModelAttribute User user, Model model) {
+//        model.addAttribute("users", userService.findByIdNumber(user.getIdNumber()));
+//
+//        return "user/list";
+//    }
 
     @GetMapping("user/delete")
     public String deleteByIdForm(Model model) {

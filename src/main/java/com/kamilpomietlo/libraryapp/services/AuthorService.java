@@ -5,11 +5,9 @@ import com.kamilpomietlo.libraryapp.model.Author;
 
 import java.util.Set;
 
-public interface AuthorService {
+public interface AuthorService extends BaseService<Author> {
 
-    Set<Author> getAuthors();
     Set<Author> findByName(String name);
     AuthorCommand saveAuthorCommand(AuthorCommand authorCommand);
-    Author findById(Long id);
     AuthorCommand findCommandById(Long id);
 }

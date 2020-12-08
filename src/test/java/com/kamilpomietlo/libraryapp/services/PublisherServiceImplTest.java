@@ -13,7 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ class PublisherServiceImplTest {
     @Test
     void getPublishers() {
         // given
-        Set<Publisher> publishers = new HashSet<>();
+        List<Publisher> publishers = new ArrayList<>();
 
         Publisher publisher1 = new Publisher();
         publisher1.setId(1L);
@@ -56,7 +57,7 @@ class PublisherServiceImplTest {
         when(publisherRepository.findAll()).thenReturn(publishers);
 
         // when
-        Set<Publisher> publisherSet = publisherService.getPublishers();
+        Set<Publisher> publisherSet = publisherService.findAll();
 
         // then
         assertNotNull(publisherSet);

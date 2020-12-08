@@ -5,11 +5,9 @@ import com.kamilpomietlo.libraryapp.model.Publisher;
 
 import java.util.Set;
 
-public interface PublisherService {
+public interface PublisherService extends BaseService<Publisher> {
 
-    Set<Publisher> getPublishers();
     Set<Publisher> findByName(String name);
     PublisherCommand savePublisherCommand(PublisherCommand publisherCommand);
-    Publisher findById(Long id);
     PublisherCommand findCommandById(Long id);
 }

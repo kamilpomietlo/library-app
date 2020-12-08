@@ -26,7 +26,7 @@ public class PublisherController {
 
     @GetMapping("publisher/list")
     public String getPublishers(Model model) {
-        model.addAttribute("publishers", publisherService.getPublishers());
+        model.addAttribute("publishers", publisherService.findAll());
 
         return "publisher/list";
     }

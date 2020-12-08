@@ -2,20 +2,23 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
+import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class IndexServiceImpl implements IndexService {
+@Transactional
+public class IndexServiceImpl extends BaseServiceImpl<Book, BookRepository> implements IndexService {
 
-    private final BookService bookService;
-    private final AuthorService authorService;
+    private final AuthorRepository authorRepository;
 
-    public IndexServiceImpl(BookService bookService, AuthorService authorService) {
-        this.bookService = bookService;
-        this.authorService = authorService;
+    public IndexServiceImpl(BookRepository repository, AuthorRepository authorRepository) {
+        super(repository);
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -25,7 +28,7 @@ public class IndexServiceImpl implements IndexService {
         // no title provided
         if (book.getTitle().isEmpty()) {
             if (!author.getName().isEmpty()) {
-                Set<Author> authors = authorService.findByName(author.getName());
+                Set<Author> authors = authorRepository.findByNameIgnoreCaseContaining(author.getName());
 
                 for (Author searchedAuthor : authors) {
                     searchedAuthor.getBooks().iterator().forEachRemaining(searchedBooks::add);
@@ -35,16 +38,16 @@ public class IndexServiceImpl implements IndexService {
             return searchedBooks;
         }
 
-        // no author's name provided
+        // no name provided
         if (author.getName().isEmpty()) {
-            searchedBooks = bookService.findByTitle(book.getTitle());
+            searchedBooks = repository.findByTitleIgnoreCaseContaining(book.getTitle());
 
             return searchedBooks;
         }
 
-        // both title and author's name provided
-        Set<Book> books = bookService.findByTitle(book.getTitle());
-        Set<Author> authors = authorService.findByName(author.getName());
+        // both title and name provided
+        Set<Book> books = repository.findByTitleIgnoreCaseContaining(book.getTitle());
+        Set<Author> authors = authorRepository.findByNameIgnoreCaseContaining(author.getName());
 
         for (Book searchedBook : books) {
             for (Author searchedAuthor : authors) {

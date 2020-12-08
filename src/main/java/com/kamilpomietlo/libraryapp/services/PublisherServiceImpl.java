@@ -14,33 +14,25 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class PublisherServiceImpl implements PublisherService {
+@Transactional
+public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRepository> implements PublisherService {
 
-    private final PublisherRepository publisherRepository;
     private final PublisherCommandToPublisher publisherCommandToPublisher;
     private final PublisherToPublisherCommand publisherToPublisherCommand;
     private final String EXCEPTION_STRING = "Expected object not found.";
 
-    public PublisherServiceImpl(PublisherRepository publisherRepository,
+    public PublisherServiceImpl(PublisherRepository repository,
                                 PublisherCommandToPublisher publisherCommandToPublisher,
                                 PublisherToPublisherCommand publisherToPublisherCommand) {
-        this.publisherRepository = publisherRepository;
+        super(repository);
         this.publisherCommandToPublisher = publisherCommandToPublisher;
         this.publisherToPublisherCommand = publisherToPublisherCommand;
     }
 
     @Override
-    public Set<Publisher> getPublishers() {
-        Set<Publisher> publisherSet = new HashSet<>();
-        publisherRepository.findAll().iterator().forEachRemaining(publisherSet::add);
-
-        return publisherSet;
-    }
-
-    @Override
     public Set<Publisher> findByName(String name) {
         Set<Publisher> publisherSet = new HashSet<>();
-        Optional<Publisher> publisherOptional = publisherRepository.findByNameIgnoreCaseContaining(name.trim());
+        Optional<Publisher> publisherOptional = repository.findByNameIgnoreCaseContaining(name.trim());
         if (publisherOptional.isEmpty()) {
             throw new NotFoundException(EXCEPTION_STRING);
         } else {
@@ -51,27 +43,14 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    @Transactional
     public PublisherCommand savePublisherCommand(PublisherCommand publisherCommand) {
         Publisher detachedPublisher = publisherCommandToPublisher.convert(publisherCommand);
-        Publisher savedPublisher = publisherRepository.save(detachedPublisher);
+        Publisher savedPublisher = repository.save(detachedPublisher);
 
         return publisherToPublisherCommand.convert(savedPublisher);
     }
 
     @Override
-    public Publisher findById(Long id) {
-        Optional<Publisher> publisherOptional = publisherRepository.findById(id);
-
-        if (publisherOptional.isEmpty()) {
-            throw new NotFoundException(EXCEPTION_STRING);
-        }
-
-        return publisherOptional.get();
-    }
-
-    @Override
-    @Transactional
     public PublisherCommand findCommandById(Long id) {
         return publisherToPublisherCommand.convert(findById(id));
     }

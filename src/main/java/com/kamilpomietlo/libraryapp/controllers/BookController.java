@@ -36,7 +36,7 @@ public class BookController {
 
     @GetMapping("book/list")
     public String getBooks(Model model) {
-        model.addAttribute("books", bookService.getBooks());
+        model.addAttribute("books", bookService.findAll());
 
         return "book/list";
     }
@@ -71,9 +71,9 @@ public class BookController {
 
     @GetMapping("book/add")
     public String addNewBookForm(Model model) {
-        model.addAttribute("authors", authorService.getAuthors());
-        model.addAttribute("genres", genreService.getGenres());
-        model.addAttribute("publishers", publisherService.getPublishers());
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+        model.addAttribute("publishers", publisherService.findAll());
         model.addAttribute("books", new BookCommand());
 
         return "book/add";
@@ -87,9 +87,9 @@ public class BookController {
 
             bookCommand.getAuthors().clear();
 
-            model.addAttribute("authors", authorService.getAuthors());
-            model.addAttribute("genres", genreService.getGenres());
-            model.addAttribute("publishers", publisherService.getPublishers());
+            model.addAttribute("authors", authorService.findAll());
+            model.addAttribute("genres", genreService.findAll());
+            model.addAttribute("publishers", publisherService.findAll());
 
             return "book/add";
         }
@@ -102,9 +102,9 @@ public class BookController {
 
     @GetMapping("book/{id}/edit")
     public String editBookForm(@PathVariable String id, Model model) {
-        model.addAttribute("authors", authorService.getAuthors());
-        model.addAttribute("genres", genreService.getGenres());
-        model.addAttribute("publishers", publisherService.getPublishers());
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("genres", genreService.findAll());
+        model.addAttribute("publishers", publisherService.findAll());
         model.addAttribute("books", bookService.findCommandById(Long.valueOf(id)));
 
         return "book/edit";
@@ -116,9 +116,9 @@ public class BookController {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
-            model.addAttribute("authors", authorService.getAuthors());
-            model.addAttribute("genres", genreService.getGenres());
-            model.addAttribute("publishers", publisherService.getPublishers());
+            model.addAttribute("authors", authorService.findAll());
+            model.addAttribute("genres", genreService.findAll());
+            model.addAttribute("publishers", publisherService.findAll());
 
             return "book/edit";
         }

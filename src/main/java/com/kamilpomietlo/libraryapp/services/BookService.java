@@ -5,13 +5,10 @@ import com.kamilpomietlo.libraryapp.model.Book;
 
 import java.util.Set;
 
-public interface BookService {
+public interface BookService extends BaseService<Book> {
 
-    Set<Book> getBooks();
     Set<Book> findByTitle(String title);
-    void deleteById(Long id);
     BookCommand saveBookCommand(BookCommand bookCommand);
-    Book findById(Long id);
     BookCommand findCommandById(Long id);
     void reserveBook(BookCommand bookCommand);
     void borrowBook(BookCommand bookCommand);

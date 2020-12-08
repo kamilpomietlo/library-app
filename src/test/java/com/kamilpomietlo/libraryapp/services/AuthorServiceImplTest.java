@@ -13,9 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -41,7 +39,7 @@ class AuthorServiceImplTest {
     @Test
     void getAuthors() {
         // given
-        Set<Author> authors = new HashSet<>();
+        List<Author> authors = new ArrayList<>();
 
         Author author1 = new Author();
         author1.setId(1L);
@@ -57,7 +55,7 @@ class AuthorServiceImplTest {
         when(authorRepository.findAll()).thenReturn(authors);
 
         // when
-        Set<Author> authorSet = authorService.getAuthors();
+        Set<Author> authorSet = authorService.findAll();
 
         // then
         assertNotNull(authorSet);
