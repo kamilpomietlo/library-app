@@ -9,8 +9,6 @@ import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
 @Service
 @Transactional
 public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> implements BookService {
@@ -23,11 +21,6 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         super(repository);
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
-    }
-
-    @Override
-    public Set<Book> findByTitle(String title) {
-        return repository.findByTitleIgnoreCaseContaining(title.trim());
     }
 
     @Override

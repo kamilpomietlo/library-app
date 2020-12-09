@@ -13,7 +13,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -61,29 +64,6 @@ class AuthorServiceImplTest {
         assertNotNull(authorSet);
         assertEquals(2, authorSet.size());
         verify(authorRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findByName() {
-        // given
-        Author author = new Author();
-
-        author.setId(1L);
-        author.setName("name");
-
-        Set<Author> authorSet = new HashSet<>();
-        authorSet.add(author);
-
-        when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authorSet);
-
-        // when
-        Set<Author> authorsReturned = authorService.findByName("name");
-
-        // then
-        assertNotNull(authorsReturned);
-        assertEquals(1, authorsReturned.size());
-        verify(authorRepository, times(1)).findByNameIgnoreCaseContaining(anyString());
-        verify(authorRepository, never()).findAll();
     }
 
     @Test

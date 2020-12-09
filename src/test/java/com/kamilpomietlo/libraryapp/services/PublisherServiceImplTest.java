@@ -66,28 +66,6 @@ class PublisherServiceImplTest {
     }
 
     @Test
-    void findByName() {
-        // given
-        Publisher publisher = new Publisher();
-
-        publisher.setId(1L);
-        publisher.setName("name");
-
-        Optional<Publisher> publisherOptional = Optional.of(publisher);
-
-        when(publisherRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(publisherOptional);
-
-        // when
-        Set<Publisher> publishersReturned = publisherService.findByName("name");
-
-        // then
-        assertNotNull(publishersReturned);
-        assertEquals(1, publishersReturned.size());
-        verify(publisherRepository, times(1)).findByNameIgnoreCaseContaining(anyString());
-        verify(publisherRepository, never()).findAll();
-    }
-
-    @Test
     void savePublisherCommand() {
         // given
         PublisherCommand publisherCommand = new PublisherCommand();

@@ -64,28 +64,6 @@ class UserServiceImplTest {
         verify(userRepository, times(1)).findAll();
     }
 
-//    @Test
-//    void findByIdNumber() {
-//        // given
-//        User user = new User();
-//
-//        user.setId(1L);
-//        user.setIdNumber("123");
-//
-//        Optional<User> userOptional = Optional.of(user);
-//
-//        when(userRepository.findByIdNumber(anyString())).thenReturn(userOptional);
-//
-//        // when
-//        User userReturned = userService.findByIdNumber("123");
-//
-//        // then
-//        assertNotNull(userReturned);
-//        assertEquals(1, userReturned.getId());
-//        verify(userRepository, times(1)).findByIdNumber(anyString());
-//        verify(userRepository, never()).findAll();
-//    }
-
     @Test
     void deleteById() {
         // given

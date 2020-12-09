@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BaseEntityCommand {
+abstract class BaseEntityCommand {
 
     private Long id;
 }

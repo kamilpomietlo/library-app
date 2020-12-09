@@ -1,20 +1,17 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
-import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Slf4j
+@RequestMapping("author")
 @Controller
 public class AuthorController {
 
@@ -24,37 +21,23 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping("author/list")
+    @GetMapping("/list")
     public String getAuthors(Model model) {
         model.addAttribute("authors", authorService.findAll());
 
         return "author/list";
     }
 
-    @GetMapping("author/find")
-    public String authorSearchForm(Model model) {
-        model.addAttribute("authors", new Author());
-
-        return "author/find";
-    }
-
-    @PostMapping("author/find")
-    public String authorSearchSubmit(@ModelAttribute Author author, Model model) {
-        model.addAttribute("authors", authorService.findByName(author.getName()));
-
-        return "author/list";
-    }
-
-    @GetMapping("author/add")
-    public String addNewAuthorForm(Model model) {
+    @GetMapping("/add")
+    public String addAuthorForm(Model model) {
         model.addAttribute("authors", new AuthorCommand());
 
         return "author/add";
     }
 
-    @PostMapping("author/add")
-    public String addNewAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
-                                     BindingResult bindingResult) {
+    @PostMapping("/add")
+    public String addAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
+                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
@@ -66,14 +49,14 @@ public class AuthorController {
         return "redirect:/author/list";
     }
 
-    @GetMapping("author/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editAuthorForm(@PathVariable String id, Model model) {
         model.addAttribute("authors", authorService.findCommandById(Long.valueOf(id)));
 
         return "author/edit";
     }
 
-    @PostMapping("author/{id}/edit")
+    @PostMapping("/{id}/edit")
     public String editAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

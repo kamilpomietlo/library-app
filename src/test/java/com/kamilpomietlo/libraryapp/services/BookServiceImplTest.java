@@ -11,7 +11,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -57,29 +60,6 @@ class BookServiceImplTest {
         assertNotNull(bookSet);
         assertEquals(2, bookSet.size());
         verify(bookRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findByTitle() {
-        // given
-        Book book = new Book();
-
-        book.setId(1L);
-        book.setTitle("title");
-
-        Set<Book> bookSet = new HashSet<>();
-        bookSet.add(book);
-
-        when(bookRepository.findByTitleIgnoreCaseContaining(anyString())).thenReturn(bookSet);
-
-        // when
-        Set<Book> booksReturned = bookService.findByTitle("title");
-
-        // then
-        assertNotNull(booksReturned);
-        assertEquals(1, booksReturned.size());
-        verify(bookRepository, times(1)).findByTitleIgnoreCaseContaining(anyString());
-        verify(bookRepository, never()).findAll();
     }
 
     @Test

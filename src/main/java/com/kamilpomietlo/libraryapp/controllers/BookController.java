@@ -1,21 +1,22 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.BookStatus;
-import com.kamilpomietlo.libraryapp.services.*;
+import com.kamilpomietlo.libraryapp.model.*;
+import com.kamilpomietlo.libraryapp.services.AuthorService;
+import com.kamilpomietlo.libraryapp.services.BookService;
+import com.kamilpomietlo.libraryapp.services.GenreService;
+import com.kamilpomietlo.libraryapp.services.PublisherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 @Slf4j
+@RequestMapping("book")
 @Controller
 public class BookController {
 
@@ -23,73 +24,50 @@ public class BookController {
     private final AuthorService authorService;
     private final PublisherService publisherService;
     private final GenreService genreService;
-    private final UserService userService;
 
     public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService,
-                          GenreService genreService, UserService userService) {
+                          GenreService genreService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.publisherService = publisherService;
         this.genreService = genreService;
-        this.userService = userService;
     }
 
-    @GetMapping("book/list")
+    @GetMapping("/list")
     public String getBooks(Model model) {
         model.addAttribute("books", bookService.findAll());
 
         return "book/list";
     }
 
-    @GetMapping("book/find")
-    public String bookSearchForm(Model model) {
-        model.addAttribute("books", new Book());
-
-        return "book/find";
-    }
-
-    @PostMapping("book/find")
-    public String bookSearchSubmit(@ModelAttribute Book book, Model model) {
-        model.addAttribute("books", bookService.findByTitle(book.getTitle()));
-
-        return "book/list";
-    }
-
-    @GetMapping("book/delete")
+    @GetMapping("/delete")
     public String deleteByIdForm(Model model) {
-        model.addAttribute("books", new Book());
+        model.addAttribute("book", new Book());
 
         return "book/delete";
     }
 
-    @PostMapping("book/delete")
+    @PostMapping("/delete")
     public String deleteByIdSubmit(@ModelAttribute Book book) {
         bookService.deleteById(book.getId());
 
         return "redirect:/book/list";
     }
 
-    @GetMapping("book/add")
-    public String addNewBookForm(Model model) {
-        model.addAttribute("authors", authorService.findAll());
-        model.addAttribute("genres", genreService.findAll());
-        model.addAttribute("publishers", publisherService.findAll());
-        model.addAttribute("books", new BookCommand());
+    @GetMapping("/add")
+    public String addBookForm(Model model) {
+        model.addAttribute("book", new BookCommand());
 
         return "book/add";
     }
 
-    @PostMapping("book/add")
-    public String addNewBookSubmit(Model model, @Valid @ModelAttribute("books") BookCommand bookCommand,
-                                   BindingResult bindingResult) {
+    @PostMapping("/add")
+    public String addBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
+                                BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
             bookCommand.getAuthors().clear();
-
-            model.addAttribute("authors", authorService.findAll());
-            model.addAttribute("genres", genreService.findAll());
-            model.addAttribute("publishers", publisherService.findAll());
 
             return "book/add";
         }
@@ -100,25 +78,18 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-    @GetMapping("book/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editBookForm(@PathVariable String id, Model model) {
-        model.addAttribute("authors", authorService.findAll());
-        model.addAttribute("genres", genreService.findAll());
-        model.addAttribute("publishers", publisherService.findAll());
-        model.addAttribute("books", bookService.findCommandById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
 
         return "book/edit";
     }
 
-    @PostMapping("book/{id}/edit")
-    public String editBookSubmit(Model model, @Valid @ModelAttribute("books") BookCommand bookCommand,
+    @PostMapping("/{id}/edit")
+    public String editBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-
-            model.addAttribute("authors", authorService.findAll());
-            model.addAttribute("genres", genreService.findAll());
-            model.addAttribute("publishers", publisherService.findAll());
 
             return "book/edit";
         }
@@ -132,7 +103,7 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-    @GetMapping("book/{id}/reserve")
+    @GetMapping("/{id}/reserve")
     public String reserveBook(@PathVariable String id) {
         BookCommand bookToReserve = bookService.findCommandById(Long.valueOf(id));
 
@@ -141,12 +112,27 @@ public class BookController {
         return "redirect:/index";
     }
 
-    @GetMapping("book/{id}/borrow")
+    @GetMapping("/{id}/borrow")
     public String borrowBook(@PathVariable String id) {
         BookCommand bookToBorrow = bookService.findCommandById(Long.valueOf(id));
 
         bookService.borrowBook(bookToBorrow);
 
         return "redirect:/index";
+    }
+
+    @ModelAttribute("authors")
+    private Set<Author> getAuthors() {
+        return authorService.findAll();
+    }
+
+    @ModelAttribute("publishers")
+    private Set<Publisher> getPublishers() {
+        return publisherService.findAll();
+    }
+
+    @ModelAttribute("genres")
+    private Set<Genre> getGenres() {
+        return genreService.findAll();
     }
 }

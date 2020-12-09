@@ -8,8 +8,6 @@ import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
 @Service
 @Transactional
 public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository> implements AuthorService {
@@ -22,11 +20,6 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository>
         super(repository);
         this.authorCommandToAuthor = authorCommandToAuthor;
         this.authorToAuthorCommand = authorToAuthorCommand;
-    }
-
-    @Override
-    public Set<Author> findByName(String name) {
-        return repository.findByNameIgnoreCaseContaining(name.trim());
     }
 
     @Override
