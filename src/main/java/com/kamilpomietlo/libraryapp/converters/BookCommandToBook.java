@@ -2,9 +2,7 @@ package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.model.*;
-import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -13,8 +11,6 @@ import java.util.Set;
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
 
-    @Synchronized
-    @Nullable
     @Override
     public Book convert(BookCommand source) {
         if (source == null) {

@@ -2,9 +2,7 @@ package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
-import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +14,6 @@ public class AuthorToAuthorCommand implements Converter<Author, AuthorCommand> {
         this.bookToBookCommand = bookToBookCommand;
     }
 
-    @Synchronized
-    @Nullable
     @Override
     public AuthorCommand convert(Author source) {
         if (source == null) {

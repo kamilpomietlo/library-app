@@ -2,9 +2,7 @@ package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
 import com.kamilpomietlo.libraryapp.model.Publisher;
-import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +14,6 @@ public class PublisherToPublisherCommand implements Converter<Publisher, Publish
         this.bookToBookCommand = bookToBookCommand;
     }
 
-    @Synchronized
-    @Nullable
     @Override
     public PublisherCommand convert(Publisher source) {
         if (source == null) {

@@ -2,9 +2,7 @@ package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.GenreCommand;
 import com.kamilpomietlo.libraryapp.model.Genre;
-import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +14,6 @@ public class GenreToGenreCommand implements Converter<Genre, GenreCommand> {
         this.bookToBookCommand = bookToBookCommand;
     }
 
-    @Synchronized
-    @Nullable
     @Override
     public GenreCommand convert(Genre source) {
         if (source == null) {
