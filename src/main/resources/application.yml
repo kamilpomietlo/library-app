@@ -1,0 +1,15 @@
+spring:
+  mail:
+    host: poczta.interia.pl
+    port: 587
+    username: bestlib@interia.pl
+    password: x
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000

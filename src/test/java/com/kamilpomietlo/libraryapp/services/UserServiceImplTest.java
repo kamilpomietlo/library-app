@@ -28,6 +28,8 @@ class UserServiceImplTest {
     private UserService userService;
     private UserCommandToUser userCommandToUser;
     private UserToUserCommand userToUserCommand;
+    private ConfirmationTokenService confirmationTokenService;
+    private EmailSenderService emailSenderService;
 
     @Mock
     UserRepository userRepository;
@@ -36,7 +38,7 @@ class UserServiceImplTest {
     void setUp() {
         userCommandToUser = new UserCommandToUser(new BookCommandToBook());
         userToUserCommand = new UserToUserCommand(new BookToBookCommand());
-        userService = new UserServiceImpl(userRepository, userCommandToUser, userToUserCommand);
+        userService = new UserServiceImpl(userRepository, userCommandToUser, userToUserCommand, confirmationTokenService, emailSenderService);
     }
 
     @Test
