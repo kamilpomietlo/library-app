@@ -43,8 +43,6 @@ class UserCommandToUserTest {
         // given
         UserCommand userCommand = new UserCommand();
         userCommand.setId(ID);
-        userCommand.setFirstName(FIRST_NAME);
-        userCommand.setLastName(LAST_NAME);
         userCommand.setIdNumber(ID_NUMBER);
         userCommand.setCountry(COUNTRY);
         userCommand.setState(STATE);

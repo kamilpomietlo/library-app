@@ -76,13 +76,13 @@ public class IndexController {
         return "redirect:/login";
     }
 
-//    @GetMapping("login")
-//    public String login(Model model) {
-//        model.addAttribute("user", new User());
-//
-//        return "login";
-//    }
-//
+    @GetMapping("login")
+    public String login() {
+        // code
+
+        return "login";
+    }
+
 //    @PostMapping("login")
 //    public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
 //        if (bindingResult.hasErrors()) {
@@ -95,6 +95,4 @@ public class IndexController {
 //
 //        return "redirect:/index";
 //    }
-
-    //todo fix register on the same email
 }

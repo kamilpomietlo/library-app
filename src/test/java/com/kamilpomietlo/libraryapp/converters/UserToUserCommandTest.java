@@ -67,8 +67,6 @@ class UserToUserCommandTest {
         // then
         assertNotNull(userCommand);
         assertEquals(ID, userCommand.getId());
-        assertEquals(FIRST_NAME, userCommand.getFirstName());
-        assertEquals(LAST_NAME, userCommand.getLastName());
         assertEquals(ID_NUMBER, userCommand.getIdNumber());
         assertEquals(COUNTRY, userCommand.getCountry());
         assertEquals(STATE, userCommand.getState());

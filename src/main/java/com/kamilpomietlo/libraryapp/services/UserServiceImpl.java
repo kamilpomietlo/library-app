@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> implements UserService {
@@ -59,6 +61,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         sendConfirmationMail(savedUser.getEmail(), confirmationToken.getConfirmationToken());
+    }
+
+    @Override
+    public boolean isEmailUsed(String email) {
+        Optional<User> userOptional = repository.findByEmail(email);
+
+        return userOptional.isPresent();
     }
 
     @Override

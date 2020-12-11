@@ -1,6 +1,7 @@
 package com.kamilpomietlo.libraryapp.commands;
 
 import com.kamilpomietlo.libraryapp.model.UserRole;
+import com.kamilpomietlo.libraryapp.validators.EmailNotInUse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class UserRegisterCommand extends BaseEntityCommand {
 
     @NotBlank
     @Email
+    @EmailNotInUse
     private String email;
 
     @NotBlank

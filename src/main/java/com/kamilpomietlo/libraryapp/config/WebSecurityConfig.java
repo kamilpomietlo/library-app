@@ -33,7 +33,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/sign-in").permitAll();
+                .loginPage("/login").permitAll();
     }
 
     @Override
