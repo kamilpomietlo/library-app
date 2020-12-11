@@ -8,5 +8,6 @@ import java.util.Set;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
+
     Set<Author> findByNameIgnoreCaseContaining(String name);
 }

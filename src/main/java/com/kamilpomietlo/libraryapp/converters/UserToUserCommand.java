@@ -22,8 +22,6 @@ public class UserToUserCommand implements Converter<User, UserCommand> {
 
         final UserCommand userCommand = new UserCommand();
         userCommand.setId(source.getId());
-        userCommand.setFirstName(source.getFirstName());
-        userCommand.setLastName(source.getLastName());
         userCommand.setIdNumber(source.getIdNumber());
         userCommand.setCountry(source.getCountry());
         userCommand.setState(source.getState());

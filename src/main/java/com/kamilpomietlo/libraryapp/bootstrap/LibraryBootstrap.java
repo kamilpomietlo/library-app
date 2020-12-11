@@ -253,6 +253,11 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setStreet("Szkolna");
         janKowalski.setHomeNumber("7");
         janKowalski.addBook(misery);
+        janKowalski.setEmail("jankowalski@example.pl");
+        janKowalski.setPassword("123");
+        janKowalski.setUserRole(UserRole.USER);
+        janKowalski.setLocked(false);
+        janKowalski.setEnabled(true);
 
         User tomaszNowak = new User();
         tomaszNowak.setId(2L);
@@ -266,6 +271,11 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setHomeNumber("12");
         tomaszNowak.addBook(timeOfContempt);
         tomaszNowak.addBook(poirotInvestigates);
+        tomaszNowak.setEmail("tomasznowak@example.pl");
+        tomaszNowak.setPassword("456");
+        tomaszNowak.setUserRole(UserRole.LIBRARIAN);
+        tomaszNowak.setLocked(false);
+        tomaszNowak.setEnabled(true);
 
         users.add(janKowalski);
         users.add(tomaszNowak);

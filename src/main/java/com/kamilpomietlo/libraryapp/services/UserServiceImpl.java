@@ -1,20 +1,17 @@
 package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
+import com.kamilpomietlo.libraryapp.commands.UserRegisterCommand;
 import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
+import com.kamilpomietlo.libraryapp.converters.UserRegisterCommandToUser;
 import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.text.MessageFormat;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -24,15 +21,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     private final UserToUserCommand userToUserCommand;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSenderService emailSenderService;
+    private final UserRegisterCommandToUser userRegisterCommandToUser;
 
     public UserServiceImpl(UserRepository repository, UserCommandToUser userCommandToUser,
                            UserToUserCommand userToUserCommand, ConfirmationTokenService confirmationTokenService,
-                           EmailSenderService emailSenderService) {
+                           EmailSenderService emailSenderService, UserRegisterCommandToUser userRegisterCommandToUser) {
         super(repository);
         this.userCommandToUser = userCommandToUser;
         this.userToUserCommand = userToUserCommand;
         this.confirmationTokenService = confirmationTokenService;
         this.emailSenderService = emailSenderService;
+        this.userRegisterCommandToUser = userRegisterCommandToUser;
     }
 
     @Override
@@ -49,28 +48,29 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     }
 
     @Override
-    public UserDetails findUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> userOptional = repository.findByEmail(email);
+    public void registerUser(UserRegisterCommand userRegisterCommand) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        final String encryptedPassword = passwordEncoder.encode(userRegisterCommand.getPassword());
 
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
-        }
+        userRegisterCommand.setPassword(encryptedPassword);
+        User savedUser = repository.save(userRegisterCommandToUser.convert(userRegisterCommand));
 
-        return userOptional.get();
+        final ConfirmationToken confirmationToken = new ConfirmationToken(savedUser);
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        sendConfirmationMail(savedUser.getEmail(), confirmationToken.getConfirmationToken());
     }
 
     @Override
-    public void signUpUser(User user) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        final String encryptedPassword = passwordEncoder.encode(user.getPassword());
+    public void sendConfirmationMail(String userMail, String confirmationToken) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(userMail);
+        mailMessage.setSubject("BestLib registration confirmation link");
+        mailMessage.setFrom("bestlib@interia.pl");
+        mailMessage.setText("Thank you for registering. Please click on the link below to activate your account.\n\n"
+                + "http://localhost:8080/register/confirm?token=" + confirmationToken);
 
-        user.setPassword(encryptedPassword);
-        repository.save(user);
-
-        final ConfirmationToken confirmationToken = new ConfirmationToken(user);
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-
-        sendConfirmationMail(user.getEmail(), confirmationToken.getConfirmationToken());
+        emailSenderService.sendEmail(mailMessage);
     }
 
     @Override
@@ -82,15 +82,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         confirmationTokenService.deleteById(confirmationToken.getId());
     }
 
-    @Override
-    public void sendConfirmationMail(String userMail, String confirmationToken) {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(userMail);
-        mailMessage.setSubject("BestLib registration confirmation link");
-        mailMessage.setFrom("bestlib@interia.pl");
-        mailMessage.setText("Thank you for registering. Please click on the link below to activate your account.\n\n"
-                + "http://localhost:8080/sign-up/confirm?token=" + confirmationToken);
-
-        emailSenderService.sendEmail(mailMessage);
-    }
+//    @Override
+//    public User findUserByUsername(String email) throws UsernameNotFoundException {
+//        Optional<User> userOptional = repository.findByEmail(email);
+//
+//        if (userOptional.isEmpty()) {
+//            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
+//        }
+//
+//        return userOptional.get();
+//    }
 }

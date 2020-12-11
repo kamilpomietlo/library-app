@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,14 +13,6 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class UserCommand extends BaseEntityCommand {
-
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z']*$")
-    private String firstName;
-
-    @NotBlank
-    @Pattern(regexp = "^[A-Za-z']*$")
-    private String lastName;
 
     @NotBlank
     @PESEL

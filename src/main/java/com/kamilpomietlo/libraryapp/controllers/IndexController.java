@@ -1,21 +1,25 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
+import com.kamilpomietlo.libraryapp.commands.UserRegisterCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
-import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.IndexService;
 import com.kamilpomietlo.libraryapp.services.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -44,35 +48,53 @@ public class IndexController {
         return "book/list";
     }
 
-    @GetMapping("sign-in")
-    public String signIn(Model model) {
-        model.addAttribute("user", new User());
+    @GetMapping("register")
+    public String registerUser(Model model) {
+        model.addAttribute("user", new UserRegisterCommand());
 
-        return "redirect:/index";
+        return "register";
     }
 
-    @GetMapping("sign-up")
-    public String signUp(Model model) {
-        model.addAttribute("user", new User());
+    @PostMapping("register")
+    public String registerUser(@Valid @ModelAttribute("user") UserRegisterCommand userRegisterCommand, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
-        return "sign-up";
+            return "register";
+        }
+
+        userService.registerUser(userRegisterCommand);
+
+        return "redirect:/login";
     }
 
-    @PostMapping("sign-up")
-    public String signUp(User user) {
-        userService.signUpUser(user);
-
-        return "redirect:/sign-in";
-    }
-
-    @GetMapping("sign-up/confirm")
+    @GetMapping("register/confirm")
     public String confirmMail(@RequestParam("token") String token) {
         Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
         optionalConfirmationToken.ifPresent(userService::confirmUser);
 
-        return "sign-in";
+        return "redirect:/login";
     }
 
-    //todo sign-up on the same email, add first and last name, prevent from reserve when user not enabled
-    //todo use UserCommand, update converters, update bootstrap users and add one admin account there
+//    @GetMapping("login")
+//    public String login(Model model) {
+//        model.addAttribute("user", new User());
+//
+//        return "login";
+//    }
+//
+//    @PostMapping("login")
+//    public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+//
+//            return "login";
+//        }
+//
+//        User signedInUser = userService.findUserByUsername(user.getEmail());
+//
+//        return "redirect:/index";
+//    }
+
+    //todo fix register on the same email
 }

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
+</head>
+<body>
+<div th:replace="fragments/nav-bar :: div">
+</div>
+
+<div class="background">
+    <div class="form">
+        <h1>Registration</h1>
+        <form th:action="@{register}" th:object="${user}" method="post">
+            <label for="first-name">First name:</label>
+            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name" th:field="*{firstName}">
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
+            <label for="last-name">Last name:</label>
+            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name" th:field="*{lastName}">
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
+            <label for="email">E-mail:</label>
+            <input type="email" th:class="${#fields.hasErrors('email')} ? 'input-error' : 'input'" id="email" th:field="*{email}">
+            <div th:if="${#fields.hasErrors('email')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('email')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
+            <label for="password">Password:</label>
+            <input type="password" th:class="${#fields.hasErrors('password')} ? 'input-error' : 'input'" id="password" th:field="*{password}">
+            <div th:if="${#fields.hasErrors('password')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('password')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
+            <button type="submit" id="submit" class="action-button">Submit</button>
+        </form>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
+</body>
+</html>
