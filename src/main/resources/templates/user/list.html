@@ -32,9 +32,8 @@
                 <td th:text="${user.street}">7</td>
                 <td th:text="${user.homeNumber}">8</td>
                 <td>
-                    <ul style="list-style: none">
-                        <li th:each="book : ${user.books}"
-                            th:text="${book.title}">9</li>
+                    <ul>
+                        <li th:each="book : ${user.books}" th:text="${book.title}">9</li>
                     </ul>
                 </td>
             </tr>

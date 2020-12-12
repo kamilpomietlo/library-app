@@ -10,23 +10,7 @@
 <div class="background">
     <div class="form">
         <h1>Edit your info</h1>
-        <form th:action="@{edit}" method="post" th:object="${users}">
-            <label for="first-name">First name:</label>
-            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name" th:field="*{firstName}">
-            <div th:if="${#fields.hasErrors('firstName')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
-                </ul>
-            </div>
-
-            <label for="last-name">Last name:</label>
-            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name" th:field="*{lastName}">
-            <div th:if="${#fields.hasErrors('lastName')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></li>
-                </ul>
-            </div>
-
+        <form th:action="@{edit}" th:object="${users}" method="post">
             <label for="id-number">ID number:</label>
             <input type="text" class="read-only" id="id-number" th:field="*{idNumber}" readonly>
 

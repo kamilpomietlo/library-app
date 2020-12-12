@@ -9,24 +9,8 @@
 
 <div class="background">
     <div class="form">
-        <h1>Create new account</h1>
+        <h1>?</h1>
         <form th:action="@{add}" method="post" th:object="${users}">
-            <label for="first-name">First name:</label>
-            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name" th:field="*{firstName}">
-            <div th:if="${#fields.hasErrors('firstName')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
-                </ul>
-            </div>
-
-            <label for="last-name">Last name:</label>
-            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name" th:field="*{lastName}">
-            <div th:if="${#fields.hasErrors('lastName')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></li>
-                </ul>
-            </div>
-
             <label for="id-number">ID number:</label>
             <input type="text" th:class="${#fields.hasErrors('idNumber')} ? 'input-error' : 'input'" id="id-number" th:field="*{idNumber}">
             <div th:if="${#fields.hasErrors('idNumber')}" class="alert">

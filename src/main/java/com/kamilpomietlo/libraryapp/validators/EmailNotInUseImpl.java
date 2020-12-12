@@ -19,10 +19,10 @@ public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, Str
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !checkEmailUsage(email);
+        return !isEmailUsed(email);
     }
 
-    private boolean checkEmailUsage(String email) {
+    private boolean isEmailUsed(String email) {
         return userService.isEmailUsed(email);
     }
 }

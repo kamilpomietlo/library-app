@@ -34,21 +34,18 @@ body {
     position: fixed;
 }
 
-#logo {
-    height: 100px;
-    border-radius: 0 20px 20px 0;
-    pointer-events: none;
-}
-
 .name {
     padding: 0 30px;
-    display: inline;
+    display: inline-block;
     color: var(--secondaryColor);
-    font-size: 60px;
+    font-size: 75px;
     font-family: 'Big Shoulders Stencil Text', cursive;
-    border-right: 3px solid #ff6e00;
+    border-right: 4px solid #ff6e00;
     border-radius: 10px;
     user-select: none;
+    text-decoration: none;
+    position: relative;
+    top: 10px;
 }
 
 #login {
@@ -58,13 +55,6 @@ body {
 
 #register {
     margin-right: 40px;
-}
-
-#find {
-    margin-left: 80px;
-    margin-right: 80px;
-    min-width: 170px;
-    width: 170px;
 }
 
 .footer {
@@ -128,7 +118,7 @@ button:hover {
 .form label {
     display: inline-block;
     text-align: left;
-    width: 130px;
+    width: 150px;
     font-weight: bold;
 }
 
@@ -192,13 +182,6 @@ ul {
 h1 {
     padding-bottom: 20px;
     font-size: 40px;
-}
-
-label {
-    display: inline-block;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
 }
 
 input, select {
