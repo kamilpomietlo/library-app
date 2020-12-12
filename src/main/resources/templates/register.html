@@ -43,6 +43,14 @@
                 </ul>
             </div>
 
+            <label for="matchingPassword">Repeat password:</label>
+            <input type="password" th:class="${#fields.hasErrors('matchingPassword')} ? 'input-error' : 'input'" id="matchingPassword" th:field="*{matchingPassword}">
+            <div th:if="${#fields.hasErrors('matchingPassword')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('matchingPassword')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
             <button type="submit" id="submit" class="action-button">Submit</button>
         </form>
     </div>

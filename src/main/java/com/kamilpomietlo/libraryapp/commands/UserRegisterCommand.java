@@ -2,6 +2,7 @@ package com.kamilpomietlo.libraryapp.commands;
 
 import com.kamilpomietlo.libraryapp.model.UserRole;
 import com.kamilpomietlo.libraryapp.validators.EmailNotInUse;
+import com.kamilpomietlo.libraryapp.validators.PasswordMatches;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+@PasswordMatches
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,6 +36,9 @@ public class UserRegisterCommand extends BaseEntityCommand {
     @NotBlank
     @Length(min = 3)
     private String password;
+
+    @NotBlank
+    private String matchingPassword;
 
     @Enumerated(value = EnumType.STRING)
     private UserRole userRole = UserRole.USER;
