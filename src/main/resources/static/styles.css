@@ -48,24 +48,6 @@ body {
     top: 10px;
 }
 
-#login {
-    margin-left: auto;
-    margin-right: 20px;
-}
-
-#register {
-    margin-right: 40px;
-}
-
-.footer {
-    background: var(--primaryColor);
-    height: 25px;
-    border-top: 5px solid #ff6e00;
-    width: 100%;
-    bottom: 0;
-    position: fixed;
-}
-
 button {
     margin: 50px 10px 0 10px;
     width: 70px;
@@ -103,6 +85,24 @@ button:hover {
     color: dimgrey;
     cursor: not-allowed;
     user-select: none;
+}
+
+.nav-bar-buttons {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+#register, #account {
+    margin-right: 10px;
+}
+
+.footer {
+    background: var(--primaryColor);
+    height: 25px;
+    border-top: 5px solid #ff6e00;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
 }
 
 .form {
@@ -205,8 +205,15 @@ input, select {
     display: inline-block;
     color: red;
     font-size: 12px;
-    width: 480px;
+    width: 500px;
     text-align: right;
+}
+
+.alert-security {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .read-only {
