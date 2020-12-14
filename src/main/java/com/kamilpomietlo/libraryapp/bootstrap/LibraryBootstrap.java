@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -182,7 +184,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         poirotInvestigates.setCoverType(CoverType.HARD);
         poirotInvestigates.setYearOfRelease(1924);
         poirotInvestigates.setIsbn("9788577991273");
-        poirotInvestigates.setBookStatus(BookStatus.RESERVED);
+        poirotInvestigates.setBookStatus(BookStatus.AVAILABLE);
 
         Book goodOmens = new Book();
         goodOmens.setId(6L);
@@ -253,8 +255,9 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setStreet("Szkolna");
         janKowalski.setHomeNumber("7");
         janKowalski.addBook(misery);
+        janKowalski.addBook(timeOfContempt);
         janKowalski.setEmail("jankowalski@example.pl");
-        janKowalski.setPassword("123");
+        janKowalski.setPassword(passwordEncoder().encode("123"));
         janKowalski.setUserRole(UserRole.USER);
         janKowalski.setLocked(false);
         janKowalski.setEnabled(true);
@@ -269,16 +272,35 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setCity("Katowice");
         tomaszNowak.setStreet("Rynkowa");
         tomaszNowak.setHomeNumber("12");
-        tomaszNowak.addBook(timeOfContempt);
-        tomaszNowak.addBook(poirotInvestigates);
-        tomaszNowak.setEmail("tomasznowak@example.pl");
-        tomaszNowak.setPassword("456");
+        tomaszNowak.setEmail("t.nowak@example.pl");
+        tomaszNowak.setPassword(passwordEncoder().encode("456"));
         tomaszNowak.setUserRole(UserRole.LIBRARIAN);
         tomaszNowak.setLocked(false);
         tomaszNowak.setEnabled(true);
 
+        User krzysztofNowakowski = new User();
+        krzysztofNowakowski.setId(3L);
+        krzysztofNowakowski.setFirstName("Krzysztof");
+        krzysztofNowakowski.setLastName("Nowakowski");
+        krzysztofNowakowski.setIdNumber("95071375498");
+        krzysztofNowakowski.setCountry("Polska");
+        krzysztofNowakowski.setState("opolskie");
+        krzysztofNowakowski.setCity("Opole");
+        krzysztofNowakowski.setStreet("Zamkowa");
+        krzysztofNowakowski.setHomeNumber("77");
+        krzysztofNowakowski.setEmail("krzysztof.nowakowski@example.pl");
+        krzysztofNowakowski.setPassword(passwordEncoder().encode("789"));
+        krzysztofNowakowski.setUserRole(UserRole.ADMIN);
+        krzysztofNowakowski.setLocked(false);
+        krzysztofNowakowski.setEnabled(true);
+
         users.add(janKowalski);
         users.add(tomaszNowak);
+        users.add(krzysztofNowakowski);
         userRepository.saveAll(users);
+    }
+
+    private PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
