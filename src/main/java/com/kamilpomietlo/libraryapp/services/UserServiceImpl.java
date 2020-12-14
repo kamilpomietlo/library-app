@@ -9,10 +9,12 @@ import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.MessageFormat;
 import java.util.Optional;
 
 @Service
@@ -91,14 +93,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         confirmationTokenService.deleteById(confirmationToken.getId());
     }
 
-//    @Override
-//    public User findUserByUsername(String email) throws UsernameNotFoundException {
-//        Optional<User> userOptional = repository.findByEmail(email);
-//
-//        if (userOptional.isEmpty()) {
-//            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
-//        }
-//
-//        return userOptional.get();
-//    }
+    @Override
+    public User findUserByEmail(String email) throws UsernameNotFoundException {
+        Optional<User> userOptional = repository.findByEmail(email);
+
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException(MessageFormat.format("User with email {0} cannot be found.", email));
+        }
+
+        return userOptional.get();
+    }
 }

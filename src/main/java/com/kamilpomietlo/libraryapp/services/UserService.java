@@ -13,5 +13,5 @@ public interface UserService extends BaseService<User> {
     boolean isEmailUsed(String email);
     void sendConfirmationMail(String userMail, String confirmationToken);
     void confirmUser(ConfirmationToken confirmationToken);
-//    User findUserByUsername(String email);
+    User findUserByEmail(String email);
 }

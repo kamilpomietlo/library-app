@@ -78,21 +78,6 @@ public class IndexController {
 
     @GetMapping("login")
     public String login() {
-        // code
-
         return "login";
     }
-
-//    @PostMapping("login")
-//    public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-//
-//            return "login";
-//        }
-//
-//        User signedInUser = userService.findUserByUsername(user.getEmail());
-//
-//        return "redirect:/index";
-//    }
 }
