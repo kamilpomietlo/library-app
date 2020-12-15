@@ -14,7 +14,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(NotFoundException.class)
     public ModelAndView handleNotFoundException() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("errors/404error");
+        modelAndView.setViewName("errors/404");
 
         return modelAndView;
     }
@@ -23,7 +23,7 @@ public class ExceptionHandlerController {
     @ExceptionHandler(NumberFormatException.class)
     public ModelAndView handleNumberFormatException() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/errors/400error");
+        modelAndView.setViewName("errors/400");
 
         return modelAndView;
     }
