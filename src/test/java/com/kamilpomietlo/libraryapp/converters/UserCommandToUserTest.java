@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserCommandToUserTest {
 
     private static final Long ID = 1L;
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
     private static final String ID_NUMBER = "123";
     private static final String COUNTRY = "poland";
     private static final String STATE = "slaskie";
@@ -65,8 +63,6 @@ class UserCommandToUserTest {
         // then
         assertNotNull(user);
         assertEquals(ID, user.getId());
-        assertEquals(FIRST_NAME, user.getFirstName());
-        assertEquals(LAST_NAME, user.getLastName());
         assertEquals(ID_NUMBER, user.getIdNumber());
         assertEquals(COUNTRY, user.getCountry());
         assertEquals(STATE, user.getState());

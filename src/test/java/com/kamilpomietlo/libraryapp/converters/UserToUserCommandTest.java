@@ -11,8 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserToUserCommandTest {
 
     private static final Long ID = 1L;
-    private static final String FIRST_NAME = "firstName";
-    private static final String LAST_NAME = "lastName";
     private static final String ID_NUMBER = "123";
     private static final String COUNTRY = "poland";
     private static final String STATE = "slaskie";
@@ -43,8 +41,6 @@ class UserToUserCommandTest {
         // given
         User user = new User();
         user.setId(ID);
-        user.setFirstName(FIRST_NAME);
-        user.setLastName(LAST_NAME);
         user.setIdNumber(ID_NUMBER);
         user.setCountry(COUNTRY);
         user.setState(STATE);
