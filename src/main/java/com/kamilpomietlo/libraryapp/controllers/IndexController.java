@@ -80,9 +80,4 @@ public class IndexController {
     public String login() {
         return "login";
     }
-
-    @GetMapping("/403")
-    public String accessDenied() {
-        return "errors/403";
-    }
 }
