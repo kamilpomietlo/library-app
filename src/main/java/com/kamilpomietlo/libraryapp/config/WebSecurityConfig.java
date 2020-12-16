@@ -24,25 +24,48 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String[] anonymousMatchers = new String[] {
+                "/login", "/register"
+        };
+
+        String[] userMatchers = new String[] {
+                "/book/{\\d+}/reserve"
+        };
+
+        String[] librarianMatchers = new String[] {
+                "/book/list", "/book/add", "/book/{\\d+}/edit", "/book/{\\d+}/delete",
+                "/author/list", "/author/add", "/author/{\\d+}/edit",
+                "/publisher/list", "/publisher/add", "/publisher/edit"
+        };
+
         http
                 .authorizeRequests()
-                // todo permitting everything right now
-                .antMatchers("/**").permitAll().anyRequest()
-                .authenticated()
+                .antMatchers("/", "/index").permitAll()
+                .antMatchers("/logout").authenticated()
+                .antMatchers("/user/edit", "/user/account").hasAnyAuthority("USER", "LIBRARIAN")
+                .antMatchers(userMatchers).hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(anonymousMatchers).anonymous()
+                .antMatchers(librarianMatchers).hasAnyAuthority("LIBRARIAN", "ADMIN")
+                .antMatchers("/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
                 .and()
+                .exceptionHandling().accessDeniedPage("/403")
+                .and()
+
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
+
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
     }
 
     @Override
     public void configure(WebSecurity web) {
         web
-                .ignoring().antMatchers("/h2-console/**");
+                .ignoring().antMatchers("/h2-console/**", "/css/**", "/images/**");
     }
 
     @Override
