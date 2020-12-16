@@ -256,7 +256,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         janKowalski.setHomeNumber("7");
         janKowalski.addBook(misery);
         janKowalski.addBook(timeOfContempt);
-        janKowalski.setEmail("jankowalski@example.pl");
+        janKowalski.setEmail("user@example.pl");
         janKowalski.setPassword(passwordEncoder().encode("123"));
         janKowalski.setUserRole(UserRole.USER);
         janKowalski.setLocked(false);
@@ -272,7 +272,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         tomaszNowak.setCity("Katowice");
         tomaszNowak.setStreet("Rynkowa");
         tomaszNowak.setHomeNumber("12");
-        tomaszNowak.setEmail("t.nowak@example.pl");
+        tomaszNowak.setEmail("librarian@example.pl");
         tomaszNowak.setPassword(passwordEncoder().encode("456"));
         tomaszNowak.setUserRole(UserRole.LIBRARIAN);
         tomaszNowak.setLocked(false);
@@ -288,7 +288,7 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         krzysztofNowakowski.setCity("Opole");
         krzysztofNowakowski.setStreet("Zamkowa");
         krzysztofNowakowski.setHomeNumber("77");
-        krzysztofNowakowski.setEmail("krzysztof.nowakowski@example.pl");
+        krzysztofNowakowski.setEmail("admin@example.pl");
         krzysztofNowakowski.setPassword(passwordEncoder().encode("789"));
         krzysztofNowakowski.setUserRole(UserRole.ADMIN);
         krzysztofNowakowski.setLocked(false);
