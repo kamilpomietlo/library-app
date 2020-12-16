@@ -24,19 +24,19 @@
                 <th>Action</th>
             </tr>
             <tr th:each="book : ${books}">
-                <td th:text="${book.id}">1</td>
-                <td th:text="${book.title}">2</td>
+                <td th:text="${book.id}">id</td>
+                <td th:text="${book.title}">title</td>
                 <td>
                     <ul>
-                        <li th:each="author : ${book.authors}" th:text="${author.name}">3</li>
+                        <li th:each="author : ${book.authors}" th:text="${author.name}">authors</li>
                     </ul>
                 </td>
-                <td th:text="${book.genre.description}">4</td>
-                <td th:text="${book.publisher.name}">5</td>
-                <td th:text="${book.coverType}">6</td>
-                <td th:text="${book.yearOfRelease}">7</td>
-                <td th:text="${book.isbn}">8</td>
-                <td th:text="${book.bookStatus}">9</td>
+                <td th:text="${book.genre.description}">genre</td>
+                <td th:text="${book.publisher.name}">publisher</td>
+                <td th:text="${book.coverType}">coverType</td>
+                <td th:text="${book.yearOfRelease}">yearOfRelease</td>
+                <td th:text="${book.isbn}">isbn</td>
+                <td th:text="${book.bookStatus}">bookStatus</td>
                 <td>
                     <a class="action-button"
                        th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"

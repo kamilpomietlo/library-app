@@ -6,7 +6,7 @@
         <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/register'}">Register</a>
         <a sec:authorize="${isAnonymous()}" class="nav-button" th:href="@{'/login'}">Log in</a>
 
-        <a sec:authorize="${isAuthenticated()}" class="nav-button" id="account" th:href="@{'user/account'}">My account</a>
+        <a sec:authorize="${isAuthenticated()}" class="nav-button" id="account" th:href="@{'/user/account'}">My account</a>
         <a sec:authorize="${isAuthenticated()}" class="nav-button" th:href="@{'/logout'}">Log out</a>
     </div>
 </div>

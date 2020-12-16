@@ -20,20 +20,26 @@
                 <th>City</th>
                 <th>Street</th>
                 <th>Home number</th>
-                <th>Borrowed books</th>
+                <th>Books</th>
+                <th>Books status</th>
             </tr>
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}">1</td>
-                <td th:text="${user.toString()}">2</td>
-                <td th:text="${user.idNumber}">3</td>
-                <td th:text="${user.country}">4</td>
-                <td th:text="${user.state}">5</td>
-                <td th:text="${user.city}">6</td>
-                <td th:text="${user.street}">7</td>
-                <td th:text="${user.homeNumber}">8</td>
+                <td th:text="${user.id}">id</td>
+                <td th:text="${user.toString()}">name</td>
+                <td th:text="${user.idNumber}">idNumber</td>
+                <td th:text="${user.country}">country</td>
+                <td th:text="${user.state}">state</td>
+                <td th:text="${user.city}">city</td>
+                <td th:text="${user.street}">street</td>
+                <td th:text="${user.homeNumber}">homeNumber</td>
                 <td>
                     <ul>
-                        <li th:each="book : ${user.books}" th:text="${book.title}">9</li>
+                        <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
                     </ul>
                 </td>
             </tr>
