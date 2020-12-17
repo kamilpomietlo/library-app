@@ -6,10 +6,29 @@
     color: black;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 :root {
     --primaryColor: chocolate;
     --secondaryColor: navajowhite;
     --detailsColor: saddlebrown;
+}
+
+::-webkit-scrollbar {
+    background: var(--primaryColor);
+    width: 15px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 10px var(--detailsColor);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--detailsColor);
+    border-radius: 10px;
 }
 
 body {
