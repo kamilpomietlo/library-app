@@ -7,16 +7,17 @@ import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.IndexService;
 import com.kamilpomietlo.libraryapp.services.UserService;
+import com.kamilpomietlo.libraryapp.validations.RegisterInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
 import java.util.Optional;
 
 @Slf4j
@@ -56,7 +57,7 @@ public class IndexController {
     }
 
     @PostMapping("register")
-    public String registerUser(@Valid @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
+    public String registerUser(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
