@@ -2,12 +2,18 @@ package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.services.MyUserDetailsService;
 import com.kamilpomietlo.libraryapp.services.UserService;
+import com.kamilpomietlo.libraryapp.validations.EditInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -17,9 +23,11 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+    private final MyUserDetailsService myUserDetailsService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, MyUserDetailsService myUserDetailsService) {
         this.userService = userService;
+        this.myUserDetailsService = myUserDetailsService;
     }
 
     @GetMapping("/list")
@@ -63,26 +71,36 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUserForm(@PathVariable String id, Model model) {
-        model.addAttribute("users", userService.findCommandById(Long.valueOf(id)));
+    @GetMapping("/account")
+    public String getAccountInfo(Model model) {
+        Long userId = myUserDetailsService.getLoggedAccountId();
 
-        return "user/edit";
+        model.addAttribute("user", userService.findCommandById(userId));
+
+        return "user/account";
     }
 
-    @PostMapping("/{id}/edit")
-    public String editUserSubmit(@Valid @ModelAttribute("users") UserCommand userCommand, BindingResult bindingResult) {
+    @GetMapping("/edit")
+    public String editUserForm(Model model) {
+         Long id = myUserDetailsService.getLoggedAccountId();
+
+         model.addAttribute("user", userService.findCommandById(id));
+
+         return "user/edit";
+    }
+
+    @PostMapping("/edit")
+    public String editUserSubmit(@Validated(EditInfo.class) @ModelAttribute("user") UserCommand userCommand,
+                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
             return "user/edit";
         }
 
-        UserCommand oldUserCommand = userService.findCommandById(userCommand.getId());
-        userCommand.setBooks(oldUserCommand.getBooks());
+        UserCommand userCommandToUpdate = userService.editRemainingFields(userCommand);
+        userService.saveUserCommand(userCommandToUpdate);
 
-        userService.saveUserCommand(userCommand);
-
-        return "redirect:/index";
+        return "redirect:/user/account";
     }
 }

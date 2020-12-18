@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
+</head>
+<body>
+<div th:replace="fragments/nav-bar :: div">
+</div>
+
+<div class="background">
+    <div class="table">
+        <h1>Your account info</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>ID number</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Home number</th>
+                <th>Books</th>
+                <th>Books status</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <td th:text="${user.toString()}">name</td>
+                <td th:text="${user.idNumber}">idNumber</td>
+                <td th:text="${user.country}">country</td>
+                <td th:text="${user.state}">state</td>
+                <td th:text="${user.city}">city</td>
+                <td th:text="${user.street}">street</td>
+                <td th:text="${user.homeNumber}">homeNumber</td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
+                    </ul>
+                </td>
+                <td>
+                    <a class="action-button" th:href="@{'/user/edit'}">Edit info</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.kamilpomietlo.libraryapp.commands;
 
 import com.kamilpomietlo.libraryapp.model.UserRole;
-import com.kamilpomietlo.libraryapp.validators.EmailNotInUse;
-import com.kamilpomietlo.libraryapp.validators.PasswordMatches;
+import com.kamilpomietlo.libraryapp.validations.EditInfo;
+import com.kamilpomietlo.libraryapp.validations.EmailNotInUse;
+import com.kamilpomietlo.libraryapp.validations.PasswordMatches;
+import com.kamilpomietlo.libraryapp.validations.RegisterInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,45 +25,45 @@ import java.util.Set;
 @NoArgsConstructor
 public class UserCommand extends BaseEntityCommand {
 
-    @NotBlank
-    @Pattern(regexp = "^[\\p{L}]*$")
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[\\p{L}]*$")
     private String firstName;
 
-    @NotBlank
-    @Pattern(regexp = "^[\\p{L}]*$")
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[\\p{L}]*$")
     private String lastName;
 
-    @NotBlank
-    @PESEL
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @PESEL(groups = {RegisterInfo.class, EditInfo.class})
     private String idNumber;
 
-    @NotBlank
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     private String country;
 
-    @NotBlank
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     private String state;
 
-    @NotBlank
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     private String city;
 
-    @NotBlank
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     private String street;
 
-    @NotBlank
+    @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     private String homeNumber;
 
     private Set<BookCommand> books = new HashSet<>();
 
-    @NotBlank
-    @Email
-    @EmailNotInUse
+    @NotBlank(groups = RegisterInfo.class)
+    @Email(groups = RegisterInfo.class)
+    @EmailNotInUse(groups = RegisterInfo.class)
     private String email;
 
-    @NotBlank
-    @Length(min = 3)
+    @NotBlank(groups = RegisterInfo.class)
+    @Length(groups = RegisterInfo.class, min = 3)
     private String password;
 
-    @NotBlank
+    @NotBlank(groups = RegisterInfo.class)
     private String matchingPassword;
 
     @Enumerated(value = EnumType.STRING)
@@ -69,4 +71,8 @@ public class UserCommand extends BaseEntityCommand {
 
     private Boolean locked = false;
     private Boolean enabled = false;
+
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

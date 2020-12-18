@@ -10,7 +10,25 @@
 <div class="background">
     <div class="form">
         <h1>Edit your info</h1>
-        <form th:action="@{edit}" th:object="${users}" method="post">
+        <form th:action="@{edit}" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+
+            <label for="first-name">First name:</label>
+            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name" th:field="*{firstName}">
+            <div th:if="${#fields.hasErrors('firstName')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
+            <label for="last-name">Last name:</label>
+            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name" th:field="*{lastName}">
+            <div th:if="${#fields.hasErrors('lastName')}" class="alert">
+                <ul>
+                    <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></li>
+                </ul>
+            </div>
+
             <label for="id-number">ID number:</label>
             <input type="text" class="read-only" id="id-number" th:field="*{idNumber}" readonly>
 
@@ -53,6 +71,15 @@
                     <li th:each="error : ${#fields.errors('homeNumber')}" th:text="${error}"></li>
                 </ul>
             </div>
+
+<!--            <input type="hidden" th:field="*{firstName}">-->
+<!--            <input type="hidden" th:field="*{lastName}" th:value="*{lastName}">-->
+<!--            <input type="hidden" th:field="*{email}" th:value="*{email}">-->
+<!--            <input type="hidden" th:field="*{password}" th:value="*{password}">-->
+<!--            <input type="hidden" th:field="*{matchingPassword}" th:value="*{matchingPassword}">-->
+<!--            <input type="hidden" th:field="*{userRole}" th:value="*{userRole}">-->
+<!--            <input type="hidden" th:field="*{locked}" th:value="*{locked}">-->
+<!--            <input type="hidden" th:field="*{enabled}" th:value="*{enabled}">-->
 
             <button type="submit" id="submit" class="action-button">Submit</button>
         </form>
