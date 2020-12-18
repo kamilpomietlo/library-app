@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         String[] anonymousMatchers = new String[] {
-                "/login", "/register"
+                "/login", "/register", "/register/confirm"
         };
 
         String[] userMatchers = new String[] {
@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
                 .antMatchers("/logout").authenticated()
-                .antMatchers("/user/edit", "/user/account").hasAnyAuthority("USER", "LIBRARIAN")
-                .antMatchers(userMatchers).hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(anonymousMatchers).anonymous()
+                .antMatchers("/user/edit", "/user/account").hasAnyAuthority("USER", "LIBRARIAN", "ADMIN")
+                .antMatchers(userMatchers).hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(librarianMatchers).hasAnyAuthority("LIBRARIAN", "ADMIN")
                 .antMatchers("/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
