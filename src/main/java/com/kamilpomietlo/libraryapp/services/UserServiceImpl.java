@@ -1,9 +1,7 @@
 package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.commands.UserRegisterCommand;
 import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
-import com.kamilpomietlo.libraryapp.converters.UserRegisterCommandToUser;
 import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
@@ -25,17 +23,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     private final UserToUserCommand userToUserCommand;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSenderService emailSenderService;
-    private final UserRegisterCommandToUser userRegisterCommandToUser;
 
     public UserServiceImpl(UserRepository repository, UserCommandToUser userCommandToUser,
                            UserToUserCommand userToUserCommand, ConfirmationTokenService confirmationTokenService,
-                           EmailSenderService emailSenderService, UserRegisterCommandToUser userRegisterCommandToUser) {
+                           EmailSenderService emailSenderService) {
         super(repository);
         this.userCommandToUser = userCommandToUser;
         this.userToUserCommand = userToUserCommand;
         this.confirmationTokenService = confirmationTokenService;
         this.emailSenderService = emailSenderService;
-        this.userRegisterCommandToUser = userRegisterCommandToUser;
     }
 
     @Override
@@ -52,12 +48,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     }
 
     @Override
-    public void registerUser(UserRegisterCommand userRegisterCommand) {
+    public void registerUser(UserCommand userCommand) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        final String encryptedPassword = passwordEncoder.encode(userRegisterCommand.getPassword());
+        final String encryptedPassword = passwordEncoder.encode(userCommand.getPassword());
 
-        userRegisterCommand.setPassword(encryptedPassword);
-        User savedUser = repository.save(userRegisterCommandToUser.convert(userRegisterCommand));
+        userCommand.setPassword(encryptedPassword);
+        User savedUser = repository.save(userCommandToUser.convert(userCommand));
 
         final ConfirmationToken confirmationToken = new ConfirmationToken(savedUser);
         confirmationTokenService.saveConfirmationToken(confirmationToken);

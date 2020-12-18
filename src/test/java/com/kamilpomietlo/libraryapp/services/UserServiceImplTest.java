@@ -1,7 +1,10 @@
 package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.converters.*;
+import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
+import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
+import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
+import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +30,6 @@ class UserServiceImplTest {
     private UserToUserCommand userToUserCommand;
     private ConfirmationTokenService confirmationTokenService;
     private EmailSenderService emailSenderService;
-    private UserRegisterCommandToUser userRegisterCommandToUser;
 
     @Mock
     UserRepository userRepository;
@@ -36,7 +38,7 @@ class UserServiceImplTest {
     void setUp() {
         userCommandToUser = new UserCommandToUser(new BookCommandToBook());
         userToUserCommand = new UserToUserCommand(new BookToBookCommand());
-        userService = new UserServiceImpl(userRepository, userCommandToUser, userToUserCommand, confirmationTokenService, emailSenderService, userRegisterCommandToUser);
+        userService = new UserServiceImpl(userRepository, userCommandToUser, userToUserCommand, confirmationTokenService, emailSenderService);
     }
 
     @Test

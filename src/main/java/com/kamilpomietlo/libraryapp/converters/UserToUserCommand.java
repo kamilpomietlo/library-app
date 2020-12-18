@@ -34,6 +34,14 @@ public class UserToUserCommand implements Converter<User, UserCommand> {
                     .forEach(book -> userCommand.getBooks().add(bookToBookCommand.convert(book)));
         }
 
+        userCommand.setFirstName(source.getFirstName());
+        userCommand.setLastName(source.getLastName());
+        userCommand.setEmail(source.getEmail());
+        userCommand.setPassword(source.getPassword());
+        userCommand.setUserRole(source.getUserRole());
+        userCommand.setLocked(source.getLocked());
+        userCommand.setEnabled(source.getEnabled());
+
         return userCommand;
     }
 }

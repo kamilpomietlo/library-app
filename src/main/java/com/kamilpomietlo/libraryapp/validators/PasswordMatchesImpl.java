@@ -1,6 +1,6 @@
 package com.kamilpomietlo.libraryapp.validators;
 
-import com.kamilpomietlo.libraryapp.commands.UserRegisterCommand;
+import com.kamilpomietlo.libraryapp.commands.UserCommand;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,9 +13,9 @@ public class PasswordMatchesImpl implements ConstraintValidator<PasswordMatches,
 
     @Override
     public boolean isValid(Object object, ConstraintValidatorContext context) {
-        UserRegisterCommand userRegisterCommand = (UserRegisterCommand) object;
+        UserCommand userCommand = (UserCommand) object;
 
-        boolean isValid = userRegisterCommand.getPassword().equals(userRegisterCommand.getMatchingPassword());
+        boolean isValid = userCommand.getPassword().equals(userCommand.getMatchingPassword());
         if (!isValid) {
             context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
                     .addPropertyNode("matchingPassword").addConstraintViolation();

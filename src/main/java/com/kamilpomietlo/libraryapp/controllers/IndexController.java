@@ -1,6 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
-import com.kamilpomietlo.libraryapp.commands.UserRegisterCommand;
+import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
@@ -50,20 +50,20 @@ public class IndexController {
 
     @GetMapping("register")
     public String registerUser(Model model) {
-        model.addAttribute("user", new UserRegisterCommand());
+        model.addAttribute("user", new UserCommand());
 
         return "register";
     }
 
     @PostMapping("register")
-    public String registerUser(@Valid @ModelAttribute("user") UserRegisterCommand userRegisterCommand, BindingResult bindingResult) {
+    public String registerUser(@Valid @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
             return "register";
         }
 
-        userService.registerUser(userRegisterCommand);
+        userService.registerUser(userCommand);
 
         return "redirect:/login";
     }

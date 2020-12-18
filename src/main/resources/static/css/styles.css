@@ -240,3 +240,11 @@ input, select {
     color: grey;
     cursor: not-allowed;
 }
+
+.line {
+    display: inline-block;
+    width: 550px;
+    height: 2px;
+    margin: 30px 0 10px 0;
+    background: var(--detailsColor);
+}
