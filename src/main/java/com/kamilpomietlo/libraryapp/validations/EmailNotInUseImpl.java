@@ -1,4 +1,4 @@
-package com.kamilpomietlo.libraryapp.validators;
+package com.kamilpomietlo.libraryapp.validations;
 
 import com.kamilpomietlo.libraryapp.services.UserService;
 

@@ -71,7 +71,6 @@ public class User extends BaseEntity implements UserDetails {
         return enabled;
     }
 
-    @Override
     public String toString() {
         return firstName + " " + lastName;
     }

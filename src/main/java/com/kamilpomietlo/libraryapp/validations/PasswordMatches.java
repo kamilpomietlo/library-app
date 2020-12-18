@@ -1,4 +1,4 @@
-package com.kamilpomietlo.libraryapp.validators;
+package com.kamilpomietlo.libraryapp.validations;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
