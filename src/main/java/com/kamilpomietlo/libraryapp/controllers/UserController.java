@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
-
 @Slf4j
 @RequestMapping("user")
 @Controller
@@ -49,26 +47,6 @@ public class UserController {
         userService.deleteById(user.getId());
 
         return "redirect:/user/list";
-    }
-
-    @GetMapping("/add")
-    public String addUserForm(Model model) {
-        model.addAttribute("users", new UserCommand());
-
-        return "user/add";
-    }
-
-    @PostMapping("/add")
-    public String addUserSubmit(@Valid @ModelAttribute("users") UserCommand userCommand, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-
-            return "user/add";
-        }
-
-        userService.saveUserCommand(userCommand);
-
-        return "redirect:/index";
     }
 
     @GetMapping("/account")
