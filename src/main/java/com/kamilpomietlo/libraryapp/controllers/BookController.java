@@ -33,35 +33,35 @@ public class BookController {
         this.genreService = genreService;
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String getBooks(Model model) {
         model.addAttribute("books", bookService.findAll());
 
         return "book/list";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("delete")
     public String deleteByIdForm(Model model) {
         model.addAttribute("book", new Book());
 
         return "book/delete";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public String deleteByIdSubmit(@ModelAttribute Book book) {
         bookService.deleteById(book.getId());
 
         return "redirect:/book/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addBookForm(Model model) {
         model.addAttribute("book", new BookCommand());
 
         return "book/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public String addBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
                                 BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -78,14 +78,14 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("{id}/edit")
     public String editBookForm(@PathVariable String id, Model model) {
         model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
 
         return "book/edit";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("{id}/edit")
     public String editBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -103,7 +103,7 @@ public class BookController {
         return "redirect:/book/list";
     }
 
-    @GetMapping("/{id}/reserve")
+    @GetMapping("{id}/reserve")
     public String reserveBook(@PathVariable String id) {
         BookCommand bookToReserve = bookService.findCommandById(Long.valueOf(id));
 
@@ -112,7 +112,7 @@ public class BookController {
         return "redirect:/index";
     }
 
-    @GetMapping("/{id}/borrow")
+    @GetMapping("{id}/borrow")
     public String borrowBook(@PathVariable String id) {
         BookCommand bookToBorrow = bookService.findCommandById(Long.valueOf(id));
 

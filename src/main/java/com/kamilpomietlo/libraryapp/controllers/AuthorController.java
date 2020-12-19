@@ -21,21 +21,21 @@ public class AuthorController {
         this.authorService = authorService;
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String getAuthors(Model model) {
         model.addAttribute("authors", authorService.findAll());
 
         return "author/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addAuthorForm(Model model) {
         model.addAttribute("authors", new AuthorCommand());
 
         return "author/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public String addAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -49,14 +49,14 @@ public class AuthorController {
         return "redirect:/author/list";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("{id}/edit")
     public String editAuthorForm(@PathVariable String id, Model model) {
         model.addAttribute("authors", authorService.findCommandById(Long.valueOf(id)));
 
         return "author/edit";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("{id}/edit")
     public String editAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

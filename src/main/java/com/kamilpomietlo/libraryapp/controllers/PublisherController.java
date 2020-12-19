@@ -21,21 +21,21 @@ public class PublisherController {
         this.publisherService = publisherService;
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String getPublishers(Model model) {
         model.addAttribute("publishers", publisherService.findAll());
 
         return "publisher/list";
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addPublisherForm(Model model) {
         model.addAttribute("publishers", new PublisherCommand());
 
         return "publisher/add";
     }
 
-    @PostMapping("/add")
+    @PostMapping("add")
     public String addPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
                                      BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -49,14 +49,14 @@ public class PublisherController {
         return "redirect:/publisher/list";
     }
 
-    @GetMapping("/{id}/edit")
+    @GetMapping("{id}/edit")
     public String editPublisherForm(@PathVariable String id, Model model) {
         model.addAttribute("publishers", publisherService.findCommandById(Long.valueOf(id)));
 
         return "publisher/edit";
     }
 
-    @PostMapping("/{id}/edit")
+    @PostMapping("{id}/edit")
     public String editPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
                                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

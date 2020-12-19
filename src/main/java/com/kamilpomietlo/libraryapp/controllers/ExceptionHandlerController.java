@@ -24,7 +24,7 @@ public class ExceptionHandlerController {
         return "error/400";
     }
 
-    @GetMapping("/403")
+    @GetMapping("403")
     public String handleAccessDenied() {
         return "error/403";
     }

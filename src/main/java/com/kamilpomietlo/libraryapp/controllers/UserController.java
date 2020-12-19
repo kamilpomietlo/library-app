@@ -28,28 +28,28 @@ public class UserController {
         this.myUserDetailsService = myUserDetailsService;
     }
 
-    @GetMapping("/list")
+    @GetMapping("list")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.findAll());
 
         return "user/list";
     }
 
-    @GetMapping("/delete")
+    @GetMapping("delete")
     public String deleteByIdForm(Model model) {
         model.addAttribute("users", new User());
 
         return "user/delete";
     }
 
-    @PostMapping("/delete")
+    @PostMapping("delete")
     public String deleteByIdSubmit(@ModelAttribute User user) {
         userService.deleteById(user.getId());
 
         return "redirect:/user/list";
     }
 
-    @GetMapping("/account")
+    @GetMapping("account")
     public String getAccountInfo(Model model) {
         Long userId = myUserDetailsService.getLoggedAccountId();
 
@@ -58,7 +58,7 @@ public class UserController {
         return "user/account";
     }
 
-    @GetMapping("/edit")
+    @GetMapping("edit")
     public String editUserForm(Model model) {
          Long id = myUserDetailsService.getLoggedAccountId();
 
@@ -67,7 +67,7 @@ public class UserController {
          return "user/edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("edit")
     public String editUserSubmit(@Validated(EditInfo.class) @ModelAttribute("user") UserCommand userCommand,
                                  BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
