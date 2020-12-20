@@ -26,6 +26,7 @@ class BookServiceImplTest {
     private BookService bookService;
     private BookCommandToBook bookCommandToBook;
     private BookToBookCommand bookToBookCommand;
+    private MyUserDetailsService myUserDetailsService;
 
     @Mock
     BookRepository bookRepository;
@@ -34,7 +35,7 @@ class BookServiceImplTest {
     void setUp() {
         bookCommandToBook = new BookCommandToBook();
         bookToBookCommand = new BookToBookCommand();
-        bookService = new BookServiceImpl(bookRepository, bookCommandToBook, bookToBookCommand);
+        bookService = new BookServiceImpl(bookRepository, bookCommandToBook, bookToBookCommand, myUserDetailsService);
     }
 
     @Test

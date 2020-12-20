@@ -15,12 +15,14 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
 
     private final BookCommandToBook bookCommandToBook;
     private final BookToBookCommand bookToBookCommand;
+    private final MyUserDetailsService myUserDetailsService;
 
     public BookServiceImpl(BookRepository repository, BookCommandToBook bookCommandToBook,
-                           BookToBookCommand bookToBookCommand) {
+                           BookToBookCommand bookToBookCommand, MyUserDetailsService myUserDetailsService) {
         super(repository);
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
+        this.myUserDetailsService = myUserDetailsService;
     }
 
     @Override
@@ -45,17 +47,17 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         }
     }
 
-    // todo add unit test after full implementation (user account)
     @Override
     public void reserveBook(BookCommand bookCommand) {
         Book book = findById(bookCommand.getId());
         bookCommand.setAuthors(book.getAuthors());
 
+        Long currentUserId = myUserDetailsService.getLoggedAccountId();
+
         if (bookCommand.getBookStatus() == BookStatus.AVAILABLE) {
             bookCommand.setBookStatus(BookStatus.RESERVED);
 
-            // temp user setting
-            bookCommand.setUserId(1L);
+            bookCommand.setUserId(currentUserId);
         }
 
         saveBookCommand(bookCommand);
