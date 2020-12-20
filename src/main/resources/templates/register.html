@@ -93,7 +93,7 @@
                 </ul>
             </div>
 
-            <label for="home-number">Home number:</label>
+            <label for="home-number">Home no.:</label>
             <input type="text" th:class="${#fields.hasErrors('homeNumber')} ? 'input-error' : 'input'" id="home-number" th:field="*{homeNumber}">
             <div th:if="${#fields.hasErrors('homeNumber')}" class="alert">
                 <ul>
