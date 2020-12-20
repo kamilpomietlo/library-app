@@ -36,6 +36,15 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         return bookToBookCommand.convert(findById(id));
     }
 
+    @Override
+    public void deleteById(Long id) {
+        Book bookToDelete = findById(id);
+
+        if (bookToDelete.getBookStatus() == BookStatus.AVAILABLE) {
+            repository.deleteById(id);
+        }
+    }
+
     // todo add unit test after full implementation (user account)
     @Override
     public void reserveBook(BookCommand bookCommand) {

@@ -1,7 +1,10 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.*;
+import com.kamilpomietlo.libraryapp.model.Author;
+import com.kamilpomietlo.libraryapp.model.BookStatus;
+import com.kamilpomietlo.libraryapp.model.Genre;
+import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import com.kamilpomietlo.libraryapp.services.BookService;
 import com.kamilpomietlo.libraryapp.services.GenreService;
@@ -40,16 +43,9 @@ public class BookController {
         return "book/list";
     }
 
-    @GetMapping("delete")
-    public String deleteByIdForm(Model model) {
-        model.addAttribute("book", new Book());
-
-        return "book/delete";
-    }
-
-    @PostMapping("delete")
-    public String deleteByIdSubmit(@ModelAttribute Book book) {
-        bookService.deleteById(book.getId());
+    @GetMapping("{id}/delete")
+    public String deleteById(@PathVariable Long id) {
+        bookService.deleteById(id);
 
         return "redirect:/book/list";
     }
