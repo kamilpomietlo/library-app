@@ -248,3 +248,18 @@ input, select {
     margin: 30px 0 10px 0;
     background: var(--detailsColor);
 }
+
+.book-available {
+    color: green;
+    font-weight: bold;
+}
+
+.book-reserved {
+    color: darkgoldenrod;
+    font-weight: bold;
+}
+
+.book-borrowed {
+    color: red;
+    font-weight: bold;
+}

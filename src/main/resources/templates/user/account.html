@@ -18,9 +18,9 @@
                 <th>State</th>
                 <th>City</th>
                 <th>Street</th>
-                <th>Home number</th>
+                <th>Home no.</th>
                 <th>Books</th>
-                <th>Books status</th>
+                <th>Book status</th>
                 <th>Action</th>
             </tr>
             <tr>
@@ -38,7 +38,7 @@
                 </td>
                 <td>
                     <ul>
-                        <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
+                        <li th:each="book : ${user.books}" th:text="${book.bookStatus}">book status</li>
                     </ul>
                 </td>
                 <td>

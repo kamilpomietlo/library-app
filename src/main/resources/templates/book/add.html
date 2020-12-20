@@ -69,7 +69,7 @@
             <select id="cover-type" th:field="*{coverType}">
                 <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
                         th:value="${coverType}"
-                        th:text="${coverType}">
+                        th:text="${coverType.getDisplayName()}">
                 </option>
             </select>
 
