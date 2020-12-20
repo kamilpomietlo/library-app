@@ -1,7 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.services.MyUserDetailsService;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import com.kamilpomietlo.libraryapp.validations.EditInfo;
@@ -10,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequestMapping("user")
@@ -35,16 +31,9 @@ public class UserController {
         return "user/list";
     }
 
-    @GetMapping("delete")
-    public String deleteByIdForm(Model model) {
-        model.addAttribute("users", new User());
-
-        return "user/delete";
-    }
-
-    @PostMapping("delete")
-    public String deleteByIdSubmit(@ModelAttribute User user) {
-        userService.deleteById(user.getId());
+    @GetMapping("{id}/delete")
+    public String deleteById(@PathVariable Long id) {
+        userService.deleteById(id);
 
         return "redirect:/user/list";
     }

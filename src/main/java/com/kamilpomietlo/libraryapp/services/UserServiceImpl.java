@@ -5,6 +5,7 @@ import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
 import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.model.UserRole;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,6 +46,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     @Override
     public UserCommand findCommandById(Long id) {
         return userToUserCommand.convert(findById(id));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        User userToDelete = findById(id);
+
+        if (userToDelete.getBooks().isEmpty() && userToDelete.getUserRole() != (UserRole.ADMIN)) {
+            repository.deleteById(id);
+        }
     }
 
     @Override

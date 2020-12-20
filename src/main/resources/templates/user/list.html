@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/header :: head">
     <title>BestLib</title>
 </head>
@@ -19,9 +19,10 @@
                 <th>State</th>
                 <th>City</th>
                 <th>Street</th>
-                <th>Home number</th>
+                <th>Home no.</th>
                 <th>Books</th>
-                <th>Books status</th>
+                <th>Book status</th>
+                <th>Action</th>
             </tr>
             <tr th:each="user : ${users}">
                 <td th:text="${user.id}">id</td>
@@ -41,6 +42,13 @@
                     <ul>
                         <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
                     </ul>
+                </td>
+                <td>
+                    <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
+                       th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
+                       th:href="@{'/user/' + ${user.id} + '/delete'}">Delete</a>
+                    <a class="action-button action-button-disabled" sec:authorize="${hasAuthority('ADMIN')}"
+                       th:unless="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}">Delete</a>
                 </td>
             </tr>
         </table>
