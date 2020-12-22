@@ -9,6 +9,9 @@ import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Service
 @Transactional
 public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> implements BookService {
@@ -63,19 +66,33 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         saveBookCommand(bookCommand);
     }
 
-    // todo add unit test after full implementation (user account)
     @Override
-    public void borrowBook(BookCommand bookCommand) {
+    public void acceptBorrowingBook(BookCommand bookCommand) {
         Book book = findById(bookCommand.getId());
         bookCommand.setAuthors(book.getAuthors());
+
+        Long currentUserId = myUserDetailsService.getLoggedAccountId();
 
         if (bookCommand.getBookStatus() == BookStatus.RESERVED) {
             bookCommand.setBookStatus(BookStatus.BORROWED);
 
-            // temp user setting
-            bookCommand.setUserId(1L);
+            bookCommand.setUserId(currentUserId);
         }
 
         saveBookCommand(bookCommand);
+    }
+
+    @Override
+    public Set<Book> getReservedBooks() {
+        Set<Book> reservedBooks = new HashSet<>();
+        Set<Book> books = new HashSet<>(repository.findAll());
+
+        for (Book book : books) {
+            if (book.getBookStatus() == BookStatus.RESERVED) {
+                reservedBooks.add(book);
+            }
+        }
+
+        return reservedBooks;
     }
 }

@@ -2,7 +2,10 @@
     <h1>
         <a class="name" th:href="@{'/'}">BestLib</a>
     </h1>
-    <div class="nav-bar-buttons">
+    <div class="nav-bar-function-buttons">
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button" id="reservations" th:href="@{'/book/reservations'}">Reservations</a>
+    </div>
+    <div class="nav-bar-main-buttons">
         <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/register'}">Register</a>
         <a sec:authorize="${isAnonymous()}" class="nav-button" th:href="@{'/login'}">Log in</a>
 

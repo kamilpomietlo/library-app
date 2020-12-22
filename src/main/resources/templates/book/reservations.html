@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
+</head>
+<body>
+<div th:replace="fragments/nav-bar :: div">
+</div>
+
+<div class="background">
+    <div class="table">
+        <h1>Reservations</h1>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>User name</th>
+                <th>User ID number</th>
+                <th>Book ID</th>
+                <th>Book title</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.user.id}">user id</td>
+                <td th:text="${book.user.toString()}">user name</td>
+                <td th:text="${book.user.idNumber}">user idNumber</td>
+                <td th:text="${book.id}">book id</td>
+                <td th:text="${book.title}">book title</td>
+                <td>
+                    <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
+</body>
+</html>

@@ -106,13 +106,22 @@ button:hover {
     user-select: none;
 }
 
-.nav-bar-buttons {
+.nav-bar-main-buttons {
     margin-left: auto;
     margin-right: 20px;
 }
 
 #register, #account {
     margin-right: 10px;
+}
+
+.nav-bar-function-buttons {
+    margin-right: auto;
+    margin-left: 40px;
+}
+
+#reservations {
+    margin-left: 10px;
 }
 
 .footer {

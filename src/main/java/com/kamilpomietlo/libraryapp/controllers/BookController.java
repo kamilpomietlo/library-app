@@ -108,11 +108,18 @@ public class BookController {
         return "redirect:/index";
     }
 
-    @GetMapping("{id}/borrow")
-    public String borrowBook(@PathVariable String id) {
+    @GetMapping("reservations")
+    public String getReservations(Model model) {
+        model.addAttribute("books", bookService.getReservedBooks());
+
+        return "book/reservations";
+    }
+
+    @GetMapping("{id}/accept")
+    public String acceptBorrowingBook(@PathVariable String id) {
         BookCommand bookToBorrow = bookService.findCommandById(Long.valueOf(id));
 
-        bookService.borrowBook(bookToBorrow);
+        bookService.acceptBorrowingBook(bookToBorrow);
 
         return "redirect:/index";
     }
