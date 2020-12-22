@@ -67,22 +67,6 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
     }
 
     @Override
-    public void acceptBorrowingBook(BookCommand bookCommand) {
-        Book book = findById(bookCommand.getId());
-        bookCommand.setAuthors(book.getAuthors());
-
-        Long currentUserId = myUserDetailsService.getLoggedAccountId();
-
-        if (bookCommand.getBookStatus() == BookStatus.RESERVED) {
-            bookCommand.setBookStatus(BookStatus.BORROWED);
-
-            bookCommand.setUserId(currentUserId);
-        }
-
-        saveBookCommand(bookCommand);
-    }
-
-    @Override
     public Set<Book> getReservedBooks() {
         Set<Book> reservedBooks = new HashSet<>();
         Set<Book> books = new HashSet<>(repository.findAll());
@@ -94,5 +78,16 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         }
 
         return reservedBooks;
+    }
+
+    @Override
+    public void acceptBorrowingBook(Long id) {
+        BookCommand book = findCommandById(id);
+
+        if (book.getBookStatus() == BookStatus.RESERVED) {
+            book.setBookStatus(BookStatus.BORROWED);
+        }
+
+        saveBookCommand(book);
     }
 }
