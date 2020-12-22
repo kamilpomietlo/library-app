@@ -45,6 +45,7 @@
                        th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
                     <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
                        th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Reserve</a>
+                    <a class="action-button action-button-disabled" sec:authorize="${isAnonymous()}">Reserve</a>
 
                     <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
                        th:href="@{'/book/' + ${book.id} + '/edit'}">Edit</a>
@@ -55,7 +56,6 @@
                     <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
                        th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Delete</a>
                 </td>
-<!--                    <a class="action-button" th:href="@{'/book/' + ${book.id} + '/borrow'}">Borrow</a>-->
             </tr>
         </table>
     </div>
