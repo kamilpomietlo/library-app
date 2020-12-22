@@ -50,8 +50,8 @@ public class AuthorController {
     }
 
     @GetMapping("{id}/edit")
-    public String editAuthorForm(@PathVariable String id, Model model) {
-        model.addAttribute("authors", authorService.findCommandById(Long.valueOf(id)));
+    public String editAuthorForm(@PathVariable Long id, Model model) {
+        model.addAttribute("authors", authorService.findCommandById(id));
 
         return "author/edit";
     }

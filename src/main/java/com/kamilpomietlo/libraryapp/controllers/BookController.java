@@ -75,8 +75,8 @@ public class BookController {
     }
 
     @GetMapping("{id}/edit")
-    public String editBookForm(@PathVariable String id, Model model) {
-        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
+    public String editBookForm(@PathVariable Long id, Model model) {
+        model.addAttribute("book", bookService.findCommandById(id));
 
         return "book/edit";
     }
@@ -100,8 +100,8 @@ public class BookController {
     }
 
     @GetMapping("{id}/reserve")
-    public String reserveBook(@PathVariable String id) {
-        BookCommand bookToReserve = bookService.findCommandById(Long.valueOf(id));
+    public String reserveBook(@PathVariable Long id) {
+        BookCommand bookToReserve = bookService.findCommandById(id);
 
         bookService.reserveBook(bookToReserve);
 

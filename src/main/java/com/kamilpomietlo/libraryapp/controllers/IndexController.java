@@ -36,8 +36,8 @@ public class IndexController {
 
     @GetMapping({"index", ""})
     public String searchForm(Model model) {
-        model.addAttribute("books", new Book());
-        model.addAttribute("authors", new Author());
+        model.addAttribute("book", new Book());
+        model.addAttribute("author", new Author());
 
         return "index";
     }

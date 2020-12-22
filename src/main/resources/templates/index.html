@@ -12,10 +12,10 @@
         <h1>Find a book</h1>
         <form th:action="@{''}" method="post">
             <label for="title">Title:</label>
-            <input type="text" id="title" th:field="${books.title}">
+            <input type="text" id="title" th:field="${book.title}">
 
             <label for="author">Author:</label>
-            <input type="text" id="author" th:field="${authors.name}">
+            <input type="text" id="author" th:field="${author.name}">
 
             <button type="submit" class="action-button">Submit</button>
         </form>

@@ -50,8 +50,8 @@ public class PublisherController {
     }
 
     @GetMapping("{id}/edit")
-    public String editPublisherForm(@PathVariable String id, Model model) {
-        model.addAttribute("publishers", publisherService.findCommandById(Long.valueOf(id)));
+    public String editPublisherForm(@PathVariable Long id, Model model) {
+        model.addAttribute("publishers", publisherService.findCommandById(id));
 
         return "publisher/edit";
     }
