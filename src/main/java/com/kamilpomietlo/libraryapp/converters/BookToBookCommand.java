@@ -22,6 +22,10 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
         bookCommand.setIsbn(source.getIsbn());
         bookCommand.setBookStatus(source.getBookStatus());
 
+        if (source.getAuthors() != null) {
+            bookCommand.setAuthors(source.getAuthors());
+        }
+
         if (source.getGenre() != null) {
             bookCommand.setGenreId(source.getGenre().getId());
         }
