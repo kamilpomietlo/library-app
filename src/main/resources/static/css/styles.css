@@ -110,7 +110,7 @@ button:hover {
     user-select: none;
 }
 
-.nav-bar-main-buttons {
+.main-buttons {
     margin-left: auto;
     margin-right: 20px;
 }
@@ -119,13 +119,19 @@ button:hover {
     margin-right: 10px;
 }
 
-.nav-bar-function-buttons {
+.menu-buttons {
     margin-right: auto;
-    margin-left: 40px;
+    margin-left: 50px;
 }
 
-#reservations {
+.menu-button {
     margin-left: 10px;
+}
+
+.function-buttons {
+    float: right;
+    margin-top: -25px;
+    margin-right: -30px;
 }
 
 .footer {
@@ -144,7 +150,7 @@ button:hover {
     width: 660px;
     border: 3px solid var(--detailsColor);
     border-radius: 20px;
-    padding: 40px;
+    padding: 45px;
 }
 
 .form label {
@@ -161,7 +167,7 @@ button:hover {
     width: 1280px;
     border: 3px solid var(--detailsColor);
     border-radius: 20px;
-    padding: 40px;
+    padding: 45px;
 }
 
 table {
