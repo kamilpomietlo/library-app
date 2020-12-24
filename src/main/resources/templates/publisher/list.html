@@ -1,39 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Library System</title>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/header :: head">
+    <title>BestLib</title>
 </head>
 <body>
-<h1>Publishers</h1>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Books</th>
-    </tr>
-    <tr th:each="publisher : ${publishers}">
-        <td th:text="${publisher.id}">1</td>
-        <td th:text="${publisher.name}">2</td>
-        <td>
-            <ul>
-                <li th:each="book : ${publisher.books}" th:text="${book.title}">3</li>
-            </ul>
-        </td>
-        <td>
-            <div class="col">
-                <a class="btn btn-primary" href="#"
-                   th:href="@{'/publisher/' + ${publisher.id} + '/edit'}" role="button">Edit</a>
-            </div>
-        </td>
-    </tr>
-</table>
-
-<div class="col">
-    <a class="btn btn-primary" href="#"
-       th:href="@{'/'}" role="button">Back to menu</a>
+<div th:replace="fragments/nav-bar :: div">
 </div>
 
+<div class="background">
+    <div class="table">
+        <div class="function-buttons">
+            <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+               th:href="@{'/publisher/add'}">Add publisher</a>
+        </div>
+        <h1>Search results</h1>
+        <table>
+            <tr>
+                <th>Publisher ID</th>
+                <th>Publisher name</th>
+                <th>Book ID</th>
+                <th>Book title</th>
+                <th>Action</th>
+            </tr>
+            <tr th:if="${publishers.size() > 0}" th:each="publisher : ${publishers}">
+                <td th:text="${publisher.id}">publisher id</td>
+                <td th:text="${publisher.name}">publisher name</td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${publisher.books}" th:text="${book.id}">book id</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="book : ${publisher.books}" th:text="${book.title}">book title</li>
+                    </ul>
+                </td>
+                <td>
+                    <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+                       th:href="@{'/publisher/' + ${publisher.id} + '/edit'}">Edit</a>
+                </td>
+            </tr>
+            <tr th:unless="${publishers.size() > 0}">
+                <td colspan="5">No publishers found!</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: div">
+</div>
 </body>
 </html>
