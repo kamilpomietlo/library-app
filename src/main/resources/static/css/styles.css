@@ -31,6 +31,10 @@ html {
     border-radius: 10px;
 }
 
+::-webkit-scrollbar-corner {
+    background: var(--primaryColor);
+}
+
 body {
     background-image: url("../images/background.jpeg");
     background-size: cover;

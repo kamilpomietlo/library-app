@@ -23,7 +23,7 @@
                 <th>Status</th>
                 <th>Action</th>
             </tr>
-            <tr th:each="book : ${books}">
+            <tr th:if="${books.size() > 0}" th:each="book : ${books}">
                 <td th:text="${book.id}">id</td>
                 <td th:text="${book.title}">title</td>
                 <td>
@@ -56,6 +56,9 @@
                     <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
                        th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Delete</a>
                 </td>
+            </tr>
+            <tr th:unless="${books.size() > 0}">
+                <td colspan="10">No books found!</td>
             </tr>
         </table>
     </div>

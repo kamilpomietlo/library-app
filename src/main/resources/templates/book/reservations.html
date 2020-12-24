@@ -19,7 +19,7 @@
                 <th>Book title</th>
                 <th>Action</th>
             </tr>
-            <tr th:each="book : ${books}">
+            <tr th:if="${books.size() > 0}" th:each="book : ${books}">
                 <td th:text="${book.user.id}">user id</td>
                 <td th:text="${book.user.toString()}">user name</td>
                 <td th:text="${book.user.idNumber}">user idNumber</td>
@@ -28,6 +28,9 @@
                 <td>
                     <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
                 </td>
+            </tr>
+            <tr th:unless="${books.size() > 0}">
+                <td colspan="6">No books found!</td>
             </tr>
         </table>
     </div>
