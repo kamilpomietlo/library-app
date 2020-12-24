@@ -9,6 +9,10 @@
 
 <div class="background">
     <div class="table">
+        <div class="function-buttons">
+            <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+               th:href="@{'/book/add'}">Add book</a>
+        </div>
         <h1>Search results</h1>
         <table>
             <tr>
