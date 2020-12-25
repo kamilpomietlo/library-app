@@ -7,6 +7,7 @@
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/book/list'}">Books</a>
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/author/list'}">Authors</a>
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/publisher/list'}">Publishers</a>
+        <a sec:authorize="${hasAuthority('ADMIN')}" class="nav-button menu-button" th:href="@{'/user/list'}">Users</a>
     </div>
     <div class="main-buttons">
         <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/register'}">Register</a>
