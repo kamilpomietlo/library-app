@@ -5,6 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,6 +44,9 @@ public class Book extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private BookStatus bookStatus;
 
+    private LocalDate dateOfReserveOrBorrow;
+    private LocalDate deadlineDate;
+
     public void addAuthor(Author author) {
         if (author != null) {
             this.authors.add(author);
@@ -54,5 +59,13 @@ public class Book extends BaseEntity {
             this.publisher = publisher;
             publisher.getBooks().add(this);
         }
+    }
+
+    public String dateToString() {
+        return dateOfReserveOrBorrow.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public String deadlineToString() {
+        return deadlineDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 }

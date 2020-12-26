@@ -20,6 +20,8 @@
             <th>Home no.</th>
             <th>Books</th>
             <th>Book status</th>
+            <th>Date</th>
+            <th>Deadline</th>
             <th>Action</th>
         </tr>
         <tr>
@@ -38,6 +40,16 @@
             <td>
                 <ul>
                     <li th:each="book : ${user.books}" th:text="${book.bookStatus}">book status</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="book : ${user.books}" th:text="${book.dateToString()}">date</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="book : ${user.books}" th:text="${book.deadlineToString()}">deadline</li>
                 </ul>
             </td>
             <td>

@@ -16,6 +16,8 @@
             <th>User ID number</th>
             <th>Book ID</th>
             <th>Book title</th>
+            <th>Date</th>
+            <th>Deadline</th>
             <th>Action</th>
         </tr>
         <tr th:if="${books.size() > 0}" th:each="book : ${books}">
@@ -24,12 +26,14 @@
             <td th:text="${book.user.idNumber}">user idNumber</td>
             <td th:text="${book.id}">book id</td>
             <td th:text="${book.title}">book title</td>
+            <td th:text="${book.dateToString()}">date</td>
+            <td th:text="${book.deadlineToString()}">deadline</td>
             <td>
                 <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
             </td>
         </tr>
         <tr th:unless="${books.size() > 0}">
-            <td colspan="6">No books found!</td>
+            <td colspan="8">No books found!</td>
         </tr>
     </table>
 </div>

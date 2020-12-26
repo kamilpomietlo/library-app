@@ -24,6 +24,7 @@
             <th>Year</th>
             <th>ISBN</th>
             <th>Status</th>
+            <th>Deadline</th>
             <th>Action</th>
         </tr>
         <tr th:if="${books.size() > 0}" th:each="book : ${books}">
@@ -44,6 +45,9 @@
                 ? 'book-reserved' : 'book-borrowed')" th:text="${book.bookStatus}">bookStatus
             </td>
             <td>
+                <p th:if="${book.getDeadlineDate() != null}" th:text="${book.deadlineToString()}">deadline</p>
+            </td>
+            <td>
                 <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
                    th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
                    th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
@@ -62,7 +66,7 @@
             </td>
         </tr>
         <tr th:unless="${books.size() > 0}">
-            <td colspan="10">No books found!</td>
+            <td colspan="11">No books found!</td>
         </tr>
     </table>
 </div>

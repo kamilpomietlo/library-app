@@ -12,6 +12,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,4 +41,14 @@ public class BookCommand extends BaseEntityCommand {
 
     private Long userId;
     private BookStatus bookStatus;
+    private LocalDate dateOfReserveOrBorrow;
+    private LocalDate deadlineDate;
+
+    public String dateToString() {
+        return dateOfReserveOrBorrow.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
+
+    public String deadlineToString() {
+        return deadlineDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+    }
 }

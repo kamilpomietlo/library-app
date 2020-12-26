@@ -24,6 +24,8 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setYearOfRelease(source.getYearOfRelease());
         book.setIsbn(source.getIsbn());
         book.setBookStatus(source.getBookStatus());
+        book.setDateOfReserveOrBorrow(source.getDateOfReserveOrBorrow());
+        book.setDeadlineDate(source.getDeadlineDate());
 
         if (source.getAuthors() != null) {
             Set<Author> authors = new HashSet<>(source.getAuthors());

@@ -93,6 +93,8 @@ public class BookController {
         BookCommand tempBookCommand = bookService.findCommandById(bookCommand.getId());
         bookCommand.setUserId(tempBookCommand.getUserId());
         bookCommand.setBookStatus(tempBookCommand.getBookStatus());
+        bookCommand.setDateOfReserveOrBorrow(tempBookCommand.getDateOfReserveOrBorrow());
+        bookCommand.setDeadlineDate(tempBookCommand.getDeadlineDate());
 
         bookService.saveBookCommand(bookCommand);
 
@@ -105,7 +107,7 @@ public class BookController {
 
         bookService.reserveBook(bookToReserve);
 
-        return "redirect:/index";
+        return "redirect:/user/account";
     }
 
     @GetMapping("reservations")

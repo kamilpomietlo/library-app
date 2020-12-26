@@ -9,6 +9,7 @@ import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,6 +60,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
 
         if (bookCommand.getBookStatus() == BookStatus.AVAILABLE) {
             bookCommand.setBookStatus(BookStatus.RESERVED);
+            bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
+            bookCommand.setDeadlineDate(LocalDate.now().plusDays(7L));
 
             bookCommand.setUserId(currentUserId);
         }
@@ -82,12 +85,14 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
 
     @Override
     public void acceptBorrowingBook(Long id) {
-        BookCommand book = findCommandById(id);
+        BookCommand bookCommand = findCommandById(id);
 
-        if (book.getBookStatus() == BookStatus.RESERVED) {
-            book.setBookStatus(BookStatus.BORROWED);
+        if (bookCommand.getBookStatus() == BookStatus.RESERVED) {
+            bookCommand.setBookStatus(BookStatus.BORROWED);
+            bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
+            bookCommand.setDeadlineDate(LocalDate.now().plusDays(30L));
         }
 
-        saveBookCommand(book);
+        saveBookCommand(bookCommand);
     }
 }
