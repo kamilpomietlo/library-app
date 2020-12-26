@@ -43,25 +43,22 @@ body {
     background-attachment: fixed;
 }
 
-.background {
-    padding-top: 120px;
-}
-
 .nav-bar {
     background: var(--primaryColor);
-    height: 120px;
-    border-bottom: 20px solid #ff6e00;
+    height: 100px;
+    border-bottom: 15px solid #ff6e00;
     display: inline-flex;
     width: 100%;
     align-items: center;
     position: fixed;
+    top: 0;
 }
 
 .name {
     padding: 0 30px;
     display: inline-block;
     color: var(--secondaryColor);
-    font-size: 75px;
+    font-size: 65px;
     font-family: 'Big Shoulders Stencil Text', cursive;
     border-right: 4px solid #ff6e00;
     border-radius: 10px;
@@ -69,6 +66,17 @@ body {
     text-decoration: none;
     position: relative;
     top: 10px;
+}
+
+.body-content {
+    background: var(--secondaryColor);
+    text-align: center;
+    margin: 140px auto 60px auto;
+    width: fit-content;
+    max-width: 98%;
+    border: 3px solid var(--detailsColor);
+    border-radius: 20px;
+    padding: 45px;
 }
 
 button {
@@ -84,8 +92,8 @@ button:hover {
 .nav-button {
     background: #ff9637;
     text-decoration: none;
-    font-size: 20px;
-    padding: 15px;
+    font-size: 18px;
+    padding: 14px;
     border: 1px solid var(--detailsColor);
     border-radius: 10px;
     font-weight: bold;
@@ -136,38 +144,11 @@ button:hover {
 
 .footer {
     background: var(--primaryColor);
-    height: 25px;
-    border-top: 5px solid #ff6e00;
+    height: 20px;
+    border-top: 4px solid #ff6e00;
     width: 100%;
     bottom: 0;
     position: fixed;
-}
-
-.form {
-    background: var(--secondaryColor);
-    text-align: center;
-    margin: 60px auto 30px auto;
-    width: 660px;
-    border: 3px solid var(--detailsColor);
-    border-radius: 20px;
-    padding: 45px;
-}
-
-.form label {
-    display: inline-block;
-    text-align: left;
-    width: 150px;
-    font-weight: bold;
-}
-
-.table {
-    background: var(--secondaryColor);
-    text-align: center;
-    margin: 60px auto 60px auto;
-    width: 1280px;
-    border: 3px solid var(--detailsColor);
-    border-radius: 20px;
-    padding: 45px;
 }
 
 table {
@@ -203,12 +184,12 @@ table tr:last-child th:last-child {
 
 th {
     background: var(--primaryColor);
-    padding: 18px 14px;
+    padding: 16px 10px;
 }
 
 td {
     background: lightgrey;
-    padding: 18px 14px;
+    padding: 16px 10px;
     font-size: 14px;
 }
 
@@ -220,6 +201,17 @@ ul {
 h1 {
     padding-bottom: 20px;
     font-size: 40px;
+}
+
+.label-input {
+    display: block;
+}
+
+label {
+    display: inline-block;
+    text-align: left;
+    width: 150px;
+    font-weight: bold;
 }
 
 input, select {
@@ -240,7 +232,7 @@ input, select {
 }
 
 .alert li {
-    display: inline-block;
+    display: block;
     color: red;
     font-size: 12px;
     width: 500px;

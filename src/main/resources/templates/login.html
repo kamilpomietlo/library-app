@@ -7,22 +7,22 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="form">
-        <h1>Log in</h1>
-        <form th:action="@{login}" method="post">
-
+<div class="body-content">
+    <h1>Log in</h1>
+    <form th:action="@{login}" method="post">
+        <div class="label-input">
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email">
-
+        </div>
+        <div class="label-input">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password">
+        </div>
 
-            <p class="alert-security" th:if="${param.error}">Invalid e-mail and/or password</p>
+        <p class="alert-security" th:if="${param.error}">Invalid e-mail and/or password!</p>
 
-            <button type="submit" class="action-button">Submit</button>
-        </form>
-    </div>
+        <button type="submit" class="action-button">Submit</button>
+    </form>
 </div>
 
 <div th:replace="fragments/footer :: div">

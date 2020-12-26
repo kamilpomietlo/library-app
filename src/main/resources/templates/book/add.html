@@ -7,36 +7,46 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="form">
-        <h1>Add new book</h1>
-        <form th:action="@{add}" th:object="${book}" method="post">
+<div class="body-content">
+    <h1>Add new book</h1>
+    <form th:action="@{add}" th:object="${book}" method="post">
+        <div class="label-input">
             <label for="title">Title:</label>
-            <input type="text" th:class="${#fields.hasErrors('title')} ? 'input-error' : 'input'" id="title" th:field="*{title}">
-            <div th:if="${#fields.hasErrors('title')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
-                </ul>
-            </div>
+            <input type="text" th:class="${#fields.hasErrors('title')} ? 'input-error' : 'input'" id="title"
+                   th:field="*{title}">
+        </div>
+        <div th:if="${#fields.hasErrors('title')}" class="alert">
+            <ul>
+                <li th:each="error : ${#fields.errors('title')}" th:text="${error}"></li>
+            </ul>
+        </div>
 
+        <div class="label-input">
             <label for="author">Authors:</label>
-            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author" th:field="*{authors}">
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author"
+                    th:field="*{authors}">
                 <option th:value="null">------------</option>
                 <option th:each="author : ${authors}"
                         th:value="${author.id}"
                         th:text="${author.name}">
                 </option>
             </select>
+        </div>
+        <div class="label-input">
             <label for="author2"></label>
-            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author2" th:field="*{authors}">
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author2"
+                    th:field="*{authors}">
                 <option th:value="null">------------</option>
                 <option th:each="author : ${authors}"
                         th:value="${author.id}"
                         th:text="${author.name}">
                 </option>
             </select>
+        </div>
+        <div class="label-input">
             <label for="author3"></label>
-            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author3" th:field="*{authors}">
+            <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author3"
+                    th:field="*{authors}">
                 <option th:value="null">------------</option>
                 <option th:each="author : ${authors}"
                         th:value="${author.id}"
@@ -48,7 +58,9 @@
                     <li th:each="error : ${#lists.sort(#fields.errors('authors'))}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="genre">Genre:</label>
             <select id="genre" th:field="*{genreId}">
                 <option th:each="genre : ${genres}"
@@ -56,7 +68,9 @@
                         th:text="${genre.description}">
                 </option>
             </select>
+        </div>
 
+        <div class="label-input">
             <label for="publisher">Publisher:</label>
             <select id="publisher" th:field="*{publisherId}">
                 <option th:each="publisher : ${publishers}"
@@ -64,7 +78,9 @@
                         th:text="${publisher.name}">
                 </option>
             </select>
+        </div>
 
+        <div class="label-input">
             <label for="cover-type">Cover type:</label>
             <select id="cover-type" th:field="*{coverType}">
                 <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
@@ -72,26 +88,32 @@
                         th:text="${coverType.getDisplayName()}">
                 </option>
             </select>
+        </div>
 
+        <div class="label-input">
             <label for="year">Year:</label>
-            <input type="text" th:class="${#fields.hasErrors('yearOfRelease')} ? 'input-error' : 'input'" id="year" th:field="*{yearOfRelease}">
+            <input type="text" th:class="${#fields.hasErrors('yearOfRelease')} ? 'input-error' : 'input'" id="year"
+                   th:field="*{yearOfRelease}">
             <div th:if="${#fields.hasErrors('yearOfRelease')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('yearOfRelease')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="isbn">ISBN:</label>
-            <input type="text" th:class="${#fields.hasErrors('isbn')} ? 'input-error' : 'input'" id="isbn" th:field="*{isbn}">
+            <input type="text" th:class="${#fields.hasErrors('isbn')} ? 'input-error' : 'input'" id="isbn"
+                   th:field="*{isbn}">
             <div th:if="${#fields.hasErrors('isbn')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('isbn')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
-            <button type="submit" id="submit" class="action-button">Submit</button>
-        </form>
-    </div>
+        <button type="submit" id="submit" class="action-button">Submit</button>
+    </form>
 </div>
 
 <div th:replace="fragments/footer :: div">

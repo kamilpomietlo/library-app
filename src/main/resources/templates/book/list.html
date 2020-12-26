@@ -7,65 +7,64 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="table">
-        <div class="function-buttons">
-            <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-               th:href="@{'/book/add'}">Add book</a>
-        </div>
-        <h1>Search results</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
-                <th>Publisher</th>
-                <th>Cover</th>
-                <th>Year</th>
-                <th>ISBN</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <tr th:if="${books.size() > 0}" th:each="book : ${books}">
-                <td th:text="${book.id}">id</td>
-                <td th:text="${book.title}">title</td>
-                <td>
-                    <ul>
-                        <li th:each="author : ${book.authors}" th:text="${author.name}">authors</li>
-                    </ul>
-                </td>
-                <td th:text="${book.genre.description}">genre</td>
-                <td th:text="${book.publisher.name}">publisher</td>
-                <td th:text="${book.coverType.getDisplayName()}">coverType</td>
-                <td th:text="${book.yearOfRelease}">yearOfRelease</td>
-                <td th:text="${book.isbn}">isbn</td>
-                <td th:class="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}
-                ? 'book-available' : (${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).RESERVED}
-                ? 'book-reserved' : 'book-borrowed')" th:text="${book.bookStatus}">bookStatus</td>
-                <td>
-                    <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
-                       th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
-                       th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
-                    <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
-                       th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Reserve</a>
-                    <a class="action-button action-button-disabled" sec:authorize="${isAnonymous()}">Reserve</a>
-
-                    <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                       th:href="@{'/book/' + ${book.id} + '/edit'}">Edit</a>
-
-                    <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                       th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
-                       th:href="@{'/book/' + ${book.id} + '/delete'}">Delete</a>
-                    <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                       th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Delete</a>
-                </td>
-            </tr>
-            <tr th:unless="${books.size() > 0}">
-                <td colspan="10">No books found!</td>
-            </tr>
-        </table>
+<div class="body-content">
+    <div class="function-buttons">
+        <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+           th:href="@{'/book/add'}">+ Add book</a>
     </div>
+    <h1>Search results</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Publisher</th>
+            <th>Cover</th>
+            <th>Year</th>
+            <th>ISBN</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <tr th:if="${books.size() > 0}" th:each="book : ${books}">
+            <td th:text="${book.id}">id</td>
+            <td th:text="${book.title}">title</td>
+            <td>
+                <ul>
+                    <li th:each="author : ${book.authors}" th:text="${author.name}">authors</li>
+                </ul>
+            </td>
+            <td th:text="${book.genre.description}">genre</td>
+            <td th:text="${book.publisher.name}">publisher</td>
+            <td th:text="${book.coverType.getDisplayName()}">coverType</td>
+            <td th:text="${book.yearOfRelease}">yearOfRelease</td>
+            <td th:text="${book.isbn}">isbn</td>
+            <td th:class="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}
+                ? 'book-available' : (${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).RESERVED}
+                ? 'book-reserved' : 'book-borrowed')" th:text="${book.bookStatus}">bookStatus
+            </td>
+            <td>
+                <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
+                   th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
+                   th:href="@{'/book/' + ${book.id} + '/reserve'}">Reserve</a>
+                <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
+                   th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Reserve</a>
+                <a class="action-button action-button-disabled" sec:authorize="${isAnonymous()}">Reserve</a>
+
+                <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+                   th:href="@{'/book/' + ${book.id} + '/edit'}">Edit</a>
+
+                <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+                   th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}"
+                   th:href="@{'/book/' + ${book.id} + '/delete'}">Delete</a>
+                <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+                   th:unless="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}">Delete</a>
+            </td>
+        </tr>
+        <tr th:unless="${books.size() > 0}">
+            <td colspan="10">No books found!</td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="fragments/footer :: div">

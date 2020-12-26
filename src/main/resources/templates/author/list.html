@@ -7,44 +7,42 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="table">
-        <div class="function-buttons">
-            <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-               th:href="@{'/author/add'}">Add author</a>
-        </div>
-        <h1>Search results</h1>
-        <table>
-            <tr>
-                <th>Author ID</th>
-                <th>Author name</th>
-                <th>Book ID</th>
-                <th>Book title</th>
-                <th>Action</th>
-            </tr>
-            <tr th:if="${authors.size() > 0}" th:each="author : ${authors}">
-                <td th:text="${author.id}">author id</td>
-                <td th:text="${author.name}">author name</td>
-                <td>
-                    <ul>
-                        <li th:each="book : ${author.books}" th:text="${book.id}">book id</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li th:each="book : ${author.books}" th:text="${book.title}">book title</li>
-                    </ul>
-                </td>
-                <td>
-                    <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                       th:href="@{'/author/' + ${author.id} + '/edit'}">Edit</a>
-                </td>
-            </tr>
-            <tr th:unless="${authors.size() > 0}">
-                <td colspan="5">No authors found!</td>
-            </tr>
-        </table>
+<div class="body-content">
+    <div class="function-buttons">
+        <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+           th:href="@{'/author/add'}">+ Add author</a>
     </div>
+    <h1>Search results</h1>
+    <table>
+        <tr>
+            <th>Author ID</th>
+            <th>Author name</th>
+            <th>Book ID</th>
+            <th>Book title</th>
+            <th>Action</th>
+        </tr>
+        <tr th:if="${authors.size() > 0}" th:each="author : ${authors}">
+            <td th:text="${author.id}">author id</td>
+            <td th:text="${author.name}">author name</td>
+            <td>
+                <ul>
+                    <li th:each="book : ${author.books}" th:text="${book.id}">book id</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="book : ${author.books}" th:text="${book.title}">book title</li>
+                </ul>
+            </td>
+            <td>
+                <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+                   th:href="@{'/author/' + ${author.id} + '/edit'}">Edit</a>
+            </td>
+        </tr>
+        <tr th:unless="${authors.size() > 0}">
+            <td colspan="5">No authors found!</td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="fragments/footer :: div">

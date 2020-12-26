@@ -7,33 +7,31 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="table">
-        <h1>Reservations</h1>
-        <table>
-            <tr>
-                <th>User ID</th>
-                <th>User name</th>
-                <th>User ID number</th>
-                <th>Book ID</th>
-                <th>Book title</th>
-                <th>Action</th>
-            </tr>
-            <tr th:if="${books.size() > 0}" th:each="book : ${books}">
-                <td th:text="${book.user.id}">user id</td>
-                <td th:text="${book.user.toString()}">user name</td>
-                <td th:text="${book.user.idNumber}">user idNumber</td>
-                <td th:text="${book.id}">book id</td>
-                <td th:text="${book.title}">book title</td>
-                <td>
-                    <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
-                </td>
-            </tr>
-            <tr th:unless="${books.size() > 0}">
-                <td colspan="6">No books found!</td>
-            </tr>
-        </table>
-    </div>
+<div class="body-content">
+    <h1>Reservations</h1>
+    <table>
+        <tr>
+            <th>User ID</th>
+            <th>User name</th>
+            <th>User ID number</th>
+            <th>Book ID</th>
+            <th>Book title</th>
+            <th>Action</th>
+        </tr>
+        <tr th:if="${books.size() > 0}" th:each="book : ${books}">
+            <td th:text="${book.user.id}">user id</td>
+            <td th:text="${book.user.toString()}">user name</td>
+            <td th:text="${book.user.idNumber}">user idNumber</td>
+            <td th:text="${book.id}">book id</td>
+            <td th:text="${book.title}">book title</td>
+            <td>
+                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
+            </td>
+        </tr>
+        <tr th:unless="${books.size() > 0}">
+            <td colspan="6">No books found!</td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="fragments/footer :: div">

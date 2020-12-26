@@ -7,83 +7,95 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="form">
-        <h1>Edit your info</h1>
-        <form th:action="@{edit}" th:object="${user}" method="post">
-            <input type="hidden" th:field="*{id}"/>
+<div class="body-content">
+    <h1>Edit your info</h1>
+    <form th:action="@{edit}" th:object="${user}" method="post">
+        <input type="hidden" th:field="*{id}"/>
 
+        <div class="label-input">
             <label for="first-name">First name:</label>
-            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name" th:field="*{firstName}">
+            <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name"
+                   th:field="*{firstName}">
             <div th:if="${#fields.hasErrors('firstName')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('firstName')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="last-name">Last name:</label>
-            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name" th:field="*{lastName}">
+            <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name"
+                   th:field="*{lastName}">
             <div th:if="${#fields.hasErrors('lastName')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('lastName')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="id-number">ID number:</label>
             <input type="text" class="read-only" id="id-number" th:field="*{idNumber}" readonly>
+        </div>
 
+        <div class="label-input">
             <label for="country">Country:</label>
-            <input type="text" th:class="${#fields.hasErrors('country')} ? 'input-error' : 'input'" id="country" th:field="*{country}">
+            <input type="text" th:class="${#fields.hasErrors('country')} ? 'input-error' : 'input'" id="country"
+                   th:field="*{country}">
             <div th:if="${#fields.hasErrors('country')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('country')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="state">State:</label>
-            <input type="text" th:class="${#fields.hasErrors('state')} ? 'input-error' : 'input'" id="state" th:field="*{state}">
+            <input type="text" th:class="${#fields.hasErrors('state')} ? 'input-error' : 'input'" id="state"
+                   th:field="*{state}">
             <div th:if="${#fields.hasErrors('state')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('state')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="city">City:</label>
-            <input type="text" th:class="${#fields.hasErrors('city')} ? 'input-error' : 'input'" id="city" th:field="*{city}">
+            <input type="text" th:class="${#fields.hasErrors('city')} ? 'input-error' : 'input'" id="city"
+                   th:field="*{city}">
             <div th:if="${#fields.hasErrors('city')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('city')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="street">Street:</label>
-            <input type="text" th:class="${#fields.hasErrors('street')} ? 'input-error' : 'input'" id="street" th:field="*{street}">
+            <input type="text" th:class="${#fields.hasErrors('street')} ? 'input-error' : 'input'" id="street"
+                   th:field="*{street}">
             <div th:if="${#fields.hasErrors('street')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('street')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
+        <div class="label-input">
             <label for="home-number">Home number:</label>
-            <input type="text" th:class="${#fields.hasErrors('homeNumber')} ? 'input-error' : 'input'" id="home-number" th:field="*{homeNumber}">
+            <input type="text" th:class="${#fields.hasErrors('homeNumber')} ? 'input-error' : 'input'" id="home-number"
+                   th:field="*{homeNumber}">
             <div th:if="${#fields.hasErrors('homeNumber')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('homeNumber')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
-<!--            <input type="hidden" th:field="*{firstName}">-->
-<!--            <input type="hidden" th:field="*{lastName}" th:value="*{lastName}">-->
-<!--            <input type="hidden" th:field="*{email}" th:value="*{email}">-->
-<!--            <input type="hidden" th:field="*{password}" th:value="*{password}">-->
-<!--            <input type="hidden" th:field="*{matchingPassword}" th:value="*{matchingPassword}">-->
-<!--            <input type="hidden" th:field="*{userRole}" th:value="*{userRole}">-->
-<!--            <input type="hidden" th:field="*{locked}" th:value="*{locked}">-->
-<!--            <input type="hidden" th:field="*{enabled}" th:value="*{enabled}">-->
-
-            <button type="submit" id="submit" class="action-button">Submit</button>
-        </form>
-    </div>
+        <button type="submit" id="submit" class="action-button">Submit</button>
+    </form>
 </div>
 
 <div th:replace="fragments/footer :: div">

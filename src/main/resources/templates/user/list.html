@@ -7,52 +7,52 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="table">
-        <h1>Search results</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>ID number</th>
-                <th>Country</th>
-                <th>State</th>
-                <th>City</th>
-                <th>Street</th>
-                <th>Home no.</th>
-                <th>Books</th>
-                <th>Book status</th>
-                <th>Action</th>
-            </tr>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}">id</td>
-                <td th:text="${user.toString()}">name</td>
-                <td th:text="${user.idNumber}">idNumber</td>
-                <td th:text="${user.country}">country</td>
-                <td th:text="${user.state}">state</td>
-                <td th:text="${user.city}">city</td>
-                <td th:text="${user.street}">street</td>
-                <td th:text="${user.homeNumber}">homeNumber</td>
-                <td>
-                    <ul>
-                        <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
-                    </ul>
-                </td>
-                <td>
-                    <ul>
-                        <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
-                    </ul>
-                </td>
-                <td>
-                    <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
-                       th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
-                       th:href="@{'/user/' + ${user.id} + '/delete'}">Delete</a>
-                    <a class="action-button action-button-disabled" sec:authorize="${hasAuthority('ADMIN')}"
-                       th:unless="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}">Delete</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+<div class="body-content">
+    <h1>Search results</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>ID number</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Home no.</th>
+            <th>Books</th>
+            <th>Book status</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}">id</td>
+            <td th:text="${user.toString()}">name</td>
+            <td th:text="${user.getUserRole()}">role</td>
+            <td th:text="${user.idNumber}">idNumber</td>
+            <td th:text="${user.country}">country</td>
+            <td th:text="${user.state}">state</td>
+            <td th:text="${user.city}">city</td>
+            <td th:text="${user.street}">street</td>
+            <td th:text="${user.homeNumber}">homeNumber</td>
+            <td>
+                <ul>
+                    <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
+                </ul>
+            </td>
+            <td>
+                <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
+                   th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
+                   th:href="@{'/user/' + ${user.id} + '/delete'}">Delete</a>
+                <a class="action-button action-button-disabled" sec:authorize="${hasAuthority('ADMIN')}"
+                   th:unless="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}">Delete</a>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <div th:replace="fragments/footer :: div">

@@ -7,21 +7,22 @@
 <div th:replace="fragments/nav-bar :: div">
 </div>
 
-<div class="background">
-    <div class="form">
-        <h1>Add new publisher</h1>
-        <form th:action="@{add}" th:object="${publishers}" method="post">
+<div class="body-content">
+    <h1>Add new publisher</h1>
+    <form th:action="@{add}" th:object="${publishers}" method="post">
+        <div class="label-input">
             <label for="name">Name:</label>
-            <input type="text" th:class="${#fields.hasErrors('name')} ? 'input-error' : 'input'" id="name" th:field="*{name}">
+            <input type="text" th:class="${#fields.hasErrors('name')} ? 'input-error' : 'input'" id="name"
+                   th:field="*{name}">
             <div th:if="${#fields.hasErrors('name')}" class="alert">
                 <ul>
                     <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
                 </ul>
             </div>
+        </div>
 
-            <button type="submit" id="submit" class="action-button">Submit</button>
-        </form>
-    </div>
+        <button type="submit" id="submit" class="action-button">Submit</button>
+    </form>
 </div>
 
 <div th:replace="fragments/footer :: div">

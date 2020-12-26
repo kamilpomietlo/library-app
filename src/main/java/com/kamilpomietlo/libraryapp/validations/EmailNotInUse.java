@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = EmailNotInUseImpl.class)
 @Documented
 public @interface EmailNotInUse {
-    String message() default "Email is already in use";
+    String message() default "Email is already in use!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
