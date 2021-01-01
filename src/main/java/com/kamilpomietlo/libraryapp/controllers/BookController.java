@@ -124,6 +124,20 @@ public class BookController {
         return "redirect:/book/reservations";
     }
 
+    @GetMapping("borrowed")
+    public String getBorrowedBooks(Model model) {
+        model.addAttribute("books", bookService.getBorrowedBooks());
+
+        return "book/borrowed";
+    }
+
+    @GetMapping("{id}/accept-returning")
+    public String acceptReturning(@PathVariable Long id) {
+        bookService.acceptReturningBook(id);
+
+        return "redirect:/book/borrowed";
+    }
+
     @ModelAttribute("authors")
     private Set<Author> getAuthors() {
         return authorService.findAll();

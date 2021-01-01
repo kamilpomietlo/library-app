@@ -4,6 +4,7 @@
     </h1>
     <div class="menu-buttons">
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/book/reservations'}">Reservations</a>
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/book/borrowed'}">Borrowed books</a>
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/book/list'}">Books</a>
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/author/list'}">Authors</a>
         <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button" th:href="@{'/publisher/list'}">Publishers</a>

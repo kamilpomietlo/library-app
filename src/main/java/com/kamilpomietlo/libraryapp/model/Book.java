@@ -62,10 +62,18 @@ public class Book extends BaseEntity {
     }
 
     public String dateToString() {
-        return dateOfReserveOrBorrow.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        if (dateOfReserveOrBorrow != null) {
+            return dateOfReserveOrBorrow.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }
+
+        return null;
     }
 
     public String deadlineToString() {
-        return deadlineDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        if (deadlineDate != null) {
+            return deadlineDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        }
+
+        return null;
     }
 }

@@ -10,6 +10,8 @@ public interface BookService extends BaseService<Book> {
     BookCommand saveBookCommand(BookCommand bookCommand);
     BookCommand findCommandById(Long id);
     void reserveBook(BookCommand bookCommand);
-    void acceptBorrowingBook(Long id);
     Set<Book> getReservedBooks();
+    void acceptBorrowingBook(Long id);
+    Set<Book> getBorrowedBooks();
+    void acceptReturningBook(Long id);
 }

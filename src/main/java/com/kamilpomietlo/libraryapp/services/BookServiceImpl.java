@@ -72,9 +72,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
     @Override
     public Set<Book> getReservedBooks() {
         Set<Book> reservedBooks = new HashSet<>();
-        Set<Book> books = new HashSet<>(repository.findAll());
 
-        for (Book book : books) {
+        for (Book book : repository.findAll()) {
             if (book.getBookStatus() == BookStatus.RESERVED) {
                 reservedBooks.add(book);
             }
@@ -91,6 +90,33 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
             bookCommand.setBookStatus(BookStatus.BORROWED);
             bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
             bookCommand.setDeadlineDate(LocalDate.now().plusDays(30L));
+        }
+
+        saveBookCommand(bookCommand);
+    }
+
+    @Override
+    public Set<Book> getBorrowedBooks() {
+        Set<Book> borrowedBooks = new HashSet<>();
+
+        for (Book book : repository.findAll()) {
+            if (book.getBookStatus() == BookStatus.BORROWED) {
+                borrowedBooks.add(book);
+            }
+        }
+
+        return borrowedBooks;
+    }
+
+    @Override
+    public void acceptReturningBook(Long id) {
+        BookCommand bookCommand = findCommandById(id);
+
+        if (bookCommand.getBookStatus() == BookStatus.BORROWED) {
+            bookCommand.setBookStatus(BookStatus.AVAILABLE);
+            bookCommand.setUserId(null);
+            bookCommand.setDateOfReserveOrBorrow(null);
+            bookCommand.setDeadlineDate(null);
         }
 
         saveBookCommand(bookCommand);
