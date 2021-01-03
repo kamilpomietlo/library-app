@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.converters;
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.model.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +20,11 @@ class UserToUserCommandTest {
     private static final String HOME_NUMBER = "7";
     private static final Long BOOK_ID_1 = 1L;
     private static final Long BOOK_ID_2 = 2L;
+    private static final String EMAIL = "email@email.com";
+    private static final String PASSWORD = "qwe";
+    private static final UserRole USER_ROLE = UserRole.USER;
+    private static final Boolean LOCKED = false;
+    private static final Boolean ENABLED = false;
     private static UserToUserCommand userToUserCommand;
 
     @BeforeEach
@@ -47,6 +53,11 @@ class UserToUserCommandTest {
         user.setCity(CITY);
         user.setStreet(STREET);
         user.setHomeNumber(HOME_NUMBER);
+        user.setEmail(EMAIL);
+        user.setPassword(PASSWORD);
+        user.setUserRole(USER_ROLE);
+        user.setLocked(LOCKED);
+        user.setEnabled(ENABLED);
 
         Book book1 = new Book();
         book1.setId(BOOK_ID_1);
@@ -69,6 +80,11 @@ class UserToUserCommandTest {
         assertEquals(CITY, userCommand.getCity());
         assertEquals(STREET, userCommand.getStreet());
         assertEquals(HOME_NUMBER, userCommand.getHomeNumber());
+        assertEquals(EMAIL, userCommand.getEmail());
+        assertEquals(PASSWORD, userCommand.getPassword());
+        assertEquals(USER_ROLE, userCommand.getUserRole());
+        assertEquals(LOCKED, userCommand.getLocked());
+        assertEquals(ENABLED, userCommand.getEnabled());
         assertEquals(2, userCommand.getBooks().size());
     }
 }
