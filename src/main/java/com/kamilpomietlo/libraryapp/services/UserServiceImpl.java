@@ -113,6 +113,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     @Override
     public UserCommand editRemainingFields(UserCommand userCommand) {
         UserCommand dbUserCommand = findCommandById(userCommand.getId());
+
         userCommand.setBooks(dbUserCommand.getBooks());
         userCommand.setEmail(dbUserCommand.getEmail());
         userCommand.setPassword(dbUserCommand.getPassword());

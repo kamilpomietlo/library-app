@@ -1,12 +1,12 @@
 package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.*;
+import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.Genre;
+import com.kamilpomietlo.libraryapp.model.Publisher;
+import com.kamilpomietlo.libraryapp.model.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
@@ -28,8 +28,7 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setDeadlineDate(source.getDeadlineDate());
 
         if (source.getAuthors() != null) {
-            Set<Author> authors = new HashSet<>(source.getAuthors());
-            book.setAuthors(authors);
+            book.setAuthors(source.getAuthors());
         }
 
         if (source.getGenreId() != null) {
