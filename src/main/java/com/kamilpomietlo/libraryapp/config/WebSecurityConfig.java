@@ -34,9 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         String[] librarianMatchers = new String[] {
                 "/book/list", "/book/add", "/book/{\\d+}/edit", "/book/{\\d+}/delete", "/book/reservations",
-                "/book/{\\d+}/accept-reservation", "/book/borrowed", "/book/accept-returning",
-                "/author/list", "/author/add", "/author/{\\d+}/edit",
-                "/publisher/list", "/publisher/add", "/publisher/edit"
+                "/book/{\\d+}/accept-reservation", "/book/borrowed", "/book/{\\d+}/accept-returning",
+                "/author/list", "/author/add", "/author/{\\d+}/edit", "/author/{\\d+}/show-books",
+                "/publisher/list", "/publisher/add", "/publisher/{\\d+}/edit", "/publisher/{\\d+}/show-books"
         };
 
         http
