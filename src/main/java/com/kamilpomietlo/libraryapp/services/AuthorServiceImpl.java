@@ -4,9 +4,12 @@ import com.kamilpomietlo.libraryapp.commands.AuthorCommand;
 import com.kamilpomietlo.libraryapp.converters.AuthorCommandToAuthor;
 import com.kamilpomietlo.libraryapp.converters.AuthorToAuthorCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
+import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 @Service
 @Transactional
@@ -33,5 +36,12 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository>
     @Override
     public AuthorCommand findCommandById(Long id) {
         return authorToAuthorCommand.convert(findById(id));
+    }
+
+    @Override
+    public Set<Book> getAuthorsBooks(Long id) {
+        Author author = findById(id);
+
+        return author.getBooks();
     }
 }
