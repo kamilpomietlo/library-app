@@ -69,4 +69,11 @@ public class PublisherController {
 
         return "redirect:/publisher/list";
     }
+
+    @GetMapping("{id}/show-books")
+    public String showBooks(@PathVariable Long id, Model model) {
+        model.addAttribute("books", publisherService.getPublishersBooks(id));
+
+        return "book/list";
+    }
 }

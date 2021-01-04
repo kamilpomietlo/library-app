@@ -3,10 +3,13 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.PublisherCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
 import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
+import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Set;
 
 @Service
 @Transactional
@@ -34,5 +37,12 @@ public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRe
     @Override
     public PublisherCommand findCommandById(Long id) {
         return publisherToPublisherCommand.convert(findById(id));
+    }
+
+    @Override
+    public Set<Book> getPublishersBooks(Long id) {
+        Publisher publisher = findById(id);
+
+        return publisher.getBooks();
     }
 }
