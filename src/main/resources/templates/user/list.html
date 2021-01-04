@@ -8,7 +8,7 @@
 </div>
 
 <div class="body-content">
-    <h1>Search results</h1>
+    <h1>Users</h1>
     <table>
         <tr>
             <th>ID</th>
@@ -20,7 +20,8 @@
             <th>City</th>
             <th>Street</th>
             <th>Home no.</th>
-            <th>Books</th>
+            <th>Book ID</th>
+            <th>Book title</th>
             <th>Book status</th>
             <th>Date</th>
             <th>Deadline</th>
@@ -36,26 +37,32 @@
             <td th:text="${user.city}">city</td>
             <td th:text="${user.street}">street</td>
             <td th:text="${user.homeNumber}">homeNumber</td>
-            <td>
+            <td th:if="${user.books.size() > 0}">
                 <ul>
-                    <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
+                    <li th:each="book : ${user.books}" th:text="${book.id}">book id</li>
                 </ul>
             </td>
-            <td>
+            <td th:if="${user.books.size() > 0}">
+                <ul>
+                    <li th:each="book : ${user.books}" th:text="${book.title}">book title</li>
+                </ul>
+            </td>
+            <td th:if="${user.books.size() > 0}">
                 <ul>
                     <li th:each="book : ${user.books}" th:text="${book.bookStatus}">books status</li>
                 </ul>
             </td>
-            <td>
+            <td th:if="${user.books.size() > 0}">
                 <ul>
                     <li th:each="book : ${user.books}" th:text="${book.dateToString()}">date</li>
                 </ul>
             </td>
-            <td>
+            <td th:if="${user.books.size() > 0}">
                 <ul>
                     <li th:each="book : ${user.books}" th:text="${book.deadlineToString()}">deadline</li>
                 </ul>
             </td>
+            <td th:unless="${user.books.size() > 0}" colspan="5">No reserved or borrowed books found!</td>
             <td>
                 <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
                    th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"

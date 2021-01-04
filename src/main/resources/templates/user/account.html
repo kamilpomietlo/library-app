@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/header :: head">
     <title>BestLib</title>
 </head>
@@ -18,10 +18,6 @@
             <th>City</th>
             <th>Street</th>
             <th>Home no.</th>
-            <th>Books</th>
-            <th>Book status</th>
-            <th>Date</th>
-            <th>Deadline</th>
             <th>Action</th>
         </tr>
         <tr>
@@ -33,30 +29,33 @@
             <td th:text="${user.street}">street</td>
             <td th:text="${user.homeNumber}">homeNumber</td>
             <td>
-                <ul>
-                    <li th:each="book : ${user.books}" th:text="${book.title}">books</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li th:each="book : ${user.books}" th:text="${book.bookStatus}">book status</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li th:each="book : ${user.books}" th:text="${book.dateToString()}">date</li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li th:each="book : ${user.books}" th:text="${book.deadlineToString()}">deadline</li>
-                </ul>
-            </td>
-            <td>
                 <a class="action-button" th:href="@{'/user/edit'}">Edit info</a>
             </td>
         </tr>
     </table>
+    <div sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}">
+        <div class="line"></div>
+        <h1>Your books</h1>
+        <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Book title</th>
+                <th>Book status</th>
+                <th>Date</th>
+                <th>Deadline</th>
+            </tr>
+            <tr th:if="${user.books.size() > 0}" th:each="book : ${user.books}">
+                <td th:text="${book.id}">book ID</td>
+                <td th:text="${book.title}">book title</td>
+                <td th:text="${book.bookStatus}">book status</td>
+                <td th:text="${book.dateToString()}">date</td>
+                <td th:text="${book.deadlineToString()}">deadline</td>
+            </tr>
+            <tr th:unless="${user.books.size() > 0}">
+                <td colspan="5">No reserved or borrowed books found!</td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <div th:replace="fragments/footer :: div">
