@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.services;
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
@@ -17,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -316,5 +316,16 @@ class BookServiceImplTest {
         // then
         assertEquals(1L, foundBook.getId());
         verify(bookRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findBookByIdNotFound() {
+        // given
+        Long bookId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> bookService.findById(bookId));
+        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }

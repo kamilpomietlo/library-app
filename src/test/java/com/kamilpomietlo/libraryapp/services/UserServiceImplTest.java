@@ -5,6 +5,7 @@ import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.converters.UserCommandToUser;
 import com.kamilpomietlo.libraryapp.converters.UserToUserCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
@@ -307,5 +308,16 @@ class UserServiceImplTest {
         // then
         assertEquals(1L, foundUser.getId());
         verify(userRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findUserByIdNotFound() {
+        // given
+        Long userId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> userService.findById(userId));
+        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }

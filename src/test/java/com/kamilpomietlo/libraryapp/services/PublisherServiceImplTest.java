@@ -5,6 +5,7 @@ import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
 import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
+import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
@@ -19,8 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -146,5 +146,16 @@ class PublisherServiceImplTest {
         // then
         assertEquals(1L, foundPublisher.getId());
         verify(publisherRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findPublisherByIdNotFound() {
+        // given
+        Long publisherId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> publisherService.findById(publisherId));
+        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }
