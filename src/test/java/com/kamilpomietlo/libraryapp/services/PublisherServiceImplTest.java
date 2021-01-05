@@ -5,6 +5,7 @@ import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.converters.PublisherCommandToPublisher;
 import com.kamilpomietlo.libraryapp.converters.PublisherToPublisherCommand;
+import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +42,71 @@ class PublisherServiceImplTest {
     }
 
     @Test
-    void getPublishers() {
+    void savePublisherCommand() {
+        // given
+        PublisherCommand publisherCommand = new PublisherCommand();
+        publisherCommand.setId(1L);
+
+        when(publisherRepository.save(any())).thenReturn(publisherCommandToPublisher.convert(publisherCommand));
+
+        // when
+        PublisherCommand savedPublisher = publisherService.savePublisherCommand(publisherCommand);
+
+        // then
+        assertEquals(1L, savedPublisher.getId());
+        verify(publisherRepository, times(1)).save(any());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        Publisher publisher = new Publisher();
+        publisher.setId(1L);
+
+        Optional<Publisher> publisherOptional = Optional.of(publisher);
+
+        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
+
+        // when
+        PublisherCommand foundPublisherCommand = publisherService.findCommandById(publisher.getId());
+
+        // then
+        assertEquals(1L, foundPublisherCommand.getId());
+        verify(publisherRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void getPublishersBooks() {
+        // given
+        Publisher publisher = new Publisher();
+        publisher.setId(1L);
+
+        Book book1 = new Book();
+        book1.setId(1L);
+
+        Book book2 = new Book();
+        book2.setId(2L);
+
+        publisher.getBooks().add(book1);
+        publisher.getBooks().add(book2);
+
+        Optional<Publisher> publisherOptional = Optional.of(publisher);
+
+        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
+
+        // when
+        Set<Book> books = publisherService.getPublishersBooks(publisher.getId());
+
+        // then
+        assertNotNull(books);
+        assertEquals(2, books.size());
+        verify(publisherRepository, times(1)).findById(anyLong());
+    }
+
+    // parent tests
+
+    @Test
+    void findAllPublishers() {
         // given
         List<Publisher> publishers = new ArrayList<>();
 
@@ -66,23 +131,7 @@ class PublisherServiceImplTest {
     }
 
     @Test
-    void savePublisherCommand() {
-        // given
-        PublisherCommand publisherCommand = new PublisherCommand();
-        publisherCommand.setId(1L);
-
-        when(publisherRepository.save(any())).thenReturn(publisherCommandToPublisher.convert(publisherCommand));
-
-        // when
-        PublisherCommand savedPublisher = publisherService.savePublisherCommand(publisherCommand);
-
-        // then
-        assertEquals(1L, savedPublisher.getId());
-        verify(publisherRepository, times(1)).save(any());
-    }
-
-    @Test
-    void findById() {
+    void findPublisherById() {
         // given
         Publisher publisher = new Publisher();
         publisher.setId(1L);
@@ -96,24 +145,6 @@ class PublisherServiceImplTest {
 
         // then
         assertEquals(1L, foundPublisher.getId());
-        verify(publisherRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findCommandById() {
-        // given
-        Publisher publisher = new Publisher();
-        publisher.setId(1L);
-
-        Optional<Publisher> publisherOptional = Optional.of(publisher);
-
-        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
-
-        // when
-        PublisherCommand foundPublisherCommand = publisherService.findCommandById(publisher.getId());
-
-        // then
-        assertEquals(1L, foundPublisherCommand.getId());
         verify(publisherRepository, times(1)).findById(anyLong());
     }
 }

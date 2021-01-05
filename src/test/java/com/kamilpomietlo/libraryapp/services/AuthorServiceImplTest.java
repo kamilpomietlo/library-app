@@ -6,6 +6,7 @@ import com.kamilpomietlo.libraryapp.converters.AuthorToAuthorCommand;
 import com.kamilpomietlo.libraryapp.converters.BookCommandToBook;
 import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
+import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,71 @@ class AuthorServiceImplTest {
     }
 
     @Test
-    void getAuthors() {
+    void saveAuthorCommand() {
+        // given
+        AuthorCommand authorCommand = new AuthorCommand();
+        authorCommand.setId(1L);
+
+        when(authorRepository.save(any())).thenReturn(authorCommandToAuthor.convert(authorCommand));
+
+        // when
+        AuthorCommand savedAuthorCommand = authorService.saveAuthorCommand(authorCommand);
+
+        // then
+        assertEquals(1L, savedAuthorCommand.getId());
+        verify(authorRepository, times(1)).save(any());
+    }
+
+    @Test
+    void findCommandById() {
+        // given
+        Author author = new Author();
+        author.setId(1L);
+
+        Optional<Author> authorOptional = Optional.of(author);
+
+        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        // when
+        AuthorCommand foundAuthorCommand = authorService.findCommandById(author.getId());
+
+        // then
+        assertEquals(1L, foundAuthorCommand.getId());
+        verify(authorRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void getAuthorsBooks() {
+        // given
+        Author author = new Author();
+        author.setId(1L);
+
+        Book book1 = new Book();
+        book1.setId(1L);
+
+        Book book2 = new Book();
+        book2.setId(2L);
+
+        author.getBooks().add(book1);
+        author.getBooks().add(book2);
+
+        Optional<Author> authorOptional = Optional.of(author);
+
+        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        // when
+        Set<Book> books = authorService.getAuthorsBooks(author.getId());
+
+        // then
+        assertNotNull(books);
+        assertEquals(2, books.size());
+        verify(authorRepository, times(1)).findById(anyLong());
+    }
+
+    // parent tests
+
+    @Test
+    void findAllAuthors() {
         // given
         List<Author> authors = new ArrayList<>();
 
@@ -67,23 +132,7 @@ class AuthorServiceImplTest {
     }
 
     @Test
-    void saveAuthorCommand() {
-        // given
-        AuthorCommand authorCommand = new AuthorCommand();
-        authorCommand.setId(1L);
-
-        when(authorRepository.save(any())).thenReturn(authorCommandToAuthor.convert(authorCommand));
-
-        // when
-        AuthorCommand savedAuthorCommand = authorService.saveAuthorCommand(authorCommand);
-
-        // then
-        assertEquals(1L, savedAuthorCommand.getId());
-        verify(authorRepository, times(1)).save(any());
-    }
-
-    @Test
-    void findById() {
+    void findAuthorById() {
         // given
         Author author = new Author();
         author.setId(1L);
@@ -97,24 +146,6 @@ class AuthorServiceImplTest {
 
         // then
         assertEquals(1L, foundAuthor.getId());
-        verify(authorRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findCommandById() {
-        // given
-        Author author = new Author();
-        author.setId(1L);
-
-        Optional<Author> authorOptional = Optional.of(author);
-
-        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
-
-        // when
-        AuthorCommand foundAuthorCommand = authorService.findCommandById(author.getId());
-
-        // then
-        assertEquals(1L, foundAuthorCommand.getId());
         verify(authorRepository, times(1)).findById(anyLong());
     }
 }
