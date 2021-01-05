@@ -52,7 +52,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     public void deleteById(Long id) {
         User userToDelete = findById(id);
 
-        if (userToDelete.getBooks().isEmpty() && userToDelete.getUserRole() != (UserRole.ADMIN)) {
+        if ((userToDelete.getBooks().isEmpty()) && (userToDelete.getUserRole() != UserRole.ADMIN)) {
             repository.deleteById(id);
         }
     }
@@ -93,9 +93,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     @Override
     public void confirmUser(ConfirmationToken confirmationToken) {
         User user = confirmationToken.getUser();
-
         user.setEnabled(true);
+
         repository.save(user);
+
         confirmationTokenService.deleteById(confirmationToken.getId());
     }
 

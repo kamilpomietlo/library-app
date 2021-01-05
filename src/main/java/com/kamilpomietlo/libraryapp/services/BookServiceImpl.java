@@ -56,17 +56,16 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         Book book = findById(bookCommand.getId());
         bookCommand.setAuthors(book.getAuthors());
 
-        Long currentUserId = myUserDetailsService.getLoggedAccountId();
+        Long loggedUserId = myUserDetailsService.getLoggedAccountId();
 
         if (bookCommand.getBookStatus() == BookStatus.AVAILABLE) {
             bookCommand.setBookStatus(BookStatus.RESERVED);
             bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
             bookCommand.setDeadlineDate(LocalDate.now().plusDays(7L));
+            bookCommand.setUserId(loggedUserId);
 
-            bookCommand.setUserId(currentUserId);
+            saveBookCommand(bookCommand);
         }
-
-        saveBookCommand(bookCommand);
     }
 
     @Override
@@ -90,9 +89,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
             bookCommand.setBookStatus(BookStatus.BORROWED);
             bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
             bookCommand.setDeadlineDate(LocalDate.now().plusDays(30L));
-        }
 
-        saveBookCommand(bookCommand);
+            saveBookCommand(bookCommand);
+        }
     }
 
     @Override
@@ -117,8 +116,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
             bookCommand.setUserId(null);
             bookCommand.setDateOfReserveOrBorrow(null);
             bookCommand.setDeadlineDate(null);
-        }
 
-        saveBookCommand(bookCommand);
+            saveBookCommand(bookCommand);
+        }
     }
 }

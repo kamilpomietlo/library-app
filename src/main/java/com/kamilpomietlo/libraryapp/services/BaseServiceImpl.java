@@ -33,11 +33,6 @@ public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaReposit
     }
 
     @Override
-    public T save(T object) {
-        return repository.save(object);
-    }
-
-    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

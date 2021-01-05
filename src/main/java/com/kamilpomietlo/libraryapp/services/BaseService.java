@@ -8,6 +8,5 @@ public interface BaseService<T extends BaseEntity> {
 
     Set<T> findAll();
     T findById(Long id);
-    T save(T object);
     void deleteById(Long id);
 }
