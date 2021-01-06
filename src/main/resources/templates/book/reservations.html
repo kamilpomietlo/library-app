@@ -29,7 +29,7 @@
             <td th:text="${book.dateToString()}">date</td>
             <td th:text="${book.deadlineToString()}">deadline</td>
             <td>
-                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept</a>
+                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-reservation'}">Accept borrowing</a>
             </td>
         </tr>
         <tr th:unless="${books.size() > 0}">

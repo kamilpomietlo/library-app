@@ -259,6 +259,10 @@ input, select {
     background: var(--detailsColor);
 }
 
+.register-info {
+    margin-top: 25px;
+}
+
 .book-available {
     color: green;
     font-weight: bold;

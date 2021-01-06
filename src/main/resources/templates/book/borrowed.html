@@ -27,7 +27,7 @@
             <td th:text="${book.title}">book title</td>
             <td th:text="${book.deadlineToString()}">deadline</td>
             <td>
-                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-returning'}">Accept</a>
+                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-returning'}">Accept returning</a>
             </td>
         </tr>
         <tr th:unless="${books.size() > 0}">

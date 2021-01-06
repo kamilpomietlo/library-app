@@ -66,7 +66,7 @@ public class IndexController {
 
         userService.registerUser(userCommand);
 
-        return "redirect:/login";
+        return "register-info";
     }
 
     @GetMapping("register/confirm")
