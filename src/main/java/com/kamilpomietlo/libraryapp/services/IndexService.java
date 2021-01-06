@@ -5,7 +5,7 @@ import com.kamilpomietlo.libraryapp.model.Book;
 
 import java.util.Set;
 
-public interface IndexService extends BaseService<Book> {
+public interface IndexService {
 
     Set<Book> searchByBookAndAuthor(Book book, Author author);
 }

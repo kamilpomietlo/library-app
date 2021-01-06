@@ -12,12 +12,13 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class IndexServiceImpl extends BaseServiceImpl<Book, BookRepository> implements IndexService {
+public class IndexServiceImpl implements IndexService {
 
+    private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
 
-    public IndexServiceImpl(BookRepository repository, AuthorRepository authorRepository) {
-        super(repository);
+    public IndexServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
+        this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
     }
 
@@ -40,13 +41,13 @@ public class IndexServiceImpl extends BaseServiceImpl<Book, BookRepository> impl
 
         // no name provided
         if (author.getName().isEmpty()) {
-            searchedBooks = repository.findByTitleIgnoreCaseContaining(book.getTitle());
+            searchedBooks = bookRepository.findByTitleIgnoreCaseContaining(book.getTitle());
 
             return searchedBooks;
         }
 
         // both title and name provided
-        Set<Book> books = repository.findByTitleIgnoreCaseContaining(book.getTitle());
+        Set<Book> books = bookRepository.findByTitleIgnoreCaseContaining(book.getTitle());
         Set<Author> authors = authorRepository.findByNameIgnoreCaseContaining(author.getName());
 
         for (Book searchedBook : books) {
