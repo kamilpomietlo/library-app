@@ -19,14 +19,11 @@ class ConfirmationTokenServiceImplTest {
     private ConfirmationTokenService confirmationTokenService;
 
     @Mock
-    UserService userService;
-
-    @Mock
     ConfirmationTokenRepository confirmationTokenRepository;
 
     @BeforeEach
     void setUp() {
-        confirmationTokenService = new ConfirmationTokenServiceImpl(confirmationTokenRepository, userService);
+        confirmationTokenService = new ConfirmationTokenServiceImpl(confirmationTokenRepository);
     }
 
     @Test
