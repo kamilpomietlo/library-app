@@ -10,8 +10,11 @@ import java.util.Optional;
 public class ConfirmationTokenServiceImpl extends BaseServiceImpl<ConfirmationToken, ConfirmationTokenRepository>
         implements ConfirmationTokenService {
 
-    public ConfirmationTokenServiceImpl(ConfirmationTokenRepository repository) {
+    private final UserService userService;
+
+    public ConfirmationTokenServiceImpl(ConfirmationTokenRepository repository, UserService userService) {
         super(repository);
+        this.userService = userService;
     }
 
     @Override
@@ -20,7 +23,9 @@ public class ConfirmationTokenServiceImpl extends BaseServiceImpl<ConfirmationTo
     }
 
     @Override
-    public Optional<ConfirmationToken> findConfirmationTokenByToken(String confirmationToken) {
-        return repository.findByConfirmationToken(confirmationToken);
+    public void findConfirmationTokenByToken(String confirmationToken) {
+        Optional<ConfirmationToken> confirmationTokenOptional = repository.findByConfirmationToken(confirmationToken);
+
+        confirmationTokenOptional.ifPresent(userService::confirmUser);
     }
 }

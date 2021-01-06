@@ -3,7 +3,6 @@ package com.kamilpomietlo.libraryapp.controllers;
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.IndexService;
 import com.kamilpomietlo.libraryapp.services.UserService;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -71,8 +68,7 @@ public class IndexController {
 
     @GetMapping("register/confirm")
     public String confirmMail(@RequestParam("token") String token) {
-        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
-        optionalConfirmationToken.ifPresent(userService::confirmUser);
+        confirmationTokenService.findConfirmationTokenByToken(token);
 
         return "redirect:/login";
     }
