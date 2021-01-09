@@ -117,7 +117,7 @@ class AuthorControllerTest {
 
     @Test
     void editAuthorSubmitValid() throws Exception {
-        //then
+        // then
         mockMvc.perform(post("/author/1/edit")
                 .param("name", "name"))
                 .andExpect(status().is3xxRedirection())

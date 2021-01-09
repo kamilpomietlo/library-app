@@ -16,6 +16,7 @@ public class PasswordMatchesImpl implements ConstraintValidator<PasswordMatches,
         UserCommand userCommand = (UserCommand) object;
 
         boolean isValid = userCommand.getPassword().equals(userCommand.getMatchingPassword());
+
         if (!isValid) {
             context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
                     .addPropertyNode("matchingPassword").addConstraintViolation();
