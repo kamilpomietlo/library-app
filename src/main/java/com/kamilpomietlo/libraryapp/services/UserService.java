@@ -9,7 +9,6 @@ public interface UserService extends BaseService<User> {
     UserCommand saveUserCommand(UserCommand userCommand);
     UserCommand findCommandById(Long id);
     void registerUser(UserCommand userCommand);
-    boolean isEmailUsed(String email);
     void sendConfirmationMail(String userMail, String confirmationToken);
     void confirmUser(ConfirmationToken confirmationToken);
     User findUserByEmail(String email);

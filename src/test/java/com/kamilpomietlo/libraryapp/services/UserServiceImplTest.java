@@ -160,38 +160,6 @@ class UserServiceImplTest {
     }
 
     @Test
-    void isEmailUsed() {
-        // given
-        User user = new User();
-        user.setId(1L);
-        user.setEmail("xyz@example.com");
-
-        Optional<User> userOptional = Optional.of(user);
-
-        when(userRepository.findByEmail(anyString())).thenReturn(userOptional);
-
-        // when
-        boolean isEmailUsed = userService.isEmailUsed(user.getEmail());
-
-        // then
-        assertTrue(isEmailUsed);
-        verify(userRepository, times(1)).findByEmail(anyString());
-    }
-
-    @Test
-    void isEmailNotUsed() {
-        // given
-        when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
-
-        // when
-        boolean isEmailNotUsed = !userService.isEmailUsed("abc@example.com");
-
-        // then
-        assertTrue(isEmailNotUsed);
-        verify(userRepository, times(1)).findByEmail(anyString());
-    }
-
-    @Test
     void confirmUser() {
         // given
         ConfirmationToken confirmationToken = new ConfirmationToken();

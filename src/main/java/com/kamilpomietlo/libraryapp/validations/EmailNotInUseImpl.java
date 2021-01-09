@@ -1,16 +1,19 @@
 package com.kamilpomietlo.libraryapp.validations;
 
-import com.kamilpomietlo.libraryapp.services.UserService;
+import com.kamilpomietlo.libraryapp.model.User;
+import com.kamilpomietlo.libraryapp.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Optional;
 
 public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, String> {
 
-    private final UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
-    public EmailNotInUseImpl(UserService userService) {
-        this.userService = userService;
+    public EmailNotInUseImpl() {
     }
 
     @Override
@@ -19,6 +22,12 @@ public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, Str
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !userService.isEmailUsed(email);
+        return !isEmailUsed(email);
+    }
+
+    private boolean isEmailUsed(String email) {
+        Optional<User> userOptional = userRepository.findByEmail(email);
+
+        return userOptional.isPresent();
     }
 }

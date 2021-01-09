@@ -72,13 +72,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     }
 
     @Override
-    public boolean isEmailUsed(String email) {
-        Optional<User> userOptional = repository.findByEmail(email);
-
-        return userOptional.isPresent();
-    }
-
-    @Override
     public void sendConfirmationMail(String userMail, String confirmationToken) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(userMail);
