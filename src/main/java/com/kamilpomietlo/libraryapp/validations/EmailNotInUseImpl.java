@@ -19,10 +19,6 @@ public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, Str
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return !isEmailUsed(email);
-    }
-
-    private boolean isEmailUsed(String email) {
-        return userService.isEmailUsed(email);
+        return !userService.isEmailUsed(email);
     }
 }

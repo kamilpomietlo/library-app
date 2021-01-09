@@ -43,21 +43,21 @@ public class IndexController {
     }
 
     @PostMapping({"index", ""})
-    public String searchSubmit(@ModelAttribute Book book, @ModelAttribute Author author, Model model) {
+    public String searchSubmit(@ModelAttribute("book") Book book, @ModelAttribute("author") Author author, Model model) {
         model.addAttribute("books", indexService.searchByBookAndAuthor(book, author));
 
         return "book/list";
     }
 
     @GetMapping("register")
-    public String registerUser(Model model) {
+    public String registerUserGet(Model model) {
         model.addAttribute("user", new UserCommand());
 
         return "register";
     }
 
     @PostMapping("register")
-    public String registerUser(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
+    public String registerUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
@@ -74,7 +74,7 @@ public class IndexController {
         Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
         optionalConfirmationToken.ifPresent(userService::confirmUser);
 
-        return "redirect:/login";
+        return "login";
     }
 
     @GetMapping("login")
