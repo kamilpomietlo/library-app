@@ -8,10 +8,10 @@
 </div>
 
 <div class="body-content">
-    <h1>Edit author info</h1>
+    <h1 th:text="#{author.edit.header}">Edit author info</h1>
     <form th:action="@{edit}" th:object="${authors}" method="post">
         <div class="label-input">
-            <label for="name">Name:</label>
+            <label for="name" th:text="#{author.form.name}">Name:</label>
             <input type="text" th:class="${#fields.hasErrors('name')} ? 'input-error' : 'input'" id="name"
                    th:field="*{name}">
         </div>
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <button type="submit" id="submit" class="action-button">Submit</button>
+        <button type="submit" id="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>
 </div>
 

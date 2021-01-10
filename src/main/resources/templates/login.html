@@ -8,20 +8,20 @@
 </div>
 
 <div class="body-content">
-    <h1>Log in</h1>
+    <h1 th:text="#{login.header}">Log in</h1>
     <form th:action="@{login}" method="post">
         <div class="label-input">
-            <label for="email">E-mail:</label>
+            <label for="email" th:text="#{login.email}">E-mail:</label>
             <input type="email" id="email" name="email">
         </div>
         <div class="label-input">
-            <label for="password">Password:</label>
+            <label for="password" th:text="#{login.password}">Password:</label>
             <input type="password" id="password" name="password">
         </div>
 
-        <p class="alert-security" th:if="${param.error}">Invalid e-mail and/or password!</p>
+        <p class="alert-security" th:if="${param.error}" th:text="#{login.invalid}">Invalid e-mail and/or password!</p>
 
-        <button type="submit" class="action-button">Submit</button>
+        <button type="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>
 </div>
 

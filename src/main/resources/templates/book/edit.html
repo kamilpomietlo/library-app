@@ -8,10 +8,10 @@
 </div>
 
 <div class="body-content">
-    <h1>Edit book info</h1>
+    <h1 th:text="#{book.edit.header}">Edit book info</h1>
     <form th:action="@{edit}" th:object="${book}" method="post">
         <div class="label-input">
-            <label for="title">Title:</label>
+            <label for="title" th:text="#{book.form.title}">Title:</label>
             <input type="text" th:class="${#fields.hasErrors('title')} ? 'input-error' : 'input'" id="title"
                    th:field="*{title}">
             <div th:if="${#fields.hasErrors('title')}" class="alert">
@@ -22,7 +22,7 @@
         </div>
 
         <div class="label-input">
-            <label for="author">Authors:</label>
+            <label for="author" th:text="#{book.form.authors}">Authors:</label>
             <select th:class="${#fields.hasErrors('authors')} ? 'input-error' : 'input'" id="author"
                     th:field="*{authors}">
                 <option th:value="null">------------</option>
@@ -61,7 +61,7 @@
         </div>
 
         <div class="label-input">
-            <label for="genre">Genre:</label>
+            <label for="genre" th:text="#{book.form.genre}">Genre:</label>
             <select id="genre" th:field="*{genreId}">
                 <option th:each="genre : ${genres}"
                         th:value="${genre.id}"
@@ -71,7 +71,7 @@
         </div>
 
         <div class="label-input">
-            <label for="publisher">Publisher:</label>
+            <label for="publisher" th:text="#{book.form.publisher}">Publisher:</label>
             <select id="publisher" th:field="*{publisherId}">
                 <option th:each="publisher : ${publishers}"
                         th:value="${publisher.id}"
@@ -81,7 +81,7 @@
         </div>
 
         <div class="label-input">
-            <label for="cover-type">Cover type:</label>
+            <label for="cover-type" th:text="#{book.form.cover}">Cover type:</label>
             <select id="cover-type" th:field="*{coverType}">
                 <option th:each="coverType : ${T(com.kamilpomietlo.libraryapp.model.CoverType).values()}"
                         th:value="${coverType}"
@@ -91,7 +91,7 @@
         </div>
 
         <div class="label-input">
-            <label for="year">Year:</label>
+            <label for="year" th:text="#{book.form.year}">Year:</label>
             <input type="text" th:class="${#fields.hasErrors('yearOfRelease')} ? 'input-error' : 'input'" id="year"
                    th:field="*{yearOfRelease}">
             <div th:if="${#fields.hasErrors('yearOfRelease')}" class="alert">
@@ -102,7 +102,7 @@
         </div>
 
         <div class="label-input">
-            <label for="isbn">ISBN:</label>
+            <label for="isbn" th:text="#{book.form.isbn}">ISBN:</label>
             <input type="text" th:class="${#fields.hasErrors('isbn')} ? 'input-error' : 'input'" id="isbn"
                    th:field="*{isbn}">
             <div th:if="${#fields.hasErrors('isbn')}" class="alert">
@@ -112,7 +112,7 @@
             </div>
         </div>
 
-        <button type="submit" id="submit" class="action-button">Submit</button>
+        <button type="submit" id="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>
 </div>
 

@@ -10,27 +10,27 @@
 <div class="body-content">
     <div class="function-buttons">
         <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-           th:href="@{'/publisher/add'}">+ Add publisher</a>
+           th:href="@{'/publisher/add'}" th:text="#{publisher.list.add}">+ Add publisher</a>
     </div>
-    <h1>Publishers</h1>
+    <h1 th:text="#{publisher.list.header}">Publishers</h1>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Action</th>
+            <th th:text="#{publisher.id}">ID</th>
+            <th th:text="#{publisher.name}">Name</th>
+            <th th:text="#{publisher.action}">Action</th>
         </tr>
         <tr th:if="${publishers.size() > 0}" th:each="publisher : ${publishers}">
             <td th:text="${publisher.id}">id</td>
             <td th:text="${publisher.name}">name</td>
             <td>
                 <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                   th:href="@{'/publisher/' + ${publisher.id} + '/edit'}">Edit</a>
+                   th:href="@{'/publisher/' + ${publisher.id} + '/edit'}" th:text="#{edit}">Edit</a>
                 <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                   th:href="@{'/publisher/' + ${publisher.id} + '/show-books'}">Show books</a>
+                   th:href="@{'/publisher/' + ${publisher.id} + '/show-books'}" th:text="#{showBooks}">Show books</a>
             </td>
         </tr>
         <tr th:unless="${publishers.size() > 0}">
-            <td colspan="3">No publishers found!</td>
+            <td colspan="3" th:text="#{publisher.list.noPublishers}">No publishers found!</td>
         </tr>
     </table>
 </div>

@@ -8,8 +8,8 @@
 </div>
 
 <div class="body-content">
-    <h1>Thank you for registering!</h1>
-    <p class="register-info">Click on the link sent to your e-mail address to activate your account.</p>
+    <h1 th:text="#{register-info.header}">Thank you for registering!</h1>
+    <p class="register-info" th:text="#{register-info.text}">Click on the link sent to your e-mail address to activate your account.</p>
 </div>
 
 <div th:replace="fragments/footer :: div">

@@ -10,27 +10,27 @@
 <div class="body-content">
     <div class="function-buttons">
         <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-           th:href="@{'/author/add'}">+ Add author</a>
+           th:href="@{'/author/add'}" th:text="#{author.list.add}">+ Add author</a>
     </div>
-    <h1>Authors</h1>
+    <h1 th:text="#{author.list.header}">Authors</h1>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Action</th>
+            <th th:text="#{author.id}">ID</th>
+            <th th:text="#{author.name}">Name</th>
+            <th th:text="#{author.action}">Action</th>
         </tr>
         <tr th:if="${authors.size() > 0}" th:each="author : ${authors}">
             <td th:text="${author.id}">id</td>
             <td th:text="${author.name}">name</td>
             <td>
                 <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                   th:href="@{'/author/' + ${author.id} + '/edit'}">Edit</a>
+                   th:href="@{'/author/' + ${author.id} + '/edit'}" th:text="#{edit}">Edit</a>
                 <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-                   th:href="@{'/author/' + ${author.id} + '/show-books'}">Show books</a>
+                   th:href="@{'/author/' + ${author.id} + '/show-books'}" th:text="#{showBooks}">Show books</a>
             </td>
         </tr>
         <tr th:unless="${authors.size() > 0}">
-            <td colspan="3">No authors found!</td>
+            <td colspan="3" th:text="#{author.list.noAuthors}">No authors found!</td>
         </tr>
     </table>
 </div>

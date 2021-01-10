@@ -8,16 +8,16 @@
 </div>
 
 <div class="body-content">
-    <h1>Borrowed books</h1>
+    <h1 th:text="#{book.borrowed.header}">Borrowed books</h1>
     <table>
         <tr>
-            <th>User ID</th>
-            <th>User name</th>
-            <th>User ID number</th>
-            <th>Book ID</th>
-            <th>Book title</th>
-            <th>Deadline</th>
-            <th>Action</th>
+            <th th:text="#{book.userId}">User ID</th>
+            <th th:text="#{book.userName}">User name</th>
+            <th th:text="#{book.userIdNumber}">User ID number</th>
+            <th th:text="#{book.bookId}">Book ID</th>
+            <th th:text="#{book.bookTitle}">Book title</th>
+            <th th:text="#{book.deadline}">Deadline</th>
+            <th th:text="#{book.action}">Action</th>
         </tr>
         <tr th:if="${books.size() > 0}" th:each="book : ${books}">
             <td th:text="${book.user.id}">user id</td>
@@ -27,11 +27,12 @@
             <td th:text="${book.title}">book title</td>
             <td th:text="${book.deadlineToString()}">deadline</td>
             <td>
-                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-returning'}">Accept returning</a>
+                <a class="action-button" th:href="@{'/book/' + ${book.id} + '/accept-returning'}"
+                th:text="#{acceptReturning}">Accept returning</a>
             </td>
         </tr>
         <tr th:unless="${books.size() > 0}">
-            <td colspan="7">No books found!</td>
+            <td colspan="7" th:text="#{book.noBooks}">No books found!</td>
         </tr>
     </table>
 </div>

@@ -8,12 +8,12 @@
 </div>
 
 <div class="body-content">
-    <h1>Edit your info</h1>
+    <h1 th:text="#{user.edit.header}">Edit your info</h1>
     <form th:action="@{edit}" th:object="${user}" method="post">
         <input type="hidden" th:field="*{id}"/>
 
         <div class="label-input">
-            <label for="first-name">First name:</label>
+            <label for="first-name" th:text="#{user.form.firstName}">First name:</label>
             <input type="text" th:class="${#fields.hasErrors('firstName')} ? 'input-error' : 'input'" id="first-name"
                    th:field="*{firstName}">
             <div th:if="${#fields.hasErrors('firstName')}" class="alert">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="label-input">
-            <label for="last-name">Last name:</label>
+            <label for="last-name" th:text="#{user.form.lastName}">Last name:</label>
             <input type="text" th:class="${#fields.hasErrors('lastName')} ? 'input-error' : 'input'" id="last-name"
                    th:field="*{lastName}">
             <div th:if="${#fields.hasErrors('lastName')}" class="alert">
@@ -35,12 +35,12 @@
         </div>
 
         <div class="label-input">
-            <label for="id-number">ID number:</label>
+            <label for="id-number" th:text="#{user.form.idNumber}">ID number:</label>
             <input type="text" class="read-only" id="id-number" th:field="*{idNumber}" readonly>
         </div>
 
         <div class="label-input">
-            <label for="country">Country:</label>
+            <label for="country" th:text="#{user.form.country}">Country:</label>
             <input type="text" th:class="${#fields.hasErrors('country')} ? 'input-error' : 'input'" id="country"
                    th:field="*{country}">
             <div th:if="${#fields.hasErrors('country')}" class="alert">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="label-input">
-            <label for="state">State:</label>
+            <label for="state" th:text="#{user.form.state}">State:</label>
             <input type="text" th:class="${#fields.hasErrors('state')} ? 'input-error' : 'input'" id="state"
                    th:field="*{state}">
             <div th:if="${#fields.hasErrors('state')}" class="alert">
@@ -62,7 +62,7 @@
         </div>
 
         <div class="label-input">
-            <label for="city">City:</label>
+            <label for="city" th:text="#{user.form.city}">City:</label>
             <input type="text" th:class="${#fields.hasErrors('city')} ? 'input-error' : 'input'" id="city"
                    th:field="*{city}">
             <div th:if="${#fields.hasErrors('city')}" class="alert">
@@ -73,7 +73,7 @@
         </div>
 
         <div class="label-input">
-            <label for="street">Street:</label>
+            <label for="street" th:text="#{user.form.street}">Street:</label>
             <input type="text" th:class="${#fields.hasErrors('street')} ? 'input-error' : 'input'" id="street"
                    th:field="*{street}">
             <div th:if="${#fields.hasErrors('street')}" class="alert">
@@ -84,7 +84,7 @@
         </div>
 
         <div class="label-input">
-            <label for="home-number">Home number:</label>
+            <label for="home-number" th:text="#{user.form.homeNumber}">Home number:</label>
             <input type="text" th:class="${#fields.hasErrors('homeNumber')} ? 'input-error' : 'input'" id="home-number"
                    th:field="*{homeNumber}">
             <div th:if="${#fields.hasErrors('homeNumber')}" class="alert">

@@ -8,24 +8,24 @@
 </div>
 
 <div class="body-content">
-    <h1>Users</h1>
+    <h1 th:text="#{user.list.header}">Users</h1>
     <table>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>ID number</th>
-            <th>Country</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Street</th>
-            <th>Home no.</th>
-            <th>Book ID</th>
-            <th>Book title</th>
-            <th>Book status</th>
-            <th>Date</th>
-            <th>Deadline</th>
-            <th>Action</th>
+            <th th:text="#{user.list.id}">ID</th>
+            <th th:text="#{user.name}">Name</th>
+            <th th:text="#{user.list.role}">Role</th>
+            <th th:text="#{user.idNumber}">ID number</th>
+            <th th:text="#{user.country}">Country</th>
+            <th th:text="#{user.state}">State</th>
+            <th th:text="#{user.city}">City</th>
+            <th th:text="#{user.street}">Street</th>
+            <th th:text="#{user.homeNo}">Home no.</th>
+            <th th:text="#{user.bookId}">Book ID</th>
+            <th th:text="#{user.bookTitle}">Book title</th>
+            <th th:text="#{user.bookStatus}">Book status</th>
+            <th th:text="#{user.date}">Date</th>
+            <th th:text="#{user.deadline}">Deadline</th>
+            <th th:text="#{user.action}">Action</th>
         </tr>
         <tr th:each="user : ${users}">
             <td th:text="${user.id}">id</td>
@@ -62,13 +62,14 @@
                     <li th:each="book : ${user.books}" th:text="${book.deadlineToString()}">deadline</li>
                 </ul>
             </td>
-            <td th:unless="${user.books.size() > 0}" colspan="5">No reserved or borrowed books found!</td>
+            <td th:unless="${user.books.size() > 0}" colspan="5" th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
             <td>
                 <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
                    th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
-                   th:href="@{'/user/' + ${user.id} + '/delete'}">Delete</a>
+                   th:href="@{'/user/' + ${user.id} + '/delete'}" th:text="#{delete}">Delete</a>
                 <a class="action-button action-button-disabled" sec:authorize="${hasAuthority('ADMIN')}"
-                   th:unless="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}">Delete</a>
+                   th:unless="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
+                   th:text="#{delete}">Delete</a>
             </td>
         </tr>
     </table>

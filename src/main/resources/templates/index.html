@@ -8,18 +8,18 @@
 </div>
 
 <div class="body-content">
-    <h1>Find a book</h1>
+    <h1 th:text="#{index.header}">Find a book</h1>
     <form th:action="@{''}" method="post">
         <div class="label-input">
-            <label for="title">Title:</label>
+            <label for="title" th:text="#{index.title}">Title:</label>
             <input type="text" id="title" th:field="${book.title}">
         </div>
         <div class="label-input">
-            <label for="author">Author:</label>
+            <label for="author" th:text="#{index.author}">Author:</label>
             <input type="text" id="author" th:field="${author.name}">
         </div>
 
-        <button type="submit" class="action-button">Submit</button>
+        <button type="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>
 </div>
 

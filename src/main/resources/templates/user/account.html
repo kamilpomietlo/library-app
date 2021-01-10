@@ -8,17 +8,17 @@
 </div>
 
 <div class="body-content">
-    <h1>Your account info</h1>
+    <h1 th:text="#{user.account.header}">Your account info</h1>
     <table>
         <tr>
-            <th>Name</th>
-            <th>ID number</th>
-            <th>Country</th>
-            <th>State</th>
-            <th>City</th>
-            <th>Street</th>
-            <th>Home no.</th>
-            <th>Action</th>
+            <th th:text="#{user.name}">Name</th>
+            <th th:text="#{user.idNumber}">ID number</th>
+            <th th:text="#{user.country}">Country</th>
+            <th th:text="#{user.state}">State</th>
+            <th th:text="#{user.city}">City</th>
+            <th th:text="#{user.street}">Street</th>
+            <th th:text="#{user.homeNo}">Home no.</th>
+            <th th:text="#{user.action}">Action</th>
         </tr>
         <tr>
             <td th:text="${user.toString()}">name</td>
@@ -29,20 +29,20 @@
             <td th:text="${user.street}">street</td>
             <td th:text="${user.homeNumber}">homeNumber</td>
             <td>
-                <a class="action-button" th:href="@{'/user/edit'}">Edit info</a>
+                <a class="action-button" th:href="@{'/user/edit'}" th:text="#{editInfo}">Edit info</a>
             </td>
         </tr>
     </table>
     <div sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}">
         <div class="line"></div>
-        <h1>Your books</h1>
+        <h1 th:text="#{user.account.header2}">Your books</h1>
         <table>
             <tr>
-                <th>Book ID</th>
-                <th>Book title</th>
-                <th>Book status</th>
-                <th>Date</th>
-                <th>Deadline</th>
+                <th th:text="#{user.bookId}">Book ID</th>
+                <th th:text="#{user.bookTitle}">Book title</th>
+                <th th:text="#{user.bookStatus}">Book status</th>
+                <th th:text="#{user.date}">Date</th>
+                <th th:text="#{user.deadline}">Deadline</th>
             </tr>
             <tr th:if="${user.books.size() > 0}" th:each="book : ${user.books}">
                 <td th:text="${book.id}">book ID</td>
@@ -52,7 +52,7 @@
                 <td th:text="${book.deadlineToString()}">deadline</td>
             </tr>
             <tr th:unless="${user.books.size() > 0}">
-                <td colspan="5">No reserved or borrowed books found!</td>
+                <td colspan="5" th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
             </tr>
         </table>
     </div>
