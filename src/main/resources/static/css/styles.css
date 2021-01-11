@@ -79,7 +79,7 @@ body {
 }
 
 button {
-    margin: 50px 10px 0 10px;
+    margin: 30px 10px 0 10px;
     width: 70px;
     height: 30px;
 }
@@ -120,6 +120,8 @@ button:hover {
 .main-buttons {
     margin-left: auto;
     margin-right: 20px;
+    position: absolute;
+    right: 52px;
 }
 
 #register, #account {
@@ -221,6 +223,17 @@ input, select {
     margin-top: 20px;
 }
 
+.select-language {
+    width: auto;
+    height: auto;
+    font-size: 12px;
+    background: brown;
+}
+
+.option-language {
+    background: brown;
+}
+
 .input-error {
     display: inline-block;
     width: 350px;
@@ -252,11 +265,38 @@ input, select {
 
 .line {
     display: inline-block;
-    position: relative;
     width: 100%;
     height: 2px;
     margin: 30px 0 0 0;
     background: var(--detailsColor);
+}
+
+.language-line {
+    position: relative;
+    top: -5px;
+    display: inline-block;
+    width: 60%;
+    height: 2px;
+    background: var(--detailsColor);
+}
+
+.language-flag {
+    width: 25px;
+    height: 25px;
+}
+
+#lang-gb {
+    margin-bottom: -5px;
+}
+
+#lang-pl {
+    margin-top: -3px;
+}
+
+.language-choose {
+    position: absolute;
+    right: 8px;
+    text-align: center;
 }
 
 .register-info {
