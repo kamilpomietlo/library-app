@@ -65,7 +65,7 @@
             <select id="genre" th:field="*{genre}">
                 <option th:each="genre : ${T(com.kamilpomietlo.libraryapp.model.Genre).values()}"
                         th:value="${genre}"
-                        th:text="${genre}">
+                        th:text="${genre.getDisplayName()}">
                 </option>
             </select>
         </div>
