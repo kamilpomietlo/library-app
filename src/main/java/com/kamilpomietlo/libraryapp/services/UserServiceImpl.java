@@ -7,6 +7,7 @@ import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.model.UserRole;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -75,10 +77,17 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     public void sendConfirmationMail(String userMail, String confirmationToken) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(userMail);
-        mailMessage.setSubject("BestLib registration confirmation link");
         mailMessage.setFrom("bestlib@interia.pl");
-        mailMessage.setText("Thank you for registering. Please click on the link below to activate your account.\n\n"
-                + "http://localhost:8080/register/confirm?token=" + confirmationToken);
+
+        if (LocaleContextHolder.getLocale() == Locale.forLanguageTag("pl")) {
+            mailMessage.setSubject("Link aktywacyjny BestLib");
+            mailMessage.setText("Dziękujemy za rejestrację. Kliknij w poniższy link w celu aktywacji konta.\n\n"
+                    + "http://localhost:8080/register/confirm?token=" + confirmationToken);
+        } else {
+            mailMessage.setSubject("BestLib registration confirmation link");
+            mailMessage.setText("Thank you for registering. Please click on the link below to activate your account.\n\n"
+                    + "http://localhost:8080/register/confirm?token=" + confirmationToken);
+        }
 
         emailSenderService.sendEmail(mailMessage);
     }
