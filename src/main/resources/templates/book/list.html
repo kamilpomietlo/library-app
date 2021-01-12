@@ -42,7 +42,7 @@
             <td th:text="${book.isbn}">isbn</td>
             <td th:class="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).AVAILABLE}
                 ? 'book-available' : (${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).RESERVED}
-                ? 'book-reserved' : 'book-borrowed')" th:text="${book.bookStatus}">bookStatus
+                ? 'book-reserved' : 'book-borrowed')" th:text="${book.bookStatus.getDisplayName()}">bookStatus
             </td>
             <td>
                 <p th:if="${book.getDeadlineDate() != null}" th:text="${book.deadlineToString()}">deadline</p>

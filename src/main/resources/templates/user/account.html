@@ -47,7 +47,7 @@
             <tr th:if="${user.books.size() > 0}" th:each="book : ${user.books}">
                 <td th:text="${book.id}">book ID</td>
                 <td th:text="${book.title}">book title</td>
-                <td th:text="${book.bookStatus}">book status</td>
+                <td th:text="${book.bookStatus.getDisplayName()}">book status</td>
                 <td th:text="${book.dateToString()}">date</td>
                 <td th:text="${book.deadlineToString()}">deadline</td>
             </tr>

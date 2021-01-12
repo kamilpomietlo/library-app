@@ -1,16 +1,24 @@
 package com.kamilpomietlo.libraryapp.model;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+
 public enum CoverType {
-    SOFT("Soft"),
-    HARD("Hard");
+    SOFT("coverType.soft"),
+    HARD("coverType.hard");
 
-    private final String displayName;
+    private String description;
+    private MessageSource messageSource;
 
-    CoverType(String displayName) {
-        this.displayName = displayName;
+    CoverType(String description) {
+        this.description = description;
     }
 
     public String getDisplayName() {
-        return displayName;
+        return messageSource.getMessage(description, null, description, LocaleContextHolder.getLocale());
+    }
+
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 }
