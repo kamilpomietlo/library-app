@@ -3,6 +3,7 @@ package com.kamilpomietlo.libraryapp.commands;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.model.CoverType;
+import com.kamilpomietlo.libraryapp.model.Genre;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +29,7 @@ public class BookCommand extends BaseEntityCommand {
     @Size(min = 2, max = 3)
     private Set<Author> authors = new HashSet<>();
 
-    private Long genreId;
+    private Genre genre;
     private Long publisherId;
     private CoverType coverType;
 

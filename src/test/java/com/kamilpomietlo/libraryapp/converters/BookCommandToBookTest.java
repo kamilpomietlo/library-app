@@ -1,10 +1,7 @@
 package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
-import com.kamilpomietlo.libraryapp.model.Author;
-import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.BookStatus;
-import com.kamilpomietlo.libraryapp.model.CoverType;
+import com.kamilpomietlo.libraryapp.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +15,7 @@ class BookCommandToBookTest {
     private static final String TITLE = "Title";
     private static final Long AUTHOR_ID_1 = 1L;
     private static final Long AUTHOR_ID_2 = 2L;
-    private static final Long GENRE_ID = 1L;
+    private static final Genre GENRE = Genre.FANTASY;
     private static final Long PUBLISHER_ID = 1L;
     private static final CoverType COVER_TYPE = CoverType.SOFT;
     private static final Integer YEAR_OF_RELEASE = 2000;
@@ -50,7 +47,7 @@ class BookCommandToBookTest {
         BookCommand bookCommand = new BookCommand();
         bookCommand.setId(ID);
         bookCommand.setTitle(TITLE);
-        bookCommand.setGenreId(GENRE_ID);
+        bookCommand.setGenre(GENRE);
         bookCommand.setPublisherId(PUBLISHER_ID);
         bookCommand.setCoverType(COVER_TYPE);
         bookCommand.setYearOfRelease(YEAR_OF_RELEASE);
@@ -77,7 +74,7 @@ class BookCommandToBookTest {
         assertEquals(ID, book.getId());
         assertEquals(TITLE, book.getTitle());
         assertEquals(2, book.getAuthors().size());
-        assertEquals(GENRE_ID, book.getGenre().getId());
+        assertEquals(GENRE, book.getGenre());
         assertEquals(PUBLISHER_ID, book.getPublisher().getId());
         assertEquals(COVER_TYPE, book.getCoverType());
         assertEquals(YEAR_OF_RELEASE, book.getYearOfRelease());

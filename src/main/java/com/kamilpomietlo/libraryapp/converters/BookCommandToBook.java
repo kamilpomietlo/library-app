@@ -2,7 +2,6 @@ package com.kamilpomietlo.libraryapp.converters;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.model.User;
 import org.springframework.core.convert.converter.Converter;
@@ -31,11 +30,8 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
             book.setAuthors(source.getAuthors());
         }
 
-        if (source.getGenreId() != null) {
-            Genre genre = new Genre();
-            genre.setId(source.getGenreId());
-            book.setGenre(genre);
-            genre.getBooks().add(book);
+        if (source.getGenre() != null) {
+            book.setGenre(source.getGenre());
         }
 
         if (source.getPublisherId() != null) {

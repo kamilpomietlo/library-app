@@ -62,10 +62,10 @@
 
         <div class="label-input">
             <label for="genre" th:text="#{book.form.genre}">Genre:</label>
-            <select id="genre" th:field="*{genreId}">
-                <option th:each="genre : ${genres}"
-                        th:value="${genre.id}"
-                        th:text="${genre.description}">
+            <select id="genre" th:field="*{genre}">
+                <option th:each="genre : ${T(com.kamilpomietlo.libraryapp.model.Genre).values()}"
+                        th:value="${genre}"
+                        th:text="${genre}">
                 </option>
             </select>
         </div>

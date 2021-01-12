@@ -3,11 +3,9 @@ package com.kamilpomietlo.libraryapp.controllers;
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
-import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import com.kamilpomietlo.libraryapp.services.BookService;
-import com.kamilpomietlo.libraryapp.services.GenreService;
 import com.kamilpomietlo.libraryapp.services.PublisherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,14 +24,11 @@ public class BookController {
     private final BookService bookService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
-    private final GenreService genreService;
 
-    public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService,
-                          GenreService genreService) {
+    public BookController(BookService bookService, AuthorService authorService, PublisherService publisherService) {
         this.bookService = bookService;
         this.authorService = authorService;
         this.publisherService = publisherService;
-        this.genreService = genreService;
     }
 
     @GetMapping("list")
@@ -148,8 +143,8 @@ public class BookController {
         return publisherService.findAll();
     }
 
-    @ModelAttribute("genres")
-    private Set<Genre> getGenres() {
-        return genreService.findAll();
-    }
+//    @ModelAttribute("genres")
+//    private Set<Genre> getGenres() {
+//        return genreService.findAll();
+//    }
 }

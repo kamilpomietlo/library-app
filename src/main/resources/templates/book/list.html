@@ -35,7 +35,7 @@
                     <li th:each="author : ${book.authors}" th:text="${author.name}">authors</li>
                 </ul>
             </td>
-            <td th:text="${book.genre.description}">genre</td>
+            <td th:text="${book.genre}">genre</td>
             <td th:text="${book.publisher.name}">publisher</td>
             <td th:text="${book.coverType.getDisplayName()}">coverType</td>
             <td th:text="${book.yearOfRelease}">yearOfRelease</td>

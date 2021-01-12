@@ -15,7 +15,7 @@ class BookToBookCommandTest {
     private static final String TITLE = "Title";
     private static final Long AUTHOR_ID_1 = 1L;
     private static final Long AUTHOR_ID_2 = 2L;
-    private static final Long GENRE_ID = 1L;
+    private static final Genre GENRE = Genre.FANTASY;
     private static final Long PUBLISHER_ID = 1L;
     private static final CoverType COVER_TYPE = CoverType.SOFT;
     private static final Integer YEAR_OF_RELEASE = 2000;
@@ -47,6 +47,7 @@ class BookToBookCommandTest {
         Book book = new Book();
         book.setId(ID);
         book.setTitle(TITLE);
+        book.setGenre(GENRE);
         book.setCoverType(COVER_TYPE);
         book.setYearOfRelease(YEAR_OF_RELEASE);
         book.setIsbn(ISBN);
@@ -60,9 +61,6 @@ class BookToBookCommandTest {
         Author author2 = new Author();
         author2.setId(AUTHOR_ID_2);
 
-        Genre genre = new Genre();
-        genre.setId(GENRE_ID);
-
         Publisher publisher = new Publisher();
         publisher.setId(PUBLISHER_ID);
 
@@ -71,7 +69,6 @@ class BookToBookCommandTest {
 
         book.getAuthors().add(author1);
         book.getAuthors().add(author2);
-        book.setGenre(genre);
         book.setPublisher(publisher);
         book.setUser(user);
 
@@ -83,7 +80,7 @@ class BookToBookCommandTest {
         assertEquals(ID, bookCommand.getId());
         assertEquals(TITLE, bookCommand.getTitle());
         assertEquals(2, book.getAuthors().size());
-        assertEquals(GENRE_ID, bookCommand.getGenreId());
+        assertEquals(GENRE, bookCommand.getGenre());
         assertEquals(PUBLISHER_ID, bookCommand.getPublisherId());
         assertEquals(COVER_TYPE, bookCommand.getCoverType());
         assertEquals(YEAR_OF_RELEASE, bookCommand.getYearOfRelease());

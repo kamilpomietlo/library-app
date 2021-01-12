@@ -24,8 +24,7 @@ public class Book extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id")
+    @Enumerated(value = EnumType.STRING)
     private Genre genre;
 
     @ManyToOne

@@ -29,7 +29,7 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
         }
 
         if (source.getGenre() != null) {
-            bookCommand.setGenreId(source.getGenre().getId());
+            bookCommand.setGenre(source.getGenre());
         }
 
         if (source.getPublisher() != null) {

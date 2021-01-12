@@ -6,7 +6,6 @@ import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import com.kamilpomietlo.libraryapp.services.BookService;
-import com.kamilpomietlo.libraryapp.services.GenreService;
 import com.kamilpomietlo.libraryapp.services.PublisherService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,9 +42,6 @@ class BookControllerTest {
 
     @Mock
     PublisherService publisherService;
-
-    @Mock
-    GenreService genreService;
 
     @BeforeEach
     void setUp() {
