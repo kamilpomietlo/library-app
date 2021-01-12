@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
-@PasswordMatches(groups = RegisterInfo.class)
+@PasswordMatches(groups = RegisterInfo.class, message = "{password.matches}")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -56,7 +56,7 @@ public class UserCommand extends BaseEntityCommand {
 
     @NotBlank(groups = RegisterInfo.class)
     @Email(groups = RegisterInfo.class)
-    @EmailNotInUse(groups = RegisterInfo.class)
+    @EmailNotInUse(groups = RegisterInfo.class, message = "{email.notInUse}")
     private String email;
 
     @NotBlank(groups = RegisterInfo.class)
