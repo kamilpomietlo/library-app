@@ -3,7 +3,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: bestlib.mailing@gmail.com
-    password: x
+    password: ENC(qMIweIrNsJViznVf9TGtDiDlQe94AIgO)
     properties:
       mail:
         smtp:
@@ -13,3 +13,9 @@ spring:
           connectiontimeout: 5000
           timeout: 5000
           writetimeout: 5000
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+    password: BestLib #should be stored somewhere else
