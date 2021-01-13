@@ -75,18 +75,20 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
 
     @Override
     public void sendConfirmationMail(String userMail, String confirmationToken) {
+        String confirmationLink = "https://bestlib-app.herokuapp.com/register/confirm?token=";
+
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(userMail);
-        mailMessage.setFrom("bestlib@interia.pl");
+        mailMessage.setFrom("BestLib");
 
         if (LocaleContextHolder.getLocale() == Locale.forLanguageTag("pl")) {
             mailMessage.setSubject("Link aktywacyjny BestLib");
             mailMessage.setText("Dziękujemy za rejestrację. Kliknij w poniższy link w celu aktywacji konta.\n\n"
-                    + "http://localhost:8080/register/confirm?token=" + confirmationToken);
+                    + confirmationLink + confirmationToken);
         } else {
             mailMessage.setSubject("BestLib registration confirmation link");
             mailMessage.setText("Thank you for registering. Please click on the link below to activate your account.\n\n"
-                    + "http://localhost:8080/register/confirm?token=" + confirmationToken);
+                    + confirmationLink + confirmationToken);
         }
 
         emailSenderService.sendEmail(mailMessage);
