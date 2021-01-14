@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Profile({"default", "dev"})
+@Profile("default")
 @Component
 public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 

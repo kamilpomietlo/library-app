@@ -37,7 +37,7 @@ public class Book extends BaseEntity {
     private Integer yearOfRelease;
     private String isbn;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @Enumerated(value = EnumType.STRING)

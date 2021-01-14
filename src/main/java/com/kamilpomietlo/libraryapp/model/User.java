@@ -26,7 +26,7 @@ public class User extends BaseEntity implements UserDetails {
     private String street;
     private String homeNumber;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private Set<Book> books = new HashSet<>();
 
