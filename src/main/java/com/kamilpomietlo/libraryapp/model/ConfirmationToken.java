@@ -3,7 +3,9 @@ package com.kamilpomietlo.libraryapp.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -11,10 +13,6 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 public class ConfirmationToken extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private String confirmationToken;
     private LocalDate createDate;
