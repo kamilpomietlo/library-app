@@ -1,5 +1,6 @@
 # BestLib Library System
-![image](https://drive.google.com/uc?export=view&id=1pcPdQyfO7qEwCzFTbWOeP1Mm5s4mVvZd)
+<a href="https://drive.google.com/uc?export=view&id=1pcPdQyfO7qEwCzFTbWOeP1Mm5s4mVvZd">
+<img src="https://drive.google.com/uc?export=view&id=1pcPdQyfO7qEwCzFTbWOeP1Mm5s4mVvZd" style="width: 650px; max-width: 100%; height: auto" title="Click to enlarge picture"/>
 
 
 ## General info
@@ -24,7 +25,7 @@ Project is created with:
 
 ## Launch
 There are two ways to run the application:
-* you can execute com.kamilpomietlo.libraryapp.LibraryAppApplication within IDE which starts a webserver on http://localhost:8080 or
+* you can execute com.kamilpomietlo.libraryapp.LibraryApp within IDE which starts a webserver on http://localhost:8080
 * you can simply launch it on Heroku at this link: https://bestlib-app.herokuapp.com (it may take up to 30 seconds to start)
 
 
