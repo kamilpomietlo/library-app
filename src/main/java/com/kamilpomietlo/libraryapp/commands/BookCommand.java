@@ -4,13 +4,13 @@ import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.model.CoverType;
 import com.kamilpomietlo.libraryapp.model.Genre;
+import com.kamilpomietlo.libraryapp.validations.MaxCurrentYear;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +36,7 @@ public class BookCommand extends BaseEntityCommand {
     private CoverType coverType;
 
     @NotNull
-    @Max(2020)
+    @MaxCurrentYear(message = "{maxCurrentYear}")
     private Integer yearOfRelease;
 
     @ISBN
