@@ -27,10 +27,12 @@ public class UserCommand extends BaseEntityCommand {
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
     @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[\\p{L}]*$")
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String firstName;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
-    @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[\\p{L}]*$")
+    @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[\\p{L}]*[-]?[\\p{L}]+$")
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String lastName;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
@@ -38,18 +40,24 @@ public class UserCommand extends BaseEntityCommand {
     private String idNumber;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String country;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String state;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String city;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String street;
 
     @NotBlank(groups = {RegisterInfo.class, EditInfo.class})
+    @Pattern(groups = {RegisterInfo.class, EditInfo.class}, regexp = "^[0-9]*[A-Za-z]?[/]?[0-9]*$")
+    @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String homeNumber;
 
     private Set<BookCommand> books = new HashSet<>();

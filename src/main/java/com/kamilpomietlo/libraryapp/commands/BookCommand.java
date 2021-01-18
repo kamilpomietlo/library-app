@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +25,7 @@ import java.util.Set;
 public class BookCommand extends BaseEntityCommand {
 
     @NotBlank
+    @Length(max = 128)
     private String title;
 
     @Size(min = 2, max = 3)
