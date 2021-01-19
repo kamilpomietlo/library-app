@@ -8,9 +8,12 @@
 </div>
 
 <div class="body-content">
+    <div class="back-button">
+        <a class="action-button" th:href="@{'/'}" th:text="#{back}">Back</a>
+    </div>
     <div class="function-buttons">
         <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-           th:href="@{'/book/add'}" th:text="#{book.list.add}">+ Add book</a>
+        th:href="@{'/book/add'}" th:text="#{book.list.add}">+ Add book</a>
     </div>
     <h1 th:text="#{book.list.header}">Books</h1>
     <table>

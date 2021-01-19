@@ -137,7 +137,15 @@ button:hover {
     margin-left: 10px;
 }
 
+.back-button {
+    display: inline-block;
+    float: left;
+    margin-top: 15px;
+    margin-left: -30px;
+}
+
 .function-buttons {
+    display: inline-block;
     float: right;
     margin-top: 15px;
     margin-right: -30px;
