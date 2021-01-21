@@ -11,7 +11,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -70,7 +72,7 @@ class IndexServiceImplTest {
     }
 
     @Test
-    void searchByBookAndAuthorEmptyFields() {
+    void findBooksEmptyFields() {
         // given
         Author author = new Author();
         author.setId(1L);
@@ -80,7 +82,7 @@ class IndexServiceImplTest {
         book.setId(1L);
         book.setTitle("");
 
-        Genre genre = Genre.FANTASY;
+        Genre genre = null;
 
         // when
         Set<Book> bookSet = indexService.findBooks(book, author, genre);
@@ -93,7 +95,7 @@ class IndexServiceImplTest {
     }
 
     @Test
-    void searchByBookAndAuthorOnlyBook() {
+    void findBooksOnlyBook() {
         // given
         Set<Book> books = new HashSet<>();
 
@@ -124,7 +126,7 @@ class IndexServiceImplTest {
     }
 
     @Test
-    void searchByBookAndAuthorOnlyAuthor() {
+    void findBooksOnlyAuthor() {
         // given
         Set<Author> authors = new HashSet<>();
 
@@ -151,5 +153,49 @@ class IndexServiceImplTest {
         assertEquals(1, bookSet.size());
         verify(bookRepository, times(0)).findByTitleIgnoreCaseContaining(anyString());
         verify(authorRepository, times(1)).findByNameIgnoreCaseContaining(anyString());
+    }
+
+    @Test
+    void findBooksOnlyGenre() {
+        // given
+        Set<Author> authors = new HashSet<>();
+        List<Book> books = new ArrayList<>();
+
+        Author author = new Author();
+        author.setId(1L);
+        author.setName("");
+
+        Book book1 = new Book();
+        book1.setId(1L);
+        book1.setTitle("");
+        book1.setGenre(Genre.FANTASY);
+
+        Book book2 = new Book();
+        book2.setId(2L);
+        book2.setTitle("");
+        book2.setGenre(Genre.HISTORY);
+
+        Book book3 = new Book();
+        book3.setId(3L);
+        book3.setTitle("");
+        book3.setGenre(Genre.FANTASY);
+
+        Genre genre = Genre.FANTASY;
+
+        authors.add(author);
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+
+        when(bookRepository.findAll()).thenReturn(books);
+
+        // when
+        Set<Book> bookSet = indexService.findBooks(book1, author, genre);
+
+        // then
+        assertNotNull(bookSet);
+        assertEquals(2, bookSet.size());
+        verify(bookRepository, times(0)).findByTitleIgnoreCaseContaining(anyString());
+        verify(authorRepository, times(0)).findByNameIgnoreCaseContaining(anyString());
     }
 }
