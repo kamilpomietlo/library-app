@@ -18,6 +18,16 @@
             <label for="author" th:text="#{index.author}">Author:</label>
             <input type="text" id="author" th:field="${author.name}">
         </div>
+        <div class="label-input">
+            <label for="genre" th:text="#{index.genre}">Genre:</label>
+            <select id="genre" th:field="${book.genre}">
+                <option th:value="null">------------</option>
+                <option th:each="genre : ${T(com.kamilpomietlo.libraryapp.model.Genre).values()}"
+                        th:value="${genre}"
+                        th:text="${genre.getDisplayName()}">
+                </option>
+            </select>
+        </div>
 
         <button type="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>

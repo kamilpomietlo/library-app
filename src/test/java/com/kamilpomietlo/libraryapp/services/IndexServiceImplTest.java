@@ -2,6 +2,7 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ class IndexServiceImplTest {
     }
 
     @Test
-    void searchByBookAndAuthor() {
+    void findBooks() {
         // given
         Set<Author> authors = new HashSet<>();
         Set<Book> books = new HashSet<>();
@@ -48,6 +49,9 @@ class IndexServiceImplTest {
         book.setId(1L);
         book.setTitle("title");
         book.addAuthor(author);
+        book.setGenre(Genre.FANTASY);
+
+        Genre genre = Genre.FANTASY;
 
         books.add(book);
         authors.add(author);
@@ -56,7 +60,7 @@ class IndexServiceImplTest {
         when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authors);
 
         // when
-        Set<Book> bookSet = indexService.searchByBookAndAuthor(book, author);
+        Set<Book> bookSet = indexService.findBooks(book, author, genre);
 
         // then
         assertNotNull(bookSet);
@@ -76,8 +80,10 @@ class IndexServiceImplTest {
         book.setId(1L);
         book.setTitle("");
 
+        Genre genre = Genre.FANTASY;
+
         // when
-        Set<Book> bookSet = indexService.searchByBookAndAuthor(book, author);
+        Set<Book> bookSet = indexService.findBooks(book, author, genre);
 
         // then
         assertNotNull(bookSet);
@@ -99,13 +105,16 @@ class IndexServiceImplTest {
         book.setId(1L);
         book.setTitle("title");
         book.addAuthor(author);
+        book.setGenre(Genre.FANTASY);
+
+        Genre genre = Genre.FANTASY;
 
         books.add(book);
 
         when(bookRepository.findByTitleIgnoreCaseContaining(anyString())).thenReturn(books);
 
         // when
-        Set<Book> bookSet = indexService.searchByBookAndAuthor(book, author);
+        Set<Book> bookSet = indexService.findBooks(book, author, genre);
 
         // then
         assertNotNull(bookSet);
@@ -128,12 +137,14 @@ class IndexServiceImplTest {
         book.setTitle("");
         book.addAuthor(author);
 
+        Genre genre = null;
+
         authors.add(author);
 
         when(authorRepository.findByNameIgnoreCaseContaining(anyString())).thenReturn(authors);
 
         // when
-        Set<Book> bookSet = indexService.searchByBookAndAuthor(book, author);
+        Set<Book> bookSet = indexService.findBooks(book, author, genre);
 
         // then
         assertNotNull(bookSet);

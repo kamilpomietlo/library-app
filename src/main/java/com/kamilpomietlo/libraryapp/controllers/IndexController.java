@@ -4,6 +4,7 @@ import com.kamilpomietlo.libraryapp.commands.UserCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
+import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.IndexService;
 import com.kamilpomietlo.libraryapp.services.UserService;
@@ -38,13 +39,15 @@ public class IndexController {
     public String searchForm(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("author", new Author());
+        model.addAttribute("genre", Genre.values());
 
         return "index";
     }
 
     @PostMapping({"index", ""})
-    public String searchSubmit(@ModelAttribute("book") Book book, @ModelAttribute("author") Author author, Model model) {
-        model.addAttribute("books", indexService.searchByBookAndAuthor(book, author));
+    public String searchSubmit(@ModelAttribute("book") Book book, @ModelAttribute("author") Author author,
+                               Genre genre, Model model) {
+        model.addAttribute("books", indexService.findBooks(book, author, genre));
 
         return "book/list";
     }
@@ -57,7 +60,8 @@ public class IndexController {
     }
 
     @PostMapping("register")
-    public String registerUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand, BindingResult bindingResult) {
+    public String registerUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand,
+                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 

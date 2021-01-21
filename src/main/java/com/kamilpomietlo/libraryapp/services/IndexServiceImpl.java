@@ -2,12 +2,14 @@ package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
+import com.kamilpomietlo.libraryapp.model.Genre;
 import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Service
@@ -23,10 +25,17 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public Set<Book> searchByBookAndAuthor(Book book, Author author) {
-        Set<Book> searchedBooks = new HashSet<>();
+    public Set<Book> findBooks(Book book, Author author, Genre genre) {
+        Set<Book> searchedBooks;
 
-        // no title provided
+        // if only genre provided, initialize set with all books
+        if (book.getTitle().isEmpty() && author.getName().isEmpty() && genre != null) {
+            searchedBooks = new HashSet<>(bookRepository.findAll());
+        } else {
+            searchedBooks = new HashSet<>();
+        }
+
+        // no book title but author name provided
         if (book.getTitle().isEmpty()) {
             if (!author.getName().isEmpty()) {
                 Set<Author> authors = authorRepository.findByNameIgnoreCaseContaining(author.getName());
@@ -36,14 +45,16 @@ public class IndexServiceImpl implements IndexService {
                 }
             }
 
-            return searchedBooks;
+            // filtering books by genre if provided
+            return filterByGenre(searchedBooks, genre);
         }
 
-        // no name provided
+        // no author name but book title provided
         if (author.getName().isEmpty()) {
             searchedBooks = bookRepository.findByTitleIgnoreCaseContaining(book.getTitle());
 
-            return searchedBooks;
+            // filtering books by genre if provided
+            return filterByGenre(searchedBooks, genre);
         }
 
         // both title and name provided
@@ -58,6 +69,23 @@ public class IndexServiceImpl implements IndexService {
             }
         }
 
-        return searchedBooks;
+        // filtering books by genre if provided
+        return filterByGenre(searchedBooks, genre);
+    }
+
+    private Set<Book> filterByGenre(Set<Book> books, Genre genre) {
+        Iterator<Book> iterator = books.iterator();
+
+        if (genre != null) {
+            while (iterator.hasNext()) {
+                Book object = iterator.next();
+
+                if (object.getGenre() != genre) {
+                    iterator.remove();
+                }
+            }
+        }
+
+        return books;
     }
 }

@@ -74,7 +74,7 @@ class IndexControllerTest {
         books.add(book2);
 
         // when
-        when(indexService.searchByBookAndAuthor(any(), any())).thenReturn(books);
+        when(indexService.findBooks(any(), any(), any())).thenReturn(books);
 
         // then
         mockMvc.perform(post("/"))
@@ -82,7 +82,7 @@ class IndexControllerTest {
                 .andExpect(model().attribute("books", books))
                 .andExpect(view().name("book/list"));
 
-        verify(indexService, times(1)).searchByBookAndAuthor(any(), any());
+        verify(indexService, times(1)).findBooks(any(), any(), any());
     }
 
     @Test
