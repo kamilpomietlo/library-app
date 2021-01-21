@@ -127,7 +127,7 @@ class UserControllerTest {
                 .param("state", "state")
                 .param("city", "city")
                 .param("street", "street")
-                .param("homeNumber", "homeNumber"))
+                .param("homeNumber", "1a"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/user/account"));
 
