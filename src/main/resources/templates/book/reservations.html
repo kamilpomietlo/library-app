@@ -11,21 +11,21 @@
     <h1 th:text="#{book.reservations.header}">Reservations</h1>
     <table>
         <tr>
+            <th th:text="#{book.bookId}">Book ID</th>
+            <th th:text="#{book.bookTitle}">Book title</th>
             <th th:text="#{book.userId}">User ID</th>
             <th th:text="#{book.userName}">User name</th>
             <th th:text="#{book.userIdNumber}">User ID number</th>
-            <th th:text="#{book.bookId}">Book ID</th>
-            <th th:text="#{book.bookTitle}">Book title</th>
             <th th:text="#{book.date}">Date</th>
             <th th:text="#{book.deadline}">Deadline</th>
             <th th:text="#{book.action}">Action</th>
         </tr>
         <tr th:if="${books.size() > 0}" th:each="book : ${books}">
+            <td th:text="${book.id}">book id</td>
+            <td th:text="${book.title}">book title</td>
             <td th:text="${book.user.id}">user id</td>
             <td th:text="${book.user.toString()}">user name</td>
             <td th:text="${book.user.idNumber}">user idNumber</td>
-            <td th:text="${book.id}">book id</td>
-            <td th:text="${book.title}">book title</td>
             <td th:text="${book.dateToString()}">date</td>
             <td th:text="${book.deadlineToString()}">deadline</td>
             <td>
