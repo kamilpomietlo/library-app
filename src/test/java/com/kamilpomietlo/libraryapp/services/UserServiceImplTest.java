@@ -21,7 +21,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -252,7 +251,7 @@ class UserServiceImplTest {
         when(userRepository.findAll()).thenReturn(users);
 
         // when
-        Set<User> userSet = userService.findAll();
+        List<User> userSet = userService.findAll();
 
         // then
         assertNotNull(userSet);

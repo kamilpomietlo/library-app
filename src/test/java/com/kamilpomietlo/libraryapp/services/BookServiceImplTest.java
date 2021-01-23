@@ -16,7 +16,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -166,7 +165,7 @@ class BookServiceImplTest {
         when(bookRepository.findAll()).thenReturn(books);
 
         // when
-        Set<Book> bookSet = bookService.getReservedBooks();
+        List<Book> bookSet = bookService.getReservedBooks();
 
         // then
         assertNotNull(bookSet);
@@ -229,7 +228,7 @@ class BookServiceImplTest {
         when(bookRepository.findAll()).thenReturn(books);
 
         // when
-        Set<Book> bookSet = bookService.getReservedBooks();
+        List<Book> bookSet = bookService.getReservedBooks();
 
         // then
         assertNotNull(bookSet);
@@ -292,7 +291,7 @@ class BookServiceImplTest {
         when(bookRepository.findAll()).thenReturn(books);
 
         // when
-        Set<Book> bookSet = bookService.findAll();
+        List<Book> bookSet = bookService.findAll();
 
         // then
         assertNotNull(bookSet);

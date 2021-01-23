@@ -17,7 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -51,7 +53,7 @@ class BookControllerTest {
     @Test
     void getBooks() throws Exception {
         // given
-        Set<Book> books = new HashSet<>();
+        List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
         book1.setId(1L);
@@ -210,7 +212,7 @@ class BookControllerTest {
     @Test
     void getReservations() throws Exception {
         // given
-        Set<Book> books = new HashSet<>();
+        List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
         book1.setId(1L);
@@ -246,7 +248,7 @@ class BookControllerTest {
     @Test
     void getBorrowedBooks() throws Exception {
         // given
-        Set<Book> books = new HashSet<>();
+        List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
         book1.setId(1L);

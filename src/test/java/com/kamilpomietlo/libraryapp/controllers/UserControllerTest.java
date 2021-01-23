@@ -13,8 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
@@ -44,7 +44,7 @@ class UserControllerTest {
     @Test
     void getUsers() throws Exception {
         // given
-        Set<User> users = new HashSet<>();
+        List<User> users = new ArrayList<>();
 
         User user1 = new User();
         user1.setId(1L);

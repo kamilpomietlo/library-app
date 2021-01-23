@@ -13,8 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -42,7 +42,7 @@ class AuthorControllerTest {
     @Test
     void getAuthors() throws Exception {
         // given
-        Set<Author> authors = new HashSet<>();
+        List<Author> authors = new ArrayList<>();
 
         Author author1 = new Author();
         author1.setId(1L);
@@ -139,7 +139,7 @@ class AuthorControllerTest {
     @Test
     void showBooks() throws Exception {
         // given
-        Set<Book> books = new HashSet<>();
+        List<Book> books = new ArrayList<>();
 
         Book book1 = new Book();
         book1.setId(1L);

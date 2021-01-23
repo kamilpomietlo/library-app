@@ -14,7 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RequestMapping("book")
@@ -134,12 +134,12 @@ public class BookController {
     }
 
     @ModelAttribute("authors")
-    private Set<Author> getAuthors() {
+    private List<Author> getAuthors() {
         return authorService.findAll();
     }
 
     @ModelAttribute("publishers")
-    private Set<Publisher> getPublishers() {
+    private List<Publisher> getPublishers() {
         return publisherService.findAll();
     }
 

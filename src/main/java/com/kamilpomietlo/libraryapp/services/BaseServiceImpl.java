@@ -4,9 +4,9 @@ import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaRepository<T, Long>> implements BaseService<T> {
 
@@ -17,8 +17,8 @@ public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaReposit
     }
 
     @Override
-    public Set<T> findAll() {
-        return new HashSet<>(repository.findAll());
+    public List<T> findAll() {
+        return new ArrayList<>(repository.findAll());
     }
 
     @Override

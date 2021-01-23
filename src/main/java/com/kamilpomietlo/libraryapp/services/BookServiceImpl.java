@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -69,8 +69,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
     }
 
     @Override
-    public Set<Book> getReservedBooks() {
-        Set<Book> reservedBooks = new HashSet<>();
+    public List<Book> getReservedBooks() {
+        List<Book> reservedBooks = new ArrayList<>();
 
         for (Book book : repository.findAll()) {
             if (book.getBookStatus() == BookStatus.RESERVED) {
@@ -95,8 +95,8 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
     }
 
     @Override
-    public Set<Book> getBorrowedBooks() {
-        Set<Book> borrowedBooks = new HashSet<>();
+    public List<Book> getBorrowedBooks() {
+        List<Book> borrowedBooks = new ArrayList<>();
 
         for (Book book : repository.findAll()) {
             if (book.getBookStatus() == BookStatus.BORROWED) {

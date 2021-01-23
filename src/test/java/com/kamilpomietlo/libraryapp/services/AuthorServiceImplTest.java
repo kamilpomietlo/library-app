@@ -18,7 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -94,7 +93,7 @@ class AuthorServiceImplTest {
         when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
 
         // when
-        Set<Book> books = authorService.getAuthorsBooks(author.getId());
+        List<Book> books = authorService.getAuthorsBooks(author.getId());
 
         // then
         assertNotNull(books);
@@ -123,7 +122,7 @@ class AuthorServiceImplTest {
         when(authorRepository.findAll()).thenReturn(authors);
 
         // when
-        Set<Author> authorSet = authorService.findAll();
+        List<Author> authorSet = authorService.findAll();
 
         // then
         assertNotNull(authorSet);

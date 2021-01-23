@@ -6,8 +6,8 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true, exclude = "books")
@@ -18,7 +18,7 @@ public class Publisher extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "publisher")
-    private Set<Book> books = new HashSet<>();
+    private List<Book> books = new ArrayList<>();
 
     public Publisher() {
     }

@@ -9,7 +9,7 @@ import com.kamilpomietlo.libraryapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Transactional
@@ -40,7 +40,7 @@ public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRe
     }
 
     @Override
-    public Set<Book> getPublishersBooks(Long id) {
+    public List<Book> getPublishersBooks(Long id) {
         Publisher publisher = findById(id);
 
         return publisher.getBooks();

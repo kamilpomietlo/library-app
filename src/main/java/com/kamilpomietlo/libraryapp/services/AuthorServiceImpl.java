@@ -9,7 +9,7 @@ import com.kamilpomietlo.libraryapp.repositories.AuthorRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 @Transactional
@@ -39,7 +39,7 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository>
     }
 
     @Override
-    public Set<Book> getAuthorsBooks(Long id) {
+    public List<Book> getAuthorsBooks(Long id) {
         Author author = findById(id);
 
         return author.getBooks();
