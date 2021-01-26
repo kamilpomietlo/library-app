@@ -10,9 +10,15 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import java.util.Locale;
 
+/**
+ * Class used for web configuration.
+ */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    /**
+     * Gets user locale by {@code CookieLocaleResolver}.
+     */
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
@@ -21,6 +27,9 @@ public class WebConfig implements WebMvcConfigurer {
         return localeResolver;
     }
 
+    /**
+     * Provides language change.
+     */
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
@@ -29,6 +38,9 @@ public class WebConfig implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());

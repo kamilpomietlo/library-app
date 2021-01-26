@@ -12,6 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * Class used for web security configuration.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,6 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.myUserDetailsService = myUserDetailsService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         String[] anonymousMatchers = new String[] {
@@ -50,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
+
                 .exceptionHandling().accessDeniedPage("/403")
                 .and()
 
@@ -63,12 +70,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void configure(WebSecurity web) {
         web
                 .ignoring().antMatchers("/h2-console/**", "/css/**", "/images/**");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -76,6 +89,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * Provides {@code BCryptPasswordEncoder}.
+     *
+     * @return new {@code BCryptPasswordEncoder} object
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
