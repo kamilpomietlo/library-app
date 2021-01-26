@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Controller used to global exception handling.
+ */
 @Controller
 @ControllerAdvice
 public class ExceptionHandlerController {

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * Controller related to {@code Publisher} object.
+ */
 @Slf4j
 @RequestMapping("publisher")
 @Controller
@@ -35,6 +38,13 @@ public class PublisherController {
         return "publisher/add";
     }
 
+    /**
+     * Submits form data for adding new object and saves it if validation is successful.
+     *
+     * @param publisherCommand object to be added
+     * @param bindingResult performs validation of the object
+     * @return add form when validation failed, otherwise redirects to list of publishers
+     */
     @PostMapping("add")
     public String addPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
                                      BindingResult bindingResult) {
@@ -56,6 +66,13 @@ public class PublisherController {
         return "publisher/edit";
     }
 
+    /**
+     * Submits form data for editing existing object and saves it if validation is successful.
+     *
+     * @param publisherCommand object to be edited
+     * @param bindingResult performs validation of the object
+     * @return edit form when validation failed, otherwise redirects to list of publishers
+     */
     @PostMapping("{id}/edit")
     public String editPublisherSubmit(@Valid @ModelAttribute("publishers") PublisherCommand publisherCommand,
                                       BindingResult bindingResult) {

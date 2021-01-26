@@ -11,6 +11,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller related to {@code User} object.
+ */
 @Slf4j
 @RequestMapping("user")
 @Controller
@@ -38,6 +41,12 @@ public class UserController {
         return "redirect:/user/list";
     }
 
+    /**
+     * Provides user account page for the currently logged user.
+     *
+     * @param model model
+     * @return user account page
+     */
     @GetMapping("account")
     public String getAccountInfo(Model model) {
         Long userId = myUserDetailsService.getLoggedAccountId();
@@ -47,6 +56,12 @@ public class UserController {
         return "user/account";
     }
 
+    /**
+     * Provides user edit page for the currently logged user.
+     *
+     * @param model model
+     * @return user edit page
+     */
     @GetMapping("edit")
     public String editUserForm(Model model) {
          Long id = myUserDetailsService.getLoggedAccountId();
@@ -56,6 +71,14 @@ public class UserController {
          return "user/edit";
     }
 
+    /**
+     * Submits form data for editing existing object and saves it if validation is successful. Fields not sent
+     * via form are set to current ones before saving object.
+     *
+     * @param userCommand object to be edited
+     * @param bindingResult performs validation of the object
+     * @return edit form when validation failed, otherwise redirects to list of publishers
+     */
     @PostMapping("edit")
     public String editUserSubmit(@Validated(EditInfo.class) @ModelAttribute("user") UserCommand userCommand,
                                  BindingResult bindingResult) {

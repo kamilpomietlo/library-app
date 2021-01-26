@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * Controller related to {@code Author} object.
+ */
 @Slf4j
 @RequestMapping("author")
 @Controller
@@ -35,6 +38,13 @@ public class AuthorController {
         return "author/add";
     }
 
+    /**
+     * Submits form data for adding new object and saves it if validation is successful.
+     *
+     * @param authorCommand object to be added
+     * @param bindingResult performs validation of the object
+     * @return add form when validation failed, otherwise redirects to list of authors
+     */
     @PostMapping("add")
     public String addAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
                                   BindingResult bindingResult) {
@@ -56,6 +66,13 @@ public class AuthorController {
         return "author/edit";
     }
 
+    /**
+     * Submits form data for editing existing object and saves it if validation is successful.
+     *
+     * @param authorCommand object to be edited
+     * @param bindingResult performs validation of the object
+     * @return edit form when validation failed, otherwise redirects to list of authors
+     */
     @PostMapping("{id}/edit")
     public String editAuthorSubmit(@Valid @ModelAttribute("authors") AuthorCommand authorCommand,
                                    BindingResult bindingResult) {

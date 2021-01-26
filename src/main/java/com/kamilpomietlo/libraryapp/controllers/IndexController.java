@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 
+/**
+ * Controller used for index page activities.
+ */
 @Slf4j
 @Controller
 public class IndexController {
@@ -59,6 +62,13 @@ public class IndexController {
         return "register";
     }
 
+    /**
+     * Submits form data for registering new user and saves it if validation is successful.
+     *
+     * @param userCommand object to be saved
+     * @param bindingResult performs validation of the object
+     * @return registration form when validation failed, otherwise register-info page
+     */
     @PostMapping("register")
     public String registerUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand,
                                    BindingResult bindingResult) {
@@ -73,6 +83,12 @@ public class IndexController {
         return "register-info";
     }
 
+    /**
+     * Confirms user registration if provided {@code ConfirmationToken} is correct.
+     *
+     * @param token confirmationToken
+     * @return login page
+     */
     @GetMapping("register/confirm")
     public String confirmMail(@RequestParam("token") String token) {
         Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);

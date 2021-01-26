@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller related to {@code Book} object.
+ */
 @Slf4j
 @RequestMapping("book")
 @Controller
@@ -52,6 +55,13 @@ public class BookController {
         return "book/add";
     }
 
+    /**
+     * Submits form data for adding new object and saves it if validation is successful.
+     *
+     * @param bookCommand object to be added
+     * @param bindingResult performs validation of the object
+     * @return add form when validation failed, otherwise redirects to list of books
+     */
     @PostMapping("add")
     public String addBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
                                 BindingResult bindingResult) {
@@ -76,6 +86,14 @@ public class BookController {
         return "book/edit";
     }
 
+    /**
+     * Submits form data for editing existing object and saves it if validation is successful. Fields not sent
+     * via form are set to current ones before saving object.
+     *
+     * @param bookCommand object to be edited
+     * @param bindingResult performs validation of the object
+     * @return edit form when validation failed, otherwise redirects to list of books
+     */
     @PostMapping("{id}/edit")
     public String editBookSubmit(@Valid @ModelAttribute("book") BookCommand bookCommand,
                                  BindingResult bindingResult) {
@@ -96,6 +114,12 @@ public class BookController {
         return "redirect:/book/list";
     }
 
+    /**
+     * Reserves the book by {@code id}.
+     *
+     * @param id id of the book to be reserved
+     * @return redirects to user account page
+     */
     @GetMapping("{id}/reserve")
     public String reserveBook(@PathVariable Long id) {
         BookCommand bookToReserve = bookService.findCommandById(id);
@@ -142,9 +166,4 @@ public class BookController {
     private List<Publisher> getPublishers() {
         return publisherService.findAll();
     }
-
-//    @ModelAttribute("genres")
-//    private Set<Genre> getGenres() {
-//        return genreService.findAll();
-//    }
 }
