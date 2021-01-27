@@ -5,6 +5,9 @@ import com.kamilpomietlo.libraryapp.model.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+/**
+ * {@inheritDoc}
+ */
 @Component
 public class UserToUserCommand implements Converter<User, UserCommand> {
 
@@ -14,6 +17,9 @@ public class UserToUserCommand implements Converter<User, UserCommand> {
         this.bookToBookCommand = bookToBookCommand;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserCommand convert(User source) {
         if (source == null) {

@@ -5,9 +5,15 @@ import com.kamilpomietlo.libraryapp.model.Book;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+/**
+ * {@inheritDoc}
+ */
 @Component
 public class BookToBookCommand implements Converter<Book, BookCommand> {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BookCommand convert(Book source) {
         if (source == null) {

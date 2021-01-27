@@ -5,6 +5,9 @@ import com.kamilpomietlo.libraryapp.model.Publisher;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+/**
+ * {@inheritDoc}
+ */
 @Component
 public class PublisherToPublisherCommand implements Converter<Publisher, PublisherCommand> {
 
@@ -14,6 +17,9 @@ public class PublisherToPublisherCommand implements Converter<Publisher, Publish
         this.bookToBookCommand = bookToBookCommand;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PublisherCommand convert(Publisher source) {
         if (source == null) {
