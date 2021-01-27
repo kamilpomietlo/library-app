@@ -2,10 +2,7 @@ package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
-import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.IndexService;
-import com.kamilpomietlo.libraryapp.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -35,12 +31,6 @@ class IndexControllerTest {
 
     @Mock
     IndexService indexService;
-
-    @Mock
-    UserService userService;
-
-    @Mock
-    ConfirmationTokenService confirmationTokenService;
 
     @BeforeEach
     void setUp() {
@@ -83,38 +73,6 @@ class IndexControllerTest {
                 .andExpect(view().name("book/list"));
 
         verify(indexService, times(1)).findBooks(any(), any(), any());
-    }
-
-    @Test
-    void registerUserGet() throws Exception {
-        // then
-        mockMvc.perform(get("/register/"))
-                .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user"))
-                .andExpect(view().name("register"));
-
-        verifyNoInteractions(indexService);
-    }
-
-    @Test
-    void confirmMail() throws Exception {
-        // given
-        ConfirmationToken confirmationToken = new ConfirmationToken();
-        confirmationToken.setConfirmationToken("token");
-
-        Optional<ConfirmationToken> confirmationTokenOptional = Optional.of(confirmationToken);
-
-        // when
-        when(confirmationTokenService.findConfirmationTokenByToken(anyString())).thenReturn(confirmationTokenOptional);
-
-        // then
-        mockMvc.perform(get("/register/confirm")
-                .param("token", "token"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("login"));
-
-        verify(confirmationTokenService, times(1)).findConfirmationTokenByToken(anyString());
-        verify(userService, times(1)).confirmUser(any());
     }
 
     @Test

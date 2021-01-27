@@ -1,15 +1,20 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
+import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
+import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.MyUserDetailsService;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import com.kamilpomietlo.libraryapp.validations.EditInfo;
+import com.kamilpomietlo.libraryapp.validations.RegisterInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * Controller related to {@code User} object.
@@ -21,10 +26,13 @@ public class UserController {
 
     private final UserService userService;
     private final MyUserDetailsService myUserDetailsService;
+    private final ConfirmationTokenService confirmationTokenService;
 
-    public UserController(UserService userService, MyUserDetailsService myUserDetailsService) {
+    public UserController(UserService userService, MyUserDetailsService myUserDetailsService,
+                          ConfirmationTokenService confirmationTokenService) {
         this.userService = userService;
         this.myUserDetailsService = myUserDetailsService;
+        this.confirmationTokenService = confirmationTokenService;
     }
 
     @GetMapping("list")
@@ -92,5 +100,47 @@ public class UserController {
         userService.saveUserCommand(userCommandToUpdate);
 
         return "redirect:/user/account";
+    }
+
+    @GetMapping("register")
+    public String registerUserGet(Model model) {
+        model.addAttribute("user", new UserCommand());
+
+        return "user/register";
+    }
+
+    /**
+     * Submits form data for registering new user and saves it if validation is successful.
+     *
+     * @param userCommand object to be saved
+     * @param bindingResult performs validation of the object
+     * @return registration form when validation failed, otherwise register-info page
+     */
+    @PostMapping("register")
+    public String registerUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand,
+                                   BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "user/register";
+        }
+
+        userService.registerUser(userCommand);
+
+        return "user/register-info";
+    }
+
+    /**
+     * Confirms user registration if provided {@code ConfirmationToken} is correct.
+     *
+     * @param token confirmationToken
+     * @return login page
+     */
+    @GetMapping("register/confirm")
+    public String confirmMail(@RequestParam("token") String token) {
+        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
+        optionalConfirmationToken.ifPresent(userService::confirmUser);
+
+        return "redirect:/login";
     }
 }

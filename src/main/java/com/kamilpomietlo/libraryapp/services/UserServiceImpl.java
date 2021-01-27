@@ -75,7 +75,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
 
     @Override
     public void sendConfirmationMail(String userMail, String confirmationToken) {
-        String confirmationLink = "https://bestlib-app.herokuapp.com/register/confirm?token=";
+        String confirmationLink = "https://bestlib-app.herokuapp.com/user/register/confirm?token=";
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(userMail);

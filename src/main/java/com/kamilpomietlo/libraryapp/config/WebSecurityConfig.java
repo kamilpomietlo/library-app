@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         String[] anonymousMatchers = new String[] {
-                "/login", "/register", "/register/confirm"
+                "/login", "/user/register", "/user/register/confirm"
         };
 
         String[] userMatchers = new String[] {

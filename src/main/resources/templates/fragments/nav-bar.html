@@ -17,7 +17,7 @@
            th:href="@{'/user/list'}" th:text="#{nav-bar.users}">Users</a>
     </div>
     <div class="main-buttons">
-        <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/register'}"
+        <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/user/register'}"
         th:text="#{nav-bar.register}">Register</a>
         <a sec:authorize="${isAnonymous()}" class="nav-button" th:href="@{'/login'}"
         th:text="#{nav-bar.logIn}">Log in</a>
