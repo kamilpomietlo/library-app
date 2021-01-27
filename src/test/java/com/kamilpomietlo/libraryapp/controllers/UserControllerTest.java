@@ -157,7 +157,7 @@ class UserControllerTest {
         mockMvc.perform(get("/user/register/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("user"))
-                .andExpect(view().name("register"));
+                .andExpect(view().name("user/register"));
 
         verifyNoInteractions(userService);
     }
