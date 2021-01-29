@@ -8,6 +8,9 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Optional;
 
+/**
+ * {@inheritDoc}
+ */
 public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, String> {
 
     @Autowired
@@ -20,6 +23,13 @@ public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, Str
     public void initialize(EmailNotInUse constraintAnnotation) {
     }
 
+    /**
+     * Checks whether the value is found in database.
+     *
+     * @param email value to be checked
+     * @param context validator context
+     * @return boolean value
+     */
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
         return !isEmailUsed(email);
