@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * {@inheritDoc}
+ *
+ * @param <R> repository interface related to {@code <T>} object type
+ */
 public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaRepository<T, Long>> implements BaseService<T> {
 
     protected R repository;
@@ -16,13 +21,19 @@ public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaReposit
         this.repository = repository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<T> findAll() {
         return new ArrayList<>(repository.findAll());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public T findById(Long id) {
+    public T findById(Long id) throws NotFoundException {
         Optional<T> tOptional = repository.findById(id);
 
         if (tOptional.isEmpty()) {
@@ -32,6 +43,9 @@ public abstract class BaseServiceImpl<T extends BaseEntity, R extends JpaReposit
         return tOptional.get();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);

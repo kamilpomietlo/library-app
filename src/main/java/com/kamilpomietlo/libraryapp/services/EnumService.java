@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.util.EnumSet;
 
+/**
+ * Service used for enum i18n.
+ */
 @Service
 public class EnumService {
 
@@ -19,6 +22,9 @@ public class EnumService {
         this.messageSource = messageSource;
     }
 
+    /**
+     * Sets message source for every enum value in application.
+     */
     @PostConstruct
     public void postConstruct() {
         for (BookStatus bookStatus : EnumSet.allOf(BookStatus.class)) {

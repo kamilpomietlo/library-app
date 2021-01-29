@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository> implements AuthorService {
@@ -25,6 +28,9 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository>
         this.authorToAuthorCommand = authorToAuthorCommand;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AuthorCommand saveAuthorCommand(AuthorCommand authorCommand) {
         Author detachedAuthor = authorCommandToAuthor.convert(authorCommand);
@@ -33,11 +39,17 @@ public class AuthorServiceImpl extends BaseServiceImpl<Author, AuthorRepository>
         return authorToAuthorCommand.convert(savedAuthor);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AuthorCommand findCommandById(Long id) {
         return authorToAuthorCommand.convert(findById(id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Book> getAuthorsBooks(Long id) {
         Author author = findById(id);

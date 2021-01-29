@@ -13,6 +13,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> implements BookService {
@@ -29,6 +32,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         this.myUserDetailsService = myUserDetailsService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BookCommand saveBookCommand(BookCommand bookCommand) {
         Book detachedBook = bookCommandToBook.convert(bookCommand);
@@ -37,11 +43,19 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         return bookToBookCommand.convert(savedBook);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public BookCommand findCommandById(Long id) {
         return bookToBookCommand.convert(findById(id));
     }
 
+    /**
+     * Deletes the {@code Book} object only if it's status is Available.
+     *
+     * @param id object id
+     */
     @Override
     public void deleteById(Long id) {
         Book bookToDelete = findById(id);
@@ -51,6 +65,11 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         }
     }
 
+    /**
+     * Changes the {@code Book} status to Reserved, sets dates and links it to the specific {@code User}.
+     *
+     * @param bookCommand book to be reserved
+     */
     @Override
     public void reserveBook(BookCommand bookCommand) {
         Book book = findById(bookCommand.getId());
@@ -68,6 +87,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Book> getReservedBooks() {
         List<Book> reservedBooks = new ArrayList<>();
@@ -81,6 +103,11 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         return reservedBooks;
     }
 
+    /**
+     * Changes the {@code Book} status to Borrowed and sets new dates.
+     *
+     * @param id object id
+     */
     @Override
     public void acceptBorrowingBook(Long id) {
         BookCommand bookCommand = findCommandById(id);
@@ -94,6 +121,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Book> getBorrowedBooks() {
         List<Book> borrowedBooks = new ArrayList<>();
@@ -107,6 +137,11 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         return borrowedBooks;
     }
 
+    /**
+     * Changes the {@code Book} status to Available, sets dates and {@code User} id to {@code null}.
+     *
+     * @param id object id
+     */
     @Override
     public void acceptReturningBook(Long id) {
         BookCommand bookCommand = findCommandById(id);

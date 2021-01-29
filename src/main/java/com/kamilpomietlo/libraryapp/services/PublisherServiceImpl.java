@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRepository> implements PublisherService {
@@ -26,6 +29,9 @@ public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRe
         this.publisherToPublisherCommand = publisherToPublisherCommand;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PublisherCommand savePublisherCommand(PublisherCommand publisherCommand) {
         Publisher detachedPublisher = publisherCommandToPublisher.convert(publisherCommand);
@@ -34,11 +40,17 @@ public class PublisherServiceImpl extends BaseServiceImpl<Publisher, PublisherRe
         return publisherToPublisherCommand.convert(savedPublisher);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public PublisherCommand findCommandById(Long id) {
         return publisherToPublisherCommand.convert(findById(id));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Book> getPublishersBooks(Long id) {
         Publisher publisher = findById(id);

@@ -4,6 +4,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class EmailSenderServiceImpl implements EmailSenderService {
 
@@ -13,6 +16,9 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         this.javaMailSender = javaMailSender;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void sendEmail(SimpleMailMessage mailMessage) {
         javaMailSender.send(mailMessage);

@@ -13,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class MyUserDetailsServiceImpl implements MyUserDetailsService {
@@ -23,6 +26,9 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         this.userService = userService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userService.findUserByEmail(email);
@@ -31,6 +37,9 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         return buildUserForAuthentication(user, authorities);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<GrantedAuthority> getUserAuthority(UserRole userRole) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
@@ -39,12 +48,18 @@ public class MyUserDetailsServiceImpl implements MyUserDetailsService {
         return grantedAuthorities;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserDetails buildUserForAuthentication(User user, List<GrantedAuthority> authorities) {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
                 user.getEnabled(), true, true, !user.getLocked(), authorities);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Long getLoggedAccountId() {
         UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

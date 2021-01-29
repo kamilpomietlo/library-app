@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 public class ConfirmationTokenServiceImpl extends BaseServiceImpl<ConfirmationToken, ConfirmationTokenRepository>
         implements ConfirmationTokenService {
@@ -14,11 +17,17 @@ public class ConfirmationTokenServiceImpl extends BaseServiceImpl<ConfirmationTo
         super(repository);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void saveConfirmationToken(ConfirmationToken confirmationToken) {
         repository.save(confirmationToken);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<ConfirmationToken> findConfirmationTokenByToken(String confirmationToken) {
         return repository.findByConfirmationToken(confirmationToken);

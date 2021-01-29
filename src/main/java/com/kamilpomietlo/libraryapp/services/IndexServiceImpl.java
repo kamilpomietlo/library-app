@@ -12,6 +12,9 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class IndexServiceImpl implements IndexService {
@@ -24,6 +27,9 @@ public class IndexServiceImpl implements IndexService {
         this.authorRepository = authorRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Book> findBooks(Book book, Author author, Genre genre) {
         Set<Book> searchedBooks;
@@ -73,6 +79,13 @@ public class IndexServiceImpl implements IndexService {
         return filterByGenre(searchedBooks, genre);
     }
 
+    /**
+     * Filters set of books by genre.
+     *
+     * @param books set of books to be filtered
+     * @param genre genre enum value to be filtered by
+     * @return filtered set of books
+     */
     private Set<Book> filterByGenre(Set<Book> books, Genre genre) {
         Iterator<Book> iterator = books.iterator();
 

@@ -18,6 +18,9 @@ import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.Optional;
 
+/**
+ * {@inheritDoc}
+ */
 @Service
 @Transactional
 public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> implements UserService {
@@ -37,6 +40,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         this.emailSenderService = emailSenderService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserCommand saveUserCommand(UserCommand userCommand) {
         User detachedUser = userCommandToUser.convert(userCommand);
@@ -45,11 +51,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         return userToUserCommand.convert(savedUser);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserCommand findCommandById(Long id) {
         return userToUserCommand.convert(findById(id));
     }
 
+    /**
+     * Deletes the {@code User} object only if there are no books assigned and it's role is not Admin.
+     *
+     * @param id object id
+     */
     @Override
     public void deleteById(Long id) {
         User userToDelete = findById(id);
@@ -59,6 +73,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         }
     }
 
+    /**
+     * Encrypts password before saving user account. Generates {@code ConfirmationToken}
+     * and calls {@code sendConfirmationMail} method.
+     *
+     * @param userCommand object to be saved
+     */
     @Override
     public void registerUser(UserCommand userCommand) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -73,6 +93,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         sendConfirmationMail(savedUser.getEmail(), confirmationToken.getConfirmationToken());
     }
 
+    /**
+     * Prepares confirmation mail to be sent to the user e-mail address. The message is internationalized.
+     *
+     * @param userMail user e-mail address
+     * @param confirmationToken confirmation token
+     */
     @Override
     public void sendConfirmationMail(String userMail, String confirmationToken) {
         String confirmationLink = "https://bestlib-app.herokuapp.com/user/register/confirm?token=";
@@ -94,6 +120,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         emailSenderService.sendEmail(mailMessage);
     }
 
+    /**
+     * Enables user account and deletes related redundant {@code ConfirmationToken} object.
+     *
+     * @param confirmationToken confirmation token
+     */
     @Override
     public void confirmUser(ConfirmationToken confirmationToken) {
         User user = confirmationToken.getUser();
@@ -104,6 +135,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         confirmationTokenService.deleteById(confirmationToken.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public User findUserByEmail(String email) throws UsernameNotFoundException {
         Optional<User> userOptional = repository.findByEmail(email);
@@ -115,6 +149,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         return userOptional.get();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UserCommand editRemainingFields(UserCommand userCommand) {
         UserCommand dbUserCommand = findCommandById(userCommand.getId());
