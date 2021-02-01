@@ -121,8 +121,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         misery.setYearOfRelease(1987);
         misery.setIsbn("9780670813643");
         misery.setBookStatus(BookStatus.RESERVED);
-        misery.setDateOfReserveOrBorrow(LocalDate.now().minusDays(5));
-        misery.setDeadlineDate(LocalDate.now().plusDays(2));
+        misery.setDateOfReserveOrBorrow(LocalDate.now().minusDays(1));
+        misery.setDeadlineDate(LocalDate.now().plusDays(6));
 
         Book bloodOfElves = new Book();
         bloodOfElves.setId(3L);
@@ -145,8 +145,8 @@ public class LibraryBootstrap implements ApplicationListener<ContextRefreshedEve
         timeOfContempt.setYearOfRelease(1995);
         timeOfContempt.setIsbn("9788375780666");
         timeOfContempt.setBookStatus(BookStatus.BORROWED);
-        timeOfContempt.setDateOfReserveOrBorrow(LocalDate.now().minusDays(28));
-        timeOfContempt.setDeadlineDate(LocalDate.now().plusDays(2));
+        timeOfContempt.setDateOfReserveOrBorrow(LocalDate.now().minusDays(3));
+        timeOfContempt.setDeadlineDate(LocalDate.now().plusDays(27));
 
         Book poirotInvestigates = new Book();
         poirotInvestigates.setId(5L);
