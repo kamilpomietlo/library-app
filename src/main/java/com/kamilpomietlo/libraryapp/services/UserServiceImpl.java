@@ -123,16 +123,20 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
     /**
      * Enables user account and deletes related redundant {@code ConfirmationToken} object.
      *
-     * @param confirmationToken confirmation token
+     * @param token confirmation token
      */
     @Override
-    public void confirmUser(ConfirmationToken confirmationToken) {
-        User user = confirmationToken.getUser();
-        user.setEnabled(true);
+    public void confirmUser(String token) {
+        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
 
-        repository.save(user);
+        if (optionalConfirmationToken.isPresent()) {
+            User user = optionalConfirmationToken.get().getUser();
+            user.setEnabled(true);
 
-        confirmationTokenService.deleteById(confirmationToken.getId());
+            repository.save(user);
+
+            confirmationTokenService.deleteById(optionalConfirmationToken.get().getId());
+        }
     }
 
     /**

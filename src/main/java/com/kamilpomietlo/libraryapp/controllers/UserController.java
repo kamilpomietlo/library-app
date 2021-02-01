@@ -1,8 +1,6 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
-import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.MyUserDetailsService;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import com.kamilpomietlo.libraryapp.validations.EditInfo;
@@ -14,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 /**
  * Controller related to {@code User} object.
  */
@@ -26,13 +22,10 @@ public class UserController {
 
     private final UserService userService;
     private final MyUserDetailsService myUserDetailsService;
-    private final ConfirmationTokenService confirmationTokenService;
 
-    public UserController(UserService userService, MyUserDetailsService myUserDetailsService,
-                          ConfirmationTokenService confirmationTokenService) {
+    public UserController(UserService userService, MyUserDetailsService myUserDetailsService) {
         this.userService = userService;
         this.myUserDetailsService = myUserDetailsService;
-        this.confirmationTokenService = confirmationTokenService;
     }
 
     @GetMapping("list")
@@ -131,15 +124,14 @@ public class UserController {
     }
 
     /**
-     * Confirms user registration if provided {@code ConfirmationToken} is correct.
+     * Calls user registration confirmation service method.
      *
-     * @param token confirmationToken
+     * @param token confirmation token
      * @return login page
      */
     @GetMapping("register/confirm")
     public String confirmMail(@RequestParam("token") String token) {
-        Optional<ConfirmationToken> optionalConfirmationToken = confirmationTokenService.findConfirmationTokenByToken(token);
-        optionalConfirmationToken.ifPresent(userService::confirmUser);
+        userService.confirmUser(token);
 
         return "redirect:/login";
     }

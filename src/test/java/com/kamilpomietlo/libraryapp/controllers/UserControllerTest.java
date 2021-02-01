@@ -1,9 +1,7 @@
 package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
-import com.kamilpomietlo.libraryapp.services.ConfirmationTokenService;
 import com.kamilpomietlo.libraryapp.services.MyUserDetailsService;
 import com.kamilpomietlo.libraryapp.services.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +15,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.*;
@@ -35,9 +32,6 @@ class UserControllerTest {
 
     @Mock
     UserService userService;
-
-    @Mock
-    ConfirmationTokenService confirmationTokenService;
 
     @Mock
     MyUserDetailsService myUserDetailsService;
@@ -164,22 +158,12 @@ class UserControllerTest {
 
     @Test
     void confirmMail() throws Exception {
-        // given
-        ConfirmationToken confirmationToken = new ConfirmationToken();
-        confirmationToken.setConfirmationToken("token");
-
-        Optional<ConfirmationToken> confirmationTokenOptional = Optional.of(confirmationToken);
-
-        // when
-        when(confirmationTokenService.findConfirmationTokenByToken(anyString())).thenReturn(confirmationTokenOptional);
-
         // then
         mockMvc.perform(get("/user/register/confirm")
                 .param("token", "token"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/login"));
 
-        verify(confirmationTokenService, times(1)).findConfirmationTokenByToken(anyString());
         verify(userService, times(1)).confirmUser(any());
     }
 }

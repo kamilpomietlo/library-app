@@ -1,7 +1,6 @@
 package com.kamilpomietlo.libraryapp.services;
 
 import com.kamilpomietlo.libraryapp.commands.UserCommand;
-import com.kamilpomietlo.libraryapp.model.ConfirmationToken;
 import com.kamilpomietlo.libraryapp.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
@@ -42,11 +41,11 @@ public interface UserService extends BaseService<User> {
     void sendConfirmationMail(String userMail, String confirmationToken);
 
     /**
-     * Enables {@code User} account if confirmation token is correct.
+     * Enables user account if confirmation token is correct.
      *
-     * @param confirmationToken confirmation token
+     * @param token confirmation token
      */
-    void confirmUser(ConfirmationToken confirmationToken);
+    void confirmUser(String token);
 
     /**
      * Finds {@code User} object by e-mail address.

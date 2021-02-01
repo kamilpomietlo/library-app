@@ -163,16 +163,20 @@ class UserServiceImplTest {
         // given
         ConfirmationToken confirmationToken = new ConfirmationToken();
         confirmationToken.setId(1L);
+        confirmationToken.setConfirmationToken("token");
 
         User user = new User();
         user.setId(1L);
 
         confirmationToken.setUser(user);
 
+        Optional<ConfirmationToken> optionalConfirmationToken = Optional.of(confirmationToken);
+
         when(userRepository.save(any())).thenReturn(user);
+        when(confirmationTokenService.findConfirmationTokenByToken(anyString())).thenReturn(optionalConfirmationToken);
 
         // when
-        userService.confirmUser(confirmationToken);
+        userService.confirmUser(confirmationToken.getConfirmationToken());
 
         // then
         verify(userRepository, times(1)).save(any());
