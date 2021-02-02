@@ -157,6 +157,13 @@ public class BookController {
         return "redirect:/book/borrowed";
     }
 
+    @GetMapping("{id}/prolong")
+    public String prolongBook(@PathVariable Long id) {
+        bookService.prolongBook(id);
+
+        return "redirect:/user/account";
+    }
+
     @ModelAttribute("authors")
     private List<Author> getAuthors() {
         return authorService.findAll();

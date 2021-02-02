@@ -31,6 +31,7 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setBookStatus(source.getBookStatus());
         book.setDateOfReserveOrBorrow(source.getDateOfReserveOrBorrow());
         book.setDeadlineDate(source.getDeadlineDate());
+        book.setNumberOfProlongs(source.getNumberOfProlongs());
 
         if (source.getAuthors() != null) {
             book.setAuthors(source.getAuthors());

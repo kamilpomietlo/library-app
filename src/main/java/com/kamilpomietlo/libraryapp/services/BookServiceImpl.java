@@ -151,8 +151,28 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
             bookCommand.setUserId(null);
             bookCommand.setDateOfReserveOrBorrow(null);
             bookCommand.setDeadlineDate(null);
+            bookCommand.setNumberOfProlongs(0L);
 
             saveBookCommand(bookCommand);
         }
+    }
+
+    /**
+     * Prolongs the deadline of borrowed book by 30 days if current number of prolongs doesn't exceed 2 (what means
+     * that the book can't be borrowed by a user for more than 90 days).
+     *
+     * @param id object id
+     */
+    @Override
+    public void prolongBook(Long id) {
+        Book book = findById(id);
+        Long numberOfProlongs = book.getNumberOfProlongs();
+
+        if ((book.getBookStatus() == BookStatus.BORROWED) && (numberOfProlongs < 2)) {
+            book.setDeadlineDate(book.getDeadlineDate().plusDays(30));
+            book.setNumberOfProlongs(++numberOfProlongs);
+        }
+
+        repository.save(book);
     }
 }

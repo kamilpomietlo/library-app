@@ -46,6 +46,7 @@ public class BookCommand extends BaseEntityCommand {
     private BookStatus bookStatus;
     private LocalDate dateOfReserveOrBorrow;
     private LocalDate deadlineDate;
+    private Long numberOfProlongs = 0L;
 
     public String dateToString() {
         if (dateOfReserveOrBorrow != null) {

@@ -24,6 +24,7 @@ class BookToBookCommandTest {
     private static final BookStatus BOOK_STATUS = BookStatus.AVAILABLE;
     private static final LocalDate RESERVE_BORROW_DATE = LocalDate.now();
     private static final LocalDate DEADLINE_DATE = LocalDate.now();
+    private static final Long NUMBER_OF_PROLONGS = 0L;
     private static BookToBookCommand bookToBookCommand;
 
     @BeforeEach
@@ -54,6 +55,7 @@ class BookToBookCommandTest {
         book.setBookStatus(BOOK_STATUS);
         book.setDateOfReserveOrBorrow(RESERVE_BORROW_DATE);
         book.setDeadlineDate(DEADLINE_DATE);
+        book.setNumberOfProlongs(NUMBER_OF_PROLONGS);
 
         Author author1 = new Author();
         author1.setId(AUTHOR_ID_1);
@@ -89,5 +91,6 @@ class BookToBookCommandTest {
         assertEquals(BOOK_STATUS, bookCommand.getBookStatus());
         assertEquals(RESERVE_BORROW_DATE, book.getDateOfReserveOrBorrow());
         assertEquals(DEADLINE_DATE, book.getDeadlineDate());
+        assertEquals(NUMBER_OF_PROLONGS, book.getNumberOfProlongs());
     }
 }

@@ -43,6 +43,7 @@
                 <th th:text="#{user.bookStatus}">Book status</th>
                 <th th:text="#{user.date}">Date</th>
                 <th th:text="#{user.deadline}">Deadline</th>
+                <th th:text="#{user.action}">Action</th>
             </tr>
             <tr th:if="${user.books.size() > 0}" th:each="book : ${user.books}">
                 <td th:text="${book.id}">book ID</td>
@@ -50,9 +51,18 @@
                 <td th:text="${book.bookStatus.getDisplayName()}">book status</td>
                 <td th:text="${book.dateToString()}">date</td>
                 <td th:text="${book.deadlineToString()}">deadline</td>
+                <td>
+                    <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
+                       th:if="${(book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).BORROWED)
+                       && (book.numberOfProlongs < 2)}" th:href="@{'/book/' + ${book.id} + '/prolong'}"
+                       th:text="#{prolong}">Prolong</a>
+                    <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
+                       th:unless="${(book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).BORROWED)
+                       && (book.numberOfProlongs < 2)}" th:text="#{prolong}">Prolong</a>
+                </td>
             </tr>
             <tr th:unless="${user.books.size() > 0}">
-                <td colspan="5" th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
+                <td colspan="6" th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
             </tr>
         </table>
     </div>

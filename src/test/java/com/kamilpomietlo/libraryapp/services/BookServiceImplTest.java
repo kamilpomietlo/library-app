@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -270,6 +271,29 @@ class BookServiceImplTest {
 
         // then
         verify(bookRepository, times(0)).save(any());
+    }
+
+    @Test
+    void prolongBook() {
+        // given
+        Book book = new Book();
+        book.setId(1L);
+        book.setBookStatus(BookStatus.BORROWED);
+        book.setDeadlineDate(LocalDate.now());
+        book.setNumberOfProlongs(0L);
+
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+
+        // when
+        bookService.prolongBook(anyLong());
+
+        // then
+        assertEquals(LocalDate.now().plusDays(30), book.getDeadlineDate());
+        assertEquals(1L, book.getNumberOfProlongs());
+        verify(bookRepository, times(1)).findById(anyLong());
+        verify(bookRepository, times(1)).save(any());
     }
 
     // parent tests

@@ -280,4 +280,14 @@ class BookControllerTest {
 
         verify(bookService, times(1)).acceptReturningBook(anyLong());
     }
+
+    @Test
+    void prolongBook() throws Exception {
+        // then
+        mockMvc.perform(get("/book/1/prolong"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/user/account"));
+
+        verify(bookService, times(1)).prolongBook(anyLong());
+    }
 }

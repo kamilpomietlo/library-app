@@ -45,6 +45,7 @@ public class Book extends BaseEntity {
 
     private LocalDate dateOfReserveOrBorrow;
     private LocalDate deadlineDate;
+    private Long numberOfProlongs = 0L;
 
     public void addAuthor(Author author) {
         if (author != null) {

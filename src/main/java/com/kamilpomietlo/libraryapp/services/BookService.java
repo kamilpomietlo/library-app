@@ -60,4 +60,11 @@ public interface BookService extends BaseService<Book> {
      * @param id object id
      */
     void acceptReturningBook(Long id);
+
+    /**
+     * Prolongs the deadline of borrowed book.
+     *
+     * @param id object id
+     */
+    void prolongBook(Long id);
 }
