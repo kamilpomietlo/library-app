@@ -16,8 +16,8 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @PasswordMatches(groups = RegisterInfo.class, message = "{password.matches}")
 @Getter
@@ -60,7 +60,7 @@ public class UserCommand extends BaseEntityCommand {
     @Length(groups = {RegisterInfo.class, EditInfo.class}, max = 128)
     private String homeNumber;
 
-    private Set<BookCommand> books = new HashSet<>();
+    private List<BookCommand> books = new ArrayList<>();
 
     @NotBlank(groups = RegisterInfo.class)
     @Email(groups = RegisterInfo.class)
