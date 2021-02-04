@@ -1,9 +1,9 @@
 * {
+    box-sizing: border-box;
+    color: black;
+    font-family: 'Merriweather', serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Merriweather', serif;
-    color: black;
 }
 
 html {
@@ -11,9 +11,9 @@ html {
 }
 
 :root {
+    --detailsColor: saddlebrown;
     --primaryColor: chocolate;
     --secondaryColor: navajowhite;
-    --detailsColor: saddlebrown;
 }
 
 ::-webkit-scrollbar {
@@ -22,8 +22,8 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 10px var(--detailsColor);
     border-radius: 10px;
+    box-shadow: inset 0 0 10px var(--detailsColor);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -36,52 +36,52 @@ html {
 }
 
 body {
-    background-image: url("../images/background.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
     background-attachment: fixed;
+    background-image: url("../images/background.jpeg");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .nav-bar {
+    align-items: center;
     background: var(--primaryColor);
-    height: 100px;
     border-bottom: 15px solid #ff6e00;
     display: inline-flex;
-    width: 100%;
-    align-items: center;
+    height: 100px;
     position: fixed;
     top: 0;
+    width: 100%;
 }
 
 .name {
-    padding: 0 30px;
-    margin: 20px 0;
-    display: inline-block;
-    color: var(--secondaryColor);
-    font-size: 65px;
-    font-family: 'Big Shoulders Stencil Text', cursive;
-    border-right: 4px solid #ff6e00;
     border-radius: 10px;
-    user-select: none;
+    border-right: 4px solid #ff6e00;
+    color: var(--secondaryColor);
+    display: inline-block;
+    font-family: 'Big Shoulders Stencil Text', cursive;
+    font-size: 65px;
+    margin: 20px 0;
+    padding: 0 30px;
     text-decoration: none;
+    user-select: none;
 }
 
 .body-content {
     background: var(--secondaryColor);
-    text-align: center;
-    margin: 140px auto 60px auto;
-    width: fit-content;
-    max-width: 98%;
     border: 3px solid var(--detailsColor);
     border-radius: 20px;
+    margin: 140px auto 60px auto;
+    max-width: 98%;
     padding: 0 40px 40px 40px;
+    text-align: center;
+    width: fit-content;
 }
 
 button {
+    height: 30px;
     margin: 30px 10px 0 10px;
     width: 70px;
-    height: 30px;
 }
 
 button:hover {
@@ -90,23 +90,23 @@ button:hover {
 
 .nav-button {
     background: #ff9637;
-    text-decoration: none;
-    font-size: 18px;
-    padding: 14px;
     border: 1px solid var(--detailsColor);
     border-radius: 10px;
+    font-size: 18px;
     font-weight: bold;
+    padding: 14px;
     text-align: center;
+    text-decoration: none;
 }
 
 .action-button {
     background: #ff9637;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 5px;
     border: 1px solid var(--detailsColor);
     border-radius: 5px;
+    font-size: 14px;
     font-weight: bold;
+    padding: 5px;
+    text-decoration: none;
 }
 
 .action-button-disabled {
@@ -129,8 +129,8 @@ button:hover {
 }
 
 .menu-buttons {
-    margin-right: auto;
     margin-left: 50px;
+    margin-right: auto;
 }
 
 .menu-button {
@@ -140,31 +140,31 @@ button:hover {
 .back-button {
     display: inline-block;
     float: left;
-    margin-top: 15px;
     margin-left: -30px;
+    margin-top: 15px;
 }
 
 .function-buttons {
     display: inline-block;
     float: right;
-    margin-top: 15px;
     margin-right: -30px;
+    margin-top: 15px;
 }
 
 .footer {
     background: var(--primaryColor);
-    height: 20px;
     border-top: 4px solid #ff6e00;
-    width: 100%;
     bottom: 0;
+    height: 20px;
     position: fixed;
+    width: 100%;
 }
 
 table {
     background: black;
-    margin: 20px auto 10px auto;
-    border-radius: 20px;
     border: 1px solid black;
+    border-radius: 20px;
+    margin: 20px auto 10px auto;
 }
 
 table th:first-child {
@@ -198,13 +198,13 @@ th {
 
 td {
     background: lightgrey;
-    padding: 16px 10px;
     font-size: 14px;
+    padding: 16px 10px;
 }
 
 ul {
-    list-style-type: none;
     display: inline-block;
+    list-style-type: none;
 }
 
 .body-content h1 {
@@ -217,25 +217,25 @@ ul {
 
 label {
     display: inline-block;
+    font-weight: bold;
     text-align: left;
     width: 150px;
-    font-weight: bold;
 }
 
 input, select {
-    display: inline-block;
-    width: 350px;
-    height: 30px;
     border: 1px solid black;
-    padding: 0 5px;
+    display: inline-block;
+    height: 30px;
     margin-top: 20px;
+    padding: 0 5px;
+    width: 350px;
 }
 
 .select-language {
-    width: auto;
-    height: auto;
-    font-size: 12px;
     background: brown;
+    font-size: 12px;
+    height: auto;
+    width: auto;
 }
 
 .option-language {
@@ -243,26 +243,26 @@ input, select {
 }
 
 .input-error {
-    display: inline-block;
-    width: 350px;
-    height: 30px;
     border: 1px solid red;
+    display: inline-block;
+    height: 30px;
     padding: 0 5px;
+    width: 350px;
 }
 
 .alert li {
-    display: block;
     color: red;
+    display: block;
     font-size: 12px;
-    width: 500px;
     text-align: right;
+    width: 500px;
 }
 
 .alert-security {
     color: red;
     font-size: 14px;
-    text-align: center;
     margin-top: 30px;
+    text-align: center;
 }
 
 .read-only {
@@ -272,25 +272,25 @@ input, select {
 }
 
 .line {
+    background: var(--detailsColor);
     display: inline-block;
-    width: 100%;
     height: 2px;
     margin: 30px 0 0 0;
-    background: var(--detailsColor);
+    width: 100%;
 }
 
 .language-line {
+    background: var(--detailsColor);
+    display: inline-block;
+    height: 2px;
     position: relative;
     top: -5px;
-    display: inline-block;
     width: 60%;
-    height: 2px;
-    background: var(--detailsColor);
 }
 
 .language-flag {
-    width: 25px;
     height: 25px;
+    width: 25px;
 }
 
 #lang-gb {
