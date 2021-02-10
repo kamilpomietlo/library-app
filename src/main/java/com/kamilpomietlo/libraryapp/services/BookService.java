@@ -11,6 +11,11 @@ import java.util.List;
 public interface BookService extends BaseService<Book> {
 
     /**
+     * Checks whether reserved books' deadlines have been exceeded.
+     */
+    void checkReservationDeadlines();
+
+    /**
      * Saves object.
      *
      * @param bookCommand object to be saved

@@ -6,9 +6,11 @@ import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,37 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
         this.myUserDetailsService = myUserDetailsService;
+    }
+
+    @PostConstruct
+    public void onStartup() {
+        checkReservationDeadlines();
+    }
+
+    @Scheduled(cron="0 0 0 * * ?")
+    public void onSchedule() {
+        checkReservationDeadlines();
+    }
+
+    /**
+     * Checks whether reserved books' deadlines have been exceeded.
+     * Sets book status to Available, sets user and dates to null if so.
+     */
+    @Override
+    public void checkReservationDeadlines() {
+        LocalDate todayDate = LocalDate.now();
+        List<Book> books = repository.findAllByBookStatus(BookStatus.RESERVED);
+
+        for (Book book : books) {
+            if (book.getDeadlineDate().isBefore(todayDate)) {
+                book.setBookStatus(BookStatus.AVAILABLE);
+                book.setUser(null);
+                book.setDateOfReserveOrBorrow(null);
+                book.setDeadlineDate(null);
+
+                repository.save(book);
+            }
+        }
     }
 
     /**

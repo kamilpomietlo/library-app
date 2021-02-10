@@ -42,6 +42,36 @@ class BookServiceImplTest {
     }
 
     @Test
+    void checkReservationDeadlines() {
+        // given
+        List<Book> books = new ArrayList<>();
+
+        Book book1 = new Book();
+        book1.setId(1L);
+        book1.setBookStatus(BookStatus.RESERVED);
+        book1.setDeadlineDate(LocalDate.now().minusDays(1));
+
+        Book book2 = new Book();
+        book2.setId(2L);
+        book2.setBookStatus(BookStatus.RESERVED);
+        book2.setDeadlineDate(LocalDate.now());
+
+        books.add(book1);
+        books.add(book2);
+
+        when(bookRepository.findAllByBookStatus(any())).thenReturn(books);
+
+        // when
+        bookService.checkReservationDeadlines();
+
+        // then
+        assertEquals(BookStatus.AVAILABLE, book1.getBookStatus());
+        assertEquals(BookStatus.RESERVED, book2.getBookStatus());
+        verify(bookRepository, times(1)).findAllByBookStatus(any());
+        verify(bookRepository, times(1)).save(any());
+    }
+
+    @Test
     void saveBookCommand() {
         // given
         BookCommand bookCommand = new BookCommand();
