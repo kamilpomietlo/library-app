@@ -41,6 +41,60 @@ class PublisherServiceImplTest {
     }
 
     @Test
+    void findAllPublishers() {
+        // given
+        List<Publisher> publishers = new ArrayList<>();
+
+        Publisher publisher1 = new Publisher();
+        publisher1.setId(1L);
+
+        Publisher publisher2 = new Publisher();
+        publisher2.setId(2L);
+
+        publishers.add(publisher1);
+        publishers.add(publisher2);
+
+        when(publisherRepository.findAll()).thenReturn(publishers);
+
+        // when
+        List<Publisher> publisherSet = publisherService.findAll();
+
+        // then
+        assertNotNull(publisherSet);
+        assertEquals(2, publisherSet.size());
+        verify(publisherRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findPublisherById() {
+        // given
+        Publisher publisher = new Publisher();
+        publisher.setId(1L);
+
+        Optional<Publisher> publisherOptional = Optional.of(publisher);
+
+        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
+
+        // when
+        Publisher foundPublisher = publisherService.findById(publisher.getId());
+
+        // then
+        assertEquals(1L, foundPublisher.getId());
+        verify(publisherRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findPublisherByIdNotFound() {
+        // given
+        Long publisherId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> publisherService.findById(publisherId));
+        assertTrue(exception.getMessage().contains("Object not found"));
+    }
+
+    @Test
     void savePublisherCommand() {
         // given
         PublisherCommand publisherCommand = new PublisherCommand();
@@ -100,61 +154,5 @@ class PublisherServiceImplTest {
         assertNotNull(books);
         assertEquals(2, books.size());
         verify(publisherRepository, times(1)).findById(anyLong());
-    }
-
-    // parent tests
-
-    @Test
-    void findAllPublishers() {
-        // given
-        List<Publisher> publishers = new ArrayList<>();
-
-        Publisher publisher1 = new Publisher();
-        publisher1.setId(1L);
-
-        Publisher publisher2 = new Publisher();
-        publisher2.setId(2L);
-
-        publishers.add(publisher1);
-        publishers.add(publisher2);
-
-        when(publisherRepository.findAll()).thenReturn(publishers);
-
-        // when
-        List<Publisher> publisherSet = publisherService.findAll();
-
-        // then
-        assertNotNull(publisherSet);
-        assertEquals(2, publisherSet.size());
-        verify(publisherRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findPublisherById() {
-        // given
-        Publisher publisher = new Publisher();
-        publisher.setId(1L);
-
-        Optional<Publisher> publisherOptional = Optional.of(publisher);
-
-        when(publisherRepository.findById(anyLong())).thenReturn(publisherOptional);
-
-        // when
-        Publisher foundPublisher = publisherService.findById(publisher.getId());
-
-        // then
-        assertEquals(1L, foundPublisher.getId());
-        verify(publisherRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findPublisherByIdNotFound() {
-        // given
-        Long publisherId = 1L;
-
-        // when / then
-        NotFoundException exception = assertThrows(NotFoundException.class,
-                () -> publisherService.findById(publisherId));
-        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }

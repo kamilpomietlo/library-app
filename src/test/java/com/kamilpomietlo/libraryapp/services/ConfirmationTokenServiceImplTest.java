@@ -27,6 +27,18 @@ class ConfirmationTokenServiceImplTest {
     }
 
     @Test
+    void deleteConfirmationTokenById() {
+        // given
+        Long confirmationTokenId = 1L;
+
+        // when
+        confirmationTokenRepository.deleteById(confirmationTokenId);
+
+        // then
+        verify(confirmationTokenRepository, times(1)).deleteById(anyLong());
+    }
+
+    @Test
     void saveConfirmationToken() {
         // given
         ConfirmationToken confirmationToken = new ConfirmationToken();
@@ -57,19 +69,5 @@ class ConfirmationTokenServiceImplTest {
 
         // then
         verify(confirmationTokenRepository, times(1)).findByConfirmationToken(anyString());
-    }
-
-    // parent tests
-
-    @Test
-    void deleteConfirmationTokenById() {
-        // given
-        Long confirmationTokenId = 1L;
-
-        // when
-        confirmationTokenRepository.deleteById(confirmationTokenId);
-
-        // then
-        verify(confirmationTokenRepository, times(1)).deleteById(anyLong());
     }
 }

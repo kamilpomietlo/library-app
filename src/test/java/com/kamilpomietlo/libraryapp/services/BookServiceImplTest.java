@@ -42,6 +42,60 @@ class BookServiceImplTest {
     }
 
     @Test
+    void findAllBooks() {
+        // given
+        List<Book> books = new ArrayList<>();
+
+        Book book1 = new Book();
+        book1.setId(1L);
+
+        Book book2 = new Book();
+        book2.setId(2L);
+
+        books.add(book1);
+        books.add(book2);
+
+        when(bookRepository.findAll()).thenReturn(books);
+
+        // when
+        List<Book> bookSet = bookService.findAll();
+
+        // then
+        assertNotNull(bookSet);
+        assertEquals(2, bookSet.size());
+        verify(bookRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findBookById() {
+        // given
+        Book book = new Book();
+        book.setId(1L);
+
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+
+        // when
+        Book foundBook = bookService.findById(book.getId());
+
+        // then
+        assertEquals(1L, foundBook.getId());
+        verify(bookRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findBookByIdNotFound() {
+        // given
+        Long bookId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> bookService.findById(bookId));
+        assertTrue(exception.getMessage().contains("Object not found"));
+    }
+
+    @Test
     void checkReservationDeadlines() {
         // given
         List<Book> books = new ArrayList<>();
@@ -324,61 +378,5 @@ class BookServiceImplTest {
         assertEquals(1L, book.getNumberOfProlongs());
         verify(bookRepository, times(1)).findById(anyLong());
         verify(bookRepository, times(1)).save(any());
-    }
-
-    // parent tests
-
-    @Test
-    void findAllBooks() {
-        // given
-        List<Book> books = new ArrayList<>();
-
-        Book book1 = new Book();
-        book1.setId(1L);
-
-        Book book2 = new Book();
-        book2.setId(2L);
-
-        books.add(book1);
-        books.add(book2);
-
-        when(bookRepository.findAll()).thenReturn(books);
-
-        // when
-        List<Book> bookSet = bookService.findAll();
-
-        // then
-        assertNotNull(bookSet);
-        assertEquals(2, bookSet.size());
-        verify(bookRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findBookById() {
-        // given
-        Book book = new Book();
-        book.setId(1L);
-
-        Optional<Book> bookOptional = Optional.of(book);
-
-        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
-
-        // when
-        Book foundBook = bookService.findById(book.getId());
-
-        // then
-        assertEquals(1L, foundBook.getId());
-        verify(bookRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findBookByIdNotFound() {
-        // given
-        Long bookId = 1L;
-
-        // when / then
-        NotFoundException exception = assertThrows(NotFoundException.class,
-                () -> bookService.findById(bookId));
-        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }

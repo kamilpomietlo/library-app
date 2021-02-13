@@ -40,6 +40,62 @@ class AuthorServiceImplTest {
     }
 
     @Test
+    void findAllAuthors() {
+        // given
+        List<Author> authors = new ArrayList<>();
+
+        Author author1 = new Author();
+        author1.setId(1L);
+        author1.setName("name1");
+
+        Author author2 = new Author();
+        author2.setId(2L);
+        author2.setName("name2");
+
+        authors.add(author1);
+        authors.add(author2);
+
+        when(authorRepository.findAll()).thenReturn(authors);
+
+        // when
+        List<Author> authorSet = authorService.findAll();
+
+        // then
+        assertNotNull(authorSet);
+        assertEquals(2, authorSet.size());
+        verify(authorRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findAuthorById() {
+        // given
+        Author author = new Author();
+        author.setId(1L);
+
+        Optional<Author> authorOptional = Optional.of(author);
+
+        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
+
+        // when
+        Author foundAuthor = authorService.findById(author.getId());
+
+        // then
+        assertEquals(1L, foundAuthor.getId());
+        verify(authorRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findAuthorByIdNotFound() {
+        // given
+        Long authorId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> authorService.findById(authorId));
+        assertTrue(exception.getMessage().contains("Object not found"));
+    }
+
+    @Test
     void saveAuthorCommand() {
         // given
         AuthorCommand authorCommand = new AuthorCommand();
@@ -99,63 +155,5 @@ class AuthorServiceImplTest {
         assertNotNull(books);
         assertEquals(2, books.size());
         verify(authorRepository, times(1)).findById(anyLong());
-    }
-
-    // parent tests
-
-    @Test
-    void findAllAuthors() {
-        // given
-        List<Author> authors = new ArrayList<>();
-
-        Author author1 = new Author();
-        author1.setId(1L);
-        author1.setName("name1");
-
-        Author author2 = new Author();
-        author2.setId(2L);
-        author2.setName("name2");
-
-        authors.add(author1);
-        authors.add(author2);
-
-        when(authorRepository.findAll()).thenReturn(authors);
-
-        // when
-        List<Author> authorSet = authorService.findAll();
-
-        // then
-        assertNotNull(authorSet);
-        assertEquals(2, authorSet.size());
-        verify(authorRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findAuthorById() {
-        // given
-        Author author = new Author();
-        author.setId(1L);
-
-        Optional<Author> authorOptional = Optional.of(author);
-
-        when(authorRepository.findById(anyLong())).thenReturn(authorOptional);
-
-        // when
-        Author foundAuthor = authorService.findById(author.getId());
-
-        // then
-        assertEquals(1L, foundAuthor.getId());
-        verify(authorRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findAuthorByIdNotFound() {
-        // given
-        Long authorId = 1L;
-
-        // when / then
-        NotFoundException exception = assertThrows(NotFoundException.class,
-                () -> authorService.findById(authorId));
-        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }

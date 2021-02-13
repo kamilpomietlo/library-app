@@ -50,6 +50,60 @@ class UserServiceImplTest {
     }
 
     @Test
+    void findAllUsers() {
+        // given
+        List<User> users = new ArrayList<>();
+
+        User user1 = new User();
+        user1.setId(1L);
+
+        User user2 = new User();
+        user2.setId(2L);
+
+        users.add(user1);
+        users.add(user2);
+
+        when(userRepository.findAll()).thenReturn(users);
+
+        // when
+        List<User> userSet = userService.findAll();
+
+        // then
+        assertNotNull(userSet);
+        assertEquals(2, userSet.size());
+        verify(userRepository, times(1)).findAll();
+    }
+
+    @Test
+    void findUserById() {
+        // given
+        User user = new User();
+        user.setId(1L);
+
+        Optional<User> userOptional = Optional.of(user);
+
+        when(userRepository.findById(anyLong())).thenReturn(userOptional);
+
+        // when
+        User foundUser = userService.findById(user.getId());
+
+        // then
+        assertEquals(1L, foundUser.getId());
+        verify(userRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void findUserByIdNotFound() {
+        // given
+        Long userId = 1L;
+
+        // when / then
+        NotFoundException exception = assertThrows(NotFoundException.class,
+                () -> userService.findById(userId));
+        assertTrue(exception.getMessage().contains("Object not found"));
+    }
+
+    @Test
     void saveUserCommand() {
         // given
         UserCommand userCommand = new UserCommand();
@@ -234,61 +288,5 @@ class UserServiceImplTest {
         // then
         assertEquals(dbUser.getEmail(), userCommand.getEmail());
         verify(userRepository, times(1)).findById(anyLong());
-    }
-
-    // parent tests
-
-    @Test
-    void findAllUsers() {
-        // given
-        List<User> users = new ArrayList<>();
-
-        User user1 = new User();
-        user1.setId(1L);
-
-        User user2 = new User();
-        user2.setId(2L);
-
-        users.add(user1);
-        users.add(user2);
-
-        when(userRepository.findAll()).thenReturn(users);
-
-        // when
-        List<User> userSet = userService.findAll();
-
-        // then
-        assertNotNull(userSet);
-        assertEquals(2, userSet.size());
-        verify(userRepository, times(1)).findAll();
-    }
-
-    @Test
-    void findUserById() {
-        // given
-        User user = new User();
-        user.setId(1L);
-
-        Optional<User> userOptional = Optional.of(user);
-
-        when(userRepository.findById(anyLong())).thenReturn(userOptional);
-
-        // when
-        User foundUser = userService.findById(user.getId());
-
-        // then
-        assertEquals(1L, foundUser.getId());
-        verify(userRepository, times(1)).findById(anyLong());
-    }
-
-    @Test
-    void findUserByIdNotFound() {
-        // given
-        Long userId = 1L;
-
-        // when / then
-        NotFoundException exception = assertThrows(NotFoundException.class,
-                () -> userService.findById(userId));
-        assertTrue(exception.getMessage().contains("Object not found"));
     }
 }
