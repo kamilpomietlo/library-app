@@ -43,7 +43,7 @@ body {
     background-size: cover;
 }
 
-.nav-bar {
+nav {
     align-items: center;
     background: var(--primaryColor);
     border-bottom: 15px solid #ff6e00;
@@ -67,7 +67,7 @@ body {
     user-select: none;
 }
 
-.body-content {
+main {
     background: var(--secondaryColor);
     border: 3px solid var(--detailsColor);
     border-radius: 20px;
@@ -151,7 +151,7 @@ button:hover {
     margin-top: 15px;
 }
 
-.footer {
+footer {
     background: var(--primaryColor);
     border-top: 4px solid #ff6e00;
     bottom: 0;
@@ -207,7 +207,7 @@ ul {
     list-style-type: none;
 }
 
-.body-content h1 {
+main h1 {
     margin-top: 40px;
 }
 

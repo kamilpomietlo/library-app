@@ -4,10 +4,10 @@
     <title>BestLib</title>
 </head>
 <body>
-<div th:replace="fragments/nav-bar :: div">
-</div>
+<nav th:replace="fragments/nav-bar :: nav">
+</nav>
 
-<div class="body-content">
+<main>
     <h1 th:text="#{book.borrowed.header}">Borrowed books</h1>
     <table>
         <tr>
@@ -37,9 +37,9 @@
             <td colspan="8" th:text="#{book.noBooks}">No books found!</td>
         </tr>
     </table>
-</div>
+</main>
 
-<div th:replace="fragments/footer :: div">
-</div>
+<footer th:replace="fragments/footer :: footer">
+</footer>
 </body>
 </html>

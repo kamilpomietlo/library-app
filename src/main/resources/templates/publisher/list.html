@@ -4,10 +4,10 @@
     <title>BestLib</title>
 </head>
 <body>
-<div th:replace="fragments/nav-bar :: div">
-</div>
+<nav th:replace="fragments/nav-bar :: nav">
+</nav>
 
-<div class="body-content">
+<main>
     <div class="function-buttons">
         <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
            th:href="@{'/publisher/add'}" th:text="#{publisher.list.add}">+ Add publisher</a>
@@ -33,9 +33,9 @@
             <td colspan="3" th:text="#{publisher.list.noPublishers}">No publishers found!</td>
         </tr>
     </table>
-</div>
+</main>
 
-<div th:replace="fragments/footer :: div">
-</div>
+<footer th:replace="fragments/footer :: footer">
+</footer>
 </body>
 </html>

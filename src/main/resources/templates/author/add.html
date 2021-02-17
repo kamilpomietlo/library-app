@@ -4,10 +4,10 @@
     <title>BestLib</title>
 </head>
 <body>
-<div th:replace="fragments/nav-bar :: div">
-</div>
+<nav th:replace="fragments/nav-bar :: nav">
+</nav>
 
-<div class="body-content">
+<main>
     <h1 th:text="#{author.add.header}">Add new author</h1>
     <form th:action="@{add}" th:object="${authors}" method="post">
         <div class="label-input">
@@ -25,9 +25,9 @@
 
         <button type="submit" id="submit" class="action-button" th:text="#{submit}">Submit</button>
     </form>
-</div>
+</main>
 
-<div th:replace="fragments/footer :: div">
-</div>
+<footer th:replace="fragments/footer :: footer">
+</footer>
 </body>
 </html>
