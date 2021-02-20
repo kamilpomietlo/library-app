@@ -4,15 +4,13 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <h1 th:text="#{register-info.header}">Thank you for registering!</h1>
-    <p class="register-info" th:text="#{register-info.text}">Click on the link sent to your e-mail address to activate your account.</p>
+    <header th:text="#{register-info.header}">Thank you for registering!</header>
+    <p class="register-info" th:text="#{register-info.text}">register info text</p>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

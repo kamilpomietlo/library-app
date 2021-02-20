@@ -4,28 +4,26 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <h1 th:text="#{publisher.add.header}">Add new publisher</h1>
+    <header th:text="#{publisher.add.header}">Add new publisher</header>
     <form th:action="@{add}" th:object="${publishers}" method="post">
         <div class="label-input">
             <label for="name" th:text="#{publisher.form.name}">Name:</label>
             <input type="text" th:class="${#fields.hasErrors('name')} ? 'input-error' : 'input'" id="name"
                    th:field="*{name}">
-            <div th:if="${#fields.hasErrors('name')}" class="alert">
-                <ul>
-                    <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
-                </ul>
-            </div>
+        </div>
+        <div th:if="${#fields.hasErrors('name')}" class="alert">
+            <ul>
+                <li th:each="error : ${#fields.errors('name')}" th:text="${error}"></li>
+            </ul>
         </div>
 
-        <button type="submit" id="submit" class="action-button" th:text="#{submit}">Submit</button>
+        <button type="submit" class="main__form--submit-button action-button" th:text="#{submit}">Submit</button>
     </form>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

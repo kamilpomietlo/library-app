@@ -4,12 +4,11 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <h1 th:text="#{user.list.header}">Users</h1>
-    <table>
+    <header th:text="#{user.list.header}">Users</header>
+    <table class="main__table">
         <tr>
             <th th:text="#{user.list.id}">ID</th>
             <th th:text="#{user.name}">Name</th>
@@ -62,7 +61,8 @@
                     <li th:each="book : ${user.books}" th:text="${book.deadlineToString()}">deadline</li>
                 </ul>
             </td>
-            <td th:unless="${user.books.size() > 0}" colspan="5" th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
+            <td th:unless="${user.books.size() > 0}" colspan="5"
+                th:text="#{user.noBooks}">No reserved or borrowed books found!</td>
             <td>
                 <a class="action-button" sec:authorize="${hasAuthority('ADMIN')}"
                    th:if="${user.books.size() == 0 && user.userRole != T(com.kamilpomietlo.libraryapp.model.UserRole).ADMIN}"
@@ -75,7 +75,6 @@
     </table>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

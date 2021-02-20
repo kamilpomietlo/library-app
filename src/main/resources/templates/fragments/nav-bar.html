@@ -1,41 +1,36 @@
 <nav xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <h1>
-        <a class="name" th:href="@{'/'}">BestLib</a>
-    </h1>
-    <div class="menu-buttons">
-        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button"
+    <a class="nav__logo" th:href="@{'/'}">BestLib</a>
+    <div class="nav__menu-buttons">
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/book/reservations'}" th:text="#{nav-bar.reservations}">Reservations</a>
-        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button"
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/book/borrowed'}" th:text="#{nav-bar.borrowedBooks}">Borrowed books</a>
-        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button"
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/book/list'}" th:text="#{nav-bar.books}">Books</a>
-        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button"
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/author/list'}" th:text="#{nav-bar.authors}">Authors</a>
-        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav-button menu-button"
+        <a sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/publisher/list'}" th:text="#{nav-bar.publishers}">Publishers</a>
-        <a sec:authorize="${hasAuthority('ADMIN')}" class="nav-button menu-button"
+        <a sec:authorize="${hasAuthority('ADMIN')}" class="nav__menu-buttons--button"
            th:href="@{'/user/list'}" th:text="#{nav-bar.users}">Users</a>
     </div>
-    <div class="main-buttons">
-        <a sec:authorize="${isAnonymous()}" class="nav-button" id="register" th:href="@{'/user/register'}"
+    <div class="nav__security-buttons">
+        <a sec:authorize="${isAnonymous()}" class="nav__security-buttons--button" th:href="@{'/user/register'}"
         th:text="#{nav-bar.register}">Register</a>
-        <a sec:authorize="${isAnonymous()}" class="nav-button" th:href="@{'/login'}"
+        <a sec:authorize="${isAnonymous()}" class="nav__security-buttons--button" th:href="@{'/login'}"
         th:text="#{nav-bar.logIn}">Log in</a>
-
-        <a sec:authorize="${isAuthenticated()}" class="nav-button" id="account" th:href="@{'/user/account'}"
+        <a sec:authorize="${isAuthenticated()}" class="nav__security-buttons--button" th:href="@{'/user/account'}"
         th:text="#{nav-bar.myAccount}">My account</a>
-        <a sec:authorize="${isAuthenticated()}" class="nav-button" th:href="@{'/logout'}"
+        <a sec:authorize="${isAuthenticated()}" class="nav__security-buttons--button" th:href="@{'/logout'}"
         th:text="#{nav-bar.logOut}">Log out</a>
     </div>
-    <div class="language-choose">
+    <div class="nav__language">
         <a th:href="@{''(lang=en)}">
-            <img class="language-flag" id="lang-gb" src="/images/flag-gb.png" alt="flag-gb">
+            <img src="/images/flag-gb.png" alt="English flag" class="nav__language--flag">
         </a>
-
-        <div class="language-line"></div>
-
+        <div class="nav__language--line"></div>
         <a th:href="@{''(lang=pl)}">
-            <img class="language-flag" id="lang-pl" src="/images/flag-pl.png" alt="flag-pl">
+            <img src="/images/flag-pl.png" alt="Polish flag" class="nav__language--flag">
         </a>
     </div>
 </nav>

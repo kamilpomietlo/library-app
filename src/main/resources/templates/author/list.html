@@ -4,16 +4,18 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <div class="function-buttons">
-        <a class="action-button" sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
-           th:href="@{'/author/add'}" th:text="#{author.list.add}">+ Add author</a>
+    <div class="main__function-buttons">
+        <div class="main__function-buttons--operations">
+            <a class="function-buttons__operations--operation action-button"
+               sec:authorize="${hasAnyAuthority('LIBRARIAN', 'ADMIN')}"
+               th:href="@{'/author/add'}" th:text="#{author.list.add}">+ Add author</a>
+        </div>
     </div>
-    <h1 th:text="#{author.list.header}">Authors</h1>
-    <table>
+    <header th:text="#{author.list.header}">Authors</header>
+    <table class="main__table">
         <tr>
             <th th:text="#{author.id}">ID</th>
             <th th:text="#{author.name}">Name</th>
@@ -35,7 +37,6 @@
     </table>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

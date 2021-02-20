@@ -4,11 +4,10 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <h1 th:text="#{index.header}">Find a book</h1>
+    <header th:text="#{index.header}">Find a book</header>
     <form th:action="@{''}" method="post">
         <div class="label-input">
             <label for="title" th:text="#{index.title}">Title:</label>
@@ -29,11 +28,10 @@
             </select>
         </div>
 
-        <button type="submit" class="action-button" th:text="#{submit}">Submit</button>
+        <button type="submit" class="main__form--submit-button action-button" th:text="#{submit}">Submit</button>
     </form>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

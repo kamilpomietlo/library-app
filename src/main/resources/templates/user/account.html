@@ -4,12 +4,11 @@
     <title>BestLib</title>
 </head>
 <body>
-<nav th:replace="fragments/nav-bar :: nav">
-</nav>
+<nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
-    <h1 th:text="#{user.account.header}">Your account info</h1>
-    <table>
+    <header th:text="#{user.account.header}">Your account info</header>
+    <table class="main__table">
         <tr>
             <th th:text="#{user.name}">Name</th>
             <th th:text="#{user.idNumber}">ID number</th>
@@ -33,10 +32,10 @@
             </td>
         </tr>
     </table>
-    <div sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}">
+    <div class="main__table--user-books" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}">
         <div class="line"></div>
-        <h1 th:text="#{user.account.header2}">Your books</h1>
-        <table>
+        <header th:text="#{user.account.header2}">Your books</header>
+        <table class="main__table">
             <tr>
                 <th th:text="#{user.bookId}">Book ID</th>
                 <th th:text="#{user.bookTitle}">Book title</th>
@@ -68,7 +67,6 @@
     </div>
 </main>
 
-<footer th:replace="fragments/footer :: footer">
-</footer>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
