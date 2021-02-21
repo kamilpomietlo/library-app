@@ -6,6 +6,7 @@ import com.kamilpomietlo.libraryapp.converters.BookToBookCommand;
 import com.kamilpomietlo.libraryapp.exceptions.NotFoundException;
 import com.kamilpomietlo.libraryapp.model.Book;
 import com.kamilpomietlo.libraryapp.model.BookStatus;
+import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -366,9 +367,15 @@ class BookServiceImplTest {
         book.setDeadlineDate(LocalDate.now());
         book.setNumberOfProlongs(0L);
 
+        User user = new User();
+        user.setId(1L);
+
+        book.setUser(user);
+
         Optional<Book> bookOptional = Optional.of(book);
 
         when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+        when(myUserDetailsService.getLoggedAccountId()).thenReturn(1L);
 
         // when
         bookService.prolongBook(anyLong());

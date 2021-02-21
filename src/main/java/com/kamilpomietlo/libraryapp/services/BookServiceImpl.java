@@ -201,7 +201,9 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
         Book book = findById(id);
         Long numberOfProlongs = book.getNumberOfProlongs();
 
-        if ((book.getBookStatus() == BookStatus.BORROWED) && (numberOfProlongs < 2)) {
+        if ((myUserDetailsService.getLoggedAccountId().equals(book.getUser().getId()))
+                && (book.getBookStatus() == BookStatus.BORROWED)
+                && (numberOfProlongs < 2)) {
             book.setDeadlineDate(book.getDeadlineDate().plusDays(30));
             book.setNumberOfProlongs(++numberOfProlongs);
         }
