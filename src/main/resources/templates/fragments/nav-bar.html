@@ -18,11 +18,11 @@
         <a sec:authorize="${isAnonymous()}" class="nav__security-buttons--button" th:href="@{'/user/register'}"
         th:text="#{nav-bar.register}">Register</a>
         <a sec:authorize="${isAnonymous()}" class="nav__security-buttons--button" th:href="@{'/login'}"
-        th:text="#{nav-bar.logIn}">Log in</a>
+        th:text="#{nav-bar.login}">Log in</a>
         <a sec:authorize="${isAuthenticated()}" class="nav__security-buttons--button" th:href="@{'/user/account'}"
         th:text="#{nav-bar.myAccount}">My account</a>
         <a sec:authorize="${isAuthenticated()}" class="nav__security-buttons--button" th:href="@{'/logout'}"
-        th:text="#{nav-bar.logOut}">Log out</a>
+        th:text="#{nav-bar.logout}">Log out</a>
     </div>
     <div class="nav__language">
         <a th:href="@{''(lang=en)}">
