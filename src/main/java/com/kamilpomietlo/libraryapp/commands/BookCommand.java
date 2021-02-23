@@ -43,7 +43,7 @@ public class BookCommand extends BaseEntityCommand {
     private String isbn;
 
     private Long userId;
-    private BookStatus bookStatus;
+    private BookStatus bookStatus = BookStatus.AVAILABLE;
     private LocalDate dateOfReserveOrBorrow;
     private LocalDate deadlineDate;
     private Long numberOfProlongs = 0L;

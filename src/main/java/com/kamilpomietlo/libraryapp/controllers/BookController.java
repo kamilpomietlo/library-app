@@ -2,7 +2,6 @@ package com.kamilpomietlo.libraryapp.controllers;
 
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
-import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.model.Publisher;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import com.kamilpomietlo.libraryapp.services.BookService;
@@ -83,7 +82,6 @@ public class BookController {
             return "book/add";
         }
 
-        bookCommand.setBookStatus(BookStatus.AVAILABLE);
         bookService.saveBookCommand(bookCommand);
 
         return "redirect:/book/list";

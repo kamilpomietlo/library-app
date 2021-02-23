@@ -41,7 +41,7 @@ public class Book extends BaseEntity {
     private User user;
 
     @Enumerated(value = EnumType.STRING)
-    private BookStatus bookStatus;
+    private BookStatus bookStatus = BookStatus.AVAILABLE;
 
     private LocalDate dateOfReserveOrBorrow;
     private LocalDate deadlineDate;
