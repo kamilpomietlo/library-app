@@ -365,7 +365,6 @@ class BookServiceImplTest {
         book.setId(1L);
         book.setBookStatus(BookStatus.BORROWED);
         book.setDeadlineDate(LocalDate.now());
-        book.setNumberOfProlongs(0L);
 
         User user = new User();
         user.setId(1L);
@@ -383,6 +382,35 @@ class BookServiceImplTest {
         // then
         assertEquals(LocalDate.now().plusDays(30), book.getDeadlineDate());
         assertEquals(1L, book.getNumberOfProlongs());
+        verify(bookRepository, times(1)).findById(anyLong());
+        verify(bookRepository, times(1)).save(any());
+    }
+
+    @Test
+    void cancelReservation() {
+        // given
+        Book book = new Book();
+        book.setId(1L);
+        book.setBookStatus(BookStatus.RESERVED);
+        book.setDeadlineDate(LocalDate.now());
+
+        User user = new User();
+        user.setId(1L);
+
+        book.setUser(user);
+
+        Optional<Book> bookOptional = Optional.of(book);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+        when(myUserDetailsService.getLoggedAccountId()).thenReturn(1L);
+
+        // when
+        bookService.cancelReservation(anyLong());
+
+        // then
+        assertNull(book.getUser());
+        assertNull(book.getDateOfReserveOrBorrow());
+        assertNull(book.getDeadlineDate());
         verify(bookRepository, times(1)).findById(anyLong());
         verify(bookRepository, times(1)).save(any());
     }

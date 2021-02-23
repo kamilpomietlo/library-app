@@ -290,4 +290,14 @@ class BookControllerTest {
 
         verify(bookService, times(1)).prolongBook(anyLong());
     }
+
+    @Test
+    void cancelReservation() throws Exception {
+        // then
+        mockMvc.perform(get("/book/1/cancel-reservation"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/user/account"));
+
+        verify(bookService, times(1)).cancelReservation(anyLong());
+    }
 }

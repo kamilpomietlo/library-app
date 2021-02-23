@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         };
 
         String[] userMatchers = new String[] {
-                "/book/{\\d+}/reserve", "/book/{\\d+}/prolong"
+                "/book/{\\d+}/reserve", "/book/{\\d+}/prolong", "/book/{\\d+}/cancel-reservation"
         };
 
         String[] librarianMatchers = new String[] {

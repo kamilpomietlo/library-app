@@ -210,4 +210,22 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
 
         repository.save(book);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void cancelReservation(Long id) {
+        Book book = findById(id);
+
+        if ((myUserDetailsService.getLoggedAccountId().equals(book.getUser().getId()))
+                && (book.getBookStatus() == BookStatus.RESERVED)) {
+            book.setBookStatus(BookStatus.AVAILABLE);
+            book.setUser(null);
+            book.setDateOfReserveOrBorrow(null);
+            book.setDeadlineDate(null);
+        }
+
+        repository.save(book);
+    }
 }

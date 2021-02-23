@@ -52,11 +52,17 @@
                 <td th:text="${book.deadlineToString()}">deadline</td>
                 <td>
                     <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
+                       th:if="${book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).RESERVED}"
+                       th:href="@{'/book/' + ${book.id} + '/cancel-reservation'}"
+                       th:text="#{cancelReservation}">Cancel</a>
+
+                    <a class="action-button" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
                        th:if="${(book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).BORROWED)
                        && (book.numberOfProlongs < 2)}" th:href="@{'/book/' + ${book.id} + '/prolong'}"
                        th:text="#{prolong}">Prolong</a>
                     <a class="action-button action-button-disabled" sec:authorize="${hasAnyAuthority('USER', 'ADMIN')}"
-                       th:unless="${(book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).BORROWED)
+                       th:unless="${((book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).BORROWED)
+                       || (book.bookStatus == T(com.kamilpomietlo.libraryapp.model.BookStatus).RESERVED))
                        && (book.numberOfProlongs < 2)}" th:text="#{prolong}">Prolong</a>
                 </td>
             </tr>

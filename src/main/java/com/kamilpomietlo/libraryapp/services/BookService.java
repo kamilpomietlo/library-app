@@ -72,4 +72,11 @@ public interface BookService extends BaseService<Book> {
      * @param id object id
      */
     void prolongBook(Long id);
+
+    /**
+     * Cancels book reservation.
+     *
+     * @param id object id
+     */
+    void cancelReservation(Long id);
 }

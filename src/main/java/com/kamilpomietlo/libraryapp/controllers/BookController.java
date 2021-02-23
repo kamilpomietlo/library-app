@@ -34,6 +34,16 @@ public class BookController {
         this.publisherService = publisherService;
     }
 
+    @ModelAttribute("authors")
+    private List<Author> getAuthors() {
+        return authorService.findAll();
+    }
+
+    @ModelAttribute("publishers")
+    private List<Publisher> getPublishers() {
+        return publisherService.findAll();
+    }
+
     @GetMapping("list")
     public String getBooks(Model model) {
         model.addAttribute("books", bookService.findAll());
@@ -164,13 +174,10 @@ public class BookController {
         return "redirect:/user/account";
     }
 
-    @ModelAttribute("authors")
-    private List<Author> getAuthors() {
-        return authorService.findAll();
-    }
+    @GetMapping("{id}/cancel-reservation")
+    public String cancelReservation(@PathVariable Long id) {
+        bookService.cancelReservation(id);
 
-    @ModelAttribute("publishers")
-    private List<Publisher> getPublishers() {
-        return publisherService.findAll();
+        return "redirect:/user/account";
     }
 }
