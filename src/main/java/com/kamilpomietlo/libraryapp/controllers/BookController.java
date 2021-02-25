@@ -111,13 +111,8 @@ public class BookController {
             return "book/edit";
         }
 
-        BookCommand tempBookCommand = bookService.findCommandById(bookCommand.getId());
-        bookCommand.setUserId(tempBookCommand.getUserId());
-        bookCommand.setBookStatus(tempBookCommand.getBookStatus());
-        bookCommand.setDateOfReserveOrBorrow(tempBookCommand.getDateOfReserveOrBorrow());
-        bookCommand.setDeadlineDate(tempBookCommand.getDeadlineDate());
-
-        bookService.saveBookCommand(bookCommand);
+        BookCommand bookCommandToUpdate = bookService.editRemainingFields(bookCommand);
+        bookService.saveBookCommand(bookCommandToUpdate);
 
         return "redirect:/book/list";
     }

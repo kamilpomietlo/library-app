@@ -228,4 +228,19 @@ public class BookServiceImpl extends BaseServiceImpl<Book, BookRepository> imple
 
         repository.save(book);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BookCommand editRemainingFields(BookCommand bookCommand) {
+        BookCommand tempBookCommand = findCommandById(bookCommand.getId());
+
+        bookCommand.setUserId(tempBookCommand.getUserId());
+        bookCommand.setBookStatus(tempBookCommand.getBookStatus());
+        bookCommand.setDateOfReserveOrBorrow(tempBookCommand.getDateOfReserveOrBorrow());
+        bookCommand.setDeadlineDate(tempBookCommand.getDeadlineDate());
+
+        return bookCommand;
+    }
 }

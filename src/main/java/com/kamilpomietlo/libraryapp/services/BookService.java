@@ -79,4 +79,12 @@ public interface BookService extends BaseService<Book> {
      * @param id object id
      */
     void cancelReservation(Long id);
+
+    /**
+     * Updates all fields which were not sent via form.
+     *
+     * @param bookCommand object to be edited
+     * @return edited object
+     */
+    BookCommand editRemainingFields(BookCommand bookCommand);
 }

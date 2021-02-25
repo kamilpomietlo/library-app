@@ -414,4 +414,26 @@ class BookServiceImplTest {
         verify(bookRepository, times(1)).findById(anyLong());
         verify(bookRepository, times(1)).save(any());
     }
+
+    @Test
+    void editRemainingFields() {
+        // given
+        Book dbBook = new Book();
+        dbBook.setId(1L);
+        dbBook.setBookStatus(BookStatus.RESERVED);
+
+        Book editedBook = new Book();
+        editedBook.setId(1L);
+
+        Optional<Book> bookOptional = Optional.of(dbBook);
+
+        when(bookRepository.findById(anyLong())).thenReturn(bookOptional);
+
+        // when
+        BookCommand bookCommand = bookService.editRemainingFields(bookToBookCommand.convert(editedBook));
+
+        // then
+        assertEquals(dbBook.getBookStatus(), bookCommand.getBookStatus());
+        verify(bookRepository, times(1)).findById(anyLong());
+    }
 }

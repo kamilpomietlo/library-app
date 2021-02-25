@@ -3,7 +3,6 @@ package com.kamilpomietlo.libraryapp.controllers;
 import com.kamilpomietlo.libraryapp.commands.BookCommand;
 import com.kamilpomietlo.libraryapp.model.Author;
 import com.kamilpomietlo.libraryapp.model.Book;
-import com.kamilpomietlo.libraryapp.model.BookStatus;
 import com.kamilpomietlo.libraryapp.services.AuthorService;
 import com.kamilpomietlo.libraryapp.services.BookService;
 import com.kamilpomietlo.libraryapp.services.PublisherService;
@@ -16,7 +15,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -165,17 +163,7 @@ class BookControllerTest {
         authors.add(author1);
         authors.add(author2);
 
-        BookCommand bookCommand = new BookCommand();
-        bookCommand.setId(1L);
-        bookCommand.setUserId(1L);
-        bookCommand.setBookStatus(BookStatus.AVAILABLE);
-        bookCommand.setDateOfReserveOrBorrow(LocalDate.now());
-        bookCommand.setDeadlineDate(LocalDate.now());
-
-        // when
-        when(bookService.findCommandById(anyLong())).thenReturn(bookCommand);
-
-        // then
+        // when / then
         mockMvc.perform(post("/book/1/edit")
                 .param("title", "title")
                 .param("authors", authors.toString())
@@ -184,7 +172,7 @@ class BookControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/book/list"));
 
-        verify(bookService, times(1)).findCommandById(any());
+        verify(bookService, times(1)).editRemainingFields(any());
         verify(bookService, times(1)).saveBookCommand(any());
     }
 
