@@ -45,6 +45,7 @@ nav {
     border-bottom: 10px solid #ff6e00;
     display: flex;
     height: 90px;
+    min-width: fit-content;
     position: fixed;
     width: 100%;
 }
@@ -52,23 +53,29 @@ nav {
 .nav__logo {
     border-radius: 10px;
     border-right: 4px solid #ff6e00;
-    color: var(--secondaryColor);
+    color: white;
     display: flex;
     font-family: 'Big Shoulders Stencil Text', cursive;
     font-size: 65px;
     margin: 0 20px;
-    padding: 0 20px;
+    opacity: 80%;
+    padding: 0 20px 0 0;
     text-decoration: none;
     user-select: none;
 }
 
 .nav__menu-buttons {
+    display: flex;
     margin-left: 20px;
+    margin-right: 40px;
+    white-space: nowrap;
 }
 
 .nav__security-buttons {
+    display: flex;
     margin-left: auto;
     margin-right: 5px;
+    white-space: nowrap;
 }
 
 .nav__menu-buttons--button, .nav__security-buttons--button {
@@ -78,7 +85,7 @@ nav {
     font-size: 18px;
     font-weight: bold;
     margin-left: 5px;
-    padding: 14px;
+    padding: 12px;
     text-align: center;
     text-decoration: none;
 }
@@ -110,6 +117,7 @@ main {
     flex-direction: column;
     margin: 120px auto 50px auto;
     max-width: 98%;
+    min-width: fit-content;
     padding: 30px;
     width: fit-content;
 }
@@ -155,15 +163,23 @@ form {
 
 label {
     font-weight: bold;
+    line-height: 100%;
     text-align: left;
-    width: 130px;
+    width: 150px;
 }
 
 input, select {
+    background: white;
     border: 1px solid black;
+    border-radius: 8px;
     height: 30px;
     padding: 0 5px;
     width: 350px;
+}
+
+input:focus, select:focus {
+    border: 2px solid black;
+    outline: none;
 }
 
 .input-error {
@@ -194,6 +210,10 @@ input, select {
     background: lightgrey;
     color: grey;
     cursor: not-allowed;
+}
+
+.read-only:focus {
+    border: 1px solid black;
 }
 
 .line {
@@ -264,10 +284,11 @@ th {
 td {
     background: lightgrey;
     font-size: 14px;
-    padding: 16px 10px;
+    padding: 8px 8px;
 }
 
 ul {
+    line-height: 130%;
     list-style-type: none;
 }
 
@@ -289,11 +310,16 @@ ul {
 .action-button {
     background: #ff9637;
     border: 1px solid var(--detailsColor);
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: bold;
     padding: 5px;
     text-decoration: none;
+    white-space: nowrap;
+}
+
+td .action-button {
+    line-height: 230%;
 }
 
 .action-button-disabled {
