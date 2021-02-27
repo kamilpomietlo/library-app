@@ -7,6 +7,13 @@
 <nav th:replace="fragments/nav-bar :: nav"></nav>
 
 <main>
+    <div class="main__function-buttons">
+        <div class="main__function-buttons--operations">
+            <a class="function-buttons__operations--operation action-button"
+               sec:authorize="${hasAuthority('ADMIN')}" th:href="@{'/user/add'}"
+               th:text="#{user.list.add}">+ Add user</a>
+        </div>
+    </div>
     <header th:text="#{user.list.header}">Users</header>
     <table class="main__table">
         <tr>

@@ -166,4 +166,15 @@ class UserControllerTest {
 
         verify(userService, times(1)).confirmUser(any());
     }
+
+    @Test
+    void addUserGet() throws Exception {
+        // then
+        mockMvc.perform(get("/user/add/"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("user"))
+                .andExpect(view().name("user/add"));
+
+        verifyNoInteractions(userService);
+    }
 }

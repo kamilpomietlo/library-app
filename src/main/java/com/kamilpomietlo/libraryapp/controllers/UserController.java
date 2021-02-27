@@ -135,4 +135,33 @@ public class UserController {
 
         return "redirect:/login";
     }
+
+    @GetMapping("add")
+    public String addUserGet(Model model) {
+        model.addAttribute("user", new UserCommand());
+
+        return "user/add";
+    }
+
+    /**
+     * Submits form data for registering new user (admin and librarian included) and saves it if validation
+     * is successful.
+     *
+     * @param userCommand object to be saved
+     * @param bindingResult performs validation of the object
+     * @return add form when validation failed, otherwise list of users page
+     */
+    @PostMapping("add")
+    public String addUserPost(@Validated(RegisterInfo.class) @ModelAttribute("user") UserCommand userCommand,
+                              BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+
+            return "user/add";
+        }
+
+        userService.registerUser(userCommand);
+
+        return "redirect:/user/list";
+    }
 }
