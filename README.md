@@ -24,11 +24,13 @@ Project is created with:
 ## Launch
 There are two ways to run the application:
 * you can execute com.kamilpomietlo.libraryapp.LibraryApp within IDE which starts a webserver on http://localhost:8080
-* you can simply launch it on Heroku at this link: https://bestlib-app.herokuapp.com (it may take up to 30 seconds to start)
+* you can simply launch it on Heroku at this link: https://bestlib-app.herokuapp.com (it may take up to 30 seconds to
+  start)
 
 
 ## Additional information
-You can check all application functionalities by logging into all account types. Pre created test accounts have the following credentials:
+You can check all application functionalities by logging into all account types. Pre created test accounts have the
+following credentials:
 * USER:
   * e-mail: user@example.pl
   * password: 123
@@ -39,4 +41,5 @@ You can check all application functionalities by logging into all account types.
   * e-mail: admin@example.pl
   * password: 789
   
-You can create only USER account through the regular registration process.
+You can create only USER account through the regular registration process. Only ADMIN type account has the permission
+to add new ADMIN and LIBRARIAN accounts.
