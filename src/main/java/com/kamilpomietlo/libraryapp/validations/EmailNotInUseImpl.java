@@ -2,7 +2,6 @@ package com.kamilpomietlo.libraryapp.validations;
 
 import com.kamilpomietlo.libraryapp.model.User;
 import com.kamilpomietlo.libraryapp.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,10 +12,10 @@ import java.util.Optional;
  */
 public class EmailNotInUseImpl implements ConstraintValidator<EmailNotInUse, String> {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public EmailNotInUseImpl() {
+    public EmailNotInUseImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override

@@ -118,7 +118,7 @@ class UserControllerTest {
 
     @Test
     void editUserSubmitValid() throws Exception {
-        //then
+        // then
         mockMvc.perform(post("/user/edit")
                 .param("firstName", "firstName")
                 .param("lastName", "lastName")
@@ -137,7 +137,7 @@ class UserControllerTest {
 
     @Test
     void editUserSubmitNotValid() throws Exception {
-        //then
+        // then
         mockMvc.perform(post("/user/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("user/edit"));

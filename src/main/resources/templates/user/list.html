@@ -36,7 +36,7 @@
         <tr th:each="user : ${users}">
             <td th:text="${user.id}">id</td>
             <td th:text="${user.toString()}">name</td>
-            <td th:text="${user.getUserRole().displayName}">role</td>
+            <td th:text="${user.userRole.getDisplayName()}">role</td>
             <td th:text="${user.idNumber}">idNumber</td>
             <td th:text="${user.country}">country</td>
             <td th:text="${user.state}">state</td>

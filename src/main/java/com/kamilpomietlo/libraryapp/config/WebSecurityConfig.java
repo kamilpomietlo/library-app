@@ -48,9 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/index").permitAll()
-                .antMatchers("/logout").authenticated()
+                .antMatchers("/logout", "/user/edit", "/user/account").authenticated()
                 .antMatchers(anonymousMatchers).anonymous()
-                .antMatchers("/user/edit", "/user/account").hasAnyAuthority("USER", "LIBRARIAN", "ADMIN")
                 .antMatchers(userMatchers).hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(librarianMatchers).hasAnyAuthority("LIBRARIAN", "ADMIN")
                 .antMatchers("/**").hasAuthority("ADMIN")

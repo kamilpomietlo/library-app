@@ -117,7 +117,7 @@ class PublisherControllerTest {
 
     @Test
     void editPublisherSubmitValid() throws Exception {
-        //then
+        // then
         mockMvc.perform(post("/publisher/1/edit")
                 .param("name", "name"))
                 .andExpect(status().is3xxRedirection())
@@ -128,7 +128,7 @@ class PublisherControllerTest {
 
     @Test
     void editPublisherSubmitNotValid() throws Exception {
-        //then
+        // then
         mockMvc.perform(post("/publisher/1/edit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("publisher/edit"));
