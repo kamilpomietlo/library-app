@@ -85,12 +85,16 @@ public class UserServiceImpl extends BaseServiceImpl<User, UserRepository> imple
         final String encryptedPassword = passwordEncoder.encode(userCommand.getPassword());
 
         userCommand.setPassword(encryptedPassword);
+
+        // delete line below when mailing activation is enabled
+        userCommand.setEnabled(true);
         User savedUser = repository.save(userCommandToUser.convert(userCommand));
 
-        final ConfirmationToken confirmationToken = new ConfirmationToken(savedUser);
+        // uncomment to enable mailing activation
+        /*final ConfirmationToken confirmationToken = new ConfirmationToken(savedUser);
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
-        sendConfirmationMail(savedUser.getEmail(), confirmationToken.getConfirmationToken());
+        sendConfirmationMail(savedUser.getEmail(), confirmationToken.getConfirmationToken());*/
     }
 
     /**
