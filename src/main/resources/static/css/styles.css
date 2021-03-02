@@ -79,7 +79,7 @@ nav {
 }
 
 .nav__menu-buttons--button, .nav__security-buttons--button {
-    background: #ff9637;
+    background: #ffa045;
     border: 1px solid var(--detailsColor);
     border-radius: 10px;
     font-size: 18px;
@@ -88,6 +88,10 @@ nav {
     padding: 12px;
     text-align: center;
     text-decoration: none;
+}
+
+.nav__menu-buttons--button:hover, .nav__security-buttons--button:hover {
+    background: #ff9637;
 }
 
 .nav__language {
