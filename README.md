@@ -43,3 +43,5 @@ following credentials:
   
 You can create only USER account through the regular registration process. Only ADMIN type account has the permission
 to add new ADMIN and LIBRARIAN accounts.
+
+Account activation via e-mail is currently disabled.
