@@ -35,7 +35,7 @@ public class IndexController {
 
     @PostMapping({"index", ""})
     public String searchSubmit(@ModelAttribute("book") Book book, @ModelAttribute("author") Author author,
-                               @ModelAttribute("genre") Genre genre, Model model) {
+                               Genre genre, Model model) {
         model.addAttribute("books", indexService.findBooks(book, author, genre));
 
         return "book/list";
