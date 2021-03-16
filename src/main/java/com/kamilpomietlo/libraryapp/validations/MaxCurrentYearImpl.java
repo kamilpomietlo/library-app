@@ -28,7 +28,7 @@ public class MaxCurrentYearImpl implements ConstraintValidator<MaxCurrentYear, I
         int currentYear = LocalDateTime.now().getYear();
 
         if (year != null) {
-            return (year > 0) & (year <= currentYear);
+            return (year >= 0) && (year <= currentYear);
         }
 
         return false;
